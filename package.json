@@ -1,0 +1,31 @@
+{
+  "name": "wt2doc",
+  "version": "0.0.1",
+  "description": "WebTemplate 2 Documentation - a util by Bifrost for Bifrost ",
+  "main": "index.js",
+  "bin": {
+    "wt2doc": "dist/index.js"
+  },
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "keywords": [
+    "openEHR",
+    "Bifrost",
+    "asciidoctor"
+  ],
+  "author": "Bjørn Næss <bna@dips.no>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^14.14.7",
+    "@types/ora": "^3.2.0",
+    "ora": "^5.1.0",
+    "yargs": "^16.1.0"
+  },
+  "devDependencies": {
+    "@types/yargs": "^15.0.9",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.5"
+  }
+}
