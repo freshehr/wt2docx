@@ -1,4 +1,4 @@
-import { FormList } from "./FormList";
+import { FormList } from './FormList';
 
 export interface FormInput {
   suffix?: string;

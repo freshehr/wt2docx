@@ -1,4 +1,4 @@
-import { FormRange } from "./FormRange";
+import { FormRange } from './FormRange';
 
 interface FormValidation {
   range: FormRange;

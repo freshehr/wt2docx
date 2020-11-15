@@ -1,13 +1,13 @@
-import { FormElement } from "./FormElement";
-import { WebTemplate } from "./WebTemplate";
-import { isEntry, isDataValue, isSection } from "./isEntry";
-import { StringBuilder } from "./StringBuilder";
-import { FormInput } from "./FormInput";
-import { FormList } from "./FormList";
+import { FormElement } from './FormElement';
+import { WebTemplate } from './WebTemplate';
+import { isEntry, isDataValue, isSection } from './isEntry';
+import { StringBuilder } from './StringBuilder';
+import { FormInput } from './FormInput';
+import { FormList } from './FormList';
 
 export class DocBuilder {
   sb: StringBuilder = new StringBuilder();
-  defaultLang: string = "nb";
+  defaultLang: string = 'nb';
 
   constructor(private wt: WebTemplate) {
     this.defaultLang = wt.defaultLanguage;
@@ -36,7 +36,7 @@ export class DocBuilder {
     }
   }
   private walk(f: FormElement) {
-    if (f.aqlPath == "/category") {
+    if (f.aqlPath === '/category') {
       // skipping category
     } else if (isEntry(f.rmType)) {
       this.walkEntry(f);
@@ -44,22 +44,22 @@ export class DocBuilder {
       this.walkElement(f);
     } else if (isSection(f.rmType)) {
       this.walkSection(f);
-    } else if (f.rmType == "CLUSTER") {
+    } else if (f.rmType === 'CLUSTER') {
       this.sb.append(`5+a|*${f.name}* + \n${f.rmType}: _${f.nodeId}_`);
       this.walkChildren(f);
     } else {
       switch (f.rmType) {
-        case "COMPOSITIION":
+        case 'COMPOSITIION':
           this.walkChildren(f);
           break;
-        case "ISM_TRANSITION":
+        case 'ISM_TRANSITION':
           break;
-        case "EVENT_CONTEXT":
-          f.name = "EVENT_CONTEXT";
+        case 'EVENT_CONTEXT':
+          f.name = 'EVENT_CONTEXT';
           this.walkEntry(f);
           break;
         default:
-          this.sb.append("// Not supported rmType " + f.rmType);
+          this.sb.append('// Not supported rmType ' + f.rmType);
           this.walkChildren(f);
           break;
       }
@@ -76,88 +76,85 @@ export class DocBuilder {
   private walkEntry(f: FormElement) {
     this.sb.append(`== ${f.name}`);
     this.sb.append('[options="header", cols="3,3,5,5,30"]');
-    this.sb.append("|====");
-    this.sb.append("|NodeId|Attr.|RM Type| Navn |Beskrivelse");
+    this.sb.append('|====');
+    this.sb.append('|NodeId|Attr.|RM Type| Navn |Beskrivelse');
     this.sb.append(`5+a|*${f.name}* + \n${f.rmType}: _${f.nodeId}_`);
     if (f.children) {
       f.children.forEach((child) => {
-        if (child.inContext != undefined && child.inContext) {
+        if (child.inContext !== undefined && child.inContext) {
+          // Will not document things in contexts (which is included in openEHR RM)
         } else {
           this.walk(child);
         }
       });
-      this.sb.append("|====");
+      this.sb.append('|====');
     }
   }
   private walkElement(f: FormElement) {
-    const max = f.max < 0 ? "*" : `${f.max}`;
+    const max = f.max < 0 ? '*' : `${f.max}`;
     this.sb.append(`|${f.nodeId}| ${f.min}..${max}| ${f.rmType} | ${f.name}`);
 
-    if (f.name == undefined) this.sb.append(`// ${f.id} -  ${f.aqlPath}`);
+    if (f.name === undefined) this.sb.append(`// ${f.id} -  ${f.aqlPath}`);
 
     switch (f.rmType) {
-      case "DV_CODED_TEXT":
+      case 'DV_CODED_TEXT':
         this.walkDvCodedText(f);
 
         break;
-      case "DV_TEXT":
+      case 'DV_TEXT':
         this.walkDvText(f);
         break;
-      case "DV_DATE":
+      case 'DV_DATE':
         this.walkDvDateTime(f);
         break;
-      case "DV_DATE_TIME":
+      case 'DV_DATE_TIME':
         this.walkDvDateTime(f);
         break;
-      case "DV_QUANTITY":
+      case 'DV_QUANTITY':
         this.walkDvQuantity(f);
         break;
-      case "DV_ORDINAL":
+      case 'DV_ORDINAL':
         this.walkDvOrdinal(f);
         break;
-      case "DV_COUNT":
+      case 'DV_COUNT':
         this.walkDvCount(f);
         break;
-      case "DV_DURATION":
+      case 'DV_DURATION':
         this.walkDvDuration(f);
         break;
-      case "DV_BOOLEAN":
+      case 'DV_BOOLEAN':
         this.walkDvBoolean(f);
         break;
       default:
-        this.sb.append("|Not supported rm type" + f.rmType);
+        this.sb.append('|Not supported rm type' + f.rmType);
     }
 
     if (f.annotations) {
       this.sb.newline();
       this.sb.append(f.annotations.comment);
     }
-    //this.sb.append(`${this.getValueOfRecord(f.localizedDescriptions)}`);
+    // this.sb.append(`${this.getValueOfRecord(f.localizedDescriptions)}`);
   }
 
   private walkDvBoolean(f: FormElement) {
-    this.sb.append("|");
+    this.sb.append('|');
   }
   private walkDvDuration(f: FormElement) {
-    this.sb.append("|");
+    this.sb.append('|');
   }
 
   private walkDvCount(f: FormElement) {
-    this.sb.append("|");
+    this.sb.append('|');
   }
   private walkDvOrdinal(f: FormElement) {
-    this.sb.append("a|");
+    this.sb.append('a|');
     if (f.inputs) {
       const fi: FormInput[] = f.inputs;
-      //const term = fi.terminology == undefined ? "local" : fi.terminology;
+      // const term = fi.terminology == undefined ? "local" : fi.terminology;
       fi.forEach((item) => {
-        const formItems = item.list == undefined ? [] : item.list;
+        const formItems = item.list === undefined ? [] : item.list;
         formItems.forEach((n) => {
-          this.sb.append(
-            `* ${n.ordinal} - ${n.label} ${this.getValueOfRecord(
-              n.localizedDescriptions
-            )}`
-          );
+          this.sb.append(`* ${n.ordinal} - ${n.label} ${this.getValueOfRecord(n.localizedDescriptions)}`);
         });
       });
     }
@@ -166,14 +163,14 @@ export class DocBuilder {
     if (record) {
       return record[this.defaultLang];
     } else {
-      return "";
+      return '';
     }
   }
   private walkDvQuantity(f: FormElement) {
-    this.sb.append("|");
+    this.sb.append('|');
   }
   private walkDvText(f: FormElement) {
-    this.sb.append("a|");
+    this.sb.append('a|');
     if (f.inputs) {
       f.inputs.forEach((item) => {
         if (item.list) {
@@ -185,16 +182,16 @@ export class DocBuilder {
     }
   }
   private walkDvDateTime(f: FormElement) {
-    this.sb.append("|");
+    this.sb.append('|');
   }
   private walkDvCodedText(f: FormElement) {
-    this.sb.append("a|");
+    this.sb.append('a|');
     if (f.inputs) {
       f.inputs.forEach((item) => {
-        const term = item.terminology == undefined ? "local" : item.terminology;
+        const term = item.terminology === undefined ? 'local' : item.terminology;
         if (item.list) {
           item.list.forEach((list) => {
-            if (term == "local") {
+            if (term === 'local') {
               this.sb.append(`* ${list.value} -> ${list.label} `);
             } else {
               this.sb.append(`* ${list.label} (${term}: ${list.value})`);

@@ -1,5 +1,5 @@
-import { FormInput } from "./FormInput";
-import { FormAnnotation } from "./FormAnnotation";
+import { FormInput } from './FormInput';
+import { FormAnnotation } from './FormAnnotation';
 
 export interface FormElement {
   id: string;

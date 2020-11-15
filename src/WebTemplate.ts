@@ -1,4 +1,4 @@
-import { FormElement } from "./FormElement";
+import { FormElement } from './FormElement';
 
 export interface WebTemplate {
   templateId: string;
