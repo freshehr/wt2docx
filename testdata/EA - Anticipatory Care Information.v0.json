@@ -1,0 +1,2437 @@
+{
+  "templateId" : "EA - Anticipatory Care Information.v0",
+  "version" : "2.3",
+  "defaultLanguage" : "en",
+  "languages" : [ "en" ],
+  "tree" : {
+    "id" : "anticipatory_care_information",
+    "name" : "Anticipatory Care Information",
+    "localizedName" : "Anticipatory Care Information",
+    "rmType" : "COMPOSITION",
+    "nodeId" : "openEHR-EHR-COMPOSITION.anticipatory_care_information.v0",
+    "min" : 1,
+    "max" : 1,
+    "localizedNames" : {
+      "en" : "Anticipatory Care Information"
+    },
+    "localizedDescriptions" : {
+      "en" : "A framework to communicate information that has been captured and curated in anticipation of future need for care."
+    },
+    "aqlPath" : "",
+    "children" : [ {
+      "id" : "coded_text",
+      "name" : "Coded text",
+      "localizedName" : "Coded text",
+      "rmType" : "DV_CODED_TEXT",
+      "nodeId" : "at0001",
+      "min" : 1,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Coded text"
+      },
+      "localizedDescriptions" : {
+        "en" : "*"
+      },
+      "aqlPath" : "/category[at0001]",
+      "inputs" : [ {
+        "suffix" : "code",
+        "type" : "CODED_TEXT",
+        "list" : [ {
+          "value" : "433",
+          "localizedLabels" : {
+            "en" : ""
+          }
+        } ],
+        "terminology" : "openehr"
+      } ],
+      "inContext" : true
+    }, {
+      "id" : "event_context",
+      "name" : "Event Context",
+      "localizedName" : "Event Context",
+      "rmType" : "EVENT_CONTEXT",
+      "nodeId" : "at0002",
+      "min" : 1,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Event Context"
+      },
+      "localizedDescriptions" : {
+        "en" : "*"
+      },
+      "aqlPath" : "/context[at0002]",
+      "children" : [ {
+        "id" : "xds_metadata",
+        "name" : "XDS Metadata",
+        "localizedName" : "XDS Metadata",
+        "rmType" : "CLUSTER",
+        "nodeId" : "openEHR-EHR-CLUSTER.xds_metadata.v0",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "XDS Metadata"
+        },
+        "localizedDescriptions" : {
+          "en" : "Additional composition metadata aligned with IHE-XDS which is not already available from the Reference Model COMPOSITION class."
+        },
+        "aqlPath" : "/context[at0002]/other_context[at0003]/items[openEHR-EHR-CLUSTER.xds_metadata.v0]",
+        "children" : [ {
+          "id" : "document_type",
+          "name" : "Document type",
+          "localizedName" : "Document type",
+          "rmType" : "DV_TEXT",
+          "nodeId" : "at0003",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Document type"
+          },
+          "localizedDescriptions" : {
+            "en" : "The code specifying the precise type of document from the user perspective. Normally selected from a valueset provided by the local IHE-XDS Affinity Domain or national standard."
+          },
+          "annotations" : {
+            "comment" : "for example:  Pulmonary History and Physical, Discharge Summary, Ultrasound Report.\r\nThese codes are specific to an XDS Affinity Domain."
+          },
+          "aqlPath" : "/context[at0002]/other_context[at0003]/items[openEHR-EHR-CLUSTER.xds_metadata.v0]/items[at0003]/value",
+          "inputs" : [ {
+            "type" : "TEXT",
+            "defaultValue" : "**TBD**"
+          } ]
+        } ]
+      }, {
+        "id" : "start_time",
+        "name" : "Start_time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/context[at0002]/start_time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "setting",
+        "name" : "Setting",
+        "rmType" : "DV_CODED_TEXT",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/context[at0002]/setting",
+        "inputs" : [ {
+          "suffix" : "code",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "value",
+          "type" : "TEXT"
+        } ],
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "communication",
+      "name" : "Communication",
+      "localizedName" : "Communication",
+      "rmType" : "EVALUATION",
+      "nodeId" : "openEHR-EHR-EVALUATION.communication_capability.v1",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Communication"
+      },
+      "localizedDescriptions" : {
+        "en" : "The ability of an individual to communicate."
+      },
+      "aqlPath" : "/content[openEHR-EHR-EVALUATION.communication_capability.v1,'Communication']",
+      "children" : [ {
+        "id" : "preferred_language",
+        "name" : "Preferred language",
+        "localizedName" : "Preferred language",
+        "rmType" : "CLUSTER",
+        "nodeId" : "at0015",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Preferred language"
+        },
+        "localizedDescriptions" : {
+          "en" : "Preferred language and/or method of communication for an individual."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.communication_capability.v1,'Communication']/data[at0001]/items[at0015,'Preferred language']",
+        "children" : [ {
+          "id" : "language",
+          "name" : "Language",
+          "localizedName" : "Language",
+          "rmType" : "CLUSTER",
+          "nodeId" : "openEHR-EHR-CLUSTER.language.v1",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Language"
+          },
+          "localizedDescriptions" : {
+            "en" : "A collection of words, their pronunciation and methods for combining them, understood by a specific community and used as a form of communication."
+          },
+          "aqlPath" : "/content[openEHR-EHR-EVALUATION.communication_capability.v1,'Communication']/data[at0001]/items[at0015,'Preferred language']/items[openEHR-EHR-CLUSTER.language.v1]",
+          "children" : [ {
+            "id" : "language_name",
+            "name" : "Language name",
+            "localizedName" : "Language name",
+            "rmType" : "DV_TEXT",
+            "nodeId" : "at0001",
+            "min" : 1,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Language name"
+            },
+            "localizedDescriptions" : {
+              "en" : "The name of the language."
+            },
+            "annotations" : {
+              "comment" : "For example: Mandarin, Swahili, French or Norwegian sign language. Coding of 'Language' with a terminology is preferred, where possible. ISO 639-3 codes include the simple name of the language but can represent the name and modality combined - for example Norwegian sign language. The value set for codes that are appropriate may depend on the mode."
+            },
+            "aqlPath" : "/content[openEHR-EHR-EVALUATION.communication_capability.v1,'Communication']/data[at0001]/items[at0015,'Preferred language']/items[openEHR-EHR-CLUSTER.language.v1]/items[at0001]/value",
+            "inputs" : [ {
+              "type" : "TEXT"
+            } ]
+          } ]
+        }, {
+          "id" : "comment",
+          "name" : "Comment",
+          "localizedName" : "Comment",
+          "rmType" : "DV_TEXT",
+          "nodeId" : "at0021",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Comment"
+          },
+          "localizedDescriptions" : {
+            "en" : "Additional narrative about the specific language capability not captured in other fields."
+          },
+          "aqlPath" : "/content[openEHR-EHR-EVALUATION.communication_capability.v1,'Communication']/data[at0001]/items[at0015,'Preferred language']/items[at0021]/value",
+          "inputs" : [ {
+            "type" : "TEXT"
+          } ]
+        } ]
+      }, {
+        "id" : "communication_aid",
+        "name" : "Communication aid",
+        "localizedName" : "Communication aid",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0022",
+        "min" : 0,
+        "max" : -1,
+        "localizedNames" : {
+          "en" : "Communication aid"
+        },
+        "localizedDescriptions" : {
+          "en" : "Identification of an aid to assist communication."
+        },
+        "annotations" : {
+          "comment" : "For example: a hearing aid or tactile reading device. Coding of 'Communication aid' with a terminology is preferred, where possible. Details about the actual communication aid should preferably be recorded using the EVALUATION.device_summary archetype."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.communication_capability.v1,'Communication']/data[at0001]/items[at0022]/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "communication_difficulty_summary",
+        "name" : "Communication difficulty summary",
+        "localizedName" : "Communication difficulty summary",
+        "rmType" : "CLUSTER",
+        "nodeId" : "openEHR-EHR-CLUSTER.communication_difficulty_status.v0",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Communication difficulty summary"
+        },
+        "localizedDescriptions" : {
+          "en" : "Communication difficulty status"
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.communication_capability.v1,'Communication']/data[at0001]/items[openEHR-EHR-CLUSTER.communication_difficulty_status.v0]",
+        "children" : [ {
+          "id" : "status",
+          "name" : "Status",
+          "localizedName" : "Status",
+          "rmType" : "DV_CODED_TEXT",
+          "nodeId" : "at0001",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Status"
+          },
+          "localizedDescriptions" : {
+            "en" : ""
+          },
+          "aqlPath" : "/content[openEHR-EHR-EVALUATION.communication_capability.v1,'Communication']/data[at0001]/items[openEHR-EHR-CLUSTER.communication_difficulty_status.v0]/items[at0001]/value",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0002",
+              "label" : "No difficulty communicating",
+              "localizedLabels" : {
+                "en" : "No difficulty communicating"
+              },
+              "localizedDescriptions" : {
+                "en" : "The person has no difficulty communicating."
+              }
+            }, {
+              "value" : "at0003",
+              "label" : "Requires interpreter to communicate",
+              "localizedLabels" : {
+                "en" : "Requires interpreter to communicate"
+              },
+              "localizedDescriptions" : {
+                "en" : "The person requires the help of an interpreter to communicate."
+              }
+            }, {
+              "value" : "at0004",
+              "label" : "Requires aids to communicate",
+              "localizedLabels" : {
+                "en" : "Requires aids to communicate"
+              },
+              "localizedDescriptions" : {
+                "en" : "The person requires the help of aids to communicate."
+              }
+            }, {
+              "value" : "at0005",
+              "label" : "Unable to communicate",
+              "localizedLabels" : {
+                "en" : "Unable to communicate"
+              },
+              "localizedDescriptions" : {
+                "en" : "The person is  unable to communicate"
+              }
+            } ]
+          } ]
+        } ]
+      }, {
+        "id" : "overall_comment",
+        "name" : "Overall comment",
+        "localizedName" : "Overall comment",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0009",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Overall comment"
+        },
+        "localizedDescriptions" : {
+          "en" : "Additional overall narrative about the communication capability of an individual not captured in other fields."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.communication_capability.v1,'Communication']/data[at0001]/items[at0009]/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.communication_capability.v1,'Communication']/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.communication_capability.v1,'Communication']/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.communication_capability.v1,'Communication']/subject",
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "specific_preferences",
+      "name" : "Specific preferences",
+      "localizedName" : "Specific preferences",
+      "rmType" : "EVALUATION",
+      "nodeId" : "openEHR-EHR-EVALUATION.care_preference_uk.v0",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Specific preferences"
+      },
+      "localizedDescriptions" : {
+        "en" : "The subject's preferred priorities of care and 'What matters'."
+      },
+      "aqlPath" : "/content[openEHR-EHR-EVALUATION.care_preference_uk.v0,'Specific preferences']",
+      "children" : [ {
+        "id" : "spiritual_needs",
+        "name" : "Spiritual needs",
+        "localizedName" : "Spiritual needs",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0030",
+        "min" : 0,
+        "max" : -1,
+        "localizedNames" : {
+          "en" : "Spiritual needs"
+        },
+        "localizedDescriptions" : {
+          "en" : "Any other specifc personal request or preference, including cultural or religious preferences."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.care_preference_uk.v0,'Specific preferences']/data[at0001]/items[at0030,'Spiritual needs']/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "cultural_needs",
+        "name" : "Cultural needs",
+        "localizedName" : "Cultural needs",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0030",
+        "min" : 0,
+        "max" : -1,
+        "localizedNames" : {
+          "en" : "Cultural needs"
+        },
+        "localizedDescriptions" : {
+          "en" : "Any other specifc personal request or preference, including cultural or religious preferences."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.care_preference_uk.v0,'Specific preferences']/data[at0001]/items[at0030,'Cultural needs']/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "other_social_issues",
+        "name" : "Other social issues",
+        "localizedName" : "Other social issues",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0030",
+        "min" : 0,
+        "max" : -1,
+        "localizedNames" : {
+          "en" : "Other social issues"
+        },
+        "localizedDescriptions" : {
+          "en" : "Any other specifc personal request or preference, including cultural or religious preferences."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.care_preference_uk.v0,'Specific preferences']/data[at0001]/items[at0030,'Other social issues']/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "other_instructions_or_details",
+        "name" : "Other instructions or details",
+        "localizedName" : "Other instructions or details",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0030",
+        "min" : 0,
+        "max" : -1,
+        "localizedNames" : {
+          "en" : "Other instructions or details"
+        },
+        "localizedDescriptions" : {
+          "en" : "Any other specifc personal request or preference, including cultural or religious preferences."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.care_preference_uk.v0,'Specific preferences']/data[at0001]/items[at0030,'Other instructions or details']/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "preferred_place_of_care",
+        "name" : "Preferred place of care",
+        "localizedName" : "Preferred place of care",
+        "rmType" : "DV_CODED_TEXT",
+        "nodeId" : "at0003",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Preferred place of care"
+        },
+        "localizedDescriptions" : {
+          "en" : "The patient's preferred place of care (first choice)."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.care_preference_uk.v0,'Specific preferences']/data[at0001]/items[at0003,'Preferred place of care']/value",
+        "inputs" : [ {
+          "suffix" : "code",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0006",
+            "label" : "Preferred place of care - home",
+            "localizedLabels" : {
+              "en" : "Preferred place of care - home"
+            },
+            "localizedDescriptions" : {
+              "en" : "The patient's preferred place of care is at home."
+            },
+            "termBindings" : {
+              "RCD99" : {
+                "value" : "[RCD99::XaQTk]",
+                "terminologyId" : "RCD99"
+              },
+              "READ2" : {
+                "value" : "[READ2::8Ce0.]",
+                "terminologyId" : "READ2"
+              }
+            }
+          }, {
+            "value" : "at0007",
+            "label" : "Preferred place of care - hospice",
+            "localizedLabels" : {
+              "en" : "Preferred place of care - hospice"
+            },
+            "localizedDescriptions" : {
+              "en" : "The patient's preferred place of care is a hospice."
+            },
+            "termBindings" : {
+              "RCD99" : {
+                "value" : "[RCD99::XaJ3h]",
+                "terminologyId" : "RCD99"
+              },
+              "READ2" : {
+                "value" : "[READ2::8Ce1.]",
+                "terminologyId" : "READ2"
+              }
+            }
+          }, {
+            "value" : "at0008",
+            "label" : "Preferred place of care - community hospital",
+            "localizedLabels" : {
+              "en" : "Preferred place of care - community hospital"
+            },
+            "localizedDescriptions" : {
+              "en" : "The patient's preferred place of care is a community hospital."
+            },
+            "termBindings" : {
+              "RCD99" : {
+                "value" : "[RCD99::XaQU4]",
+                "terminologyId" : "RCD99"
+              },
+              "READ2" : {
+                "value" : "[READ2::8Ce2.]",
+                "terminologyId" : "READ2"
+              }
+            }
+          }, {
+            "value" : "at0009",
+            "label" : "Preferred place of care - hospital",
+            "localizedLabels" : {
+              "en" : "Preferred place of care - hospital"
+            },
+            "localizedDescriptions" : {
+              "en" : "The patient's preferred place of care is a  hospital."
+            },
+            "termBindings" : {
+              "RCD99" : {
+                "value" : "[RCD99::XaQU5]",
+                "terminologyId" : "RCD99"
+              },
+              "READ2" : {
+                "value" : "[READ2::8Ce3.]",
+                "terminologyId" : "READ2"
+              }
+            }
+          }, {
+            "value" : "at0010",
+            "label" : "Preferred place of care - nursing home",
+            "localizedLabels" : {
+              "en" : "Preferred place of care - nursing home"
+            },
+            "localizedDescriptions" : {
+              "en" : "The patient's preferred place of care is a nursing home."
+            },
+            "termBindings" : {
+              "RCD99" : {
+                "value" : "[RCD99::XaJ3k]",
+                "terminologyId" : "RCD99"
+              },
+              "READ2" : {
+                "value" : "[READ2::94Z5.]",
+                "terminologyId" : "READ2"
+              }
+            }
+          }, {
+            "value" : "at0011",
+            "label" : "Preferred place of care - residential home",
+            "localizedLabels" : {
+              "en" : "Preferred place of care - residential home"
+            },
+            "localizedDescriptions" : {
+              "en" : "The patient's preferred place of care is a residential home."
+            },
+            "termBindings" : {
+              "RCD99" : {
+                "value" : "[RCD99::XaQiX]",
+                "terminologyId" : "RCD99"
+              },
+              "READ2" : {
+                "value" : "[READ2::8Ce5.]",
+                "terminologyId" : "READ2"
+              }
+            }
+          } ]
+        } ]
+      }, {
+        "id" : "preferred_place_of_care_location",
+        "name" : "Preferred place of care location",
+        "localizedName" : "Preferred place of care location",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0034",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Preferred place of care location"
+        },
+        "localizedDescriptions" : {
+          "en" : "Details of the organisation/location of the preferred place of care."
+        },
+        "annotations" : {
+          "ITM" : "Check code bindings"
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.care_preference_uk.v0,'Specific preferences']/data[at0001]/items[at0034,'Preferred place of care location']/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "preferred_place_of_care_second_choice_location_details",
+        "name" : "Preferred place of care (second choice) location details",
+        "localizedName" : "Preferred place of care (second choice) location details",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0034",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Preferred place of care (second choice) location details"
+        },
+        "localizedDescriptions" : {
+          "en" : "Details of organisation/location of the second choice preference of place of care."
+        },
+        "annotations" : {
+          "ITM" : "Check code bindings"
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.care_preference_uk.v0,'Specific preferences']/data[at0001]/items[at0034,'Preferred place of care (second choice) location details']/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.care_preference_uk.v0,'Specific preferences']/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.care_preference_uk.v0,'Specific preferences']/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.care_preference_uk.v0,'Specific preferences']/subject",
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "living_arrangement",
+      "name" : "Living arrangement",
+      "localizedName" : "Living arrangement",
+      "rmType" : "EVALUATION",
+      "nodeId" : "openEHR-EHR-EVALUATION.living_arrangement.v0",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Living arrangement"
+      },
+      "localizedDescriptions" : {
+        "en" : "The circumstances about an individual living alone or with others."
+      },
+      "annotations" : {
+        "comment" : "This information will provide a sense of the level of support, both physically and emotionally, to which an individual may have access."
+      },
+      "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]",
+      "children" : [ {
+        "id" : "living_arrangement",
+        "name" : "Living arrangement",
+        "localizedName" : "Living arrangement",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0004",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Living arrangement"
+        },
+        "localizedDescriptions" : {
+          "en" : "Single word or phrase that describes if an individual usually resides alone or with others."
+        },
+        "annotations" : {
+          "comment" : "Coding of the living arrangement with a terminology is preferred, where possible. The value sets for this data element are likely to vary between jurisdictions - it is anticipated that they will usually be set within a use-case specific template. For example: 'lives alone'; 'lives with family'; or 'lives with others'."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[at0004]/value",
+        "inputs" : [ {
+          "type" : "TEXT",
+          "list" : [ {
+            "value" : "Lives in own home",
+            "label" : "Lives in own home"
+          }, {
+            "value" : "Lives in sheltered accomodation",
+            "label" : "Lives in sheltered accomodation"
+          }, {
+            "value" : "Lives in care home",
+            "label" : "Lives in care home"
+          } ],
+          "listOpen" : false
+        } ]
+      }, {
+        "id" : "household_composition",
+        "name" : "Household composition",
+        "localizedName" : "Household composition",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0005",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Household composition"
+        },
+        "localizedDescriptions" : {
+          "en" : "Single word or phrase that describes the relationship between people who reside together."
+        },
+        "annotations" : {
+          "comment" : "Coding of the household composition with a terminology is preferred, where possible. For example: single; sole parent with children aged less than 16 years; couple; couple with children aged less than 16 years; family; family with other non-related members present; or group of unrelated adults."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[at0005]/value",
+        "inputs" : [ {
+          "type" : "TEXT",
+          "list" : [ {
+            "value" : "Lives alone",
+            "label" : "Lives alone"
+          }, {
+            "value" : "Lives with next of kin",
+            "label" : "Lives with next of kin"
+          }, {
+            "value" : "Lives with other person",
+            "label" : "Lives with other person"
+          } ],
+          "listOpen" : false
+        } ]
+      }, {
+        "id" : "other_person_in_household",
+        "name" : "Other person in household",
+        "localizedName" : "Other person in household",
+        "rmType" : "CLUSTER",
+        "nodeId" : "openEHR-EHR-CLUSTER.contact_cc.v0",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Other person in household"
+        },
+        "localizedDescriptions" : {
+          "en" : "Contacts for patients and organisations (excluding practitioners)."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Other person in household']",
+        "children" : [ {
+          "id" : "relationship",
+          "name" : "Relationship",
+          "localizedName" : "Relationship",
+          "rmType" : "DV_TEXT",
+          "nodeId" : "at0001",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Relationship"
+          },
+          "localizedDescriptions" : {
+            "en" : "The relationship between the subject and the contact. This field is only appropriate when the archetype is used for patient contacts, not for organisation contacts."
+          },
+          "annotations" : {
+            "comment" : "Coding with a terminology is desirable where possible."
+          },
+          "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Other person in household']/items[at0001]/value",
+          "inputs" : [ {
+            "type" : "TEXT"
+          } ]
+        }, {
+          "id" : "name",
+          "name" : "Name",
+          "localizedName" : "Name",
+          "rmType" : "CLUSTER",
+          "nodeId" : "openEHR-EHR-CLUSTER.name_cc.v0",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Name"
+          },
+          "localizedDescriptions" : {
+            "en" : "Name details aligned with FHIR resource."
+          },
+          "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Other person in household']/items[openEHR-EHR-CLUSTER.name_cc.v0]",
+          "children" : [ {
+            "id" : "use",
+            "name" : "Use",
+            "localizedName" : "Use",
+            "rmType" : "DV_CODED_TEXT",
+            "nodeId" : "at0001",
+            "min" : 1,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Use"
+            },
+            "localizedDescriptions" : {
+              "en" : "Identification of the purpose for the name."
+            },
+            "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Other person in household']/items[openEHR-EHR-CLUSTER.name_cc.v0]/items[at0001]/value",
+            "inputs" : [ {
+              "suffix" : "code",
+              "type" : "CODED_TEXT",
+              "list" : [ {
+                "value" : "at0002",
+                "label" : "Usual",
+                "localizedLabels" : {
+                  "en" : "Usual"
+                },
+                "localizedDescriptions" : {
+                  "en" : "The usual name."
+                }
+              } ]
+            } ]
+          }, {
+            "id" : "contact_name",
+            "name" : "Contact name",
+            "localizedName" : "Contact name",
+            "rmType" : "DV_TEXT",
+            "nodeId" : "at0009",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Contact name"
+            },
+            "localizedDescriptions" : {
+              "en" : "A text representation of the full name."
+            },
+            "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Other person in household']/items[openEHR-EHR-CLUSTER.name_cc.v0]/items[at0009,'Contact name']/value",
+            "inputs" : [ {
+              "type" : "TEXT"
+            } ]
+          } ]
+        }, {
+          "id" : "telephone",
+          "name" : "Telephone",
+          "localizedName" : "Telephone",
+          "rmType" : "CLUSTER",
+          "nodeId" : "openEHR-EHR-CLUSTER.telecom_cc.v0",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Telephone"
+          },
+          "localizedDescriptions" : {
+            "en" : "FHIR telecom details."
+          },
+          "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Other person in household']/items[openEHR-EHR-CLUSTER.telecom_cc.v0,'Telephone']",
+          "children" : [ {
+            "id" : "system",
+            "name" : "System",
+            "localizedName" : "System",
+            "rmType" : "DV_CODED_TEXT",
+            "nodeId" : "at0001",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "System"
+            },
+            "localizedDescriptions" : {
+              "en" : "Telecommunications form for contact point - what communications system is required to make use of the contact."
+            },
+            "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Other person in household']/items[openEHR-EHR-CLUSTER.telecom_cc.v0,'Telephone']/items[at0001]/value",
+            "inputs" : [ {
+              "suffix" : "code",
+              "type" : "CODED_TEXT",
+              "list" : [ {
+                "value" : "at0012",
+                "label" : "Phone",
+                "localizedLabels" : {
+                  "en" : "Phone"
+                },
+                "localizedDescriptions" : {
+                  "en" : "The communication form is phone."
+                }
+              } ]
+            } ]
+          }, {
+            "id" : "telephone_number",
+            "name" : "Telephone number",
+            "localizedName" : "Telephone number",
+            "rmType" : "DV_TEXT",
+            "nodeId" : "at0002",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Telephone number"
+            },
+            "localizedDescriptions" : {
+              "en" : "The actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address)."
+            },
+            "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Other person in household']/items[openEHR-EHR-CLUSTER.telecom_cc.v0,'Telephone']/items[at0002,'Telephone number']/value",
+            "inputs" : [ {
+              "type" : "TEXT"
+            } ]
+          } ]
+        } ]
+      }, {
+        "id" : "care_home_details",
+        "name" : "Care home details",
+        "localizedName" : "Care home details",
+        "rmType" : "CLUSTER",
+        "nodeId" : "openEHR-EHR-CLUSTER.organisation.v0",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Care home details"
+        },
+        "localizedDescriptions" : {
+          "en" : "Details of an organisation."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.organisation.v0,'Care home details']",
+        "children" : [ {
+          "id" : "care_home_name",
+          "name" : "Care home name",
+          "localizedName" : "Care home name",
+          "rmType" : "DV_TEXT",
+          "nodeId" : "at0001",
+          "min" : 1,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Care home name"
+          },
+          "localizedDescriptions" : {
+            "en" : "Name of the organisation."
+          },
+          "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.organisation.v0,'Care home details']/items[at0001,'Care home name']/value",
+          "inputs" : [ {
+            "type" : "TEXT"
+          } ]
+        }, {
+          "id" : "cqc_identifier",
+          "name" : "CQC Identifier",
+          "localizedName" : "CQC Identifier",
+          "rmType" : "DV_IDENTIFIER",
+          "nodeId" : "at0011",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "CQC Identifier"
+          },
+          "localizedDescriptions" : {
+            "en" : "Identifier of organisation."
+          },
+          "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.organisation.v0,'Care home details']/items[at0011,'CQC Identifier']/value",
+          "inputs" : [ {
+            "suffix" : "id",
+            "type" : "TEXT"
+          }, {
+            "suffix" : "type",
+            "type" : "TEXT"
+          }, {
+            "suffix" : "issuer",
+            "type" : "TEXT"
+          }, {
+            "suffix" : "assigner",
+            "type" : "TEXT"
+          } ]
+        } ]
+      }, {
+        "id" : "access_arrangements",
+        "name" : "Access arrangements",
+        "localizedName" : "Access arrangements",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0010",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Access arrangements"
+        },
+        "localizedDescriptions" : {
+          "en" : "Additional narrative about the living arrangement not captured in other fields."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/data[at0001]/items[at0010,'Access arrangements']/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.living_arrangement.v0]/subject",
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "lasting_power_of_attorney_-_health_and_welfare",
+      "name" : "Lasting power of attorney - health and welfare",
+      "localizedName" : "Lasting power of attorney - health and welfare",
+      "rmType" : "ADMIN_ENTRY",
+      "nodeId" : "openEHR-EHR-ADMIN_ENTRY.legal_authority.v0",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Lasting power of attorney - health and welfare"
+      },
+      "localizedDescriptions" : {
+        "en" : "A framework to communicate information about legal directives or orders that apply to the individual, for example, a power of attorney or guardianship order."
+      },
+      "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']",
+      "children" : [ {
+        "id" : "type",
+        "name" : "Type",
+        "localizedName" : "Type",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0002",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Type"
+        },
+        "localizedDescriptions" : {
+          "en" : "The type of legal directive or order that applies to the individual."
+        },
+        "annotations" : {
+          "comment" : "Coding of the type of legal directive or order with a terminology is preferred, where possible. It is expected that this is largely localised to reflect local policy and legislation. For example, 'Welfare Power of Attorney', 'Welfare Guardianship Order' or 'Emergency Detention Order'."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0002]/value",
+        "inputs" : [ {
+          "type" : "TEXT",
+          "list" : [ {
+            "value" : "Lasting Power of Attorney for Health and Welfare without authority to make life sustaining decisions",
+            "label" : "Lasting Power of Attorney for Health and Welfare without authority to make life sustaining decisions"
+          }, {
+            "value" : "Lasting Power of Attorney for Health and Welfare with authority to make life sustaining decisions",
+            "label" : "Lasting Power of Attorney for Health and Welfare with authority to make life sustaining decisions"
+          }, {
+            "value" : "Guardianship for Health and Welfare without authority to make life sustaining decisions",
+            "label" : "Guardianship for Health and Welfare without authority to make life sustaining decisions"
+          }, {
+            "value" : "Guardianship for Health and Welfare with authority to make life sustaining decisions",
+            "label" : "Guardianship for Health and Welfare with authority to make life sustaining decisions"
+          }, {
+            "value" : "Court appointed deputy without authority to make life sustaining decisions",
+            "label" : "Court appointed deputy without authority to make life sustaining decisions"
+          }, {
+            "value" : "Court appointed deputy with authority to make life sustaining decisions",
+            "label" : "Court appointed deputy with authority to make life sustaining decisions"
+          } ],
+          "listOpen" : false
+        } ]
+      }, {
+        "id" : "status",
+        "name" : "Status",
+        "localizedName" : "Status",
+        "rmType" : "DV_CODED_TEXT",
+        "nodeId" : "at0004",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Status"
+        },
+        "localizedDescriptions" : {
+          "en" : "The status of the legal directive or order."
+        },
+        "annotations" : {
+          "comment" : "Coding of the legal directive or order status with a terminology is preferred, where possible."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0004]/value",
+        "inputs" : [ {
+          "suffix" : "code",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0005",
+            "label" : "Present",
+            "localizedLabels" : {
+              "en" : "Present"
+            },
+            "localizedDescriptions" : {
+              "en" : "A legal directive or order is present."
+            }
+          }, {
+            "value" : "at0006",
+            "label" : "Absent",
+            "localizedLabels" : {
+              "en" : "Absent"
+            },
+            "localizedDescriptions" : {
+              "en" : "A legal directive or order is absent."
+            }
+          } ]
+        } ]
+      }, {
+        "id" : "representative",
+        "name" : "Representative",
+        "localizedName" : "Representative",
+        "rmType" : "CLUSTER",
+        "nodeId" : "at0023",
+        "min" : 0,
+        "max" : -1,
+        "localizedNames" : {
+          "en" : "Representative"
+        },
+        "localizedDescriptions" : {
+          "en" : "Details of a nominated representative who has authority to act and make decisions on behalf of the individual, or who has been appointed to support the individual in decision-making."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0023]",
+        "children" : [ {
+          "id" : "representative",
+          "name" : "Representative",
+          "localizedName" : "Representative",
+          "rmType" : "CLUSTER",
+          "nodeId" : "openEHR-EHR-CLUSTER.contact_cc.v0",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Representative"
+          },
+          "localizedDescriptions" : {
+            "en" : "Contacts for patients and organisations (excluding practitioners)."
+          },
+          "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0023]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Representative']",
+          "children" : [ {
+            "id" : "relationship",
+            "name" : "Relationship",
+            "localizedName" : "Relationship",
+            "rmType" : "DV_TEXT",
+            "nodeId" : "at0001",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Relationship"
+            },
+            "localizedDescriptions" : {
+              "en" : "The relationship between the subject and the contact. This field is only appropriate when the archetype is used for patient contacts, not for organisation contacts."
+            },
+            "annotations" : {
+              "comment" : "Coding with a terminology is desirable where possible."
+            },
+            "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0023]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Representative']/items[at0001]/value",
+            "inputs" : [ {
+              "type" : "TEXT"
+            } ]
+          }, {
+            "id" : "name",
+            "name" : "Name",
+            "localizedName" : "Name",
+            "rmType" : "CLUSTER",
+            "nodeId" : "openEHR-EHR-CLUSTER.name_cc.v0",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Name"
+            },
+            "localizedDescriptions" : {
+              "en" : "Name details aligned with FHIR resource."
+            },
+            "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0023]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Representative']/items[openEHR-EHR-CLUSTER.name_cc.v0]",
+            "children" : [ {
+              "id" : "use",
+              "name" : "Use",
+              "localizedName" : "Use",
+              "rmType" : "DV_CODED_TEXT",
+              "nodeId" : "at0001",
+              "min" : 1,
+              "max" : 1,
+              "localizedNames" : {
+                "en" : "Use"
+              },
+              "localizedDescriptions" : {
+                "en" : "Identification of the purpose for the name."
+              },
+              "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0023]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Representative']/items[openEHR-EHR-CLUSTER.name_cc.v0]/items[at0001]/value",
+              "inputs" : [ {
+                "suffix" : "code",
+                "type" : "CODED_TEXT",
+                "list" : [ {
+                  "value" : "at0002",
+                  "label" : "Usual",
+                  "localizedLabels" : {
+                    "en" : "Usual"
+                  },
+                  "localizedDescriptions" : {
+                    "en" : "The usual name."
+                  }
+                } ]
+              } ]
+            }, {
+              "id" : "contact_name",
+              "name" : "Contact name",
+              "localizedName" : "Contact name",
+              "rmType" : "DV_TEXT",
+              "nodeId" : "at0009",
+              "min" : 0,
+              "max" : 1,
+              "localizedNames" : {
+                "en" : "Contact name"
+              },
+              "localizedDescriptions" : {
+                "en" : "A text representation of the full name."
+              },
+              "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0023]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Representative']/items[openEHR-EHR-CLUSTER.name_cc.v0]/items[at0009,'Contact name']/value",
+              "inputs" : [ {
+                "type" : "TEXT"
+              } ]
+            } ]
+          }, {
+            "id" : "telephone",
+            "name" : "Telephone",
+            "localizedName" : "Telephone",
+            "rmType" : "CLUSTER",
+            "nodeId" : "openEHR-EHR-CLUSTER.telecom_cc.v0",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Telephone"
+            },
+            "localizedDescriptions" : {
+              "en" : "FHIR telecom details."
+            },
+            "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0023]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Representative']/items[openEHR-EHR-CLUSTER.telecom_cc.v0,'Telephone']",
+            "children" : [ {
+              "id" : "system",
+              "name" : "System",
+              "localizedName" : "System",
+              "rmType" : "DV_CODED_TEXT",
+              "nodeId" : "at0001",
+              "min" : 0,
+              "max" : 1,
+              "localizedNames" : {
+                "en" : "System"
+              },
+              "localizedDescriptions" : {
+                "en" : "Telecommunications form for contact point - what communications system is required to make use of the contact."
+              },
+              "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0023]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Representative']/items[openEHR-EHR-CLUSTER.telecom_cc.v0,'Telephone']/items[at0001]/value",
+              "inputs" : [ {
+                "suffix" : "code",
+                "type" : "CODED_TEXT",
+                "list" : [ {
+                  "value" : "at0012",
+                  "label" : "Phone",
+                  "localizedLabels" : {
+                    "en" : "Phone"
+                  },
+                  "localizedDescriptions" : {
+                    "en" : "The communication form is phone."
+                  }
+                } ]
+              } ]
+            }, {
+              "id" : "telephone_number",
+              "name" : "Telephone number",
+              "localizedName" : "Telephone number",
+              "rmType" : "DV_TEXT",
+              "nodeId" : "at0002",
+              "min" : 0,
+              "max" : 1,
+              "localizedNames" : {
+                "en" : "Telephone number"
+              },
+              "localizedDescriptions" : {
+                "en" : "The actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address)."
+              },
+              "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0023]/items[openEHR-EHR-CLUSTER.contact_cc.v0,'Representative']/items[openEHR-EHR-CLUSTER.telecom_cc.v0,'Telephone']/items[at0002,'Telephone number']/value",
+              "inputs" : [ {
+                "type" : "TEXT"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "id" : "certificate_location",
+        "name" : "Certificate location",
+        "localizedName" : "Certificate location",
+        "rmType" : "CLUSTER",
+        "nodeId" : "at0034",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Certificate location"
+        },
+        "localizedDescriptions" : {
+          "en" : "Information regarding where the legal directive or order certification is stored and who has a copy of it."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0034]",
+        "children" : [ {
+          "id" : "location",
+          "name" : "Location",
+          "localizedName" : "Location",
+          "rmType" : "DV_TEXT",
+          "nodeId" : "at0035",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Location"
+          },
+          "localizedDescriptions" : {
+            "en" : "Information regarding where the certificate is stored and how to gain access to it."
+          },
+          "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0034]/items[at0035]/value",
+          "inputs" : [ {
+            "type" : "TEXT"
+          } ]
+        }, {
+          "id" : "lpa_attachment",
+          "name" : "LPA attachment",
+          "localizedName" : "LPA attachment",
+          "rmType" : "CLUSTER",
+          "nodeId" : "openEHR-EHR-CLUSTER.multimedia_source.v0",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "LPA attachment"
+          },
+          "localizedDescriptions" : {
+            "en" : "A multimedia resource that is generated or acquired during the provision of healthcare."
+          },
+          "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0034]/items[openEHR-EHR-CLUSTER.multimedia_source.v0,'LPA attachment']",
+          "children" : [ {
+            "id" : "resource_name",
+            "name" : "Resource name",
+            "localizedName" : "Resource name",
+            "rmType" : "DV_TEXT",
+            "nodeId" : "at0002",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Resource name"
+            },
+            "localizedDescriptions" : {
+              "en" : "Name or title of the multimedia resource."
+            },
+            "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0034]/items[openEHR-EHR-CLUSTER.multimedia_source.v0,'LPA attachment']/items[at0002]/value",
+            "inputs" : [ {
+              "type" : "TEXT",
+              "defaultValue" : "TBD LPA attachment"
+            } ]
+          }, {
+            "id" : "content",
+            "name" : "Content",
+            "localizedName" : "Content",
+            "rmType" : "DV_MULTIMEDIA",
+            "nodeId" : "at0001",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Content"
+            },
+            "localizedDescriptions" : {
+              "en" : "Digital representation of the resource."
+            },
+            "annotations" : {
+              "comment" : "The actual content will be captured and stored using the Multimedia data type. For example: RTF or PDF for a document; JPG for an image; MP4 for a video; or WAV for an audio file. If the content is stored elsewhere the external location can be referenced using the URI data type."
+            },
+            "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0034]/items[openEHR-EHR-CLUSTER.multimedia_source.v0,'LPA attachment']/items[at0001]/value",
+            "inputs" : [ {
+              "type" : "TEXT"
+            } ]
+          }, {
+            "id" : "created",
+            "name" : "Created",
+            "localizedName" : "Created",
+            "rmType" : "DV_DATE_TIME",
+            "nodeId" : "at0004",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Created"
+            },
+            "localizedDescriptions" : {
+              "en" : "The time, date, partial date or period when the resource was generated or authored."
+            },
+            "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/data[at0001]/items[at0034]/items[openEHR-EHR-CLUSTER.multimedia_source.v0,'LPA attachment']/items[at0004]/value",
+            "inputs" : [ {
+              "type" : "DATETIME"
+            } ]
+          } ]
+        } ]
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.legal_authority.v0,'Lasting power of attorney - health and welfare']/subject",
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "advance_care_plan",
+      "name" : "Advance care plan",
+      "localizedName" : "Advance care plan",
+      "rmType" : "EVALUATION",
+      "nodeId" : "openEHR-EHR-EVALUATION.advance_care_directive.v1",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Advance care plan"
+      },
+      "localizedDescriptions" : {
+        "en" : "A framework to communicate the preferences of an individual for future medical treatment and care."
+      },
+      "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance care plan']",
+      "children" : [ {
+        "id" : "type_of_directive",
+        "name" : "Type of directive",
+        "localizedName" : "Type of directive",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0005",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Type of directive"
+        },
+        "localizedDescriptions" : {
+          "en" : "The type of advance care directive."
+        },
+        "annotations" : {
+          "comment" : "A short text description of the nature of the advance care directive. Coding of the type of directive with a terminology is preferred, where possible. It is expected that this is largely localised to reflect local policy and legislation.\r\n\r\nFor example, in the Netherlands, advance care directive types include, but are not limited to, 'Treatment prohibition', 'Treatment prohibition with completion of Completed Life', 'Euthanasia request' and 'Declaration of life'.\r\n\r\nIn the UK, advance care directive types include 'Advance Decision', 'Advance Directive' and 'Advance Statement'."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance care plan']/data[at0001]/items[at0005]/value",
+        "inputs" : [ {
+          "type" : "TEXT",
+          "list" : [ {
+            "value" : "Advance Care plan:: 736366004 | Advance care plan (record artifact) |",
+            "label" : "Advance Care plan:: 736366004 | Advance care plan (record artifact) |"
+          } ],
+          "listOpen" : false
+        } ]
+      }, {
+        "id" : "status",
+        "name" : "Status",
+        "localizedName" : "Status",
+        "rmType" : "DV_CODED_TEXT",
+        "nodeId" : "at0004",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Status"
+        },
+        "localizedDescriptions" : {
+          "en" : "The status of the advance care directive."
+        },
+        "annotations" : {
+          "comment" : "Coding of the advance care directive status with a terminology is preferred, where possible."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance care plan']/data[at0001]/items[at0004]/value",
+        "inputs" : [ {
+          "suffix" : "code",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0044",
+            "label" : "Present",
+            "localizedLabels" : {
+              "en" : "Present"
+            },
+            "localizedDescriptions" : {
+              "en" : "The individual has an advance care directive."
+            },
+            "termBindings" : {
+              "SNOMED-CT" : {
+                "value" : "[SNOMED-CT::410515003]",
+                "terminologyId" : "SNOMED-CT"
+              }
+            }
+          }, {
+            "value" : "at0045",
+            "label" : "Absent",
+            "localizedLabels" : {
+              "en" : "Absent"
+            },
+            "localizedDescriptions" : {
+              "en" : "The individual does not have an advance care directive."
+            },
+            "termBindings" : {
+              "SNOMED-CT" : {
+                "value" : "[SNOMED-CT::410516002]",
+                "terminologyId" : "SNOMED-CT"
+              }
+            }
+          } ]
+        } ]
+      }, {
+        "id" : "description",
+        "name" : "Description",
+        "localizedName" : "Description",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0006",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Description"
+        },
+        "localizedDescriptions" : {
+          "en" : "Narrative description of the overall advance care directive."
+        },
+        "annotations" : {
+          "comment" : "May be used to record a narrative overview of the complete advance care directive, which may or may not be supported by structured data. Details of specific structured findings can be included using CLUSTER archetypes in the 'Directive details' slot. This data element may be used to capture legacy data that is not available in a structured format."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance care plan']/data[at0001]/items[at0006]/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "last_updated",
+        "name" : "Last updated",
+        "localizedName" : "Last updated",
+        "rmType" : "DV_DATE_TIME",
+        "nodeId" : "at0055",
+        "min" : 0,
+        "max" : 1,
+        "dependsOn" : [ "type_of_directive", "description", "status" ],
+        "localizedNames" : {
+          "en" : "Last updated"
+        },
+        "localizedDescriptions" : {
+          "en" : "The date when this advance directive record was last updated. This may not be a formal review but e.g. a typo correction."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance care plan']/protocol[at0010]/items[at0055]/value",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ]
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance care plan']/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance care plan']/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance care plan']/subject",
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "advance_decision_to_refuse_treatment",
+      "name" : "Advance decision to refuse treatment",
+      "localizedName" : "Advance decision to refuse treatment",
+      "rmType" : "EVALUATION",
+      "nodeId" : "openEHR-EHR-EVALUATION.advance_care_directive.v1",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Advance decision to refuse treatment"
+      },
+      "localizedDescriptions" : {
+        "en" : "A framework to communicate the preferences of an individual for future medical treatment and care."
+      },
+      "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance decision to refuse treatment']",
+      "children" : [ {
+        "id" : "type_of_directive",
+        "name" : "Type of directive",
+        "localizedName" : "Type of directive",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0005",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Type of directive"
+        },
+        "localizedDescriptions" : {
+          "en" : "The type of advance care directive."
+        },
+        "annotations" : {
+          "comment" : "A short text description of the nature of the advance care directive. Coding of the type of directive with a terminology is preferred, where possible. It is expected that this is largely localised to reflect local policy and legislation.\r\n\r\nFor example, in the Netherlands, advance care directive types include, but are not limited to, 'Treatment prohibition', 'Treatment prohibition with completion of Completed Life', 'Euthanasia request' and 'Declaration of life'.\r\n\r\nIn the UK, advance care directive types include 'Advance Decision', 'Advance Directive' and 'Advance Statement'."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance decision to refuse treatment']/data[at0001]/items[at0005]/value",
+        "inputs" : [ {
+          "type" : "TEXT",
+          "list" : [ {
+            "value" : "Advance decision to refuse treatment 1052911000000106 | Advance decision to refuse treatment (record artifact) |",
+            "label" : "Advance decision to refuse treatment 1052911000000106 | Advance decision to refuse treatment (record artifact) |"
+          } ],
+          "listOpen" : false
+        } ]
+      }, {
+        "id" : "status",
+        "name" : "Status",
+        "localizedName" : "Status",
+        "rmType" : "DV_CODED_TEXT",
+        "nodeId" : "at0004",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Status"
+        },
+        "localizedDescriptions" : {
+          "en" : "The status of the advance care directive."
+        },
+        "annotations" : {
+          "comment" : "Coding of the advance care directive status with a terminology is preferred, where possible."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance decision to refuse treatment']/data[at0001]/items[at0004]/value",
+        "inputs" : [ {
+          "suffix" : "code",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0044",
+            "label" : "Present",
+            "localizedLabels" : {
+              "en" : "Present"
+            },
+            "localizedDescriptions" : {
+              "en" : "The individual has an advance care directive."
+            },
+            "termBindings" : {
+              "SNOMED-CT" : {
+                "value" : "[SNOMED-CT::410515003]",
+                "terminologyId" : "SNOMED-CT"
+              }
+            }
+          }, {
+            "value" : "at0045",
+            "label" : "Absent",
+            "localizedLabels" : {
+              "en" : "Absent"
+            },
+            "localizedDescriptions" : {
+              "en" : "The individual does not have an advance care directive."
+            },
+            "termBindings" : {
+              "SNOMED-CT" : {
+                "value" : "[SNOMED-CT::410516002]",
+                "terminologyId" : "SNOMED-CT"
+              }
+            }
+          } ]
+        } ]
+      }, {
+        "id" : "description",
+        "name" : "Description",
+        "localizedName" : "Description",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0006",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Description"
+        },
+        "localizedDescriptions" : {
+          "en" : "Narrative description of the overall advance care directive."
+        },
+        "annotations" : {
+          "comment" : "May be used to record a narrative overview of the complete advance care directive, which may or may not be supported by structured data. Details of specific structured findings can be included using CLUSTER archetypes in the 'Directive details' slot. This data element may be used to capture legacy data that is not available in a structured format."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance decision to refuse treatment']/data[at0001]/items[at0006]/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "last_updated",
+        "name" : "Last updated",
+        "localizedName" : "Last updated",
+        "rmType" : "DV_DATE_TIME",
+        "nodeId" : "at0055",
+        "min" : 0,
+        "max" : 1,
+        "dependsOn" : [ "type_of_directive", "description", "status" ],
+        "localizedNames" : {
+          "en" : "Last updated"
+        },
+        "localizedDescriptions" : {
+          "en" : "The date when this advance directive record was last updated. This may not be a formal review but e.g. a typo correction."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance decision to refuse treatment']/protocol[at0010]/items[at0055]/value",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ]
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance decision to refuse treatment']/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance decision to refuse treatment']/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.advance_care_directive.v1,'Advance decision to refuse treatment']/subject",
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "general_risks",
+      "name" : "General risks",
+      "localizedName" : "General risks",
+      "rmType" : "EVALUATION",
+      "nodeId" : "openEHR-EHR-EVALUATION.health_risk.v1",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "General risks"
+      },
+      "localizedDescriptions" : {
+        "en" : "Assessment of the potential and likelihood of future adverse health effects as determined by identified risk factors."
+      },
+      "aqlPath" : "/content[openEHR-EHR-EVALUATION.health_risk.v1,'General risks']",
+      "children" : [ {
+        "id" : "health_risk",
+        "name" : "Health risk",
+        "localizedName" : "Health risk",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0002",
+        "min" : 1,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Health risk"
+        },
+        "localizedDescriptions" : {
+          "en" : "Identification of the potential future disease, condition or health issue for which the risk is being assessed, by name."
+        },
+        "annotations" : {
+          "comment" : "Coding of 'Health risk' with a terminology is preferred, where possible. Free text should be used only if there is no appropriate terminology available. For example: risk of cardiovascular disease, with risk factors of hypertension and hypercholesterolaemia."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.health_risk.v1,'General risks']/data[at0001]/items[at0002]/value",
+        "inputs" : [ {
+          "type" : "TEXT",
+          "defaultValue" : "Personal risk"
+        } ]
+      }, {
+        "id" : "unable_to_summon_help",
+        "name" : "Unable to summon help",
+        "localizedName" : "Unable to summon help",
+        "rmType" : "CLUSTER",
+        "nodeId" : "at0016",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Unable to summon help"
+        },
+        "localizedDescriptions" : {
+          "en" : "Details about each possible risk factor."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.health_risk.v1,'General risks']/data[at0001]/items[at0016,'Unable to summon help']",
+        "children" : [ {
+          "id" : "risk_factor",
+          "name" : "Risk factor",
+          "localizedName" : "Risk factor",
+          "rmType" : "DV_TEXT",
+          "nodeId" : "at0013",
+          "min" : 1,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Risk factor"
+          },
+          "localizedDescriptions" : {
+            "en" : "Identification of the risk factor, by name."
+          },
+          "annotations" : {
+            "comment" : "For example: hypertension and hypercholesterolaemia, which may be used as part of the overall assessment for cardiovascular disease; or a genetic marker. Coding of \r\n'Risk factor' with a terminology, where possible."
+          },
+          "aqlPath" : "/content[openEHR-EHR-EVALUATION.health_risk.v1,'General risks']/data[at0001]/items[at0016,'Unable to summon help']/items[at0013]/value",
+          "inputs" : [ {
+            "type" : "TEXT",
+            "list" : [ {
+              "value" : "Unable to summon help in an emergency",
+              "label" : "Unable to summon help in an emergency"
+            } ],
+            "listOpen" : false
+          } ]
+        }, {
+          "id" : "presence",
+          "name" : "Presence",
+          "localizedName" : "Presence",
+          "rmType" : "DV_CODED_TEXT",
+          "nodeId" : "at0017",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Presence"
+          },
+          "localizedDescriptions" : {
+            "en" : "Presence of the risk factor."
+          },
+          "aqlPath" : "/content[openEHR-EHR-EVALUATION.health_risk.v1,'General risks']/data[at0001]/items[at0016,'Unable to summon help']/items[at0017]/value",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0018",
+              "label" : "Present",
+              "localizedLabels" : {
+                "en" : "Present"
+              },
+              "localizedDescriptions" : {
+                "en" : "The risk factor has been identified for this individual."
+              },
+              "termBindings" : {
+                "SNOMED-CT" : {
+                  "value" : "[SNOMED-CT::52101004]",
+                  "terminologyId" : "SNOMED-CT"
+                }
+              }
+            }, {
+              "value" : "at0019",
+              "label" : "Absent",
+              "localizedLabels" : {
+                "en" : "Absent"
+              },
+              "localizedDescriptions" : {
+                "en" : "The risk factor has not been identified for this individual."
+              },
+              "termBindings" : {
+                "SNOMED-CT" : {
+                  "value" : "[SNOMED-CT::2667000]",
+                  "terminologyId" : "SNOMED-CT"
+                }
+              }
+            } ]
+          } ]
+        } ]
+      }, {
+        "id" : "impaired_ability_to_recognise_risk",
+        "name" : "Impaired ability to recognise risk",
+        "localizedName" : "Impaired ability to recognise risk",
+        "rmType" : "CLUSTER",
+        "nodeId" : "at0016",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Impaired ability to recognise risk"
+        },
+        "localizedDescriptions" : {
+          "en" : "Details about each possible risk factor."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.health_risk.v1,'General risks']/data[at0001]/items[at0016,'Impaired ability to recognise risk']",
+        "children" : [ {
+          "id" : "risk_factor",
+          "name" : "Risk factor",
+          "localizedName" : "Risk factor",
+          "rmType" : "DV_TEXT",
+          "nodeId" : "at0013",
+          "min" : 1,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Risk factor"
+          },
+          "localizedDescriptions" : {
+            "en" : "Identification of the risk factor, by name."
+          },
+          "annotations" : {
+            "comment" : "For example: hypertension and hypercholesterolaemia, which may be used as part of the overall assessment for cardiovascular disease; or a genetic marker. Coding of \r\n'Risk factor' with a terminology, where possible."
+          },
+          "aqlPath" : "/content[openEHR-EHR-EVALUATION.health_risk.v1,'General risks']/data[at0001]/items[at0016,'Impaired ability to recognise risk']/items[at0013]/value",
+          "inputs" : [ {
+            "type" : "TEXT",
+            "list" : [ {
+              "value" : "Impaired ability to recognise safety risks",
+              "label" : "Impaired ability to recognise safety risks"
+            } ],
+            "listOpen" : false
+          } ]
+        }, {
+          "id" : "presence",
+          "name" : "Presence",
+          "localizedName" : "Presence",
+          "rmType" : "DV_CODED_TEXT",
+          "nodeId" : "at0017",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Presence"
+          },
+          "localizedDescriptions" : {
+            "en" : "Presence of the risk factor."
+          },
+          "aqlPath" : "/content[openEHR-EHR-EVALUATION.health_risk.v1,'General risks']/data[at0001]/items[at0016,'Impaired ability to recognise risk']/items[at0017]/value",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0018",
+              "label" : "Present",
+              "localizedLabels" : {
+                "en" : "Present"
+              },
+              "localizedDescriptions" : {
+                "en" : "The risk factor has been identified for this individual."
+              },
+              "termBindings" : {
+                "SNOMED-CT" : {
+                  "value" : "[SNOMED-CT::52101004]",
+                  "terminologyId" : "SNOMED-CT"
+                }
+              }
+            }, {
+              "value" : "at0019",
+              "label" : "Absent",
+              "localizedLabels" : {
+                "en" : "Absent"
+              },
+              "localizedDescriptions" : {
+                "en" : "The risk factor has not been identified for this individual."
+              },
+              "termBindings" : {
+                "SNOMED-CT" : {
+                  "value" : "[SNOMED-CT::2667000]",
+                  "terminologyId" : "SNOMED-CT"
+                }
+              }
+            } ]
+          } ]
+        } ]
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.health_risk.v1,'General risks']/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.health_risk.v1,'General risks']/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.health_risk.v1,'General risks']/subject",
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "hearing",
+      "name" : "Hearing",
+      "localizedName" : "Hearing",
+      "rmType" : "OBSERVATION",
+      "nodeId" : "openEHR-EHR-OBSERVATION.hearing.v0",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Hearing"
+      },
+      "localizedDescriptions" : {
+        "en" : "Vision"
+      },
+      "aqlPath" : "/content[openEHR-EHR-OBSERVATION.hearing.v0]",
+      "children" : [ {
+        "id" : "hearing_status",
+        "name" : "Hearing status",
+        "localizedName" : "Hearing status",
+        "rmType" : "DV_CODED_TEXT",
+        "nodeId" : "at0004",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Hearing status"
+        },
+        "localizedDescriptions" : {
+          "en" : ""
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.hearing.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value",
+        "inputs" : [ {
+          "suffix" : "code",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0005",
+            "label" : "Hearing normal",
+            "localizedLabels" : {
+              "en" : "Hearing normal"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            }
+          }, {
+            "value" : "at0006",
+            "label" : "Significant hearing impairment",
+            "localizedLabels" : {
+              "en" : "Significant hearing impairment"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            }
+          }, {
+            "value" : "at0007",
+            "label" : "Deaf",
+            "localizedLabels" : {
+              "en" : "Deaf"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            }
+          } ]
+        } ]
+      }, {
+        "id" : "time",
+        "name" : "Time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.hearing.v0]/data[at0001]/events[at0002]/time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.hearing.v0]/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.hearing.v0]/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.hearing.v0]/subject",
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "mobility",
+      "name" : "Mobility",
+      "localizedName" : "Mobility",
+      "rmType" : "OBSERVATION",
+      "nodeId" : "openEHR-EHR-OBSERVATION.mobility.v0",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Mobility"
+      },
+      "localizedDescriptions" : {
+        "en" : "The ability to move freely, such as changing position, walking and moving forward."
+      },
+      "aqlPath" : "/content[openEHR-EHR-OBSERVATION.mobility.v0]",
+      "children" : [ {
+        "id" : "overall_mobility",
+        "name" : "Overall mobility",
+        "localizedName" : "Overall mobility",
+        "rmType" : "DV_CODED_TEXT",
+        "nodeId" : "at0029",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Overall mobility"
+        },
+        "localizedDescriptions" : {
+          "en" : ""
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.mobility.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0029]/value",
+        "inputs" : [ {
+          "suffix" : "code",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0030",
+            "label" : "Independent",
+            "localizedLabels" : {
+              "en" : "Independent"
+            },
+            "localizedDescriptions" : {
+              "en" : "The individual is fully mobile."
+            }
+          }, {
+            "value" : "at0031",
+            "label" : "Requires assistance",
+            "localizedLabels" : {
+              "en" : "Requires assistance"
+            },
+            "localizedDescriptions" : {
+              "en" : "The individual requires assistance with one or more aspects of mobility."
+            }
+          }, {
+            "value" : "at0032",
+            "label" : "Fully immobile",
+            "localizedLabels" : {
+              "en" : "Fully immobile"
+            },
+            "localizedDescriptions" : {
+              "en" : "The individual is fully or practically immobile."
+            }
+          } ]
+        } ]
+      }, {
+        "id" : "time",
+        "name" : "Time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.mobility.v0]/data[at0001]/events[at0002]/time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.mobility.v0]/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.mobility.v0]/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.mobility.v0]/subject",
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "vision",
+      "name" : "Vision",
+      "localizedName" : "Vision",
+      "rmType" : "OBSERVATION",
+      "nodeId" : "openEHR-EHR-OBSERVATION.visual_function.v0",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Vision"
+      },
+      "localizedDescriptions" : {
+        "en" : "Vision"
+      },
+      "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_function.v0,'Vision']",
+      "children" : [ {
+        "id" : "vision_status",
+        "name" : "Vision status",
+        "localizedName" : "Vision status",
+        "rmType" : "DV_CODED_TEXT",
+        "nodeId" : "at0004",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Vision status"
+        },
+        "localizedDescriptions" : {
+          "en" : ""
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_function.v0,'Vision']/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value",
+        "inputs" : [ {
+          "suffix" : "code",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0005",
+            "label" : "Vision normal",
+            "localizedLabels" : {
+              "en" : "Vision normal"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            }
+          }, {
+            "value" : "at0006",
+            "label" : "Significant visual impairment",
+            "localizedLabels" : {
+              "en" : "Significant visual impairment"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            }
+          }, {
+            "value" : "at0007",
+            "label" : "Severe visual impairment",
+            "localizedLabels" : {
+              "en" : "Severe visual impairment"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            }
+          } ]
+        } ]
+      }, {
+        "id" : "time",
+        "name" : "Time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_function.v0,'Vision']/data[at0001]/events[at0002]/time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_function.v0,'Vision']/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_function.v0,'Vision']/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_function.v0,'Vision']/subject",
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "cognitive_ability",
+      "name" : "Cognitive ability",
+      "localizedName" : "Cognitive ability",
+      "rmType" : "OBSERVATION",
+      "nodeId" : "openEHR-EHR-OBSERVATION.cognitive_ability.v0",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Cognitive ability"
+      },
+      "localizedDescriptions" : {
+        "en" : "The ability to move freely, such as changing position, walking and moving forward."
+      },
+      "aqlPath" : "/content[openEHR-EHR-OBSERVATION.cognitive_ability.v0]",
+      "children" : [ {
+        "id" : "overall_status",
+        "name" : "Overall status",
+        "localizedName" : "Overall status",
+        "rmType" : "DV_CODED_TEXT",
+        "nodeId" : "at0029",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Overall status"
+        },
+        "localizedDescriptions" : {
+          "en" : ""
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.cognitive_ability.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0029]/value",
+        "inputs" : [ {
+          "suffix" : "code",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0030",
+            "label" : "No cognitive impairment",
+            "localizedLabels" : {
+              "en" : "No cognitive impairment"
+            },
+            "localizedDescriptions" : {
+              "en" : "The individual has no cognitive impairment"
+            }
+          }, {
+            "value" : "at0031",
+            "label" : "Mild cognitive impairment",
+            "localizedLabels" : {
+              "en" : "Mild cognitive impairment"
+            },
+            "localizedDescriptions" : {
+              "en" : "The individual has mild cognitive impairment."
+            }
+          }, {
+            "value" : "at0032",
+            "label" : "Significant cognitive impairment",
+            "localizedLabels" : {
+              "en" : "Significant cognitive impairment"
+            },
+            "localizedDescriptions" : {
+              "en" : "The individual has significant cognitive impairment."
+            }
+          } ]
+        } ]
+      }, {
+        "id" : "time",
+        "name" : "Time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.cognitive_ability.v0]/data[at0001]/events[at0002]/time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.cognitive_ability.v0]/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.cognitive_ability.v0]/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.cognitive_ability.v0]/subject",
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "other_disability",
+      "name" : "Other disability",
+      "localizedName" : "Other disability",
+      "rmType" : "EVALUATION",
+      "nodeId" : "openEHR-EHR-EVALUATION.clinical_synopsis.v1",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Other disability"
+      },
+      "localizedDescriptions" : {
+        "en" : "Narrative summary or overview about a patient, specifically from the perspective of a healthcare provider, and with or without associated interpretations."
+      },
+      "aqlPath" : "/content[openEHR-EHR-EVALUATION.clinical_synopsis.v1,'Other disability']",
+      "children" : [ {
+        "id" : "other_disability_notes",
+        "name" : "Other disability notes",
+        "localizedName" : "Other disability notes",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0002",
+        "min" : 1,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Other disability notes"
+        },
+        "localizedDescriptions" : {
+          "en" : "The summary, assessment, conclusions or evaluation of the clinical findings."
+        },
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.clinical_synopsis.v1,'Other disability']/data[at0001]/items[at0002,'Other disability notes']/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.clinical_synopsis.v1,'Other disability']/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.clinical_synopsis.v1,'Other disability']/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 0,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-EVALUATION.clinical_synopsis.v1,'Other disability']/subject",
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "language",
+      "name" : "Language",
+      "rmType" : "CODE_PHRASE",
+      "min" : 0,
+      "max" : 1,
+      "aqlPath" : "/language",
+      "inContext" : true
+    }, {
+      "id" : "territory",
+      "name" : "Territory",
+      "rmType" : "CODE_PHRASE",
+      "min" : 0,
+      "max" : 1,
+      "aqlPath" : "/territory",
+      "inContext" : true
+    }, {
+      "id" : "composer",
+      "name" : "Composer",
+      "rmType" : "PARTY_PROXY",
+      "min" : 0,
+      "max" : 1,
+      "aqlPath" : "/composer",
+      "inContext" : true
+    } ]
+  }
+}
