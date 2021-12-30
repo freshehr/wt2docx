@@ -21,13 +21,6 @@
  `composer`| 1..1| PARTY_PROXY | composer
 |
 |====
-===== _Participations_ [0..*]
-[options="header", cols="5,3,5,5,30"]
-|====
-|NodeId|Attr.|RM Type| Name | Description
-|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
-|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
-|====
 === context
 ===== `EVENT_CONTEXT: _at0001_`
 ===== RM attributes
@@ -40,13 +33,6 @@
 |RM: + 
  `setting`| 1..1| DV_CODED_TEXT | Setting
 a|
-|====
-===== _Participations_ [0..*]
-[options="header", cols="5,3,5,5,30"]
-|====
-|NodeId|Attr.|RM Type| Name | Description
-|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
-|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
 |====
 [options="header", cols="5,3,5,5,30"]
 |====
@@ -61,8 +47,7 @@ a|
 The code specifying the precise type of document from the user perspective. Normally selected from a valueset provided by the local IHE-XDS Affinity Domain or national standard.
 
 
-Comment: for example:  Pulmonary History and Physical, Discharge Summary, Ultrasound Report.
-These codes are specific to an XDS Affinity Domain.
+comment : comment
 |====
 == Admin
 === EoL care plan
@@ -101,13 +86,6 @@ a|
  `subject`| 1..1| PARTY_PROXY | subject
 |
 |====
-===== _Participations_ [0..*]
-[options="header", cols="5,3,5,5,30"]
-|====
-|NodeId|Attr.|RM Type| Name | Description
-|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
-|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
-|====
 [options="header", cols="5,3,5,5,30"]
 |====
 |NodeId|Attr.|RM Type| Name | Description
@@ -136,13 +114,6 @@ Name of care plan.
 |RM: + 
  `subject`| 1..1| PARTY_PROXY | subject
 |
-|====
-===== _Participations_ [0..*]
-[options="header", cols="5,3,5,5,30"]
-|====
-|NodeId|Attr.|RM Type| Name | Description
-|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
-|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
 |====
 [options="header", cols="5,3,5,5,30"]
 |====
@@ -189,10 +160,7 @@ a|
 Description of reason for not selecting Options A, B or C or where C1 or C2 is selected without selecting C3.
 
 
-Comment: Additional implementation guidance: in an electronic format, if someone selects D we could have a line coming up explaining that the only legal reasons for selecting D are:
-1. if the physician thinks it would cause the patient physiological or psychological harm
-2. if the patient lacks capacity, and it is not practicable or appropriate to contact those close to them.
-If C1 or C2 has been selected without selecting C3, please document why involvement of those holding parental responsibility has not been possible.
+comment : comment
 |====
 // Not supported rmType ADMIN_ENTRY
 // Not supported rmType ADMIN_ENTRY
@@ -232,7 +200,7 @@ a|
 Identification of the problem or diagnosis, by name.
 
 
-Comment: Coding of the name of the problem or diagnosis with a terminology is preferred, where possible.
+comment : comment
 |at0009 + 
  `clinical_description`| 0..1| DV_TEXT | Clinical description
 a|
@@ -241,7 +209,7 @@ a|
 Narrative description about the problem or diagnosis.
 
 
-Comment: Use to provide background and context, including evolution, episodes or exacerbations, progress and any other relevant details, about the problem or diagnosis.
+comment : comment
 |====
 == Co-morbid conditions
 === Problem/Diagnosis
@@ -278,7 +246,7 @@ a|
 Identification of the problem or diagnosis, by name.
 
 
-Comment: Coding of the name of the problem or diagnosis with a terminology is preferred, where possible.
+comment : comment
 |====
 === Other relevant clinical issues
 ===== `EVALUATION: _openEHR-EHR-EVALUATION.clinical_synopsis.v1_`
@@ -295,13 +263,6 @@ Comment: Coding of the name of the problem or diagnosis with a terminology is pr
 |RM: + 
  `subject`| 1..1| PARTY_PROXY | subject
 |
-|====
-===== _Participations_ [0..*]
-[options="header", cols="5,3,5,5,30"]
-|====
-|NodeId|Attr.|RM Type| Name | Description
-|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
-|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
 |====
 [options="header", cols="5,3,5,5,30"]
 |====
@@ -328,13 +289,6 @@ The summary, assessment, conclusions or evaluation of the clinical findings.
 |RM: + 
  `subject`| 1..1| PARTY_PROXY | subject
 |
-|====
-===== _Participations_ [0..*]
-[options="header", cols="5,3,5,5,30"]
-|====
-|NodeId|Attr.|RM Type| Name | Description
-|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
-|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
 |====
 [options="header", cols="5,3,5,5,30"]
 |====
@@ -422,13 +376,6 @@ a|
  `subject`| 1..1| PARTY_PROXY | subject
 |
 |====
-===== _Participations_ [0..*]
-[options="header", cols="5,3,5,5,30"]
-|====
-|NodeId|Attr.|RM Type| Name | Description
-|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
-|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
-|====
 [options="header", cols="5,3,5,5,30"]
 |====
 |NodeId|Attr.|RM Type| Name | Description
@@ -461,13 +408,6 @@ a|
 |RM: + 
  `subject`| 1..1| PARTY_PROXY | subject
 |
-|====
-===== _Participations_ [0..*]
-[options="header", cols="5,3,5,5,30"]
-|====
-|NodeId|Attr.|RM Type| Name | Description
-|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
-|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
 |====
 [options="header", cols="5,3,5,5,30"]
 |====
@@ -532,13 +472,6 @@ a|
  `subject`| 1..1| PARTY_PROXY | subject
 |
 |====
-===== _Participations_ [0..*]
-[options="header", cols="5,3,5,5,30"]
-|====
-|NodeId|Attr.|RM Type| Name | Description
-|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
-|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
-|====
 [options="header", cols="5,3,5,5,30"]
 |====
 |NodeId|Attr.|RM Type| Name | Description
@@ -554,7 +487,7 @@ a|
 Description of the overall intent for future care and treatment for the individual.
 
 
-Comment: For example: the values suggested in the Thomas et al MJA reference - 'Curative', 'Restorative', 'Supportive', 'Terminal'; and 'Unknown'.
+comment : comment
 |at0003 + 
  `additional_information`| 0..1| DV_TEXT | Additional information
 a|
@@ -663,13 +596,6 @@ Physical or digital location of the Advance intervention decisions record.
 |RM: + 
  `subject`| 1..1| PARTY_PROXY | subject
 |
-|====
-===== _Participations_ [0..*]
-[options="header", cols="5,3,5,5,30"]
-|====
-|NodeId|Attr.|RM Type| Name | Description
-|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
-|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
 |====
 [options="header", cols="5,3,5,5,30"]
 |====

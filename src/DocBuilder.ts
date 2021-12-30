@@ -95,8 +95,6 @@ export class DocBuilder {
     }
   }
   private walkEntry(f: FormElement) {
-
-
     const nodeId = f.nodeId?f.nodeId:`\`RM:${f.id}\``
 
     this.sb.append(`=== ${f.name}`);
@@ -150,13 +148,27 @@ export class DocBuilder {
       this.sb.append('|====');
     }
 
-    this.walkParticipations(true);
+
+    // Look for display participations flag in Annotations
+    const displayParticipations= () => {
+      if (f.annotations)
+        console.dir(f.annotations)
+
+      for (const key in f.annotations) {
+        if (f.annotations.hasOwnProperty(key) && key.valueOf() === 'comment')
+        return true
+      }
+      return false
+    }
+
+    this.walkParticipations(displayParticipations());
 
   }
 
   private walkParticipations(displayParticipations : boolean) {
 
-    if (displayParticipations) {
+    if (!displayParticipations) return;
+
       this.sb.append(`===== _Participations_ [0..*]`);
       this.sb.append('[options="header", cols="5,3,5,5,30"]');
       this.sb.append('|====');
@@ -166,7 +178,7 @@ export class DocBuilder {
       this.sb.append('|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.');
 //      this.sb.append('|RM: time|0..1|DV_INTERVAL| Time | The time interval during which the participation took place, ');
       this.sb.append('|====');
-    }
+
   }
 
   private walkElement(f: FormElement) {
@@ -220,10 +232,17 @@ export class DocBuilder {
         this.sb.append('|Not supported rm type: ' + f.rmType);
     }
 
-    if (f.annotations) {
-      this.sb.newline().append(`Comment: ${f.annotations.comment}`);
-    }
+    this.walkAnnotations(f);
 
+  }
+
+  private walkAnnotations(f: FormElement) {
+    if (f.annotations) {
+      for (const key in f.annotations) {
+        if (f.annotations.hasOwnProperty(key))
+          this.sb.newline().append(`${key.toString()} : ${key.valueOf()}`);
+      }
+    }
   }
 
   private walkDvBoolean() {
@@ -248,6 +267,7 @@ export class DocBuilder {
   private walkDvCount() {
     this.sb.append('|');
   }
+
   private walkDvOrdinal(f: FormElement) {
     this.sb.append('a|');
     if (f.inputs) {
@@ -261,6 +281,7 @@ export class DocBuilder {
       });
     }
   }
+
   private getValueOfRecord(record?: Record<string, string>): string {
     if (record) {
       return record[this.defaultLang];

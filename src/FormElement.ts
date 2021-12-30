@@ -1,5 +1,4 @@
 import { FormInput } from './FormInput';
-import { FormAnnotation } from './FormAnnotation';
 
 export interface FormElement {
   id: string;
@@ -11,7 +10,7 @@ export interface FormElement {
   max: number;
   localizedNames: Record<string, string>;
   localizedDescriptions: Record<string, string>;
-  annotations?: FormAnnotation;
+  annotations?:  Record<string, string> ;
   aqlPath: string;
   inputs?: FormInput[];
   inContext?: boolean;
