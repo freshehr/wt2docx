@@ -1,0 +1,726 @@
+= EA - End of life Care.v0
+
+
+== *End of life Care plan*
+
+
+=== `COMPOSITION: _openEHR-EHR-COMPOSITION.care_plan.v0_`
+
+
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+|RM: + 
+ `territory`| 1..1| CODE_PHRASE | territory
+|
+|RM: + 
+ `composer`| 1..1| PARTY_PROXY | composer
+|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+=== context
+===== `EVENT_CONTEXT: _at0001_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `start_time`| 1..1| DV_DATE_TIME | Start_time
+|
+|RM: + 
+ `setting`| 1..1| DV_CODED_TEXT | Setting
+a|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*XDS Metadata* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.xds_metadata.v0_`
+|at0003 + 
+ `document_type`| 0..1| DV_TEXT | Document type
+a|
+
+
+The code specifying the precise type of document from the user perspective. Normally selected from a valueset provided by the local IHE-XDS Affinity Domain or national standard.
+
+
+Comment: for example:  Pulmonary History and Physical, Discharge Summary, Ultrasound Report.
+These codes are specific to an XDS Affinity Domain.
+|====
+== Admin
+=== EoL care plan
+===== `ACTION: _openEHR-EHR-ACTION.care_plan_uk.v0_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `current_state`| 1..1| DV_CODED_TEXT | Current_state
+a|
+* 245 -> undefined 
+
+
+
+|RM: + 
+ `transition`| 0..1| DV_CODED_TEXT | Transition
+a|
+|RM: + 
+ `careflow_step`| 0..1| DV_CODED_TEXT | Careflow_step
+a|
+* at0038 -> Care Plan Commenced 
+
+
+
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | Time
+|
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|at0002 + 
+ `care_plan_name`| 0..1| DV_TEXT | Care Plan Name
+a|
+
+
+Name of care plan.
+|====
+=== Mental capacity assessment
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.mental_capacity_assessment.v0_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | Time
+|
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|at0004 + 
+ `decision_plan`| 0..1| DV_TEXT | Decision/plan
+a|
+
+
+Description of the specific decision or plan to which the mental capacity status and assessment details relate.
+|at0005 + 
+ `does_the_person_have_capacity_to_making_and_sharing_this_plan`| 0..1| DV_CODED_TEXT | Does the person have capacity to making and sharing this plan?
+a|
+* at0006 -> Has capacity 
+* at0007 -> Does not have capacity 
+* at0008 -> Indeterminate 
+
+
+The individual's mental capacity status.
+|at0009 + 
+ `if_no_in_what_way_does_this_person_lack_capacity`| 0..1| DV_TEXT | If no, in what way does this person lack capacity?
+a|
+
+
+Narrative description of the individual's mental capacity.
+5+a|*Involvement in decision* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.mental_capacity_details.v0_`
+|at0002 + 
+ `mental_capacity`| 0..*| DV_CODED_TEXT | Mental capacity
+a|
+* at0003 -> A Person has mental capacity 
+* at0004 -> B Person does not have mental capacity 
+* at0005 -> C1 Person less than 18 or 16 with sufficient maturity 
+* at0006 -> C2 Person less than 18 or 16 without sufficient maturity 
+* at0007 -> C3 Person less than 18 or 16 parental decision 
+
+
+Details of involvement in making this plan.
+|at0008 + 
+ `option_d`| 0..1| DV_TEXT | Option D
+a|
+
+
+Description of reason for not selecting Options A, B or C or where C1 or C2 is selected without selecting C3.
+
+
+Comment: Additional implementation guidance: in an electronic format, if someone selects D we could have a line coming up explaining that the only legal reasons for selecting D are:
+1. if the physician thinks it would cause the patient physiological or psychological harm
+2. if the patient lacks capacity, and it is not practicable or appropriate to contact those close to them.
+If C1 or C2 has been selected without selecting C3, please document why involvement of those holding parental responsibility has not been possible.
+|====
+// Not supported rmType ADMIN_ENTRY
+// Not supported rmType ADMIN_ENTRY
+== Background
+== Primary diagnosis
+=== Problem/Diagnosis
+===== `EVALUATION: _openEHR-EHR-EVALUATION.problem_diagnosis.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|at0002 + 
+ `primary_eol_care_diagnosis`| 1..1| DV_TEXT | Primary EoL care diagnosis
+a|
+
+
+Identification of the problem or diagnosis, by name.
+
+
+Comment: Coding of the name of the problem or diagnosis with a terminology is preferred, where possible.
+|at0009 + 
+ `clinical_description`| 0..1| DV_TEXT | Clinical description
+a|
+
+
+Narrative description about the problem or diagnosis.
+
+
+Comment: Use to provide background and context, including evolution, episodes or exacerbations, progress and any other relevant details, about the problem or diagnosis.
+|====
+== Co-morbid conditions
+=== Problem/Diagnosis
+===== `EVALUATION: _openEHR-EHR-EVALUATION.problem_diagnosis.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|at0002 + 
+ `co-morbidity`| 1..1| DV_TEXT | Co-morbidity
+a|
+
+
+Identification of the problem or diagnosis, by name.
+
+
+Comment: Coding of the name of the problem or diagnosis with a terminology is preferred, where possible.
+|====
+=== Other relevant clinical issues
+===== `EVALUATION: _openEHR-EHR-EVALUATION.clinical_synopsis.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|at0002 + 
+ `other_relevant_clinical_issues`| 1..1| DV_TEXT | Other relevant clinical issues
+a|
+
+
+The summary, assessment, conclusions or evaluation of the clinical findings.
+|====
+=== Prognosis
+===== `EVALUATION: _openEHR-EHR-EVALUATION.prognosis.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*GSF prognostic indicator* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.gsf_prognostic_indicator.v0_`
+|at0001 + 
+ `prognostic_indicator`| 0..1| DV_CODED_TEXT | Prognostic indicator
+a|
+* at0002 -> Stage A (blue) - year plus prognosis 
+* at0003 -> Stage B (green) - months prognosis 
+* at0004 -> stage C (yellow) - weeks prognosis 
+* at0005 -> Stage D (red) - days prognosis 
+
+
+
+|at0013 + 
+ `patient_insight`| 0..1| DV_CODED_TEXT | Patient insight
+a|
+* at0014 -> Patient has insight of their illness 
+* at0015 -> Patiient aware of prognosis 
+* at0016 -> Patient not aware of prognosis 
+
+
+Does the patient have insight into their illness and/or prognosis?
+|====
+=== Clinical Frailty Scale (CFS)
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.clinical_frailty_scale.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | Time
+|
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|at0004 + 
+ `assessment`| 0..1| DV_ORDINAL | Assessment
+a|
+* 1 - Very Fit People who are robust, active, energetic and motivated. These people commonly exercise regularly. They are among the fittest for their age.
+* 2 - Well People who have no active disease symptoms but are less fit than category 1. Often, they exercise or are very active occasionally, e.g. seasonally.
+* 3 - Managing Well People whose medical problems are well controlled, but are not regularly active beyond routine walking.
+* 4 - Vulnerable While not dependent on others for daily help, often symptoms limit activities. A common complaint is being "slowed up", and/or being tired during the day.
+* 5 - Mildly Frail These people often have more evident slowing, and need help in high order IADLs (finances, transportation, heavy housework, medications). Typically, mild frailty progressively impairs shopping and walking outside alone, meal preparation and housework.
+* 6 - Moderately Frail People need help with all outside activities and with keeping house. Inside, they often have problems with stairs and need help with bathing and might need minimal assistance (cuing, standby) with dressing.
+* 7 - Severely Frail Completely dependent for personal care, from whatever cause (physical or cognitive). Even so, they seem stable and not at high risk of dying (within - 6 monts).
+* 8 - Very Severely Frail Completely dependent, approaching the end of life. Typically, they could not recover even from a minor illness.
+* 9 - Terminally Ill Approaching the end of life. This category applies to people with a life expectancy <6 months, who are not otherwise evidently frail.
+|====
+=== Modified Karnofsky Performance Status Scale
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.modified_karnofsky_performance_status_scale.v0_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | Time
+|
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|at0004 + 
+ `performance_status`| 0..1| DV_ORDINAL | Performance status
+a|
+* 100 - Normal; no complaints; no evidence of disease 
+* 90 - Able to carry on normal activity; minor sign of symptoms of disease 
+* 80 - Normal activity with effort; some signs or symptoms of disease 
+* 70 - Cares for self; unable to carry on normal activity or to do active work 
+* 60 - Able to care for most needs; but requires occasional assistance 
+* 50 - Considerable assistance and frequent medical care required 
+* 40 - In bed more than 50% of the time 
+* 30 - Almost completely bedfast 
+* 20 - Totally bedfast and requiring extensive nursing care by professionals and/or family 
+* 10 - Comatose or barely rousable 
+|====
+=== Anticipatory medications
+===== `EVALUATION: _openEHR-EHR-EVALUATION.anticipatory_medication_summary.v0_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|at0004 + 
+ `status`| 0..1| DV_CODED_TEXT | Status
+a|
+* at0005 -> Anticipatory medication in place 
+* at0006 -> Anticipatory medication being organised 
+* at0007 -> Anticipatory medication not needed 
+
+
+
+|at0014 + 
+ `description`| 0..1| DV_TEXT | Description
+a|
+
+
+
+|at0008 + 
+ `home_oxygen`| 0..1| DV_CODED_TEXT | Home oxygen
+a|
+* at0009 -> On home oxygen 
+* at0010 -> Home oxygen not required 
+
+
+
+5+a|*Specific medication* +
+ `CLUSTER: _at0011_`
+|at0012 + 
+ `medication_name`| 0..1| DV_TEXT | Medication name
+a|
+
+
+
+|at0013 + 
+ `location`| 0..1| DV_TEXT | Location
+a|
+
+
+
+|at0015 + 
+ `comments`| 0..1| DV_TEXT | Comments
+a|
+
+
+
+|====
+=== Advance intervention decisions
+===== `EVALUATION: _openEHR-EHR-EVALUATION.intervention_decisions.v0_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|at0002 + 
+ `focus_of_care`| 0..1| DV_TEXT | Focus of care
+a|
+* No decision made
+* Active treatment of main condition & Co-morbidities; Appropriate to admit to hospital (life sustaining treatment)
+* Palliative treatment of main condition & active treatment of co-morbidities: Appropriate to admit to hospital
+* Symptomatic relief of main condition & co-morbidities: aiming to stay in preferred place of care (symptom control)
+
+
+Description of the overall intent for future care and treatment for the individual.
+
+
+Comment: For example: the values suggested in the Thomas et al MJA reference - 'Curative', 'Restorative', 'Supportive', 'Terminal'; and 'Unknown'.
+|at0003 + 
+ `additional_information`| 0..1| DV_TEXT | Additional information
+a|
+
+
+Narrative description about the logic and justification for the 'Intent of care' statement.
+|at0004 + 
+ `cpr_decision`| 0..1| DV_CODED_TEXT | CPR decision
+a|
+* at0005 -> Full CPR 
+* at0006 -> Limited CPR 
+* at0007 -> No CPR 
+
+
+Directive for future cardiopulmonary resuscitation (CPR) intervention.
+5+a|*CPR decision details* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.cpr_decision_details_ea.v0_`
+|at0001 + 
+ `reason_patient_is_not_aware`| 0..1| DV_TEXT | Reason patient is not aware
+a|
+
+
+
+|at0003 + 
+ `reason_family_are_not_aware`| 0..1| DV_TEXT | Reason family are not aware
+a|
+
+
+
+|at0032 + 
+ `patient_awareness`| 0..1| DV_TEXT | Patient awareness
+a|
+* Aware of prognosis
+* Unaware of prognosis
+* Does not wish to discuss prognosis
+* Not discussed / unknown
+
+
+Narrative description about awareness of the Advance intervention decisions by the individual.
+|at0033 + 
+ `family_awareness`| 0..1| DV_TEXT | Family awareness
+a|
+* Family aware of prognosis
+* Family unaware of prognosis
+* Patient does not wish family to be told of prognosis
+* Not discussed / unknown
+
+
+Narrative description about awareness of the Advance intervention decisions by family, carers or legal proxy.
+|at0035 + 
+ `overall_comment`| 0..1| DV_TEXT | Overall comment
+a|
+
+
+Additional narrative about all advance intervention decisions, not captured in other fields.
+|at0037 + 
+ `last_updated`| 0..1| DV_DATE_TIME | Last updated
+|
+5+a|*Digital representation* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.multimedia_source.v0_`
+|at0002 + 
+ `resource_name`| 0..1| DV_TEXT | Resource name
+a|
+* ReSPECT
+* PEACE
+* TEP
+
+
+Name or title of the multimedia resource.
+|at0005 + 
+ `description`| 0..1| DV_TEXT | Description
+a|
+
+
+Narrative description about the resource.
+// Not supported rmType ELEMENT
+|at0007 + 
+ `comment`| 0..1| DV_TEXT | Comment
+a|
+
+
+Additional narrative about the multimedia source not captured in other fields.
+5+a|*Document location* +
+ `CLUSTER: _at0042_`
+|at0043 + 
+ `location`| 0..1| DV_TEXT | Location
+a|
+
+
+Physical or digital location of the Advance intervention decisions record.
+|====
+// Not supported rmType ADMIN_ENTRY
+== Preferences
+=== Preferred place of death
+===== `EVALUATION: _openEHR-EHR-EVALUATION.care_preference_uk.v0_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+|====
+===== _Participations_ [0..*]
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation
+|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|at0015 + 
+ `preferred_place_of_death`| 0..2| DV_CODED_TEXT | Preferred place of death
+a|
+* at0016 -> Preferred place of death: home 
+* at0017 -> Preferred place of death: hospice 
+* at0018 -> Preferred place of death: community hospital 
+* at0019 -> Preferred place of death: hospital 
+* at0020 -> Preferred place of death: nursing home 
+* at0021 -> Preferred place of death: residential home 
+* at0022 -> Preferred place of death: patient unable to express preference 
+* at0023 -> Preferred place of death discussed with patient 
+* at0024 -> Preferred place of death: discussion not appropriate 
+* at0025 -> Preferred place of death: patient undecided 
+* at0032 -> Preferred place of death: patient declined discussion 
+* at0033 -> Preferred place of death: usual place of residence 
+
+
+The patient's first choice preferred place of death.
+|at0015 + 
+ `preferred_place_of_death_second_choice`| 0..2| DV_CODED_TEXT | Preferred place of death (second choice)
+a|
+* at0016 -> Preferred place of death: home 
+* at0017 -> Preferred place of death: hospice 
+* at0018 -> Preferred place of death: community hospital 
+* at0019 -> Preferred place of death: hospital 
+* at0020 -> Preferred place of death: nursing home 
+* at0021 -> Preferred place of death: residential home 
+* at0022 -> Preferred place of death: patient unable to express preference 
+* at0023 -> Preferred place of death discussed with patient 
+* at0024 -> Preferred place of death: discussion not appropriate 
+* at0025 -> Preferred place of death: patient undecided 
+* at0032 -> Preferred place of death: patient declined discussion 
+* at0033 -> Preferred place of death: usual place of residence 
+
+
+The patient's second choice preferred place of death.
+|at0036 + 
+ `preferred_place_of_death_location`| 0..2| DV_TEXT | Preferred place of death location
+a|
+
+
+Details of the organisation/location of the preferred place of death.
+|at0036 + 
+ `preferred_place_of_death_second_choice_location`| 0..2| DV_TEXT | Preferred place of death (second choice) location
+a|
+
+
+Details of the organisation/location of the preferred place of death (second choice).
+|====
+// Not supported rmType ADMIN_ENTRY

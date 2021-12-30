@@ -19,7 +19,6 @@ console.log('Loading ' + file + ' and write to ' + outFile);
 
 const inputfileExist = fs.existsSync(file);
 if (inputfileExist) {
-  console.log(inputfileExist);
   const data = fs.readFileSync(file, { encoding: 'utf8', flag: 'r' });
   const wt: WebTemplate = JSON.parse(data);
   const docBuilder = new DocBuilder(wt);
