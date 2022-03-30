@@ -39,15 +39,20 @@ a|
 |NodeId|Attr.|RM Type| Name | Description
 5+a|*XDS Metadata* +
  `CLUSTER: _openEHR-EHR-CLUSTER.xds_metadata.v0_`
+===== Annotations]
+[options="header", cols="5,30"]
+|Key|Value|
+
+
+| comment | for example:  Pulmonary History and Physical, Discharge Summary, Ultrasound Report.
+These codes are specific to an XDS Affinity Domain.|
+|====
 |at0003 + 
  `document_type`| 0..1| DV_TEXT | Document type
 a|
 
 
 The code specifying the precise type of document from the user perspective. Normally selected from a valueset provided by the local IHE-XDS Affinity Domain or national standard.
-
-
-comment : comment
 |====
 == Admin
 === EoL care plan
@@ -152,15 +157,22 @@ a|
 
 
 Details of involvement in making this plan.
+===== Annotations]
+[options="header", cols="5,30"]
+|Key|Value|
+
+
+| comment | Additional implementation guidance: in an electronic format, if someone selects D we could have a line coming up explaining that the only legal reasons for selecting D are:
+1. if the physician thinks it would cause the patient physiological or psychological harm
+2. if the patient lacks capacity, and it is not practicable or appropriate to contact those close to them.
+If C1 or C2 has been selected without selecting C3, please document why involvement of those holding parental responsibility has not been possible.|
+|====
 |at0008 + 
  `option_d`| 0..1| DV_TEXT | Option D
 a|
 
 
 Description of reason for not selecting Options A, B or C or where C1 or C2 is selected without selecting C3.
-
-
-comment : comment
 |====
 // Not supported rmType ADMIN_ENTRY
 // Not supported rmType ADMIN_ENTRY
@@ -192,24 +204,32 @@ comment : comment
 [options="header", cols="5,3,5,5,30"]
 |====
 |NodeId|Attr.|RM Type| Name | Description
+===== Annotations]
+[options="header", cols="5,30"]
+|Key|Value|
+
+
+| comment | Coding of the name of the problem or diagnosis with a terminology is preferred, where possible.|
+|====
 |at0002 + 
  `primary_eol_care_diagnosis`| 1..1| DV_TEXT | Primary EoL care diagnosis
 a|
 
 
 Identification of the problem or diagnosis, by name.
+===== Annotations]
+[options="header", cols="5,30"]
+|Key|Value|
 
 
-comment : comment
+| comment | Use to provide background and context, including evolution, episodes or exacerbations, progress and any other relevant details, about the problem or diagnosis.|
+|====
 |at0009 + 
  `clinical_description`| 0..1| DV_TEXT | Clinical description
 a|
 
 
 Narrative description about the problem or diagnosis.
-
-
-comment : comment
 |====
 == Co-morbid conditions
 === Problem/Diagnosis
@@ -238,15 +258,19 @@ comment : comment
 [options="header", cols="5,3,5,5,30"]
 |====
 |NodeId|Attr.|RM Type| Name | Description
+===== Annotations]
+[options="header", cols="5,30"]
+|Key|Value|
+
+
+| comment | Coding of the name of the problem or diagnosis with a terminology is preferred, where possible.|
+|====
 |at0002 + 
  `co-morbidity`| 1..1| DV_TEXT | Co-morbidity
 a|
 
 
 Identification of the problem or diagnosis, by name.
-
-
-comment : comment
 |====
 === Other relevant clinical issues
 ===== `EVALUATION: _openEHR-EHR-EVALUATION.clinical_synopsis.v1_`
@@ -475,6 +499,13 @@ a|
 [options="header", cols="5,3,5,5,30"]
 |====
 |NodeId|Attr.|RM Type| Name | Description
+===== Annotations]
+[options="header", cols="5,30"]
+|Key|Value|
+
+
+| comment | For example: the values suggested in the Thomas et al MJA reference - 'Curative', 'Restorative', 'Supportive', 'Terminal'; and 'Unknown'.|
+|====
 |at0002 + 
  `focus_of_care`| 0..1| DV_TEXT | Focus of care
 a|
@@ -485,9 +516,6 @@ a|
 
 
 Description of the overall intent for future care and treatment for the individual.
-
-
-comment : comment
 |at0003 + 
  `additional_information`| 0..1| DV_TEXT | Additional information
 a|

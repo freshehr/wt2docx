@@ -182,6 +182,9 @@ export class DocBuilder {
   }
 
   private walkElement(f: FormElement) {
+
+    this.walkAnnotations(f);
+
     const max = f.max < 0 ? '*' : `${f.max}`;
 
     const nodeId = f.nodeId?f.nodeId:`RM:`;
@@ -229,19 +232,23 @@ export class DocBuilder {
         break;
 
       default:
-        this.sb.append('|Not supported rm type: ' + f.rmType);
+        this.sb.append('|Unsupported RM type: ' + f.rmType);
     }
 
-    this.walkAnnotations(f);
 
   }
 
   private walkAnnotations(f: FormElement) {
     if (f.annotations) {
+
+      this.sb.append(`===== Annotations]`);
+      this.sb.append('[options="header", cols="5,30"]');
+      this.sb.append('|Key|Value|');
       for (const key in f.annotations) {
         if (f.annotations.hasOwnProperty(key))
-          this.sb.newline().append(`${key.toString()} : ${key.valueOf()}`);
+          this.sb.newline().append(`| ${key} | ${f.annotations[key]}|`);
       }
+      this.sb.append('|====');
     }
   }
 
