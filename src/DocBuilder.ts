@@ -56,6 +56,9 @@ export class DocBuilder {
     } else if (f.rmType === 'CLUSTER') {
       this.sb.append(`5+a|*${f.name}* +\n \`${f.rmType}: _${f.nodeId}_\``);
       this.walkChildren(f);
+    } else if (f.rmType === 'ELEMENT') {
+      this.sb.append(`5+a|*${f.name}* +\n \`${f.rmType}: _${f.nodeId}_\``);
+      this.walkChildren(f);
     } else {
       switch (f.rmType) {
         case 'COMPOSITION':
@@ -194,7 +197,6 @@ export class DocBuilder {
     switch (f.rmType) {
       case 'DV_CODED_TEXT':
         this.walkDvCodedText(f);
-
         break;
       case 'DV_TEXT':
         this.walkDvText(f);
@@ -264,7 +266,7 @@ export class DocBuilder {
   }
 
   private walkDvIdentifier() {
-    this.sb.append('|');
+    this.sb.append('| DV_IDENTIFIER ');
   }
   private walkDvDuration() {
     this.sb.append('|');
