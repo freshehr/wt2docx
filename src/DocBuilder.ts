@@ -151,13 +151,13 @@ export class DocBuilder {
 
     // Look for display participations flag in Annotations
     const displayParticipations= () => {
-      if (f.annotations)
-        console.dir(f.annotations)
+//      if (f.annotations)
+//        console.dir(f.annotations)
 
-      for (const key in f.annotations) {
-        if (f.annotations.hasOwnProperty(key) && key.valueOf() === 'comment')
-        return true
-      }
+ //     for (const key in f.annotations) {
+ //       if (f.annotations.hasOwnProperty(key) && key.valueOf() === 'comment')
+ //       return true
+  //    }
       return false
     }
 
@@ -183,7 +183,6 @@ export class DocBuilder {
 
   private walkElement(f: FormElement) {
 
-    this.walkAnnotations(f);
 
     const max = f.max < 0 ? '*' : `${f.max}`;
 
@@ -234,6 +233,7 @@ export class DocBuilder {
       default:
         this.sb.append('|Unsupported RM type: ' + f.rmType);
     }
+    this.walkAnnotations(f);
 
 
   }
@@ -241,14 +241,13 @@ export class DocBuilder {
   private walkAnnotations(f: FormElement) {
     if (f.annotations) {
 
-      this.sb.append(`===== Annotations]`);
-      this.sb.append('[options="header", cols="5,30"]');
-      this.sb.append('|Key|Value|');
+      this.sb.append(``);
+      this.sb.append(`_Annotations_`);
+
       for (const key in f.annotations) {
         if (f.annotations.hasOwnProperty(key))
-          this.sb.newline().append(`| ${key} | ${f.annotations[key]}|`);
+          this.sb.newline().append(`*${key}*: ${f.annotations[key]}`);
       }
-      this.sb.append('|====');
     }
   }
 
