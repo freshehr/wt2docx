@@ -1,6 +1,6 @@
 import { FormElement } from './FormElement';
 import { WebTemplate } from './WebTemplate';
-import { isEntry, isDataValue, isSection } from './isEntry';
+import { isEntry, isEvent, isDataValue, isSection } from './isEntry';
 import { StringBuilder } from './StringBuilder';
 import { FormInput } from './FormInput';
 
@@ -56,9 +56,12 @@ export class DocBuilder {
     } else if (f.rmType === 'CLUSTER') {
       this.sb.append(`5+a|*${f.name}* +\n \`${f.rmType}: _${f.nodeId}_\``);
       this.walkChildren(f);
-    } else if (f.rmType === 'ELEMENT') {
+    } else if (isEvent(f.rmType)) {
       this.sb.append(`5+a|*${f.name}* +\n \`${f.rmType}: _${f.nodeId}_\``);
       this.walkChildren(f);
+    } else if (f.rmType === 'ELEMENT') {
+//      this.sb.append(`5+a|*${f.name}* +\n \`${f.rmType}: _${f.nodeId}_\``);
+      this.walkElement(f);
     } else {
       switch (f.rmType) {
         case 'COMPOSITION':
@@ -189,20 +192,37 @@ export class DocBuilder {
 
     const max = f.max < 0 ? '*' : `${f.max}`;
 
+    if (f.rmType === 'ELEMENT')
+    {
+      this.sb.append(`|SubType + \n \`${f.id}\`| ${f.min}..${max}| ${f.rmType} | ${f.name} | ${this.getValueOfRecord(f.localizedDescriptions)}`);
+      this.walkChildren(f);
+      return
+    }
     const nodeId = f.nodeId?f.nodeId:`RM:`;
-    this.sb.append(`|${nodeId} + \n \`${f.id}\`| ${f.min}..${max}| ${f.rmType} | ${f.name}`);
+    this.sb.append(`|${nodeId} + \n \`${f.id}\`| ${f.min}..${max}| ${f.rmType} | ${f.localizedName}`);
 
     if (f.name === undefined){this.sb.append(`// ${f.id} -  ${f.aqlPath}`);}
 
     switch (f.rmType) {
+      case 'ELEMENT':
+        break;
       case 'DV_CODED_TEXT':
         this.walkDvCodedText(f);
         break;
       case 'DV_TEXT':
         this.walkDvText(f);
         break;
+      case 'DV_PARSABLE':
+        this.walkDvParsable();
+        break;
+      case 'DV_STATE':
+        this.walkDvState();
+        break;
       case 'DV_DATE':
-        this.walkDvDateTime();
+        this.walkDvDate();
+        break;
+      case 'DV_TIME':
+        this.walkDvTime();
         break;
       case 'DV_DATE_TIME':
         this.walkDvDateTime();
@@ -219,12 +239,32 @@ export class DocBuilder {
       case 'DV_DURATION':
         this.walkDvDuration();
         break;
+      case 'DV_URI':
+        this.walkDvUri();
+        break;
       case 'DV_BOOLEAN':
         this.walkDvBoolean();
         break;
       case 'DV_IDENTIFIER':
         this.walkDvIdentifier();
         break;
+        case 'DV_PROPORTION':
+        this.walkDvProportion();
+        break;
+
+      case 'DV_SCALE':
+        this.walkDvScale();
+        break;
+
+      case 'DV_MULTIMEDIA':
+        this.walkDvMultimedia();
+        break;
+
+      case 'DV_EHR_URI':
+        this.walkDvEhrUri();
+        break;
+
+
       case 'CODE_PHRASE':
         this.walkCodePhrase();
         break;
@@ -244,8 +284,6 @@ export class DocBuilder {
     if (f.annotations) {
 
       this.sb.append(``);
-      this.sb.append(`_Annotations_`);
-
       for (const key in f.annotations) {
         if (f.annotations.hasOwnProperty(key))
           this.sb.newline().append(`*${key}*: ${f.annotations[key]}`);
@@ -261,20 +299,51 @@ export class DocBuilder {
     this.sb.append('|');
   }
 
+  private walkDvParsable() {
+    this.sb.append('|');
+  }
+
+  private walkDvState() {
+    this.sb.append('|');
+  }
   private walkPartyProxy() {
    this.sb.append('|');
   }
 
   private walkDvIdentifier() {
-    this.sb.append('| DV_IDENTIFIER ');
+    this.sb.append('|');
+  }
+
+  private walkDvProportion() {
+    this.sb.append('|');
   }
   private walkDvDuration() {
     this.sb.append('|');
   }
 
+
+  private walkDvUri() {
+    this.sb.append('|');
+  }
   private walkDvCount() {
     this.sb.append('|');
   }
+
+  private walkDvDate() {
+    this.sb.append('|');
+  }
+
+  private walkDvScale() {
+    this.sb.append('|');
+  }
+  private walkDvMultimedia() {
+    this.sb.append('|');
+  }
+
+  private walkDvEhrUri() {
+    this.sb.append('|');
+  }
+
 
   private walkDvOrdinal(f: FormElement) {
     this.sb.append('a|');
@@ -297,11 +366,19 @@ export class DocBuilder {
       return '';
     }
   }
+
+  private appendDescription(f : FormElement){
+    this.sb.newline().append(`*Description*: ${this.getValueOfRecord(f.localizedDescriptions)}`);
+  }
+
   private walkDvQuantity() {
     this.sb.append('|');
   }
 
-
+private walkDvDefault(f : FormElement) {
+  this.sb.append('|');
+  this.appendDescription(f)
+}
   private walkDvText(f: FormElement) {
     this.sb.append('a|');
     if (f.inputs) {
@@ -315,10 +392,14 @@ export class DocBuilder {
           this.sb.append( `* _Other text allowed_`);
 
       });
-      this.sb.newline().append(`${this.getValueOfRecord(f.localizedDescriptions)}`);
+      this.appendDescription(f);
     }
   }
   private walkDvDateTime() {
+    this.sb.append('|');
+  }
+
+  private walkDvTime() {
     this.sb.append('|');
   }
   private walkDvCodedText(f: FormElement) {
@@ -336,7 +417,7 @@ export class DocBuilder {
           });
           if (item.listOpen)
             this.sb.append( `* _Other text allowed_`);
-          this.sb.newline().append(`${this.getValueOfRecord(f.localizedDescriptions)}`);
+          this.appendDescription(f);
         }
       });
     }

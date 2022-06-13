@@ -37,13 +37,13 @@ The status of the entire report. Note: This is not the status of any of the repo
 |====
 |NodeId|Attr.|RM Type| Name | Description
 |RM: + 
- `language`| 1..1| CODE_PHRASE | language
+ `language`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `encoding`| 1..1| CODE_PHRASE | encoding
+ `encoding`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `subject`| 1..1| PARTY_PROXY | subject
+ `subject`| 1..1| PARTY_PROXY | undefined
 |
 |====
 [options="header", cols="5,3,5,5,30"]
@@ -75,7 +75,9 @@ _Annotations_
 
 
 *comment*: Also known as 'Family name' or 'Surname'.
-// Not supported rmType DV_IDENTIFIER
+|at0003 + 
+ `identifier`| 0..*| DV_IDENTIFIER | Identifier
+|
 5+a|*Electronic communication* +
  `CLUSTER: _at0006_`
 |at0007 + 
@@ -94,7 +96,19 @@ _Annotations_
 
 
 *comment*: The range of electronic communication mediums includes, but is not limited to use of : telephone, cellular phone, email, pager, fax, conferencing tool or social media.
-// Not supported rmType ELEMENT
+|SubType + 
+ `value`| 1..1| ELEMENT | Value | The unique combination of alphanumeric characters, meaningful for the identified type or medium of electronic communication.
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Value
+// text_value -  /content[openEHR-EHR-ADMIN_ENTRY.demographics.v0,'Provider']/data[at0001]/items[openEHR-EHR-CLUSTER.person.v0,'Notifier']/items[at0006]/items[at0016]/value
+a|
+
+
+The unique combination of alphanumeric characters, meaningful for the identified type or medium of electronic communication.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Value
+// uri_value -  /content[openEHR-EHR-ADMIN_ENTRY.demographics.v0,'Provider']/data[at0001]/items[openEHR-EHR-CLUSTER.person.v0,'Notifier']/items[at0006]/items[at0016]/value
+|
 |at0012 + 
  `purpose`| 0..1| DV_CODED_TEXT | Purpose
 a|
@@ -122,7 +136,9 @@ _Annotations_
 
 
 *comment*: For example: 'Royal Children's Hospital'; 'ABC District Nursing Service'; 'YNWA Oslo' or 'JB Smith Lawyers'.
-// Not supported rmType DV_IDENTIFIER
+|at0003 + 
+ `identifier`| 0..*| DV_IDENTIFIER | Identifier
+|
 5+a|*Address* +
  `CLUSTER: _openEHR-EHR-CLUSTER.address.v0_`
 |at0009 + 
@@ -205,7 +221,19 @@ _Annotations_
 
 
 *comment*: The range of electronic communication mediums includes, but is not limited to use of: telephone, cellular phone, email, pager, fax, conferencing tool or social media.
-// Not supported rmType ELEMENT
+|SubType + 
+ `value`| 1..1| ELEMENT | Value | The unique combination of alphanumeric characters, meaningful for the identified type or medium of electronic communication.
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Value
+// text_value -  /content[openEHR-EHR-ADMIN_ENTRY.demographics.v0,'Provider']/data[at0001]/items[openEHR-EHR-CLUSTER.person.v0,'Notifier']/items[openEHR-EHR-CLUSTER.organisation.v0]/items[at0006]/items[at0016]/value
+a|
+
+
+The unique combination of alphanumeric characters, meaningful for the identified type or medium of electronic communication.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Value
+// uri_value -  /content[openEHR-EHR-ADMIN_ENTRY.demographics.v0,'Provider']/data[at0001]/items[openEHR-EHR-CLUSTER.person.v0,'Notifier']/items[openEHR-EHR-CLUSTER.organisation.v0]/items[at0006]/items[at0016]/value
+|
 |====
 === Patient
 ===== `ADMIN_ENTRY: _openEHR-EHR-ADMIN_ENTRY.demographics.v0_`
@@ -214,13 +242,13 @@ _Annotations_
 |====
 |NodeId|Attr.|RM Type| Name | Description
 |RM: + 
- `language`| 1..1| CODE_PHRASE | language
+ `language`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `encoding`| 1..1| CODE_PHRASE | encoding
+ `encoding`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `subject`| 1..1| PARTY_PROXY | subject
+ `subject`| 1..1| PARTY_PROXY | undefined
 |
 |====
 [options="header", cols="5,3,5,5,30"]
@@ -285,7 +313,9 @@ _Annotations_
 
 
 *comment*: Coding with an external terminology is preferred, where possible. For example: 'Junior (Jr)'; 'Senior (Sr)'; 'Second (II)'.
-// Not supported rmType DV_IDENTIFIER
+|at0003 + 
+ `identifier`| 0..*| DV_IDENTIFIER | Identifier
+|
 5+a|*Address* +
  `CLUSTER: _openEHR-EHR-CLUSTER.address.v0_`
 |at0001 + 
@@ -499,7 +529,19 @@ _Annotations_
 
 
 *comment*: The range of electronic communication mediums includes, but is not limited to use of : telephone, cellular phone, email, pager, fax, conferencing tool or social media.
-// Not supported rmType ELEMENT
+|SubType + 
+ `value`| 1..1| ELEMENT | Value | The unique combination of alphanumeric characters, meaningful for the identified type or medium of electronic communication.
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Value
+// text_value -  /content[openEHR-EHR-ADMIN_ENTRY.demographics.v0,'Patient']/data[at0001]/items[openEHR-EHR-CLUSTER.person.v0,'Patient']/items[at0006]/items[at0016]/value
+a|
+
+
+The unique combination of alphanumeric characters, meaningful for the identified type or medium of electronic communication.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Value
+// uri_value -  /content[openEHR-EHR-ADMIN_ENTRY.demographics.v0,'Patient']/data[at0001]/items[openEHR-EHR-CLUSTER.person.v0,'Patient']/items[at0006]/items[at0016]/value
+|
 |at0012 + 
  `purpose`| 0..1| DV_CODED_TEXT | Purpose
 a|
@@ -770,7 +812,19 @@ _Annotations_
 
 
 *comment*: The range of electronic communication mediums includes, but is not limited to use of: telephone, cellular phone, email, pager, fax, conferencing tool or social media.
-// Not supported rmType ELEMENT
+|SubType + 
+ `value`| 1..1| ELEMENT | Value | The unique combination of alphanumeric characters, meaningful for the identified type or medium of electronic communication.
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Value
+// text_value -  /content[openEHR-EHR-ADMIN_ENTRY.demographics.v0,'Patient']/data[at0001]/items[openEHR-EHR-CLUSTER.person.v0,'Patient']/items[openEHR-EHR-CLUSTER.occupation_record.v1]/items[openEHR-EHR-CLUSTER.organisation.v0]/items[at0006]/items[at0016]/value
+a|
+
+
+The unique combination of alphanumeric characters, meaningful for the identified type or medium of electronic communication.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Value
+// uri_value -  /content[openEHR-EHR-ADMIN_ENTRY.demographics.v0,'Patient']/data[at0001]/items[openEHR-EHR-CLUSTER.person.v0,'Patient']/items[openEHR-EHR-CLUSTER.occupation_record.v1]/items[openEHR-EHR-CLUSTER.organisation.v0]/items[at0006]/items[at0016]/value
+|
 |====
 === Emergency Contact
 ===== `ADMIN_ENTRY: _openEHR-EHR-ADMIN_ENTRY.demographics.v0_`
@@ -779,13 +833,13 @@ _Annotations_
 |====
 |NodeId|Attr.|RM Type| Name | Description
 |RM: + 
- `language`| 1..1| CODE_PHRASE | language
+ `language`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `encoding`| 1..1| CODE_PHRASE | encoding
+ `encoding`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `subject`| 1..1| PARTY_PROXY | subject
+ `subject`| 1..1| PARTY_PROXY | undefined
 |
 |====
 [options="header", cols="5,3,5,5,30"]
@@ -817,7 +871,9 @@ _Annotations_
 
 
 *comment*: Also known as 'Family name' or 'Surname'.
-// Not supported rmType DV_IDENTIFIER
+|at0003 + 
+ `identifier`| 0..*| DV_IDENTIFIER | Identifier
+|
 5+a|*Electronic communication* +
  `CLUSTER: _at0006_`
 |at0007 + 
@@ -836,7 +892,19 @@ _Annotations_
 
 
 *comment*: The range of electronic communication mediums includes, but is not limited to use of : telephone, cellular phone, email, pager, fax, conferencing tool or social media.
-// Not supported rmType ELEMENT
+|SubType + 
+ `value`| 1..1| ELEMENT | Value | The unique combination of alphanumeric characters, meaningful for the identified type or medium of electronic communication.
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Value
+// text_value -  /content[openEHR-EHR-ADMIN_ENTRY.demographics.v0,'Emergency Contact']/data[at0001]/items[openEHR-EHR-CLUSTER.person.v0]/items[at0006]/items[at0016]/value
+a|
+
+
+The unique combination of alphanumeric characters, meaningful for the identified type or medium of electronic communication.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Value
+// uri_value -  /content[openEHR-EHR-ADMIN_ENTRY.demographics.v0,'Emergency Contact']/data[at0001]/items[openEHR-EHR-CLUSTER.person.v0]/items[at0006]/items[at0016]/value
+|
 |at0012 + 
  `purpose`| 0..1| DV_CODED_TEXT | Purpose
 a|
@@ -856,13 +924,13 @@ The purpose or use for the identified type of electronic communication.
 |====
 |NodeId|Attr.|RM Type| Name | Description
 |RM: + 
- `language`| 1..1| CODE_PHRASE | language
+ `language`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `encoding`| 1..1| CODE_PHRASE | encoding
+ `encoding`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `subject`| 1..1| PARTY_PROXY | subject
+ `subject`| 1..1| PARTY_PROXY | undefined
 |
 |====
 [options="header", cols="5,3,5,5,30"]
@@ -905,16 +973,16 @@ a|
 |====
 |NodeId|Attr.|RM Type| Name | Description
 |RM: + 
- `time`| 1..1| DV_DATE_TIME | Time
+ `time`| 1..1| DV_DATE_TIME | undefined
 |
 |RM: + 
- `language`| 1..1| CODE_PHRASE | language
+ `language`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `encoding`| 1..1| CODE_PHRASE | encoding
+ `encoding`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `subject`| 1..1| PARTY_PROXY | subject
+ `subject`| 1..1| PARTY_PROXY | undefined
 |
 |====
 [options="header", cols="5,3,5,5,30"]
@@ -993,16 +1061,16 @@ Name of the symptom or sign being screened.
 |====
 |NodeId|Attr.|RM Type| Name | Description
 |RM: + 
- `time`| 1..1| DV_DATE_TIME | Time
+ `time`| 1..1| DV_DATE_TIME | undefined
 |
 |RM: + 
- `language`| 1..1| CODE_PHRASE | language
+ `language`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `encoding`| 1..1| CODE_PHRASE | encoding
+ `encoding`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `subject`| 1..1| PARTY_PROXY | subject
+ `subject`| 1..1| PARTY_PROXY | undefined
 |
 |====
 [options="header", cols="5,3,5,5,30"]
@@ -1087,13 +1155,13 @@ Name of the symptom or sign being screened.
 |====
 |NodeId|Attr.|RM Type| Name | Description
 |RM: + 
- `language`| 1..1| CODE_PHRASE | language
+ `language`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `encoding`| 1..1| CODE_PHRASE | encoding
+ `encoding`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `subject`| 1..1| PARTY_PROXY | subject
+ `subject`| 1..1| PARTY_PROXY | undefined
 |
 |====
 [options="header", cols="5,3,5,5,30"]
@@ -1154,13 +1222,13 @@ Narrative description about the risk factor.
 |====
 |NodeId|Attr.|RM Type| Name | Description
 |RM: + 
- `language`| 1..1| CODE_PHRASE | language
+ `language`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `encoding`| 1..1| CODE_PHRASE | encoding
+ `encoding`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `subject`| 1..1| PARTY_PROXY | subject
+ `subject`| 1..1| PARTY_PROXY | undefined
 |
 |====
 [options="header", cols="5,3,5,5,30"]
@@ -1186,13 +1254,13 @@ _Annotations_
 |====
 |NodeId|Attr.|RM Type| Name | Description
 |RM: + 
- `language`| 1..1| CODE_PHRASE | language
+ `language`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `encoding`| 1..1| CODE_PHRASE | encoding
+ `encoding`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `subject`| 1..1| PARTY_PROXY | subject
+ `subject`| 1..1| PARTY_PROXY | undefined
 |
 |====
 [options="header", cols="5,3,5,5,30"]
@@ -1207,16 +1275,16 @@ _Annotations_
 |====
 |NodeId|Attr.|RM Type| Name | Description
 |RM: + 
- `time`| 1..1| DV_DATE_TIME | Time
+ `time`| 1..1| DV_DATE_TIME | undefined
 |
 |RM: + 
- `language`| 1..1| CODE_PHRASE | language
+ `language`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `encoding`| 1..1| CODE_PHRASE | encoding
+ `encoding`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `subject`| 1..1| PARTY_PROXY | subject
+ `subject`| 1..1| PARTY_PROXY | undefined
 |
 |====
 [options="header", cols="5,3,5,5,30"]
@@ -1265,7 +1333,13 @@ _Annotations_
 
 
 *comment*: For example: Travel to an 'at risk' location; exposure to infected body fluids; or worked as a dental technician. Coding of 'Exposure situation' with a terminology is preferred, where possible.
-// Not supported rmType ELEMENT
+|SubType + 
+ `date_of_exposure`| 0..*| ELEMENT | Date of exposure | The date/s when the individual was exposed to the agent.
+|RM: + 
+ `date_time_value`| 0..1| DV_DATE_TIME | Date of exposure
+// date_time_value -  /content[openEHR-EHR-SECTION.adhoc.v1,'Case investigation']/items[openEHR-EHR-OBSERVATION.exposure_assessment.v0]/data[at0001]/events[at0002]/data[at0042]/items[at0044]/items[at0063]/value
+|
+// Not supported rmType DV_INTERVAL<DV_DATE_TIME>
 |at0055 + 
  `comment`| 0..1| DV_TEXT | Comment
 a|
@@ -1280,13 +1354,13 @@ Additional narrative about the specific exposure event, not captured in other fi
 |====
 |NodeId|Attr.|RM Type| Name | Description
 |RM: + 
- `language`| 1..1| CODE_PHRASE | language
+ `language`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `encoding`| 1..1| CODE_PHRASE | encoding
+ `encoding`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `subject`| 1..1| PARTY_PROXY | subject
+ `subject`| 1..1| PARTY_PROXY | undefined
 |
 |====
 [options="header", cols="5,3,5,5,30"]
@@ -1404,16 +1478,16 @@ a|
 |====
 |NodeId|Attr.|RM Type| Name | Description
 |RM: + 
- `time`| 1..1| DV_DATE_TIME | Time
+ `time`| 1..1| DV_DATE_TIME | undefined
 |
 |RM: + 
- `language`| 1..1| CODE_PHRASE | language
+ `language`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `encoding`| 1..1| CODE_PHRASE | encoding
+ `encoding`| 1..1| CODE_PHRASE | undefined
 |
 |RM: + 
- `subject`| 1..1| PARTY_PROXY | subject
+ `subject`| 1..1| PARTY_PROXY | undefined
 |
 |====
 [options="header", cols="5,3,5,5,30"]

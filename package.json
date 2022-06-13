@@ -8,7 +8,7 @@
 
   },
   "scripts": {
-    "dev": "ts-node src/index.ts  --wt 'templates/C1DN -  COVID-19 Updated.json' -o 'out/C1DN -  COVID-19 Updated.adoc'",
+    "dev": "ts-node src/index.ts  --wt 'templates/Generic Nurse Encounter.json' -o 'out/Generic Nurse Encounter.adoc'",
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
