@@ -28,6 +28,8 @@ export function isDataValue(rmType: string) {
     'DV_EHR_URI',
     'DV_MULTIMEDIA',
     'DV_PARSABLE',
-    'DV_STATE'
+    'DV_STATE',
+    'CODE_PHRASE',
+    'PARTY_PROXY'
   ].includes(rmType);
 }

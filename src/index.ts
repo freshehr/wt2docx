@@ -16,7 +16,7 @@ const file = args['web-template'];
 const outFile = args['out-file'];
 
 console.log('\n' +
-  'Loading Hello Vanessa' + file + ' and write to ' + outFile);
+  'Loading ' + file + ' and write to ' + outFile);
 
 const inputfileExist = fs.existsSync(file);
 if (inputfileExist) {

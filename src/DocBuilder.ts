@@ -60,7 +60,6 @@ export class DocBuilder {
       this.sb.append(`5+a|*${f.name}* +\n \`${f.rmType}: _${f.nodeId}_\``);
       this.walkChildren(f);
     } else if (f.rmType === 'ELEMENT') {
-//      this.sb.append(`5+a|*${f.name}* +\n \`${f.rmType}: _${f.nodeId}_\``);
       this.walkElement(f);
     } else {
       switch (f.rmType) {
@@ -87,7 +86,6 @@ export class DocBuilder {
         default:
           this.sb.append('// Not supported rmType ' + f.rmType);
 
-   //       this.walkChildren(f);
           break;
       }
     }
@@ -115,6 +113,7 @@ export class DocBuilder {
       this.sb.append('|NodeId|Attr.|RM Type| Name | Description');
 
       f.children.forEach((child) => {
+
         if (!child.inContext) {
           this.walk(child)
         }
@@ -148,7 +147,8 @@ export class DocBuilder {
       this.sb.append('|====');
       this.sb.append('|NodeId|Attr.|RM Type| Name | Description');
 
-      rmAttributes.forEach((child) => {
+      rmAttributes.forEach(child => {
+        child.localizedName = child.id;
         this.walk(child);
       });
       this.sb.append('|====');
@@ -212,68 +212,20 @@ export class DocBuilder {
       case 'DV_TEXT':
         this.walkDvText(f);
         break;
-      case 'DV_PARSABLE':
-        this.walkDvParsable();
-        break;
-      case 'DV_STATE':
-        this.walkDvState();
-        break;
-      case 'DV_DATE':
-        this.walkDvDate();
-        break;
-      case 'DV_TIME':
-        this.walkDvTime();
-        break;
-      case 'DV_DATE_TIME':
-        this.walkDvDateTime();
-        break;
-      case 'DV_QUANTITY':
-        this.walkDvQuantity();
-        break;
       case 'DV_ORDINAL':
         this.walkDvOrdinal(f);
         break;
-      case 'DV_COUNT':
-        this.walkDvCount();
-        break;
-      case 'DV_DURATION':
-        this.walkDvDuration();
-        break;
-      case 'DV_URI':
-        this.walkDvUri();
-        break;
-      case 'DV_BOOLEAN':
-        this.walkDvBoolean();
-        break;
-      case 'DV_IDENTIFIER':
-        this.walkDvIdentifier();
-        break;
-        case 'DV_PROPORTION':
-        this.walkDvProportion();
-        break;
-
       case 'DV_SCALE':
-        this.walkDvScale();
-        break;
-
-      case 'DV_MULTIMEDIA':
-        this.walkDvMultimedia();
-        break;
-
-      case 'DV_EHR_URI':
-        this.walkDvEhrUri();
-        break;
-
-
-      case 'CODE_PHRASE':
-        this.walkCodePhrase();
-        break;
-        case 'PARTY_PROXY':
-        this.walkPartyProxy();
+        this.walkDvOrdinal(f);
         break;
 
       default:
-        this.sb.append('|Unsupported RM type: ' + f.rmType);
+        if (isDataValue(f.rmType))  {
+          this.walkDvDefault(f)
+        }
+        else  {
+          this.sb.append('|Unsupported RM type: ' + f.rmType);
+        }
     }
     this.walkAnnotations(f);
 
@@ -291,58 +243,7 @@ export class DocBuilder {
     }
   }
 
-  private walkDvBoolean() {
-    this.sb.append('|');
-  }
 
-  private walkCodePhrase() {
-    this.sb.append('|');
-  }
-
-  private walkDvParsable() {
-    this.sb.append('|');
-  }
-
-  private walkDvState() {
-    this.sb.append('|');
-  }
-  private walkPartyProxy() {
-   this.sb.append('|');
-  }
-
-  private walkDvIdentifier() {
-    this.sb.append('|');
-  }
-
-  private walkDvProportion() {
-    this.sb.append('|');
-  }
-  private walkDvDuration() {
-    this.sb.append('|');
-  }
-
-
-  private walkDvUri() {
-    this.sb.append('|');
-  }
-  private walkDvCount() {
-    this.sb.append('|');
-  }
-
-  private walkDvDate() {
-    this.sb.append('|');
-  }
-
-  private walkDvScale() {
-    this.sb.append('|');
-  }
-  private walkDvMultimedia() {
-    this.sb.append('|');
-  }
-
-  private walkDvEhrUri() {
-    this.sb.append('|');
-  }
 
 
   private walkDvOrdinal(f: FormElement) {
@@ -371,9 +272,6 @@ export class DocBuilder {
     this.sb.newline().append(`*Description*: ${this.getValueOfRecord(f.localizedDescriptions)}`);
   }
 
-  private walkDvQuantity() {
-    this.sb.append('|');
-  }
 
 private walkDvDefault(f : FormElement) {
   this.sb.append('|');
@@ -395,13 +293,7 @@ private walkDvDefault(f : FormElement) {
       this.appendDescription(f);
     }
   }
-  private walkDvDateTime() {
-    this.sb.append('|');
-  }
 
-  private walkDvTime() {
-    this.sb.append('|');
-  }
   private walkDvCodedText(f: FormElement) {
     this.sb.append('a|');
     if (f.inputs) {
