@@ -5,6 +5,7 @@ export interface FormElement {
   name: string;
   localizedName: string;
   rmType: string;
+  rmTypeText: string
   nodeId: string;
   min: number;
   max: number;
