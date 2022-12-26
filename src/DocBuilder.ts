@@ -1,6 +1,14 @@
 import { FormElement } from './FormElement';
 import { WebTemplate } from './WebTemplate';
-import { isEntry, isEvent, isDataValue, isSection } from './isEntry';
+import {
+  isEntry,
+  isEvent,
+  isDataValue,
+  isSection,
+  dataValueLabelMapper,
+  isDisplayableNode,
+  formatOccurrences, isAnyChoice,
+} from './isEntry';
 import { StringBuilder } from './StringBuilder';
 import { FormInput } from './FormInput';
 import { BuilderSettings } from './BuilderSettings';
@@ -20,15 +28,18 @@ export class DocBuilder {
     return this.sb.toString();
   }
 
+  private backTick = (inString: string): string => `\`${inString}\``
+
+
   private generate() {
 
-    const f = this.wt.tree;
+    this.sb.append('= Da Vita Peritoneal dialysis dataset extension')
+    this.sb.append(` **Template Id:  \`${this.wt.templateId} [${this.wt.semVer}]\`**`)
+    this.sb.append('6th September 2022')
+    this.sb.append(':toc: left')
 
-    this.sb.append(`= ${this.wt.templateId}`).newline();
-    this.sb.append(`== *${f.name}*`).newline()
-    this.sb.append(`=== \`${f.rmType}: _${f.nodeId}_\``).newline();
 
-    this.walk(this.wt.tree);
+    this.walkComposition(this.wt);
   }
 
 
@@ -43,48 +54,43 @@ export class DocBuilder {
   private walkNonContextChildren(f: FormElement) {
     if (f.children) {
       f.children.forEach((child) => {
-        if (!child.inContext) {this.walk(child)}
+        if (!child.inContext) {
+          this.walk(child)
+        }
       });
     }
   }
 
   private walk(f: FormElement) {
-    if (f.aqlPath === '/category') {
-      this.walkElement(f);
-    } else if (isEntry(f.rmType)) {
-      this.walkEntry(f);
+    if (isEntry(f.rmType)) {
+      this.walkEntry(f)
     } else if (isDataValue(f.rmType)) {
-      this.walkElement(f);
+      this.walkElement(f, false)
     } else if (isSection(f.rmType)) {
-      this.walkSection(f);
-    } else if (f.rmType === 'CLUSTER') {
-      this.sb.append(`5+a|=== ${f.name}*` + '\n'  + `\`${f.rmType}: _${f.nodeId}_\``);
-      this.walkChildren(f);
-    } else if (isEvent(f.rmType)) {
-//      this.sb.append(`5+a|*${f.name}* +\n \`${f.rmType}: _${f.nodeId}_\``);
-      this.walkEntry(f);
+      this.walkSection(f)
     } else if (f.rmType === 'ELEMENT') {
-      this.walkElement(f);
+      this.walkChoice(f)
+    } else if (f.rmType === 'CLUSTER') {
+      this.walkCluster(f);
+    } else if (isEvent(f.rmType)) {
+      this.walkChildren(f)
     } else {
       switch (f.rmType) {
-        case 'COMPOSITION':
-          this.walkRmAttributes(f)
-          this.walkNonContextChildren(f);
+
+        //      case 'ISM_TRANSITION':
+        //        this.walkChildren(f)
+        //        break;
+        case 'EVENT_CONTEXT':
+          f.name = 'Composition context';
+          this.walkEventContext(f);
           break;
-  //      case 'ISM_TRANSITION':
-  //        this.walkChildren(f)
-  //        break;
-  //      case 'EVENT_CONTEXT':
-  //        f.name = 'context';
-  //        this.walkEntry(f);
-  //        break;
         case 'CODE_PHRASE':
           f.name = f.id;
-          this.walkElement(f);
+          this.walkElement(f, false);
           break;
         case 'PARTY_PROXY':
           f.name = f.id;
-          this.walkElement(f);
+          this.walkElement(f, false);
           break;
 
         default:
@@ -95,45 +101,130 @@ export class DocBuilder {
     }
   }
 
+  private walkCluster(f: FormElement) {
+
+    const occurrencesText = formatOccurrences(f,this.config.displayTechnicalOccurrences)
+    const formattedOccurrencesText = occurrencesText?`[**${occurrencesText}**]`:``
+    const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
+
+    if (!this.config.hideNodeIds)
+      this.sb.append(clinicalText + '\n' + `\`${f.rmType}: _${f.nodeId}_\``);
+    else
+      this.sb.append(clinicalText)
+
+    this.walkChildren(f);
+  }
+
+  private walkComposition(wt: WebTemplate) {
+
+    const f = wt.tree
+    this.addCompositionHeader(f, wt)
+    this.addNodeHeader()
+    this.walkRmAttributes(f)
+    this.addNodeFooter();
+    this.walkNonContextChildren(f)
+  }
+
+
   private walkSection(f: FormElement) {
-    this.sb.append(`== ${f.name}`);
-    if (f.children) {
-      f.children.forEach((child) => {
-        this.walk(child);
-      });
+    if (!this.config.skippedAQLPaths.includes(f.aqlPath)) {
+      this.addLeafHeader(f)
     }
+    this.walkChildren(f)
   }
+
+  private addCompositionHeader(f: FormElement, wt: WebTemplate) {
+
+    this.sb.append(`== Composition: *${f.name}*`).newline()
+
+    if (!this.config.hideNodeIds)
+      this.sb.append(`==== Archetype Id: \`_${f.nodeId}_\``).newline();
+
+    this.sb.append(`${f.localizedDescriptions.en}`).newline()
+  }
+
+  private addLeafHeader(f: FormElement, templateId: string = null, title: string = 'Archetype Id:') {
+    const nodeId = f.nodeId ? f.nodeId : `\`RM:${f.id}\``
+
+    this.sb.append(`==  *${f.name}*`).newline()
+
+    if (!this.config.hideNodeIds)
+      this.sb.append(`==== ${title} \`${f.rmType}: _${f.nodeId}_\``).newline();
+
+    this.sb.append(`${f.localizedDescriptions.en}`).newline()
+  }
+
   private walkEntry(f: FormElement) {
-    const nodeId = f.nodeId?f.nodeId:`\`RM:${f.id}\``
 
-    this.sb.append(`== ${f.name}`);
-    this.sb.append(`=== \`${f.rmType}: _${nodeId}_\``);
-
-//    this.walkRmAttributes(f);
-
-    if (f.children) {
-      this.addNodeHeader('Archetype nodes');
-
-      f.children.forEach((child) => {
-
-        if (!child.inContext) {
-          this.walk(child)
-        }
-      });
-
-
-
-    }
-
-
+    this.addLeafHeader(f)
+    this.addNodeHeader()
+    //   this.walkRmAttributes(f);
+    this.walkNonContextChildren(f)
+    this.addNodeFooter()
 
   }
 
-  private addNodeHeader(headerText: string) {
-    this.sb.append(`==== ${headerText}`);
-    this.sb.append('[options="header", cols="15,10,10,10"]');
+  private walkEventContext(f: FormElement) {
+
+    const nodeId = f.nodeId ? f.nodeId : `\`RM:${f.id}\``
+
+    this.sb.append(`===== ${f.name}`);
+
+    if (!this.config.hideNodeIds) {
+      this.sb.append(`===== \`${f.rmType}: _${nodeId}_\``);
+    }
+
+    this.addNodeHeader()
+    this.walkNonContextChildren(f)
+    this.addNodeFooter()
+
+  }
+
+  private addNodeHeader() {
+    this.sb.append('[options="header","stretch", cols="20,30,30"]');
     this.sb.append('|====');
-    this.sb.append('|Name | Type/Cardin. | NodeId | Details');
+    this.sb.append('|Data item | Description | Allowed values');
+  }
+
+  private addNodeContent(f: FormElement, isChoice: boolean) {
+
+    const nodeId = f.nodeId ? f.nodeId : `RM: ${f.id}`;
+    const nodeIdText = ` ${this.backTick(f.id)} + \n ${this.backTick(nodeId)} `
+
+    let nodeName = f.localizedName ? f.localizedName : f.name
+
+    nodeName = nodeName ? nodeName : f.id
+
+    const rmTypeText = `${this.backTick(this.mapRmTypeText(f.rmType))}`;
+    let nameText
+    const occurrencesText = formatOccurrences(f,this.config.displayTechnicalOccurrences)
+    const formattedOccurrencesText = occurrencesText?`(_${occurrencesText}_)`:``
+
+    if (!isChoice) {
+      nameText = `**${nodeName}** +\n ${rmTypeText} ${formattedOccurrencesText}`
+
+      this.sb.append(`| ${this.applyNodeIdFilter(nameText, nodeIdText)} | ${this.getDescription(f)} `);
+
+    } else {
+      nameText = `${rmTypeText} + \n ${formattedOccurrencesText}`
+
+      this.sb.append(`| ${this.applyNodeIdFilter(nameText, nodeIdText)} |`);
+    }
+
+    if (f.name === undefined) {
+      this.sb.append(`// ${f.id} -  ${f.aqlPath}`);
+    }
+
+  }
+
+  private applyNodeIdFilter(nameText: string, nodeIdText: string) {
+    if (!this.config.hideNodeIds)
+      return nameText + `+\n ${nodeIdText}`;
+    return nameText;
+  }
+
+  private addNodeFooter() {
+    this.sb.append('|====');
   }
 
   private walkRmAttributes(f: FormElement) {
@@ -141,22 +232,14 @@ export class DocBuilder {
     const rmAttributes = new Array<FormElement>();
 
     if (f.children) {
-
       f.children.forEach((child) => {
-
-        if (['ism_transition','context'].includes(child.id) && child.children) {
-              child.children.forEach((ismChild) => {
-              const ismExcluded = this.config.excludedRMTags.includes(ismChild.id)
-              if (ismChild?.inContext && !ismExcluded) {
-                rmAttributes.push(ismChild);
-              }
-            })
-        }
-        else {
-         const excluded = this.config.excludedRMTags.includes(child.id)
-         if (child?.inContext && !excluded) {
-           rmAttributes.push(child);
-         }
+        if (!child?.inContext) return
+        if (['ism_transition', 'context'].includes(child.id) && child.children) {
+          child.children.forEach((ismChild) => {
+            this.stripExcludedRmTypes(ismChild, rmAttributes)
+          })
+        } else {
+          this.stripExcludedRmTypes(child, rmAttributes)
         }
       });
 
@@ -164,96 +247,100 @@ export class DocBuilder {
 
     if (rmAttributes.length === 0) return
 
-    this.addNodeHeader('RM attributes');
-
-     rmAttributes.forEach(child => {
+    rmAttributes.forEach(child => {
       child.localizedName = child.id;
       this.walk(child);
     });
 
-     this.sb.append('|====');
+//     this.sb.append('|====');
 
-    this.walkParticipations();
-
+//    this.walkParticipations();
   }
 
+  private stripExcludedRmTypes(childNode: FormElement, list: FormElement[]) {
 
-    // Look for display participations flag in Annotations
+    if (!this.config.excludedRMTags.includes(childNode.id)) {
+      list.push(childNode);
+    }
+  }
+
+  // Look for display participations flag in Annotations
 //    const displayParticipations= () => {
 //      if (f.annotations)
 //        console.dir(f.annotations)
 
- //     for (const key in f.annotations) {
- //       if (f.annotations.hasOwnProperty(key) && key.valueOf() === 'comment')
- //       return true
+  //     for (const key in f.annotations) {
+  //       if (f.annotations.hasOwnProperty(key) && key.valueOf() === 'comment')
+  //       return true
   //    }
- //     return false
- //   }
+  //     return false
+  //   }
 
   private walkParticipations() {
 
     if (this.config.hideParticipations) return;
 
-      this.sb.append(`===== _Participations_ [0..*]`);
-      this.sb.append('[options="header", cols="25,5,55,30"]');
-      this.sb.append('|====');
-      this.sb.append('|NodeId|Attr.|RM Type| Name | Details');
-      this.sb.append('|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation');
-      this.sb.append('')
+    this.sb.append(`===== _Participations_ [0..*]`);
+    this.sb.append('[options="header", cols="25,5,55,30"]');
+    this.sb.append('|====');
+    this.sb.append('|NodeId|Attr.|RM Type| Name | Details');
+    this.sb.append('|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation');
+    this.sb.append('')
 //      this.sb.append('|RM: mode|0..1|DV_CODED_TEXT| Mode | Optional field for recording the \'mode\' of the performer / activity interaction, e.g. present, by telephone, by email etc.');
-      this.sb.append('|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.');
+    this.sb.append('|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.');
 //      this.sb.append('|RM: time|0..1|DV_INTERVAL| Time | The time interval during which the participation took place, ');
-      this.sb.append('|====');
+    this.sb.append('|====');
 
   }
 
-  private walkElement(f: FormElement) {
+  private walkElement(f: FormElement, isChoice: boolean) {
+    this.addNodeContent(f, isChoice)
+    this.walkDataType(f)
+    this.walkAnnotations(f);
+  }
+
+  private walkDataType(f: FormElement) {
 
 
-    const max = f.max < 0 ? '*' : `${f.max}`;
+    let isInterval = false
+    let rmType = f.rmType
 
-    if (f.rmType === 'ELEMENT')
-    {
-      this.sb.append(`|SubType + \n \`  ${f.name}  ${f.rmType} | |${f.id}\`| ${f.min}..${max} | ${this.getValueOfRecord(f.localizedDescriptions)}`);
-      this.walkChildren(f);
-      return
+    if (f.rmType.startsWith('DV_INTERVAL')) {
+      isInterval = true;
+      rmType = f.rmType.replace(/(^.*<|>.*$)/g, '')
     }
 
-    const nodeId = f.nodeId?f.nodeId:`RM:`;
-    const nodeText = `${nodeId} +\n \`${f.id}\``
-
-    const rmTypeText = `${this.mapRmTypeText(f.rmType)}  +\n  \`${f.min}..${max}\``;
-    this.sb.append(`| ${f.localizedName} |  ${rmTypeText} |  ${nodeText} `);
-
-    if (f.name === undefined){this.sb.append(`// ${f.id} -  ${f.aqlPath}`);}
-
-    switch (f.rmType) {
+    switch (rmType) {
       case 'ELEMENT':
-        break;
+        this.walkDvChoice(f)
+        break
       case 'DV_CODED_TEXT':
-        this.walkDvCodedText(f);
+        this.walkDvCodedText(f)
         break;
       case 'DV_TEXT':
-        this.walkDvText(f);
+        this.walkDvText(f)
         break;
       case 'DV_ORDINAL':
-        this.walkDvOrdinal(f);
+        this.walkDvOrdinal(f)
         break;
       case 'DV_SCALE':
         this.walkDvOrdinal(f);
         break;
+      case 'DV_QUANTITY':
+        this.walkDvQuantity(f);
+        break;
+
+      case 'DV_COUNT':
+        this.walkDvCount(f);
+        break;
 
       default:
-        if (isDataValue(f.rmType))  {
+        if (isDataValue(rmType)) {
           this.walkDvDefault(f)
-        }
-        else  {
-          this.sb.append('|Unsupported RM type: ' + f.rmType);
+        } else {
+          this.sb.append('|' + this.backTick('Unsupported RM type: ' + rmType))
         }
     }
-    this.walkAnnotations(f);
-
-
   }
 
   private walkAnnotations(f: FormElement) {
@@ -261,9 +348,8 @@ export class DocBuilder {
 
       this.sb.append(``);
       for (const key in f.annotations) {
-        if (f.annotations.hasOwnProperty(key))
-        {
-          if (key !== 'comment' || !this.config.hideComments)
+        if (f.annotations.hasOwnProperty(key)) {
+          if (this.config.includedAnnotations.includes(key))
             this.sb.newline().append(`*${key}*: ${f.annotations[key]}`);
         }
       }
@@ -271,17 +357,25 @@ export class DocBuilder {
   }
 
 
+  private walkDvChoice(f: FormElement) {
+    this.sb.append('a|');
+    let subTypesAllowedText ='';
+    if (isAnyChoice(f.children.map(child =>  child.rmType)))
+     subTypesAllowedText = 'All'
+    else
+      subTypesAllowedText = 'Multiple'
 
+    this.sb.append(`_${subTypesAllowedText} data types allowed_`);
+  }
 
   private walkDvOrdinal(f: FormElement) {
     this.sb.append('a|');
     if (f.inputs) {
       const fi: FormInput[] = f.inputs;
-      // const term = fi.terminology == undefined ? "local" : fi.terminology;
       fi.forEach((item) => {
         const formItems = item.list === undefined ? [] : item.list;
         formItems.forEach((n) => {
-          this.sb.append(`* ${n.ordinal} - ${n.label} ${this.getValueOfRecord(n.localizedDescriptions)}`);
+          this.sb.append(`* [${n.ordinal}]  ${n.label} \\| ${this.backTick(n.value)} \\|`);
         });
       });
     }
@@ -295,21 +389,30 @@ export class DocBuilder {
     }
   }
 
-  private appendDescription(f : FormElement){
-    const description = this.getValueOfRecord(f.localizedDescriptions)
-    if (description)
-       this.sb.newline().append(`*Description*: ${description}`);
+  private getDescription(f: FormElement) {
+    return this.getValueOfRecord(f.localizedDescriptions)
   }
 
+  private walkChoice(f: FormElement) {
+    this.walkElement(f, false)
 
-private walkDvDefault(f : FormElement) {
-  this.sb.append('|');
-  this.appendDescription(f)
-}
+    if (isAnyChoice(f.children.map(child =>  child.rmType)))
+      return
+
+    this.sb.append(`|_SubTypes_ | |`)
+    f.children.forEach((child) => {
+      this.walkElement(child, true)
+    });
+  }
+
+  private walkDvDefault(f: FormElement) {
+    this.sb.append('|');
+//  this.appendDescription(f)
+  }
+
   private walkDvText(f: FormElement) {
     this.sb.append('a|');
-    if (f.inputs.length >0 ) {
-      this.sb.append(`**Allowed text**`)
+    if (f.inputs.length > 0) {
       this.sb.append('')
       f.inputs.forEach((item) => {
         if (item.list) {
@@ -317,14 +420,41 @@ private walkDvDefault(f : FormElement) {
             this.sb.append(`* ${val.value}`);
           });
         }
-        else
-          this.sb.append('Any text')
 
         if (item.listOpen)
-          this.sb.append( `* _Other text allowed_`);
+          this.sb.append(`* _Other text allowed_`);
 
       });
-      this.appendDescription(f);
+//      this.appendDescription(f);
+    }
+  }
+
+  private walkDvQuantity(f: FormElement) {
+    this.sb.append('a|');
+    if (f.inputs.length > 0) {
+      this.sb.append('')
+      f.inputs.forEach((item) => {
+        if (item.list && item.suffix === 'unit') {
+          item.list.forEach((val) => {
+            this.sb.append('Units: +\n')
+            this.sb.append(`* ${val.value}`);
+          });
+        }
+      });
+//      this.appendDescription(f);
+    }
+  }
+
+  private walkDvCount(f: FormElement) {
+    this.sb.append('a|');
+    if (f.inputs.length > 0) {
+      this.sb.append('')
+      f.inputs.forEach((item) => {
+        if ((item.type === 'INTEGER') && (item?.validation?.range)) {
+          this.sb.append('Range: +\n')
+          this.sb.append(`* ${item.validation.range.minOp} ${item.validation.range.min} and ${item.validation.range.maxOp} ${item.validation.range.max}`);
+        }
+      });
     }
   }
 
@@ -334,50 +464,40 @@ private walkDvDefault(f : FormElement) {
       f.inputs.forEach((item) => {
         const term = item.terminology === undefined ? 'local' : item.terminology;
         if (item.list) {
-          this.sb.append(`**Allowed Coded terms**`)
+//          this.sb.append(`**Allowed Coded terms**`)
           this.sb.append('')
           item.list.forEach((list) => {
+            const termPhrase = `${term}: ${list.value}`
             if (term === 'local') {
-              this.sb.append(`* ${list.value} -> ${list.label} `);
+              this.sb.append(`* ${list.label} +\n ${this.backTick(termPhrase)}`);
             } else {
-              this.sb.append(`* ${list.label} (${term}: ${list.value})`);
+
+              this.sb.append(`* ${list.label} +\n ${this.backTick(termPhrase)}`);
             }
-          });
+          })
+
           if (item.listOpen)
-            this.sb.append( `* _Other text allowed_`);
-          this.appendDescription(f);
+            this.sb.append(`* _Other text allowed_`);
+//          this.appendDescription(f);
         }
       });
     }
   }
 
-  private mapRmTypeText(rmType: string) {
-    switch (rmType) {
-      case 'ELEMENT':
-        break
-      case 'DV_CODED_TEXT':
-        return 'Coded text';
-      case 'DV_TEXT':
-        return 'Text';
-      case 'DV_ORDINAL':
-        return 'Ordinal';
-      case 'DV_SCALE':
-        return 'Scale';
-      case 'DV_QUANTITY':
-        return 'Quantity';
-      case 'DV_COUNT':
-        return 'Integer';
-      case 'DV_DATE_TIME':
-        return 'Date/time';
-      case 'DV_IDENTIFIER':
-        return 'Identifier';
+  private mapRmTypeText(rmTypeString: string) {
 
-      default:
-        if (isDataValue(rmType)) {
-          return rmType
-        } else {
-          this.sb.append('|Unsupported RM type: ' + rmType);
-        }
+    let rmType = rmTypeString
+    let intervalPrefix = ''
+
+    if (rmTypeString.startsWith('DV_INTERVAL')) {
+      intervalPrefix = "Interval of "
+      rmType = rmTypeString.replace(/(^.*<|>.*$)/g, '');
+    }
+
+    if (isDisplayableNode(rmType)) {
+      return `${intervalPrefix}${dataValueLabelMapper(rmType)}`
+    } else {
+      this.sb.append('|' + this.backTick('Unsupported RM type: ' + rmType))
     }
   }
 }
