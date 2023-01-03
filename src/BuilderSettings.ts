@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 export class BuilderSettings {
+
   get displayTechnicalOccurrences(): boolean {
     return this._displayTechnicalOccurrences;
   }
@@ -9,9 +10,8 @@ export class BuilderSettings {
     this._displayTechnicalOccurrences = value;
   }
 
-
   private static instance: BuilderSettings;
-
+  private _title : string;
   private _hideParticipations : boolean = true;
   private _hideComments : boolean = true;
   private _hideNodeIds : boolean = false
@@ -75,6 +75,14 @@ export class BuilderSettings {
     return BuilderSettings.instance;
   }
 
+  get title(): string {
+    return this._title;
+  }
+
+  set title(value: string) {
+    this._title = value;
+  }
+
   get hideParticipations(): boolean {
     return this._hideParticipations;
   }
@@ -89,10 +97,11 @@ export class BuilderSettings {
 
     if (settingsFileExist) {
       const settingsData = fs.readFileSync(settingsFile, { encoding: 'utf8', flag: 'r' });
-      [this._hideParticipations] = JSON.parse(settingsData);
+
+      //     [this._hideParticipations] = JSON.parse(settingsData);
+ //     this.instance = JSON.parse(settingsData);
     }
   }
-
 }
 
 

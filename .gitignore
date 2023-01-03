@@ -29,14 +29,20 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-/out/DA VITA  - PD REgistry extension.adoc
+/out/
+/templates/
+
+
 /templates/Davita Nephrology Portugal - Patient Information.json
 /templates/DaVita Nephrology Register Portugal - Encounter.json
 /templates/DaVita Nephrology Register Portugal - Imaging.json
 /templates/DaVita Nephrology Register Portugal - Medication.opt
-/out/DaVita Nephrology Register Portugal - Prescriptions.adoc
 /templates/DaVita Nephrology Register Portugal - Prescriptions.json
 /out/DaVita Nephrology Register Portugal - Prescriptions.pdf
 /out/Generic Nurse Encounter.adoc
-/templates/Generic Nurse Encounter.json
+/out/DA VITA  - PD REgistry extension.adoc
+/out/DaVita Nephrology Register Portugal - Prescriptions.adoc
+ /templates/Generic Nurse Encounter.json
 /templates/DA VITA  - PD REgistry extension.json
+
+

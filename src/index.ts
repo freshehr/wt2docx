@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import yargs from 'yargs';
 import ora from 'ora';
-import * as fs from 'fs';
+import  * as fs from 'fs';
 import { WebTemplate } from './WebTemplate';
 import { DocBuilder } from './DocBuilder';
 import  path  from 'path';
@@ -22,7 +22,7 @@ function handleOutFile(infile, outputFile, ext) {
 const args = yargs.options({
   'web-template': { type: 'string', demandOption: true, alias: 'wt' },
   'out-file': { type: 'string', demandOption: false, alias: 'o' },
-  'set-file': { type: 'string', demandOption: false, alias: 'set' },
+  'set-file': { type: 'string', demandOption: false, alias: 'set', default: "config/wtconfig.json"},
 }).argv;
 
 const spinner = ora(`Running test on ${args['web-template']}`).start();
@@ -30,27 +30,21 @@ const spinner = ora(`Running test on ${args['web-template']}`).start();
 const file = args['web-template'];
 const settingsFile = args['set-file'];
 
+ const config:BuilderSettings = BuilderSettings.getInstance();
 
-
-const config:BuilderSettings = BuilderSettings.getInstance();
-
-config.importConfig(settingsFile)
-
-
-const inputFileExist = fs.existsSync(file);
+  const inputFileExist = fs.existsSync(file);
 if (inputFileExist) {
-  const data = fs.readFileSync(file, { encoding: 'utf8', flag: 'r' });
-  const wt: WebTemplate = JSON.parse(data);
 
-  const docBuilder = new DocBuilder(wt);
-  const doc = docBuilder.toString();
+  const inDoc:string = fs.readFileSync(file, { encoding: 'utf8', flag: 'r' });
+
+  const docBuilder : DocBuilder = new DocBuilder(JSON.parse(inDoc));
+
+  const outDoc:string = docBuilder.toString();
 
   // Default outfile name to webtemplate filename with adoc extension
-  const outFile = handleOutFile(file, args['out-file'], 'adoc');
+  const outFileName = handleOutFile(file, args['out-file'], 'adoc');
 
-  console.log('\n' +
-    'Loading ' + file + ' and write to ' + outFile);
-  fs.writeFileSync(outFile, doc);
+  fs.writeFileSync(outFileName, outDoc);
 } else {
   console.log('The input file does not exist:' + file);
 }

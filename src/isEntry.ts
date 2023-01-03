@@ -108,7 +108,7 @@ export const formatOccurrences = (f: FormElement, techDisplay :boolean = true) =
   else if (f.max === 1)
     max = ''
   else
-    max = `multiple:${f.max}`
+    max = `multiple: ${f.max}`
 
  if (min === '')
   return max

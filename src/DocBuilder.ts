@@ -30,15 +30,16 @@ export class DocBuilder {
 
   private backTick = (inString: string): string => `\`${inString}\``
 
+  private buildHeader() {
+
+    this.sb.append(`= ${this.config.title ? this.config.title : this.wt.tree.name}`).newline()
+    this.sb.append(':toc: left')
+    this.sb.append(`Template Id: **${this.wt.templateId} [${this.wt.semVer}]**`).newline()
+    this.sb.append(`Created: **${Date().toString()}**`).newline()
+  }
 
   private generate() {
-
-    this.sb.append('= Da Vita Peritoneal dialysis dataset extension')
-    this.sb.append(` **Template Id:  \`${this.wt.templateId} [${this.wt.semVer}]\`**`)
-    this.sb.append('6th September 2022')
-    this.sb.append(':toc: left')
-
-
+    this.buildHeader()
     this.walkComposition(this.wt);
   }
 
@@ -118,7 +119,7 @@ export class DocBuilder {
   private walkComposition(wt: WebTemplate) {
 
     const f = wt.tree
-    this.addCompositionHeader(f, wt)
+    this.addCompositionHeader(f)
     this.addNodeHeader()
     this.walkRmAttributes(f)
     this.addNodeFooter();
@@ -133,23 +134,21 @@ export class DocBuilder {
     this.walkChildren(f)
   }
 
-  private addCompositionHeader(f: FormElement, wt: WebTemplate) {
+  private addCompositionHeader(f: FormElement) {
 
     this.sb.append(`== Composition: *${f.name}*`).newline()
 
     if (!this.config.hideNodeIds)
-      this.sb.append(`==== Archetype Id: \`_${f.nodeId}_\``).newline();
+      this.sb.append(`=== Archetype Id: \`_${f.nodeId}_\``).newline();
 
     this.sb.append(`${f.localizedDescriptions.en}`).newline()
   }
 
-  private addLeafHeader(f: FormElement, templateId: string = null, title: string = 'Archetype Id:') {
-    const nodeId = f.nodeId ? f.nodeId : `\`RM:${f.id}\``
-
+  private addLeafHeader(f: FormElement, title: string = 'Archetype Id:') {
     this.sb.append(`==  *${f.name}*`).newline()
 
     if (!this.config.hideNodeIds)
-      this.sb.append(`==== ${title} \`${f.rmType}: _${f.nodeId}_\``).newline();
+      this.sb.append(`=== ${title} \`${f.rmType}: _${f.nodeId}_\``).newline();
 
     this.sb.append(`${f.localizedDescriptions.en}`).newline()
   }
@@ -168,7 +167,7 @@ export class DocBuilder {
 
     const nodeId = f.nodeId ? f.nodeId : `\`RM:${f.id}\``
 
-    this.sb.append(`===== ${f.name}`);
+    this.sb.append(`==== ${f.name}`);
 
     if (!this.config.hideNodeIds) {
       this.sb.append(`===== \`${f.rmType}: _${nodeId}_\``);
@@ -177,7 +176,6 @@ export class DocBuilder {
     this.addNodeHeader()
     this.walkNonContextChildren(f)
     this.addNodeFooter()
-
   }
 
   private addNodeHeader() {
@@ -188,7 +186,7 @@ export class DocBuilder {
 
   private addNodeContent(f: FormElement, isChoice: boolean) {
 
-    const nodeId = f.nodeId ? f.nodeId : `RM: ${f.id}`;
+    const nodeId = f.nodeId ? `local:${f.nodeId}` : `RM:${f.id}`;
     const nodeIdText = ` ${this.backTick(f.id)} + \n ${this.backTick(nodeId)} `
 
     let nodeName = f.localizedName ? f.localizedName : f.name
@@ -206,7 +204,7 @@ export class DocBuilder {
       this.sb.append(`| ${this.applyNodeIdFilter(nameText, nodeIdText)} | ${this.getDescription(f)} `);
 
     } else {
-      nameText = `${rmTypeText} + \n ${formattedOccurrencesText}`
+      nameText = `${rmTypeText} +\n ${formattedOccurrencesText}`
 
       this.sb.append(`| ${this.applyNodeIdFilter(nameText, nodeIdText)} |`);
     }
@@ -219,7 +217,7 @@ export class DocBuilder {
 
   private applyNodeIdFilter(nameText: string, nodeIdText: string) {
     if (!this.config.hideNodeIds)
-      return nameText + `+\n ${nodeIdText}`;
+      return nameText + ` +\n ${nodeIdText}`;
     return nameText;
   }
 
@@ -234,12 +232,14 @@ export class DocBuilder {
     if (f.children) {
       f.children.forEach((child) => {
         if (!child?.inContext) return
-        if (['ism_transition', 'context'].includes(child.id) && child.children) {
-          child.children.forEach((ismChild) => {
-            this.stripExcludedRmTypes(ismChild, rmAttributes)
-          })
-        } else {
-          this.stripExcludedRmTypes(child, rmAttributes)
+        if (['ism_transition', 'context'].includes(child.id)) {
+          if (child.children) {
+            child.children.forEach((ismChild) => {
+              this.stripExcludedRmTypes(ismChild, rmAttributes);
+            });
+          } else {
+            this.stripExcludedRmTypes(child, rmAttributes);
+          }
         }
       });
 
@@ -252,9 +252,6 @@ export class DocBuilder {
       this.walk(child);
     });
 
-//     this.sb.append('|====');
-
-//    this.walkParticipations();
   }
 
   private stripExcludedRmTypes(childNode: FormElement, list: FormElement[]) {
@@ -276,6 +273,7 @@ export class DocBuilder {
   //     return false
   //   }
 
+/*
   private walkParticipations() {
 
     if (this.config.hideParticipations) return;
@@ -292,6 +290,7 @@ export class DocBuilder {
     this.sb.append('|====');
 
   }
+*/
 
   private walkElement(f: FormElement, isChoice: boolean) {
     this.addNodeContent(f, isChoice)
@@ -301,12 +300,9 @@ export class DocBuilder {
 
   private walkDataType(f: FormElement) {
 
-
-    let isInterval = false
     let rmType = f.rmType
 
     if (f.rmType.startsWith('DV_INTERVAL')) {
-      isInterval = true;
       rmType = f.rmType.replace(/(^.*<|>.*$)/g, '')
     }
 
@@ -336,7 +332,7 @@ export class DocBuilder {
 
       default:
         if (isDataValue(rmType)) {
-          this.walkDvDefault(f)
+          this.walkDvDefault()
         } else {
           this.sb.append('|' + this.backTick('Unsupported RM type: ' + rmType))
         }
@@ -359,7 +355,7 @@ export class DocBuilder {
 
   private walkDvChoice(f: FormElement) {
     this.sb.append('a|');
-    let subTypesAllowedText ='';
+    let subTypesAllowedText: string;
     if (isAnyChoice(f.children.map(child =>  child.rmType)))
      subTypesAllowedText = 'All'
     else
@@ -375,7 +371,8 @@ export class DocBuilder {
       fi.forEach((item) => {
         const formItems = item.list === undefined ? [] : item.list;
         formItems.forEach((n) => {
-          this.sb.append(`* [${n.ordinal}]  ${n.label} \\| ${this.backTick(n.value)} \\|`);
+          const termPhrase = `local:${n.value}`
+          this.sb.append(`* [${n.ordinal}] ${n.label} +\n ${this.backTick(termPhrase)}`);
         });
       });
     }
@@ -405,7 +402,7 @@ export class DocBuilder {
     });
   }
 
-  private walkDvDefault(f: FormElement) {
+  private walkDvDefault() {
     this.sb.append('|');
 //  this.appendDescription(f)
   }
@@ -462,12 +459,12 @@ export class DocBuilder {
     this.sb.append('a|');
     if (f.inputs) {
       f.inputs.forEach((item) => {
-        const term = item.terminology === undefined ? 'local' : item.terminology;
+        const term = item.terminology === undefined ? 'local': item.terminology;
         if (item.list) {
 //          this.sb.append(`**Allowed Coded terms**`)
           this.sb.append('')
           item.list.forEach((list) => {
-            const termPhrase = `${term}: ${list.value}`
+            const termPhrase = `${term}:${list.value}`
             if (term === 'local') {
               this.sb.append(`* ${list.label} +\n ${this.backTick(termPhrase)}`);
             } else {
