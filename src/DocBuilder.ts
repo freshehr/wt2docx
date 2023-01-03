@@ -32,7 +32,7 @@ export class DocBuilder {
 
   private buildHeader() {
 
-    this.sb.append(`= ${this.config.title ? this.config.title : this.wt.tree.name}`).newline()
+    this.sb.append(`= ${this.config.title ? this.config.title : this.wt.tree.name}`)
     this.sb.append(':toc: left')
     this.sb.append(`Template Id: **${this.wt.templateId} [${this.wt.semVer}]**`).newline()
     this.sb.append(`Created: **${Date().toString()}**`).newline()
