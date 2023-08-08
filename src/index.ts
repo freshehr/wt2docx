@@ -2,7 +2,7 @@
 import yargs from 'yargs';
 import ora from 'ora';
 import  * as fs from 'fs';
-import { WebTemplate } from './WebTemplate';
+// import { WebTemplate } from './WebTemplate';
 import { DocBuilder } from './DocBuilder';
 import  path  from 'path';
 import { BuilderSettings } from './BuilderSettings';
@@ -22,13 +22,13 @@ function handleOutFile(infile, outputFile, ext) {
 const args = yargs.options({
   'web-template': { type: 'string', demandOption: true, alias: 'wt' },
   'out-file': { type: 'string', demandOption: false, alias: 'o' },
-  'set-file': { type: 'string', demandOption: false, alias: 'set', default: "config/wtconfig.json"},
+  'config-file': { type: 'string', demandOption: false, alias: 'set', default: "config/wtconfig.json"},
 }).argv;
 
 const spinner = ora(`Running test on ${args['web-template']}`).start();
 
 const file = args['web-template'];
-const settingsFile = args['set-file'];
+const settingsFile = args['config-file'];
 
  const config:BuilderSettings = BuilderSettings.getInstance();
 

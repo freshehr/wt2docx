@@ -15,7 +15,7 @@ export class BuilderSettings {
   private _hideParticipations : boolean = true;
   private _hideComments : boolean = true;
   private _hideNodeIds : boolean = false
-  private _excludedRMTags: string[] = ['territory','language', 'encoding','subject', 'transition','category','context', 'current_state', 'careflow_step'];
+  private _excludedRMTags: string[] = ['territory','language', 'encoding','subject', 'transition','category', 'current_state', 'careflow_step'];
   private _skippedAQLPaths: string[] = ["/content[openEHR-EHR-SECTION.adhoc.v1,'PD extensions']"];
   private _includedAnnotations: string[] = ['comments'];
   private _hideAQLPath: boolean = true;

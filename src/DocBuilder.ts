@@ -428,7 +428,7 @@ export class DocBuilder {
 
   private walkDvQuantity(f: FormElement) {
     this.sb.append('a|');
-    if (f.inputs.length > 0) {
+    if (f.inputs?.length > 0) {
       this.sb.append('')
       f.inputs.forEach((item) => {
         if (item.list && item.suffix === 'unit') {
