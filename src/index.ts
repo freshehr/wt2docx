@@ -5,48 +5,45 @@ import  * as fs from 'fs';
 // import { WebTemplate } from './WebTemplate';
 import { DocBuilder } from './DocBuilder';
 import  path  from 'path';
-import { BuilderSettings } from './BuilderSettings';
+import { importConfig } from './BuilderConfig';
+import { Config } from "./Config";
 
-
-function handleOutFile(infile, outputFile, ext) {
+function handleOutPath(infile :string, outputFile: string , ext: string) {
   {
     if (outputFile)
       return outputFile;
 
     const pathSeg = path.parse(infile);
     return  `out/${pathSeg.name}.${ext}`;
-
   }
+}
+
+function writeOutput(docBuilder: DocBuilder, outFile: string) {
+  fs.writeFileSync(outFile, docBuilder.toString());
 }
 
 const args = yargs.options({
   'web-template': { type: 'string', demandOption: true, alias: 'wt' },
   'out-file': { type: 'string', demandOption: false, alias: 'o' },
-  'config-file': { type: 'string', demandOption: false, alias: 'set', default: "config/wtconfig.json"},
+  'config-file': { type: 'string', demandOption: false, alias: 'cf', default: "config/wtconfig.json"},
 }).argv;
 
 const spinner = ora(`Running test on ${args['web-template']}`).start();
 
-const file = args['web-template'];
-const settingsFile = args['config-file'];
+const inFilePath = args['web-template'];
+const config:Config = importConfig(args['config-file']);
+const outFilePath = handleOutPath(inFilePath, args['out-file'], 'adoc');
 
- const config:BuilderSettings = BuilderSettings.getInstance();
+const inputFileExist = fs.existsSync(inFilePath);
 
-  const inputFileExist = fs.existsSync(file);
 if (inputFileExist) {
 
-  const inDoc:string = fs.readFileSync(file, { encoding: 'utf8', flag: 'r' });
-
-  const docBuilder : DocBuilder = new DocBuilder(JSON.parse(inDoc));
-
-  const outDoc:string = docBuilder.toString();
-
-  // Default outfile name to webtemplate filename with adoc extension
-  const outFileName = handleOutFile(file, args['out-file'], 'adoc');
-
-  fs.writeFileSync(outFileName, outDoc);
-} else {
-  console.log('The input file does not exist:' + file);
+  const inDoc:string = fs.readFileSync(inFilePath, { encoding: 'utf8', flag: 'r' });
+  const docBuilder : DocBuilder = new DocBuilder(JSON.parse(inDoc), config);
+  writeOutput(docBuilder, outFilePath);
+}
+else {
+  console.log('The input file does not exist:' + inFilePath);
 }
 
 spinner.stop();
