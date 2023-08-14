@@ -11,16 +11,17 @@ import {
 } from './isEntry';
 import { StringBuilder } from './StringBuilder';
 import { FormInput } from './FormInput';
-import { BuilderSettings } from './BuilderSettings';
+
+import { Config } from "./Config";
 
 export class DocBuilder {
   sb: StringBuilder = new StringBuilder();
   defaultLang: string = 'en';
-  config: BuilderSettings;
+  config: Config;
 
-  constructor(private wt: WebTemplate) {
+  constructor(private wt: WebTemplate, config:Config) {
     this.defaultLang = wt.defaultLanguage;
-    this.config = BuilderSettings.getInstance()
+    this.config = config;
     this.generate();
   }
 
@@ -358,7 +359,7 @@ export class DocBuilder {
       this.sb.append(``);
       for (const key in f.annotations) {
         if (f.annotations.hasOwnProperty(key)) {
-          if (this.config.includedAnnotations.includes(key))
+          if (this.config?.includedAnnotations?.includes(key))
             this.sb.newline().append(`*${key}*: ${f.annotations[key]}`);
         }
       }
