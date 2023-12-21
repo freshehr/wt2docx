@@ -11,6 +11,7 @@ const defaultConfig: Config = {
   title: "",
   hideParticipations: true,
   hideAQLPaths: true,
+  displayToC: false
 };
 
  export function importConfig(path: string): Config {

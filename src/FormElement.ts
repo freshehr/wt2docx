@@ -1,6 +1,6 @@
 import { FormInput } from './FormInput';
 
-interface FormElement {
+export interface FormElement {
   id: string;
   name: string;
   localizedName: string;
@@ -19,10 +19,13 @@ interface FormElement {
   parentNode: FormElement;
 }
 
-function findFormElement (f: FormElement) :FormElement {
+
+export function findParentNodeId (formElement: FormElement) :FormElement{
+
+  while (formElement !== null && formElement.nodeId === null) {
+    formElement = formElement.parentNode;
+  }
+  return formElement;
 
 }
 
-findParentNodeId: FormElement (f: FormElement){
-
-}

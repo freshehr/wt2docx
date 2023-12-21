@@ -8,5 +8,6 @@ export type Config = {
   title: string;
   hideParticipations: boolean;
   hideAQLPaths: boolean;
+  displayToC: boolean;
 }
 

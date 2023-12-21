@@ -44,7 +44,7 @@ export enum OtherDisplayableNodes{
   'ELEMENT'
 }
 
-type DisplayableNodes = DataValues | OtherDisplayableNodes
+// type DisplayableNodes = DataValues | OtherDisplayableNodes
 
 export function isDataValue(rmType: string)
 {

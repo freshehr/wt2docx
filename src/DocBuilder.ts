@@ -1,4 +1,4 @@
-import { FormElement } from './FormElement';
+import { findParentNodeId, FormElement } from "./FormElement";
 import { WebTemplate } from './WebTemplate';
 import {
   isEntry,
@@ -51,7 +51,6 @@ export class DocBuilder {
   private walkChildren(f: FormElement) {
     if (f.children) {
       f.children.forEach((child) => {
-        child.parentNodeId = f.nodeId
         this.walk(child);
       });
     }
@@ -191,14 +190,14 @@ export class DocBuilder {
 
   private addNodeContent(f: FormElement, isChoice: boolean) {
 
+
     let nodeId: string;
     if (f.nodeId)
       nodeId = `${f.nodeId}`;
-    else if (!isChoice)
-      nodeId = `RM:${f.id}`
+    else if (isChoice)
+      nodeId = `${findParentNodeId(f).nodeId}`
     else
-      nodeId =  `${f.parentNodeId}`;
-
+      nodeId = `RM:${f.id}`
     const nodeIdText = `NodeID: [${this.backTick(nodeId)}] ${this.backTick(f.id)} `
 
 
