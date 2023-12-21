@@ -1,6 +1,15 @@
-import fs from 'fs';
+
+import * as fs from "fs";
 
 export class BuilderSettings {
+
+  get displayToC(): boolean {
+    return this._displayToC;
+  }
+
+  set displayToC(value: boolean) {
+    this._displayToC = value;
+  }
 
   get displayTechnicalOccurrences(): boolean {
     return this._displayTechnicalOccurrences;
@@ -20,6 +29,7 @@ export class BuilderSettings {
   private _includedAnnotations: string[] = ['comments'];
   private _hideAQLPath: boolean = true;
   private _displayTechnicalOccurrences: boolean = false;
+  private _displayToC: boolean= false
 
   get hideNodeIds(): boolean {
     return this._hideNodeIds;

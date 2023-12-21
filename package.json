@@ -1,13 +1,13 @@
 {
   "name": "wt2doc",
   "version": "0.0.2",
-  "description": "WebTemplate to Asciidoc documentation - a util by Bifrost for Bifrost ",
+  "description": "WebTemplate to Asciidoc documentation - a util by Bifrost for Bifrost modified by freshEHR ",
   "main": "lib/index.js",
   "bin": {
     "wt2doc": "lib/index.js"
   },
   "scripts": {
-    "dev": "ts-node src/index.ts  --wt 'templates/DaVita Nephrology Register - Prescriptions.json'",
+    "dev": "ts-node src/index.ts  --wt 'templates/DaVita Nephrology Register - Patient Information.json'",
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",

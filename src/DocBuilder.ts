@@ -32,8 +32,11 @@ export class DocBuilder {
 
   private buildHeader() {
 
-    this.sb.append(`= ${this.config.title ? this.config.title : this.wt.tree.name}`)
-    this.sb.append(':toc: left')
+    this.sb.append(`== Template: ${this.config.title ? this.config.title : this.wt.tree.name}`)
+
+    if (this.config.displayToC) this.sb.append(":toc: left");
+
+    this.sb.newline()
     this.sb.append(`Template Id: **${this.wt.templateId} [${this.wt.semVer}]**`).newline()
     this.sb.append(`Created: **${Date().toString()}**`).newline()
   }
@@ -47,6 +50,7 @@ export class DocBuilder {
   private walkChildren(f: FormElement) {
     if (f.children) {
       f.children.forEach((child) => {
+        child.parentNodeId = f.nodeId
         this.walk(child);
       });
     }
@@ -120,9 +124,9 @@ export class DocBuilder {
 
     const f = wt.tree
     this.addCompositionHeader(f)
-    this.addNodeHeader()
+//    this.addNodeHeader()
     this.walkRmAttributes(f)
-    this.addNodeFooter();
+//    this.addNodeFooter();
     this.walkNonContextChildren(f)
   }
 
@@ -186,25 +190,34 @@ export class DocBuilder {
 
   private addNodeContent(f: FormElement, isChoice: boolean) {
 
-    const nodeId = f.nodeId ? `local:${f.nodeId}` : `RM:${f.id}`;
-    const nodeIdText = ` ${this.backTick(f.id)} + \n ${this.backTick(nodeId)} `
+    let nodeId: string;
+    if (f.nodeId)
+      nodeId = `${f.nodeId}`;
+    else if (!isChoice)
+      nodeId = `RM:${f.id}`
+    else
+      nodeId =  `${f.parentNodeId}`;
+
+    const nodeIdText = `NodeID: [${this.backTick(nodeId)}] ${this.backTick(f.id)} `
+
 
     let nodeName = f.localizedName ? f.localizedName : f.name
 
     nodeName = nodeName ? nodeName : f.id
 
     const rmTypeText = `${this.backTick(this.mapRmTypeText(f.rmType))}`;
+
     let nameText
     const occurrencesText = formatOccurrences(f,this.config.displayTechnicalOccurrences)
     const formattedOccurrencesText = occurrencesText?`(_${occurrencesText}_)`:``
 
     if (!isChoice) {
-      nameText = `**${nodeName}** +\n ${rmTypeText} ${formattedOccurrencesText}`
+      nameText = `**${nodeName}** +\n Type: ${rmTypeText} ${formattedOccurrencesText}`
 
       this.sb.append(`| ${this.applyNodeIdFilter(nameText, nodeIdText)} | ${this.getDescription(f)} `);
 
     } else {
-      nameText = `${rmTypeText} +\n ${formattedOccurrencesText}`
+      nameText = `Type: ${rmTypeText} +\n ${formattedOccurrencesText}`
 
       this.sb.append(`| ${this.applyNodeIdFilter(nameText, nodeIdText)} |`);
     }

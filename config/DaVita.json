@@ -1,4 +1,5 @@
 {
-  "hideParticipations" : false,
-  "hideLanguageTerritory": false
+  "hideParticipations" : true,
+  "hideLanguageTerritory": true,
+  "displayToc": false
 }
