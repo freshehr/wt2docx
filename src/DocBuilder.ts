@@ -48,22 +48,19 @@ export class DocBuilder {
   }
 
 
-  private walkChildren(f: FormElement) {
+  private walkChildren(f: FormElement, nonContextOnly : boolean = false) {
     if (f.children) {
       f.children.forEach((child) => {
-        this.walk(child);
+        child.parentNode = f;
+        if (!nonContextOnly || (nonContextOnly && !child.inContext)) {
+          this.walk(child)
+        }
       });
     }
   }
 
   private walkNonContextChildren(f: FormElement) {
-    if (f.children) {
-      f.children.forEach((child) => {
-        if (!child.inContext) {
-          this.walk(child)
-        }
-      });
-    }
+      this.walkChildren(f, true)
   }
 
   private walk(f: FormElement) {
@@ -411,6 +408,7 @@ export class DocBuilder {
 
     this.sb.append(`|_SubTypes_ | |`)
     f.children.forEach((child) => {
+      child.parentNode = f
       this.walkElement(child, true)
     });
   }

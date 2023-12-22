@@ -1,5 +1,7 @@
 {
   "hideParticipations" : true,
   "hideLanguageTerritory": true,
-  "displayToc": false
+  "displayToc": false,
+  "hideNodeIds": false,
+  "displayTechnicalOccurrences": false
 }

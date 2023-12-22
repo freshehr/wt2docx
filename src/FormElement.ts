@@ -20,12 +20,15 @@ export interface FormElement {
 }
 
 
+
+
 export function findParentNodeId (formElement: FormElement) :FormElement{
 
-  while (formElement !== null && formElement.nodeId === null) {
-    formElement = formElement.parentNode;
-  }
-  return formElement;
+  let currentElement: FormElement = formElement
 
+  while (currentElement !== null && currentElement.nodeId === null) {
+    currentElement = currentElement.parentNode
+  }
+  return currentElement?.parentNode
 }
 
