@@ -38,8 +38,9 @@ export class DocBuilder {
     if (this.config.displayToC) this.sb.append(":toc: left");
 
     this.sb.newline()
-    this.sb.append(`Template Id: **${this.wt.templateId} [${this.wt.semVer}]**`).newline()
-    this.sb.append(`Created: **${Date().toString()}**`).newline()
+    this.sb.append(`Template Id: **${this.wt.templateId}**`).newline()
+    this.sb.append(`Version: **${this.wt.semVer}**`).newline()
+    this.sb.append(`Created: **${new Date().toDateString()}**`).newline()
   }
 
   private generate() {
@@ -75,7 +76,7 @@ export class DocBuilder {
     } else if (f.rmType === 'CLUSTER') {
       this.walkCluster(f);
     } else if (isEvent(f.rmType)) {
-      this.walkChildren(f)
+      this.walkEvent(f)
     } else {
       switch (f.rmType) {
 
@@ -117,6 +118,20 @@ export class DocBuilder {
     this.walkChildren(f);
   }
 
+  private walkEvent(f: FormElement) {
+
+    const occurrencesText = formatOccurrences(f,this.config.displayTechnicalOccurrences)
+    const formattedOccurrencesText = occurrencesText?`[**${occurrencesText}**]`:``
+    const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
+
+    if (!this.config.hideNodeIds)
+      this.sb.append(clinicalText + '\n' + `\`${f.rmType}: _${f.nodeId}_\``);
+    else
+      this.sb.append(clinicalText)
+
+    this.walkChildren(f);
+  }
+
   private walkComposition(wt: WebTemplate) {
 
     const f = wt.tree
@@ -129,7 +144,7 @@ export class DocBuilder {
 
 
   private walkSection(f: FormElement) {
-    if (!this.config.skippedAQLPaths.includes(f.aqlPath)) {
+    if (!this.config?.skippedAQLPaths?.includes(f.aqlPath)) {
       this.addLeafHeader(f)
     }
     this.walkChildren(f)
@@ -188,14 +203,24 @@ export class DocBuilder {
   private addNodeContent(f: FormElement, isChoice: boolean) {
 
 
-    let nodeId: string;
-    if (f.nodeId)
-      nodeId = `${f.nodeId}`;
+    let resolvedNodeId: string;
+
+
+    if (f.nodeId){
+      resolvedNodeId = `${f.nodeId}`;
+
+    }
     else if (isChoice)
-      nodeId = `${findParentNodeId(f).nodeId}`
+    {
+      resolvedNodeId = `${findParentNodeId(f).nodeId}`
+     }
     else
-      nodeId = `RM:${f.id}`
-    const nodeIdText = `NodeID: [${this.backTick(nodeId)}] ${this.backTick(f.id)} `
+    {
+
+      resolvedNodeId = this.backTick('RM');
+    }
+
+    const nodeIdText = `NodeID: [${this.backTick(resolvedNodeId)}] ${this.backTick(f.id)}`;
 
 
     let nodeName = f.localizedName ? f.localizedName : f.name
