@@ -13,6 +13,7 @@ import { StringBuilder } from './StringBuilder';
 import { FormInput } from './FormInput';
 
 import { Config } from "./Config";
+import rmDescriptions from '../resources/rm_descriptions.json';
 
 export class DocBuilder {
   sb: StringBuilder = new StringBuilder();
@@ -136,9 +137,9 @@ export class DocBuilder {
 
     const f = wt.tree
     this.addCompositionHeader(f)
-//    this.addNodeHeader()
-    this.walkRmAttributes(f)
-//    this.addNodeFooter();
+    this.addNodeHeader();
+    this.walkRmAttributes(f);
+    this.addNodeFooter();
     this.walkNonContextChildren(f)
   }
 
@@ -152,19 +153,19 @@ export class DocBuilder {
 
   private addCompositionHeader(f: FormElement) {
 
-    this.sb.append(`== Composition: *${f.name}*`).newline()
+    this.sb.append(`=== Composition: *${f.name}*`).newline()
 
     if (!this.config.hideNodeIds)
-      this.sb.append(`=== Archetype Id: \`_${f.nodeId}_\``).newline();
+      this.sb.append(`==== Archetype Id: \`_${f.nodeId}_\``).newline();
 
     this.sb.append(`${f.localizedDescriptions.en}`).newline()
   }
 
   private addLeafHeader(f: FormElement, title: string = 'Archetype Id:') {
-    this.sb.append(`==  *${f.name}*`).newline()
+    this.sb.append(`===  *${f.name}*`).newline()
 
     if (!this.config.hideNodeIds)
-      this.sb.append(`=== ${title} \`${f.rmType}: _${f.nodeId}_\``).newline();
+      this.sb.append(`==== ${title} \`${f.rmType}: _${f.nodeId}_\``).newline();
 
     this.sb.append(`${f.localizedDescriptions.en}`).newline()
   }
@@ -189,11 +190,12 @@ export class DocBuilder {
       this.sb.append(`===== \`${f.rmType}: _${nodeId}_\``);
     }
 
-    this.addNodeHeader()
-    this.walkNonContextChildren(f)
-    this.addNodeFooter()
+    if (f.children?.length > 0) {
+      this.addNodeHeader()
+      this.walkChildren(f)
+      this.addNodeFooter()
+    }
   }
-
   private addNodeHeader() {
     this.sb.append('[options="header","stretch", cols="20,30,30"]');
     this.sb.append('|====');
@@ -205,20 +207,12 @@ export class DocBuilder {
 
     let resolvedNodeId: string;
 
-
-    if (f.nodeId){
+    if (f.nodeId)
       resolvedNodeId = `${f.nodeId}`;
-
-    }
     else if (isChoice)
-    {
-      resolvedNodeId = `${findParentNodeId(f).nodeId}`
-     }
+      resolvedNodeId = `${findParentNodeId(f).nodeId}`;
     else
-    {
-
-      resolvedNodeId = this.backTick('RM');
-    }
+      resolvedNodeId = this.backTick("RM");
 
     const nodeIdText = `NodeID: [${this.backTick(resolvedNodeId)}] ${this.backTick(f.id)}`;
 
@@ -229,7 +223,7 @@ export class DocBuilder {
 
     const rmTypeText = `${this.backTick(this.mapRmTypeText(f.rmType))}`;
 
-    let nameText
+    let nameText: string
     const occurrencesText = formatOccurrences(f,this.config.displayTechnicalOccurrences)
     const formattedOccurrencesText = occurrencesText?`(_${occurrencesText}_)`:``
 
@@ -267,14 +261,16 @@ export class DocBuilder {
     if (f.children) {
       f.children.forEach((child) => {
         if (!child?.inContext) return
-        if (['ism_transition', 'context'].includes(child.id)) {
+
+        if (['ism_transition'].includes(child.id)) {
           if (child.children) {
             child.children.forEach((ismChild) => {
               this.stripExcludedRmTypes(ismChild, rmAttributes);
             });
-          } else {
-            this.stripExcludedRmTypes(child, rmAttributes);
           }
+        }
+        else {
+          this.stripExcludedRmTypes(child, rmAttributes);
         }
       });
 
@@ -366,7 +362,7 @@ export class DocBuilder {
         break;
 
       default:
-        if (isDataValue(rmType)) {
+        if (isDisplayableNode(rmType)) {
           this.walkDvDefault()
         } else {
           this.sb.append('|' + this.backTick('Unsupported RM type: ' + rmType))
@@ -422,7 +418,11 @@ export class DocBuilder {
   }
 
   private getDescription(f: FormElement) {
-    return this.getValueOfRecord(f.localizedDescriptions)
+    const language: string = 'en'
+    if (!f.inContext)
+     return this.getValueOfRecord(f.localizedDescriptions)
+    else
+      return rmDescriptions[f.id] ? rmDescriptions[f.id][language] : ''
   }
 
   private walkChoice(f: FormElement) {
@@ -440,7 +440,6 @@ export class DocBuilder {
 
   private walkDvDefault() {
     this.sb.append('|');
-//  this.appendDescription(f)
   }
 
   private walkDvText(f: FormElement) {

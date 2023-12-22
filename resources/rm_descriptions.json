@@ -1,0 +1,17 @@
+{
+  "category": {
+    "en": "Temporal category of this Composition, persistent / episodic or event."
+  },
+  "composer": {
+    "en": "The person primarily responsible for the content of the Composition (but not necessarily its committal into the EHR system). This is the identifier which should appear on the screen. It may or may not be the person who entered the data. When it is the patient, the special self instance of `PARTY_PROXY` will be used."
+  },
+  "setting": {
+    "en": "The setting in which the clinical session took place. Coded using the openEHR Terminology, setting group."
+  },
+  "start_time": {
+    "en": "Start time of the clinical session or other kind of event during which a provider performs a service of any kind for the patient."
+  },
+  "time": {
+    "en": "Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event."
+  }
+}

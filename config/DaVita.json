@@ -3,5 +3,12 @@
   "hideLanguageTerritory": true,
   "displayToc": false,
   "hideNodeIds": false,
-  "displayTechnicalOccurrences": false
+  "displayTechnicalOccurrences": false,
+  "skippedAQLPaths": [],
+  "includedAnnotations": ["comments"],
+  "hideComments": true,
+  "excludedRMTags": ["territory","language", "encoding","subject", "transition", "current_state", "careflow_step"],
+  "title": "",
+  "hideAQLPaths": true
 }
+

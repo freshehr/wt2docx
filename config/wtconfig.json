@@ -5,7 +5,7 @@
   "skippedAQLPaths": [],
   "includedAnnotations": ["comments"],
   "hideComments": true,
-  "excludedRMTags": ["territory","language", "encoding","subject", "transition","category","context", "current_state", "careflow_step"],
+  "excludedRMTags": ["territory","language", "encoding","subject", "transition","current_state", "careflow_step"],
   "title": "",
   "hideParticipations": true,
   "hideAQLPaths": true
