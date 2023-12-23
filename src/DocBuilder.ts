@@ -1,19 +1,20 @@
 import { findParentNodeId, FormElement } from "./FormElement";
-import { WebTemplate } from './WebTemplate';
+import { WebTemplate } from "./WebTemplate";
 import {
+  dataValueLabelMapper,
+  formatOccurrences,
+  isAnyChoice,
+  isDataValue,
+  isDisplayableNode,
   isEntry,
   isEvent,
-  isDataValue,
-  isSection,
-  dataValueLabelMapper,
-  isDisplayableNode,
-  formatOccurrences, isAnyChoice,
-} from './isEntry';
-import { StringBuilder } from './StringBuilder';
-import { FormInput } from './FormInput';
+  isSection
+} from "./isEntry";
+import { StringBuilder } from "./StringBuilder";
+import { FormInput } from "./FormInput";
 
 import { Config } from "./Config";
-import rmDescriptions from '../resources/rm_descriptions.json';
+import rmDescriptions from "../resources/rm_descriptions.json";
 
 export class DocBuilder {
   sb: StringBuilder = new StringBuilder();
@@ -107,8 +108,8 @@ export class DocBuilder {
 
   private walkCluster(f: FormElement) {
 
-    const occurrencesText = formatOccurrences(f,this.config.displayTechnicalOccurrences)
-    const formattedOccurrencesText = occurrencesText?`[**${occurrencesText}**]`:``
+    const formattedOccurrencesText = this.formatOccurrencesText(f);
+
     const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
 
     if (!this.config.hideNodeIds)
@@ -119,10 +120,14 @@ export class DocBuilder {
     this.walkChildren(f);
   }
 
+  private formatOccurrencesText(f: FormElement) {
+    const occurrencesText = formatOccurrences(f, this.config.displayTechnicalOccurrences);
+    return occurrencesText ? `[**${occurrencesText}**]` : ``;
+  }
+
   private walkEvent(f: FormElement) {
 
-    const occurrencesText = formatOccurrences(f,this.config.displayTechnicalOccurrences)
-    const formattedOccurrencesText = occurrencesText?`[**${occurrencesText}**]`:``
+    const formattedOccurrencesText =this.formatOccurrencesText(f)
     const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
 
     if (!this.config.hideNodeIds)
@@ -164,8 +169,11 @@ export class DocBuilder {
   private addLeafHeader(f: FormElement, title: string = 'Archetype Id:') {
     this.sb.append(`===  *${f.name}*`).newline()
 
-    if (!this.config.hideNodeIds)
-      this.sb.append(`==== ${title} \`${f.rmType}: _${f.nodeId}_\``).newline();
+    if (!this.config.hideNodeIds){
+      this.sb.append(`==== Type: \`_${f.rmType}_\``)
+      this.sb.append(`==== ${title} \`_${f.nodeId}_\``)
+
+    }
 
     this.sb.append(`${f.localizedDescriptions.en}`).newline()
   }
@@ -228,12 +236,12 @@ export class DocBuilder {
     const formattedOccurrencesText = occurrencesText?`(_${occurrencesText}_)`:``
 
     if (!isChoice) {
-      nameText = `**${nodeName}** +\n Type: ${rmTypeText} ${formattedOccurrencesText}`
+      nameText = `**${nodeName}** + \n Type: ${rmTypeText} ${formattedOccurrencesText}`
 
       this.sb.append(`| ${this.applyNodeIdFilter(nameText, nodeIdText)} | ${this.getDescription(f)} `);
 
     } else {
-      nameText = `Type: ${rmTypeText} +\n ${formattedOccurrencesText}`
+      nameText = `Type: ${rmTypeText}`
 
       this.sb.append(`| ${this.applyNodeIdFilter(nameText, nodeIdText)} |`);
     }
@@ -246,7 +254,7 @@ export class DocBuilder {
 
   private applyNodeIdFilter(nameText: string, nodeIdText: string) {
     if (!this.config.hideNodeIds)
-      return nameText + ` +\n ${nodeIdText}`;
+      return nameText + ` + \n ${nodeIdText}`;
     return nameText;
   }
 
@@ -452,9 +460,17 @@ export class DocBuilder {
             this.sb.append(`* ${val.value}`);
           });
         }
+        else
+        // Pick up an external valueset description annotation
+        if (item.suffix !== 'other' && f?.annotations?.vset_description)
+        {
+          // Convert /n characters to linebreaks
+          const newLined = f.annotations?.vset_description.replace(/\\n/g, String.fromCharCode(10));
+          this.sb.append(newLined)
+        }
 
         if (item.listOpen)
-          this.sb.append(`* _Other text allowed_`);
+          this.sb.append(`* _Other text/coded text allowed_`);
 
       });
 //      this.appendDescription(f);
@@ -492,9 +508,9 @@ export class DocBuilder {
 
   private walkDvCodedText(f: FormElement) {
     this.sb.append('a|');
-    if (f.inputs) {
-      f.inputs.forEach((item) => {
-        const term = item.terminology === undefined ? 'local': item.terminology;
+
+      f?.inputs.forEach((item) => {
+        const term = item.terminology === undefined ? 'local' : item.terminology;
         if (item.list) {
 //          this.sb.append(`**Allowed Coded terms**`)
           this.sb.append('')
@@ -507,13 +523,18 @@ export class DocBuilder {
               this.sb.append(`* ${list.label} +\n ${this.backTick(termPhrase)}`);
             }
           })
-
-          if (item.listOpen)
-            this.sb.append(`* _Other text allowed_`);
-//          this.appendDescription(f);
+        } else
+          // Pick up an external valueset description annotation
+        if (item.suffix === 'code' && f?.annotations?.vset_description) {
+          // Convert /n characters to linebreaks
+          const newLined = f.annotations?.vset_description.replace(/\\n/g, String.fromCharCode(10));
+          this.sb.append(newLined)
         }
+
+        if (item.listOpen)
+          this.sb.append(`* _Other text/ coded text allowed_`);
+//          this.appendDescription(f);
       });
-    }
   }
 
   private mapRmTypeText(rmTypeString: string) {
