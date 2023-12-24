@@ -33,9 +33,9 @@ export class DocBuilder {
     return this.sb.toString();
   }
 
-  private backTick = (inString: string): string => `\`${inString}\``
 
-  private buildHeader() {
+
+  private formatHeader() {
 
     this.sb.append(`== Template: ${this.config.title ? this.config.title : this.wt.tree.name}`)
 
@@ -48,7 +48,7 @@ export class DocBuilder {
   }
 
   private generate() {
-    this.buildHeader()
+    this.formatHeader()
     this.walkComposition(this.wt);
   }
 

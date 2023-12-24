@@ -3,13 +3,17 @@ export class StringBuilder {
   constructor() {
     this.arr = [];
   }
+
+  backTick = (inString: string): string => `\`${inString}\``
   append(s: string): StringBuilder {
     this.arr.push(s);
     return this;
   }
+
   toString(): string {
     return this.arr.join('\r\n');
   }
+
   newline(s?: string) {
     if (s) {
       this.append(s);
