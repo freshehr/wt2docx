@@ -1,13 +1,13 @@
 {
   "name": "wt2doc",
-  "version": "0.0.2",
-  "description": "WebTemplate to Asciidoc documentation - a util by Bifrost for Bifrost modified by freshEHR ",
+  "version": "1.0.0-rc1",
+  "description": "WebTemplate to Asciidoc documentation - a util by Bifrost modified by freshEHR ",
   "main": "lib/index.js",
   "bin": {
     "wt2doc": "lib/index.js"
   },
   "scripts": {
-    "dev": "ts-node src/index.ts  --wt 'templates/DaVita Nephrology Register - Medication.json' --cf 'config/DaVita.json'",
+    "dev": "ts-node src/index.ts",
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
@@ -19,14 +19,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bjornna/wt2doc"
+    "url": "https://github.com/freshehr/wt2doc"
   },
   "keywords": [
     "openEHR",
     "Bifrost",
+    "freshehr",
     "asciidoctor"
   ],
-  "author": "Bjørn Næss <bna@dips.no>",
+  "author": "Ian M<cNicoll <ian@freshehr.com>, Bjørn Næss <bna@dips.no>",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^14.14.7",
