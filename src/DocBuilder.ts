@@ -20,10 +20,12 @@ export class DocBuilder {
   sb: StringBuilder = new StringBuilder();
   defaultLang: string = 'en';
   config: Config;
+  exportFormat: string;
 
-  constructor(private wt: WebTemplate, config:Config) {
+  constructor(private wt: WebTemplate, config:Config, exportFormat: string) {
     this.defaultLang = wt.defaultLanguage;
     this.config = config;
+    this.exportFormat =exportFormat;
     this.generate();
   }
 

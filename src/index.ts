@@ -26,6 +26,7 @@ const args = yargs.options({
   'web-template': { type: 'string', demandOption: true, alias: 'wt' },
   'out-file': { type: 'string', demandOption: false, alias: 'o' },
   'config-file': { type: 'string', demandOption: false, alias: 'cf', default: "config/wtconfig.json"},
+  'export-format': { type: 'string', demandOption: false, alias: 'e', default: "adoc"},
 }).argv;
 
 const spinner = ora(`Running test on ${args['web-template']}`).start();
@@ -33,13 +34,13 @@ const spinner = ora(`Running test on ${args['web-template']}`).start();
 const inFilePath = args['web-template'];
 const config:Config = importConfig(args['config-file']);
 const outFilePath = handleOutPath(inFilePath, args['out-file'], 'adoc');
-
+const exportFormat = args['export-format'];
 const inputFileExist = fs.existsSync(inFilePath);
 
 if (inputFileExist) {
 
   const inDoc:string = fs.readFileSync(inFilePath, { encoding: 'utf8', flag: 'r' });
-  const docBuilder : DocBuilder = new DocBuilder(JSON.parse(inDoc), config);
+  const docBuilder : DocBuilder = new DocBuilder(JSON.parse(inDoc), config, exportFormat);
   writeOutput(docBuilder, outFilePath);
 }
 else {
