@@ -34,6 +34,7 @@
     "@types/ora": "^3.2.0",
     "ora": "^5.1.0",
     "path": "^0.12.7",
+    "xmind": "^2.2.33",
     "yargs": "^16.1.0"
   },
   "devDependencies": {
