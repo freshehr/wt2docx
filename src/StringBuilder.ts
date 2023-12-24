@@ -5,19 +5,17 @@ export class StringBuilder {
   }
 
   backTick = (inString: string): string => `\`${inString}\``
-  append(s: string): StringBuilder {
+
+  append = (s: string): StringBuilder => {
     this.arr.push(s);
     return this;
   }
 
-  toString(): string {
-    return this.arr.join('\r\n');
-  }
+  toString = (): string  => this.arr.join('\r\n');
 
-  newline(s?: string) {
-    if (s) {
+  newline = (s?: string)=>  {
+    if (s)
       this.append(s);
-    }
     this.append('\n');
     return this;
   }

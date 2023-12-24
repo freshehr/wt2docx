@@ -222,16 +222,16 @@ export class DocBuilder {
     else if (isChoice)
       resolvedNodeId = `${findParentNodeId(f).nodeId}`;
     else
-      resolvedNodeId = this.backTick("RM");
+      resolvedNodeId = this.sb.backTick("RM");
 
-    const nodeIdText = `NodeID: [${this.backTick(resolvedNodeId)}] ${this.backTick(f.id)}`;
+    const nodeIdText = `NodeID: [${this.sb.backTick(resolvedNodeId)}] ${this.sb.backTick(f.id)}`;
 
 
     let nodeName = f.localizedName ? f.localizedName : f.name
 
     nodeName = nodeName ? nodeName : f.id
 
-    const rmTypeText = `${this.backTick(this.mapRmTypeText(f.rmType))}`;
+    const rmTypeText = `${this.sb.backTick(this.mapRmTypeText(f.rmType))}`;
 
     let nameText: string
     const occurrencesText = formatOccurrences(f,this.config.displayTechnicalOccurrences)
@@ -372,10 +372,10 @@ export class DocBuilder {
         break;
 
       default:
-        if (isDisplayableNode(rmType)) {
-          this.walkDvDefault()
+        if (!isDisplayableNode(rmType)) {
+          this.sb.append("|" + this.sb.backTick("Unsupported RM type: " + rmType));
         } else {
-          this.sb.append('|' + this.backTick('Unsupported RM type: ' + rmType))
+          this.walkDvDefault();
         }
     }
   }
@@ -413,7 +413,7 @@ export class DocBuilder {
         const formItems = item.list === undefined ? [] : item.list;
         formItems.forEach((n) => {
           const termPhrase = `local:${n.value}`
-          this.sb.append(`* [${n.ordinal}] ${n.label} +\n ${this.backTick(termPhrase)}`);
+          this.sb.append(`* [${n.ordinal}] ${n.label} +\n ${this.sb.backTick(termPhrase)}`);
         });
       });
     }
@@ -519,10 +519,10 @@ export class DocBuilder {
           item.list.forEach((list) => {
             const termPhrase = `${term}:${list.value}`
             if (term === 'local') {
-              this.sb.append(`* ${list.label} +\n ${this.backTick(termPhrase)}`);
+              this.sb.append(`* ${list.label} +\n ${this.sb.backTick(termPhrase)}`);
             } else {
 
-              this.sb.append(`* ${list.label} +\n ${this.backTick(termPhrase)}`);
+              this.sb.append(`* ${list.label} +\n ${this.sb.backTick(termPhrase)}`);
             }
           })
         } else
@@ -552,7 +552,7 @@ export class DocBuilder {
     if (isDisplayableNode(rmType)) {
       return `${intervalPrefix}${dataValueLabelMapper(rmType)}`
     } else {
-      this.sb.append('|' + this.backTick('Unsupported RM type: ' + rmType))
+      this.sb.append('|' + this.sb.backTick('Unsupported RM type: ' + rmType))
     }
   }
 }
