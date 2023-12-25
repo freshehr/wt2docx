@@ -12,20 +12,28 @@ import {
 } from "./isEntry";
 import { StringBuilder } from "./StringBuilder";
 import { FormInput } from "./FormInput";
-
 import { Config } from "./Config";
 import rmDescriptions from "../resources/rm_descriptions.json";
+import { ExportFormat, formatHeader } from "./DocFormatter";
+
 
 export class DocBuilder {
+
   sb: StringBuilder = new StringBuilder();
+
   defaultLang: string = 'en';
   config: Config;
-  exportFormat: string;
+  exportFormat: ExportFormat
+  outFileDir: string;
 
-  constructor(private wt: WebTemplate, config:Config, exportFormat: string) {
+  readonly _wt: WebTemplate;
+
+  constructor(wt: WebTemplate, config:Config, exportFormatString: string, outFileDir: string) {
+    this._wt = wt;
     this.defaultLang = wt.defaultLanguage;
     this.config = config;
-    this.exportFormat =exportFormat;
+    this.exportFormat = ExportFormat[exportFormatString];
+    this.outFileDir = outFileDir
     this.generate();
   }
 
@@ -33,23 +41,15 @@ export class DocBuilder {
     return this.sb.toString();
   }
 
-
-
-  private formatHeader() {
-
-    this.sb.append(`== Template: ${this.config.title ? this.config.title : this.wt.tree.name}`)
-
-    if (this.config.displayToC) this.sb.append(":toc: left");
-
-    this.sb.newline()
-    this.sb.append(`Template Id: **${this.wt.templateId}**`).newline()
-    this.sb.append(`Version: **${this.wt.semVer}**`).newline()
-    this.sb.append(`Created: **${new Date().toDateString()}**`).newline()
+  get wt(): WebTemplate {
+    return this._wt;
   }
 
+
+
   private generate() {
-    this.formatHeader()
-    this.walkComposition(this.wt);
+    formatHeader(this)
+  //  this.walkComposition(this._wt);
   }
 
 
@@ -283,7 +283,6 @@ export class DocBuilder {
           this.stripExcludedRmTypes(child, rmAttributes);
         }
       });
-
     }
 
     if (rmAttributes.length === 0) return
