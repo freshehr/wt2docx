@@ -237,8 +237,16 @@ export const adoc = {
 
     formatDvCount: (dBuilder: DocBuilder, f: TemplateElement) => {
       const { sb } = dBuilder;
-
-
+      sb.append('a|');
+      if (f.inputs.length > 0) {
+        sb.append('')
+        f.inputs.forEach((item) => {
+          if ((item.type === 'INTEGER') && (item?.validation?.range)) {
+            sb.append('Range: +\n')
+            sb.append(`* ${item.validation.range.minOp} ${item.validation.range.min} and ${item.validation.range.maxOp} ${item.validation.range.max}`);
+          }
+        });
+      }
     },
 
 
