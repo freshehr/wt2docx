@@ -1,4 +1,4 @@
-export interface FormRange {
+export interface TemplateRange {
   minOp: string;
   min: number;
 }

@@ -1,8 +1,8 @@
 import fs from "fs";
 import { parseXMindMarkToXMindFile} from "xmindmark";
 
-import { DocBuilder } from "./DocBuilder";
-import { FormElement } from "./FormElement";
+import { DocBuilder } from "../DocBuilder";
+import { TemplateElement } from "../TemplateElement";
 
 export const xmind = {
 
@@ -11,12 +11,12 @@ export const xmind = {
     sb.append(sb.newLineCoded(`Template: ${wt.templateId} \n ${wt.semVer} \n ${new Date().toDateString()}`));
   },
 
-  formatCompositionHeader: (dBuilder: DocBuilder, f: FormElement) => {
+  formatCompositionHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
     const {  sb } = dBuilder;
     sb.append(sb.newLineCoded(`- Composition: ${f.name}`))
   },
 
-  formatElement: (dBuilder: DocBuilder, f: FormElement) => {
+  formatElement: (dBuilder: DocBuilder, f: TemplateElement) => {
     const {  sb } = dBuilder;
     sb.append(sb.newLineCoded(`- Composition: ${f.name}`))
   },

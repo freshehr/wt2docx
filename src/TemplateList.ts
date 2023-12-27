@@ -1,4 +1,4 @@
-export interface FormList {
+export interface TemplateList {
   value: string;
   label?: string;
   localizedLabels?: Record<string, string>;

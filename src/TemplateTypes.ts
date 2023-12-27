@@ -1,6 +1,6 @@
-import { FormElement } from './FormElement';
+import { TemplateElement } from './TemplateElement';
 
-export function isEntry(rmType: string) {
+export function templateTypes(rmType: string) {
   return ['OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY'].includes(rmType);
 }
 
@@ -81,7 +81,7 @@ const displayableNodeTextTable = {
 
 export const dataValueLabelMapper = (dataValue:string) => displayableNodeTextTable[dataValue] || `Missing mapping ${dataValue}`
 
-export const formatOccurrences = (f: FormElement, techDisplay :boolean = true) => {
+export const formatOccurrences = (f: TemplateElement, techDisplay :boolean = true) => {
 
   let min =''
   let max = ''

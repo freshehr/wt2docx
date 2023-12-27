@@ -1,14 +1,14 @@
-import { FormElement } from "./FormElement";
+import { TemplateElement } from "./TemplateElement";
 import { WebTemplate } from "./WebTemplate";
 import {
   formatOccurrences,
   isAnyChoice,
   isDataValue,
   isDisplayableNode,
-  isEntry,
+  templateTypes,
   isEvent,
   isSection
-} from "./isEntry";
+} from "./TemplateTypes";
 import { StringBuilder } from "./StringBuilder";
 import {  Workbook } from "xmind";
 
@@ -73,7 +73,7 @@ export class DocBuilder {
     this.walkComposition(this._wt.tree);
   }
 
-  private walkChildren(f: FormElement, nonContextOnly: boolean = false) {
+  private walkChildren(f: TemplateElement, nonContextOnly: boolean = false) {
     if (f.children) {
       f.children.forEach((child) => {
         child.parentNode = f;
@@ -84,12 +84,12 @@ export class DocBuilder {
     }
   }
 
-  private walkNonRMChildren(f: FormElement) {
+  private walkNonRMChildren(f: TemplateElement) {
     this.walkChildren(f, true)
   }
 
-  private walk(f: FormElement) {
-    if (isEntry(f.rmType)) {
+  private walk(f: TemplateElement) {
+    if (templateTypes(f.rmType)) {
       this.walkEntry(f)
     } else if (isDataValue(f.rmType)) {
       this.walkElement(f, false)
@@ -126,22 +126,22 @@ export class DocBuilder {
     }
   }
 
-  private walkUnsupported(f: FormElement)
+  private walkUnsupported(f: TemplateElement)
   {
     formatUnsupported(this,f);
   }
 
-  private walkCluster(f: FormElement) {
+  private walkCluster(f: TemplateElement) {
     formatCluster(this, f)
     this.walkChildren(f);
   }
 
-  private walkEvent(f: FormElement) {
+  private walkEvent(f: TemplateElement) {
     formatObservationEvent(this, f)
     this.walkChildren(f);
   }
 
-  private walkComposition(f: FormElement) {
+  private walkComposition(f: TemplateElement) {
     formatCompositionHeader(this, f)
     formatNodeHeader(this, f);
     this.walkRmChildren(f);
@@ -150,7 +150,7 @@ export class DocBuilder {
   }
 
 
-  private walkSection(f: FormElement) {
+  private walkSection(f: TemplateElement) {
     if (!this.config?.skippedAQLPaths?.includes(f.aqlPath)) {
       formatLeafHeader(this, f)
     }
@@ -158,7 +158,7 @@ export class DocBuilder {
   }
 
 
-  private walkEntry(f: FormElement) {
+  private walkEntry(f: TemplateElement) {
 
     formatLeafHeader(this, f)
     formatNodeHeader(this, f)
@@ -168,7 +168,7 @@ export class DocBuilder {
 
   }
 
-  private walkCompositionContext(f: FormElement) {
+  private walkCompositionContext(f: TemplateElement) {
 
     formatCompositionContextHeader(this, f);
     if (f.children?.length > 0) {
@@ -178,9 +178,9 @@ export class DocBuilder {
     }
   }
 
-  private walkRmChildren(f: FormElement) {
+  private walkRmChildren(f: TemplateElement) {
 
-    const rmAttributes = new Array<FormElement>();
+    const rmAttributes = new Array<TemplateElement>();
 
     if (f.children) {
       f.children.forEach((child) => {
@@ -207,7 +207,7 @@ export class DocBuilder {
 
   }
 
-  private stripExcludedRmTypes(childNode: FormElement, list: FormElement[]) {
+  private stripExcludedRmTypes(childNode: TemplateElement, list: TemplateElement[]) {
 
     if (!this.config.excludedRMTags.includes(childNode.id)) {
       list.push(childNode);
@@ -245,13 +245,13 @@ export class DocBuilder {
     }
   */
 
-  private walkElement(f: FormElement, isChoice: boolean) {
+  private walkElement(f: TemplateElement, isChoice: boolean) {
     formatNodeContent(this, f, isChoice)
     this.walkDataType(f)
     formatAnnotations(this,f);
   }
 
-  private walkDataType(f: FormElement) {
+  private walkDataType(f: TemplateElement) {
 
     const adjustRmTypeForInterval  = () => {
       if (f.rmType.startsWith('DV_INTERVAL'))
@@ -299,7 +299,7 @@ export class DocBuilder {
     }
   }
 
-  public getDescription = (f: FormElement) => {
+  public getDescription = (f: TemplateElement) => {
     const language: string = 'en'
     if (!f.inContext)
       return this.getValueOfRecord(f.localizedDescriptions)
@@ -307,7 +307,7 @@ export class DocBuilder {
       return rmDescriptions[f.id] ? rmDescriptions[f.id][language] : ''
   };
 
-  private walkDvChoice(f: FormElement) {
+  private walkDvChoice(f: TemplateElement) {
     this.walkElement(f, false)
 
     if (isAnyChoice(f.children.map(child => child.rmType)))

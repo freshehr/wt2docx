@@ -1,9 +1,9 @@
-import { DocBuilder } from "./DocBuilder";
+import { DocBuilder } from "../DocBuilder";
 import fs from "fs";
-import { findParentNodeId, FormElement } from "./FormElement";
-import { dataValueLabelMapper, formatOccurrences, isAnyChoice, isDisplayableNode } from "./isEntry";
-import { formatOccurrencesText, mapRmTypeText } from "./DocFormatter";
-import { TemplateInput } from "./TemplateInput";
+import { findParentNodeId, TemplateElement } from "../TemplateElement";
+import { formatOccurrences, isAnyChoice, isDisplayableNode } from "../TemplateTypes";
+import { formatOccurrencesText, mapRmTypeText } from "../DocFormatter";
+import { TemplateInput } from "../TemplateInput";
 
 export const adoc = {
 
@@ -20,7 +20,7 @@ export const adoc = {
     sb.append(`Created: **${new Date().toDateString()}**`).newline()
   },
 
-  formatCompositionHeader: (dBuilder: DocBuilder, f: FormElement) => {
+  formatCompositionHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
     const { sb, config } = dBuilder;
     sb.append(`=== Composition: *${f.name}*`).newline()
     if (!config.hideNodeIds)
@@ -32,14 +32,14 @@ export const adoc = {
     fs.writeFileSync(outFile, dBuilder.toString());
   },
 
-  formatNodeHeader: (dBuilder: DocBuilder, f: FormElement) => {
+  formatNodeHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
     const { sb } = dBuilder;
     sb.append('[options="header","stretch", cols="20,30,30"]');
     sb.append('|====');
     sb.append('|Data item | Description | Allowed values');
   },
 
-  formatLeafHeader: (dBuilder: DocBuilder, f: FormElement) => {
+  formatLeafHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
     const { sb, config } = dBuilder;
 
     sb.append(`===  *${f.name}*`).newline()
@@ -50,7 +50,7 @@ export const adoc = {
     sb.append(`${f.localizedDescriptions.en}`).newline()
   },
 
-  formatNodeContent: (dBuilder: DocBuilder, f: FormElement, isChoice: boolean) => {
+  formatNodeContent: (dBuilder: DocBuilder, f: TemplateElement, isChoice: boolean) => {
     const { sb, config } = dBuilder;
 
     const applyNodeIdFilter = (nameText: string, nodeIdText: string) => {
@@ -103,11 +103,11 @@ export const adoc = {
     dBuilder.sb.append('|====');
   },
 
-  formatUnsupported: (dBuilder: DocBuilder, f: FormElement) => {
+  formatUnsupported: (dBuilder: DocBuilder, f: TemplateElement) => {
     dBuilder.sb.append('// Not supported rmType ' + f.rmType);
   },
 
-  formatObservationEvent: (dBuilder: DocBuilder, f: FormElement) => {
+  formatObservationEvent: (dBuilder: DocBuilder, f: TemplateElement) => {
     const { sb, config } = dBuilder;
 
     const formattedOccurrencesText = formatOccurrencesText(dBuilder, f);
@@ -119,7 +119,7 @@ export const adoc = {
       sb.append(clinicalText)
   },
 
-  formatCluster: (dBuilder: DocBuilder, f: FormElement) => {
+  formatCluster: (dBuilder: DocBuilder, f: TemplateElement) => {
     const { sb, config } = dBuilder;
 
     const formattedOccurrencesText = formatOccurrencesText(dBuilder, f);
@@ -131,7 +131,7 @@ export const adoc = {
       sb.append(clinicalText)
   },
 
-  formatAnnotations: (dBuilder: DocBuilder, f: FormElement) => {
+  formatAnnotations: (dBuilder: DocBuilder, f: TemplateElement) => {
     const { sb, config } = dBuilder;
 
     if (f.annotations) {
@@ -144,7 +144,7 @@ export const adoc = {
       }
     }
   },
-  formatCompositionContextHeader: (dBuilder: DocBuilder, f: FormElement) => {
+  formatCompositionContextHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
     const { sb, config } = dBuilder;
 
     const nodeId = f.nodeId ? f.nodeId : `\`RM:${f.id}\``
@@ -156,7 +156,7 @@ export const adoc = {
   }
 },
   dvTypes: {
-    formatDvCodedText: (dBuilder: DocBuilder, f: FormElement) => {
+    formatDvCodedText: (dBuilder: DocBuilder, f: TemplateElement) => {
       const { sb } = dBuilder;
       sb.append('a|');
 
@@ -188,7 +188,7 @@ export const adoc = {
       });
     },
 
-    formatDvText: (dBuilder: DocBuilder, f: FormElement) => {
+    formatDvText: (dBuilder: DocBuilder, f: TemplateElement) => {
       const { sb } = dBuilder;
 
       sb.append('a|');
@@ -215,7 +215,7 @@ export const adoc = {
       }
     },
 
-    formatDvQuantity: (dBuilder: DocBuilder, f: FormElement) => {
+    formatDvQuantity: (dBuilder: DocBuilder, f: TemplateElement) => {
       const { sb } = dBuilder;
 
       sb.append('a|');
@@ -232,14 +232,14 @@ export const adoc = {
       }
     },
 
-    formatDvCount: (dBuilder: DocBuilder, f: FormElement) => {
+    formatDvCount: (dBuilder: DocBuilder, f: TemplateElement) => {
       const { sb, config } = dBuilder;
 
 
     },
 
 
-    formatDvDefault: (dBuilder: DocBuilder, f: FormElement) => {
+    formatDvDefault: (dBuilder: DocBuilder, f: TemplateElement) => {
       const { sb, config } = dBuilder;
 
       if (!isDisplayableNode(f.rmType))
@@ -248,12 +248,12 @@ export const adoc = {
         sb.append('|')
     },
 
-    formatDvChoice: (dBuilder: DocBuilder, f: FormElement) => {
+    formatDvChoice: (dBuilder: DocBuilder, f: TemplateElement) => {
       const { sb} = dBuilder;
       sb.append('|');
     },
 
-    formatDvOrdinal: (dBuilder: DocBuilder, f: FormElement) => {
+    formatDvOrdinal: (dBuilder: DocBuilder, f: TemplateElement) => {
       const { sb } = dBuilder;
 
       sb.append('a|');
@@ -269,7 +269,7 @@ export const adoc = {
       }
     },
 
-    formatChoiceHeader: (dBuilder: DocBuilder, f: FormElement) => {
+    formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
       const { sb } = dBuilder;
       sb.append('a|');
       let subTypesAllowedText: string;

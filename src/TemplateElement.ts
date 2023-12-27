@@ -1,6 +1,6 @@
 import { TemplateInput } from './TemplateInput';
 
-export interface FormElement {
+export interface TemplateElement {
   id: string;
   name: string;
   localizedName: string;
@@ -15,16 +15,13 @@ export interface FormElement {
   aqlPath: string;
   inputs?: TemplateInput[];
   inContext?: boolean;
-  children: FormElement[];
-  parentNode: FormElement;
+  children: TemplateElement[];
+  parentNode: TemplateElement;
 }
 
+export function findParentNodeId (formElement: TemplateElement) :TemplateElement{
 
-
-
-export function findParentNodeId (formElement: FormElement) :FormElement{
-
-  let currentElement: FormElement = formElement
+  let currentElement: TemplateElement = formElement
 
   while (currentElement !== null && currentElement.nodeId === null) {
     currentElement = currentElement.parentNode

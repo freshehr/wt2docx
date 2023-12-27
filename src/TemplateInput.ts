@@ -1,9 +1,9 @@
-import { FormList } from './FormList';
+import { TemplateList } from './TemplateList';
 
 export interface TemplateInput {
   suffix?: string;
   type: string;
-  list?: FormList[];
+  list?: TemplateList[];
   validation?: AmountValidation;
   listOpen?: boolean;
   terminology?: string;
