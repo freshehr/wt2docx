@@ -77,7 +77,7 @@ export const formatCompositionHeader = (docBuilder: DocBuilder, f: TemplateEleme
 
 export const formatNodeHeader = (docBuilder: DocBuilder, f: TemplateElement): void => {
 
-  let fn: FormatElementFn;
+  let fn: FormatHeaderFn;
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.adoc:
@@ -96,7 +96,7 @@ export const formatNodeHeader = (docBuilder: DocBuilder, f: TemplateElement): vo
   }
 
   if (fn)
-    fn(docBuilder, f);
+    fn(docBuilder);
 }
 export const formatNodeFooter = (docBuilder: DocBuilder, f: TemplateElement): void => {
 

@@ -32,7 +32,7 @@ export const adoc = {
     fs.writeFileSync(outFile, dBuilder.toString());
   },
 
-  formatNodeHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatNodeHeader: (dBuilder: DocBuilder) => {
     const { sb } = dBuilder;
     sb.append('[options="header","stretch", cols="20,30,30"]');
     sb.append('|====');
@@ -236,7 +236,7 @@ export const adoc = {
     },
 
     formatDvCount: (dBuilder: DocBuilder, f: TemplateElement) => {
-      const { sb, config } = dBuilder;
+      const { sb } = dBuilder;
 
 
     },
