@@ -36,7 +36,7 @@ const spinner = ora(`Running test on ${args['web-template']}`).start();
 const inFilePath = args['web-template'];
 const config:Config = importConfig(args['config-file']);
 const outFileDir: string = args['out-dir'];
-const outFilePath = handleOutPath(inFilePath, args['out-file'], 'adoc');
+const outFilePath = handleOutPath(inFilePath, args['out-file'], 'xmind');
 const exportFormat = args['export-format'];
 
 const inputFileExist = fs.existsSync(inFilePath);

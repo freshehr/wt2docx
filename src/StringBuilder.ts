@@ -19,4 +19,6 @@ export class StringBuilder {
     this.append('\n');
     return this;
   }
+
+  newLineCoded = (inString: string):string => inString.replace(/\\n/g, String.fromCharCode(10));
 }

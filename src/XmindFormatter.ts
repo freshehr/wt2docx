@@ -1,22 +1,28 @@
-import { DocBuilder } from "./DocBuilder";
-import { Topic , Workbook,Marker,Zipper} from "xmind";
+import fs from "fs";
+import { parseXMindMarkToXMindFile} from "xmindmark";
 
-export let wb: Workbook;
+import { DocBuilder } from "./DocBuilder";
+import { FormElement } from "./FormElement";
 
 export const xmind = {
 
   formatHeader: (dBuilder : DocBuilder): void => {
-
-      wb = new Workbook()
-
-      const topic: Topic = new Topic({sheet: wb.createSheet(dBuilder.wt.templateId, dBuilder.config?.title)});
-
-      topic.add({title: `${dBuilder.wt.templateId} ${dBuilder.wt.semVer} ${new Date().toDateString()}`} );
-
+    const { sb, wt } = dBuilder;
+    sb.append(sb.newLineCoded(`Template: ${wt.templateId} \n ${wt.semVer} \n ${new Date().toDateString()}`));
   },
-  saveFile: (dBuilder: DocBuilder, outfile: any): void => {
-    const zipper = new Zipper({path: dBuilder.outFileDir, workbook: wb, filename: dBuilder.wt.templateId});
 
-    zipper.save().then(status => status && console.log('Saved /tmp/MyFirstMap.xmind'));
+  formatCompositionHeader: (dBuilder: DocBuilder, f: FormElement) => {
+    const {  sb } = dBuilder;
+    sb.append(sb.newLineCoded(`- Composition: ${f.name}`))
+  },
+
+  formatElement: (dBuilder: DocBuilder, f: FormElement) => {
+    const {  sb } = dBuilder;
+    sb.append(sb.newLineCoded(`- Composition: ${f.name}`))
+  },
+
+  saveFile: async (dBuilder: DocBuilder, outFile: any): Promise <void>  => {
+      const xmindArrayBuffer = await parseXMindMarkToXMindFile(dBuilder.toString())
+      fs.writeFileSync(outFile, Buffer.from(xmindArrayBuffer), {encoding: "utf8"});
   }
 }

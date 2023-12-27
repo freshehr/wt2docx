@@ -11,15 +11,18 @@ import {
   isSection
 } from "./isEntry";
 import { StringBuilder } from "./StringBuilder";
+import {  Workbook } from "xmind";
+
 import { FormInput } from "./FormInput";
 import { Config } from "./Config";
 import rmDescriptions from "../resources/rm_descriptions.json";
-import { ExportFormat, formatHeader } from "./DocFormatter";
+import { addNodeHeader, ExportFormat, formatCompositionHeader, formatHeader } from "./DocFormatter";
 
 
 export class DocBuilder {
 
   sb: StringBuilder = new StringBuilder();
+  wb: Workbook = new Workbook()
 
   defaultLang: string = 'en';
   config: Config;
@@ -49,7 +52,7 @@ export class DocBuilder {
 
   private generate() {
     formatHeader(this)
-  //  this.walkComposition(this._wt);
+    this.walkComposition(this._wt);
   }
 
 
@@ -143,11 +146,12 @@ export class DocBuilder {
   private walkComposition(wt: WebTemplate) {
 
     const f = wt.tree
-    this.addCompositionHeader(f)
-    this.addNodeHeader();
-    this.walkRmAttributes(f);
-    this.addNodeFooter();
-    this.walkNonContextChildren(f)
+ //   this.addCompositionHeader(f)
+    formatCompositionHeader(this,f)
+    addNodeHeader(this,f);
+ //   walkRmAttributes(this,f);
+//    this.addNodeFooter();
+//    this.walkNonContextChildren(f)
   }
 
 
@@ -158,15 +162,15 @@ export class DocBuilder {
     this.walkChildren(f)
   }
 
-  private addCompositionHeader(f: FormElement) {
-
-    this.sb.append(`=== Composition: *${f.name}*`).newline()
-
-    if (!this.config.hideNodeIds)
-      this.sb.append(`==== Archetype Id: \`_${f.nodeId}_\``).newline();
-
-    this.sb.append(`${f.localizedDescriptions.en}`).newline()
-  }
+  // private addCompositionHeader(f: FormElement) {
+  //
+  //   this.sb.append(`=== Composition: *${f.name}*`).newline()
+  //
+  //   if (!this.config.hideNodeIds)
+  //     this.sb.append(`==== Archetype Id: \`_${f.nodeId}_\``).newline();
+  //
+  //   this.sb.append(`${f.localizedDescriptions.en}`).newline()
+  // }
 
   private addLeafHeader(f: FormElement, title: string = 'Archetype Id:') {
     this.sb.append(`===  *${f.name}*`).newline()
@@ -183,10 +187,10 @@ export class DocBuilder {
   private walkEntry(f: FormElement) {
 
     this.addLeafHeader(f)
-    this.addNodeHeader()
+    addNodeHeader(this,f)
     //   this.walkRmAttributes(f);
     this.walkNonContextChildren(f)
-    this.addNodeFooter()
+    addNodeFooter(this)
 
   }
 
@@ -205,63 +209,6 @@ export class DocBuilder {
       this.walkChildren(f)
       this.addNodeFooter()
     }
-  }
-  private addNodeHeader() {
-    this.sb.append('[options="header","stretch", cols="20,30,30"]');
-    this.sb.append('|====');
-    this.sb.append('|Data item | Description | Allowed values');
-  }
-
-  private addNodeContent(f: FormElement, isChoice: boolean) {
-
-
-    let resolvedNodeId: string;
-
-    if (f.nodeId)
-      resolvedNodeId = `${f.nodeId}`;
-    else if (isChoice)
-      resolvedNodeId = `${findParentNodeId(f).nodeId}`;
-    else
-      resolvedNodeId = this.sb.backTick("RM");
-
-    const nodeIdText = `NodeID: [${this.sb.backTick(resolvedNodeId)}] ${this.sb.backTick(f.id)}`;
-
-
-    let nodeName = f.localizedName ? f.localizedName : f.name
-
-    nodeName = nodeName ? nodeName : f.id
-
-    const rmTypeText = `${this.sb.backTick(this.mapRmTypeText(f.rmType))}`;
-
-    let nameText: string
-    const occurrencesText = formatOccurrences(f,this.config.displayTechnicalOccurrences)
-    const formattedOccurrencesText = occurrencesText?`(_${occurrencesText}_)`:``
-
-    if (!isChoice) {
-      nameText = `**${nodeName}** + \n Type: ${rmTypeText} ${formattedOccurrencesText}`
-
-      this.sb.append(`| ${this.applyNodeIdFilter(nameText, nodeIdText)} | ${this.getDescription(f)} `);
-
-    } else {
-      nameText = `Type: ${rmTypeText}`
-
-      this.sb.append(`| ${this.applyNodeIdFilter(nameText, nodeIdText)} |`);
-    }
-
-    if (f.name === undefined) {
-      this.sb.append(`// ${f.id} -  ${f.aqlPath}`);
-    }
-
-  }
-
-  private applyNodeIdFilter(nameText: string, nodeIdText: string) {
-    if (!this.config.hideNodeIds)
-      return nameText + ` + \n ${nodeIdText}`;
-    return nameText;
-  }
-
-  private addNodeFooter() {
-    this.sb.append('|====');
   }
 
   private walkRmAttributes(f: FormElement) {
@@ -426,13 +373,13 @@ export class DocBuilder {
     }
   }
 
-  private getDescription(f: FormElement) {
+  public getDescription = (f: FormElement) => {
     const language: string = 'en'
     if (!f.inContext)
      return this.getValueOfRecord(f.localizedDescriptions)
     else
       return rmDescriptions[f.id] ? rmDescriptions[f.id][language] : ''
-  }
+  };
 
   private walkChoice(f: FormElement) {
     this.walkElement(f, false)
@@ -538,20 +485,4 @@ export class DocBuilder {
       });
   }
 
-  private mapRmTypeText(rmTypeString: string) {
 
-    let rmType = rmTypeString
-    let intervalPrefix = ''
-
-    if (rmTypeString.startsWith('DV_INTERVAL')) {
-      intervalPrefix = "Interval of "
-      rmType = rmTypeString.replace(/(^.*<|>.*$)/g, '');
-    }
-
-    if (isDisplayableNode(rmType)) {
-      return `${intervalPrefix}${dataValueLabelMapper(rmType)}`
-    } else {
-      this.sb.append('|' + this.sb.backTick('Unsupported RM type: ' + rmType))
-    }
-  }
-}
