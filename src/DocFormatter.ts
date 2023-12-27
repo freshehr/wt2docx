@@ -75,7 +75,7 @@ export const formatCompositionHeader = (docBuilder: DocBuilder, f: TemplateEleme
     fn(docBuilder, f);
 }
 
-export const formatNodeHeader = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatNodeHeader = (docBuilder: DocBuilder): void => {
 
   let fn: FormatHeaderFn;
 
