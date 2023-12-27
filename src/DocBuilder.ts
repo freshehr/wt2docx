@@ -280,8 +280,6 @@ export class DocBuilder {
     }
   }
 
-
-
   private getValueOfRecord(record?: Record<string, string>): string {
     if (record) {
       return record[this.defaultLang];
