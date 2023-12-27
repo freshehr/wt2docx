@@ -19,9 +19,9 @@ import {
   addCompositionHeader,
   addNodeFooter,
   addNodeHeader,
-  ExportFormat,
+  ExportFormat, formatCluster,
   formatCompositionHeader,
-  formatHeader, formatLeafHeader, formatNodeContent
+  formatLeafHeader, formatNodeContent, formatObservationEvent, formatOccurrencesText, formatTemplateHeader
 } from "./DocFormatter";
 
 
@@ -55,10 +55,9 @@ export class DocBuilder {
   }
 
   private generate() {
-    formatHeader(this)
-    this.walkComposition(this._wt);
+    formatTemplateHeader(this)
+    this.walkComposition(this._wt.tree);
   }
-
 
   private walkChildren(f: FormElement, nonContextOnly: boolean = false) {
     if (f.children) {
@@ -116,41 +115,16 @@ export class DocBuilder {
   }
 
   private walkCluster(f: FormElement) {
-
-    const formattedOccurrencesText = this.formatOccurrencesText(f);
-
-    const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
-
-    if (!this.config.hideNodeIds)
-      this.sb.append(clinicalText + '\n' + `\`${f.rmType}: _${f.nodeId}_\``);
-    else
-      this.sb.append(clinicalText)
-
+    formatCluster(this,f )
     this.walkChildren(f);
-  }
-
-  private formatOccurrencesText(f: FormElement) {
-    const occurrencesText = formatOccurrences(f, this.config.displayTechnicalOccurrences);
-    return occurrencesText ? `[**${occurrencesText}**]` : ``;
   }
 
   private walkEvent(f: FormElement) {
-
-    const formattedOccurrencesText = this.formatOccurrencesText(f)
-    const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
-
-    if (!this.config.hideNodeIds)
-      this.sb.append(clinicalText + '\n' + `\`${f.rmType}: _${f.nodeId}_\``);
-    else
-      this.sb.append(clinicalText)
-
+    formatObservationEvent(this,f)
     this.walkChildren(f);
   }
 
-  private walkComposition(wt: WebTemplate) {
-
-    const f = wt.tree
-
+  private walkComposition(f: FormElement) {
     addCompositionHeader(this, f)
     formatCompositionHeader(this, f)
     addNodeHeader(this, f);
@@ -173,7 +147,7 @@ export class DocBuilder {
 
     formatLeafHeader(this,f)
     addNodeHeader(this, f)
-    //   this.walkRmAttributes(f);
+    this.walkRmAttributes(f);
     this.walkNonRMChildren(f)
     addNodeFooter(this)
 

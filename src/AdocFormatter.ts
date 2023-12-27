@@ -2,7 +2,7 @@ import { DocBuilder } from "./DocBuilder";
 import fs from "fs";
 import { findParentNodeId, FormElement } from "./FormElement";
 import { dataValueLabelMapper, formatOccurrences, isDisplayableNode } from "./isEntry";
-import {mapRmTypeText} from "./DocFormatter"
+import { formatOccurrencesText, mapRmTypeText } from "./DocFormatter";
 
 export const adoc = {
 
@@ -99,5 +99,30 @@ export const adoc = {
 
   formatNodeFooter:  (dBuilder: DocBuilder) => {
     dBuilder.sb.append('|====');
+  },
+
+  formatObservationEvent: (dBuilder: DocBuilder, f: FormElement) => {
+    const { sb, config } = dBuilder;
+
+    const formattedOccurrencesText = formatOccurrencesText(dBuilder,f);
+    const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
+
+    if (config.hideNodeIds)
+      sb.append(clinicalText + '\n' + `\`${f.rmType}: _${f.nodeId}_\``);
+    else
+      sb.append(clinicalText)
+  },
+
+  formatCluster: (dBuilder: DocBuilder, f: FormElement) => {
+    const { sb, config } = dBuilder;
+
+    const formattedOccurrencesText = formatOccurrencesText(dBuilder,f);
+    const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
+
+    if (config.hideNodeIds)
+      sb.append(clinicalText + '\n' + `\`${f.rmType}: _${f.nodeId}_\``);
+        else
+      sb.append(clinicalText)
   }
 }
+
