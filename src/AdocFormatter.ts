@@ -37,6 +37,17 @@ export const adoc = {
     sb.append('|Data item | Description | Allowed values');
   },
 
+  formatLeafHeader: (dBuilder: DocBuilder, f: FormElement) => {
+      const { sb, config} = dBuilder;
+
+      sb.append(`===  *${f.name}*`).newline()
+      if (!config.hideNodeIds) {
+          sb.append(`==== Type: \`_${f.rmType}_\``)
+          sb.append(`==== Id \`_${f.nodeId}_\``)
+      }
+      sb.append(`${f.localizedDescriptions.en}`).newline()
+  },
+
   formatNodeContent: (dBuilder: DocBuilder, f: FormElement, isChoice: boolean) => {
     const { wb, sb, wt, config } = dBuilder;
 

@@ -17,6 +17,8 @@ type SaveFileFn = (db: DocBuilder, outFile: string) =>  Promise<void>;
 type FormatCompositionHeaderFn = (dBuilder: DocBuilder, f: FormElement) => void;
 type FormatElementFn  = (docBuilder: DocBuilder, f: FormElement) => void;
 type BuilderFn  = (docBuilder: DocBuilder) => void;
+type FormatNodeContentFn = (dBuilder: DocBuilder, f: FormElement, isChoice: boolean) => void;
+
 
 export const mapRmTypeText = (rmTypeString: string) => {
 
@@ -105,8 +107,38 @@ export const addNodeHeader = (docBuilder: DocBuilder, f: FormElement): void => {
     fn(docBuilder, f);
 }
 
-export const saveFile  = async (docBuilder: DocBuilder, outFile: string): Promise<void> => {
+export const addCompositionHeader = (docBuilder: DocBuilder, f: FormElement): void => {
 
+  let fn: FormatElementFn;
+
+  switch (docBuilder.exportFormat) {
+    case ExportFormat.xmind, ExportFormat.fsh:
+      break;
+    default:
+      fn = adoc.formatCompositionHeader
+      break;
+  }
+
+  if (fn)
+    fn(docBuilder, f);
+}
+
+export const formatLeafHeader = (docBuilder: DocBuilder, f: FormElement): void => {
+  let fn: FormatElementFn;
+
+  switch (docBuilder.exportFormat) {
+    case ExportFormat.xmind, ExportFormat.fsh:
+      break;
+    default:
+      fn = adoc.formatLeafHeader
+      break;
+  }
+
+  if (fn)
+    fn(docBuilder, f);
+}
+
+export const saveFile  = async (docBuilder: DocBuilder, outFile: string): Promise<void> => {
   let fn: SaveFileFn;
 
   switch (docBuilder.exportFormat) {
@@ -138,17 +170,19 @@ export const addNodeFooter  =  (docBuilder: DocBuilder)=> {
     fn(docBuilder)
 }
 
-export const addNodeContent= (dBuilder: DocBuilder, f: FormElement, isChoice: boolean) =>{
-  let fn: BuilderFn;
+export const formatNodeContent= (dBuilder: DocBuilder, f: FormElement, isChoice: boolean) =>{
+  let fn: FormatNodeContentFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (dBuilder.exportFormat) {
     case ExportFormat.xmind, ExportFormat.fsh:
       break;
     default:
-      fn = adoc.formatNodeFooter
+      fn = adoc.formatNodeContent
       break
   }
 
   if (fn)
-    fn(docBuilder, f)
+    fn(dBuilder, f, isChoice)
 }
+
+

@@ -1,7 +1,6 @@
-import { findParentNodeId, FormElement } from "./FormElement";
+import { FormElement } from "./FormElement";
 import { WebTemplate } from "./WebTemplate";
 import {
-  dataValueLabelMapper,
   formatOccurrences,
   isAnyChoice,
   isDataValue,
@@ -16,7 +15,14 @@ import {  Workbook } from "xmind";
 import { FormInput } from "./FormInput";
 import { Config } from "./Config";
 import rmDescriptions from "../resources/rm_descriptions.json";
-import { addNodeHeader, ExportFormat, formatCompositionHeader, formatHeader } from "./DocFormatter";
+import {
+  addCompositionHeader,
+  addNodeFooter,
+  addNodeHeader,
+  ExportFormat,
+  formatCompositionHeader,
+  formatHeader, formatLeafHeader, formatNodeContent
+} from "./DocFormatter";
 
 
 export class DocBuilder {
@@ -31,7 +37,7 @@ export class DocBuilder {
 
   readonly _wt: WebTemplate;
 
-  constructor(wt: WebTemplate, config:Config, exportFormatString: string, outFileDir: string) {
+  constructor(wt: WebTemplate, config: Config, exportFormatString: string, outFileDir: string) {
     this._wt = wt;
     this.defaultLang = wt.defaultLanguage;
     this.config = config;
@@ -48,15 +54,13 @@ export class DocBuilder {
     return this._wt;
   }
 
-
-
   private generate() {
     formatHeader(this)
     this.walkComposition(this._wt);
   }
 
 
-  private walkChildren(f: FormElement, nonContextOnly : boolean = false) {
+  private walkChildren(f: FormElement, nonContextOnly: boolean = false) {
     if (f.children) {
       f.children.forEach((child) => {
         child.parentNode = f;
@@ -67,8 +71,8 @@ export class DocBuilder {
     }
   }
 
-  private walkNonContextChildren(f: FormElement) {
-      this.walkChildren(f, true)
+  private walkNonRMChildren(f: FormElement) {
+    this.walkChildren(f, true)
   }
 
   private walk(f: FormElement) {
@@ -132,7 +136,7 @@ export class DocBuilder {
 
   private walkEvent(f: FormElement) {
 
-    const formattedOccurrencesText =this.formatOccurrencesText(f)
+    const formattedOccurrencesText = this.formatOccurrencesText(f)
     const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
 
     if (!this.config.hideNodeIds)
@@ -146,50 +150,31 @@ export class DocBuilder {
   private walkComposition(wt: WebTemplate) {
 
     const f = wt.tree
- //   this.addCompositionHeader(f)
-    formatCompositionHeader(this,f)
-    addNodeHeader(this,f);
- //   walkRmAttributes(this,f);
-//    this.addNodeFooter();
-//    this.walkNonContextChildren(f)
+
+    addCompositionHeader(this, f)
+    formatCompositionHeader(this, f)
+    addNodeHeader(this, f);
+    this.walkRmAttributes(f);
+    addNodeFooter(this);
+    this.walkNonRMChildren(f)
   }
 
 
   private walkSection(f: FormElement) {
     if (!this.config?.skippedAQLPaths?.includes(f.aqlPath)) {
-      this.addLeafHeader(f)
+      formatLeafHeader(this,f)
     }
     this.walkChildren(f)
   }
 
-  // private addCompositionHeader(f: FormElement) {
-  //
-  //   this.sb.append(`=== Composition: *${f.name}*`).newline()
-  //
-  //   if (!this.config.hideNodeIds)
-  //     this.sb.append(`==== Archetype Id: \`_${f.nodeId}_\``).newline();
-  //
-  //   this.sb.append(`${f.localizedDescriptions.en}`).newline()
-  // }
 
-  private addLeafHeader(f: FormElement, title: string = 'Archetype Id:') {
-    this.sb.append(`===  *${f.name}*`).newline()
-
-    if (!this.config.hideNodeIds){
-      this.sb.append(`==== Type: \`_${f.rmType}_\``)
-      this.sb.append(`==== ${title} \`_${f.nodeId}_\``)
-
-    }
-
-    this.sb.append(`${f.localizedDescriptions.en}`).newline()
-  }
 
   private walkEntry(f: FormElement) {
 
-    this.addLeafHeader(f)
-    addNodeHeader(this,f)
+    formatLeafHeader(this,f)
+    addNodeHeader(this, f)
     //   this.walkRmAttributes(f);
-    this.walkNonContextChildren(f)
+    this.walkNonRMChildren(f)
     addNodeFooter(this)
 
   }
@@ -205,9 +190,9 @@ export class DocBuilder {
     }
 
     if (f.children?.length > 0) {
-      this.addNodeHeader()
+      addNodeHeader(this, f)
       this.walkChildren(f)
-      this.addNodeFooter()
+      addNodeFooter(this)
     }
   }
 
@@ -225,8 +210,7 @@ export class DocBuilder {
               this.stripExcludedRmTypes(ismChild, rmAttributes);
             });
           }
-        }
-        else {
+        } else {
           this.stripExcludedRmTypes(child, rmAttributes);
         }
       });
@@ -260,27 +244,27 @@ export class DocBuilder {
   //     return false
   //   }
 
-/*
-  private walkParticipations() {
+  /*
+    private walkParticipations() {
 
-    if (this.config.hideParticipations) return;
+      if (this.config.hideParticipations) return;
 
-    this.sb.append(`===== _Participations_ [0..*]`);
-    this.sb.append('[options="header", cols="25,5,55,30"]');
-    this.sb.append('|====');
-    this.sb.append('|NodeId|Attr.|RM Type| Name | Details');
-    this.sb.append('|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation');
-    this.sb.append('')
-//      this.sb.append('|RM: mode|0..1|DV_CODED_TEXT| Mode | Optional field for recording the \'mode\' of the performer / activity interaction, e.g. present, by telephone, by email etc.');
-    this.sb.append('|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.');
-//      this.sb.append('|RM: time|0..1|DV_INTERVAL| Time | The time interval during which the participation took place, ');
-    this.sb.append('|====');
+      this.sb.append(`===== _Participations_ [0..*]`);
+      this.sb.append('[options="header", cols="25,5,55,30"]');
+      this.sb.append('|====');
+      this.sb.append('|NodeId|Attr.|RM Type| Name | Details');
+      this.sb.append('|RM: function|1..1|DV_TEXT| Role | The function of the Party in this participation');
+      this.sb.append('')
+  //      this.sb.append('|RM: mode|0..1|DV_CODED_TEXT| Mode | Optional field for recording the \'mode\' of the performer / activity interaction, e.g. present, by telephone, by email etc.');
+      this.sb.append('|RM: performer|1..1|PARTY_IDENTIFIED| Performer name and ID | The id and possibly demographic system link of the party participating in the activity.');
+  //      this.sb.append('|RM: time|0..1|DV_INTERVAL| Time | The time interval during which the participation took place, ');
+      this.sb.append('|====');
 
-  }
-*/
+    }
+  */
 
   private walkElement(f: FormElement, isChoice: boolean) {
-    this.addNodeContent(f, isChoice)
+    formatNodeContent(this, f, isChoice)
     this.walkDataType(f)
     this.walkAnnotations(f);
   }
@@ -343,8 +327,8 @@ export class DocBuilder {
   private walkDvChoice(f: FormElement) {
     this.sb.append('a|');
     let subTypesAllowedText: string;
-    if (isAnyChoice(f.children.map(child =>  child.rmType)))
-     subTypesAllowedText = 'All'
+    if (isAnyChoice(f.children.map(child => child.rmType)))
+      subTypesAllowedText = 'All'
     else
       subTypesAllowedText = 'Multiple'
 
@@ -376,7 +360,7 @@ export class DocBuilder {
   public getDescription = (f: FormElement) => {
     const language: string = 'en'
     if (!f.inContext)
-     return this.getValueOfRecord(f.localizedDescriptions)
+      return this.getValueOfRecord(f.localizedDescriptions)
     else
       return rmDescriptions[f.id] ? rmDescriptions[f.id][language] : ''
   };
@@ -384,7 +368,7 @@ export class DocBuilder {
   private walkChoice(f: FormElement) {
     this.walkElement(f, false)
 
-    if (isAnyChoice(f.children.map(child =>  child.rmType)))
+    if (isAnyChoice(f.children.map(child => child.rmType)))
       return
 
     this.sb.append(`|_SubTypes_ | |`)
@@ -407,11 +391,9 @@ export class DocBuilder {
           item.list.forEach((val) => {
             this.sb.append(`* ${val.value}`);
           });
-        }
-        else
-        // Pick up an external valueset description annotation
-        if (item.suffix !== 'other' && f?.annotations?.vset_description)
-        {
+        } else
+          // Pick up an external valueset description annotation
+        if (item.suffix !== 'other' && f?.annotations?.vset_description) {
           // Convert /n characters to linebreaks
           const newLined = f.annotations?.vset_description.replace(/\\n/g, String.fromCharCode(10));
           this.sb.append(newLined)
@@ -457,32 +439,31 @@ export class DocBuilder {
   private walkDvCodedText(f: FormElement) {
     this.sb.append('a|');
 
-      f?.inputs.forEach((item) => {
-        const term = item.terminology === undefined ? 'local' : item.terminology;
-        if (item.list) {
+    f?.inputs.forEach((item) => {
+      const term = item.terminology === undefined ? 'local' : item.terminology;
+      if (item.list) {
 //          this.sb.append(`**Allowed Coded terms**`)
-          this.sb.append('')
-          item.list.forEach((list) => {
-            const termPhrase = `${term}:${list.value}`
-            if (term === 'local') {
-              this.sb.append(`* ${list.label} +\n ${this.sb.backTick(termPhrase)}`);
-            } else {
+        this.sb.append('')
+        item.list.forEach((list) => {
+          const termPhrase = `${term}:${list.value}`
+          if (term === 'local') {
+            this.sb.append(`* ${list.label} +\n ${this.sb.backTick(termPhrase)}`);
+          } else {
 
-              this.sb.append(`* ${list.label} +\n ${this.sb.backTick(termPhrase)}`);
-            }
-          })
-        } else
-          // Pick up an external valueset description annotation
-        if (item.suffix === 'code' && f?.annotations?.vset_description) {
-          // Convert /n characters to linebreaks
-          const newLined = f.annotations?.vset_description.replace(/\\n/g, String.fromCharCode(10));
-          this.sb.append(newLined)
-        }
+            this.sb.append(`* ${list.label} +\n ${this.sb.backTick(termPhrase)}`);
+          }
+        })
+      } else
+        // Pick up an external valueset description annotation
+      if (item.suffix === 'code' && f?.annotations?.vset_description) {
+        // Convert /n characters to linebreaks
+        const newLined = f.annotations?.vset_description.replace(/\\n/g, String.fromCharCode(10));
+        this.sb.append(newLined)
+      }
 
-        if (item.listOpen)
-          this.sb.append(`* _Other text/ coded text allowed_`);
+      if (item.listOpen)
+        this.sb.append(`* _Other text/ coded text allowed_`);
 //          this.appendDescription(f);
-      });
+    });
   }
-
-
+}
