@@ -81,13 +81,9 @@ export const formatNodeHeader = (docBuilder: DocBuilder): void => {
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.adoc:
-      break;
     case ExportFormat.xmind:
-      break;
     case ExportFormat.docx:
-      break;
     case ExportFormat.pdf:
-      break;
     case ExportFormat.fsh:
       break;
     default:
@@ -115,6 +111,7 @@ export const formatNodeFooter = (docBuilder: DocBuilder, f: TemplateElement): vo
   if (fn)
     fn(docBuilder, f);
 }
+
 export const formatCompositionContextHeader = (docBuilder: DocBuilder, f: TemplateElement): void => {
 
   let fn: FormatElementFn;
@@ -196,7 +193,7 @@ export const saveFile  = async (docBuilder: DocBuilder, outFile: string): Promis
     await fn(docBuilder, outFile)
 }
 
-export const formatNodeContent= (dBuilder: DocBuilder, f: TemplateElement, isChoice: boolean) =>{
+export const formatNodeContent= (dBuilder: DocBuilder, f: TemplateElement, isChoice: boolean) => {
   let fn: FormatNodeContentFn;
 
   switch (dBuilder.exportFormat) {

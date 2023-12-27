@@ -135,7 +135,7 @@ export class DocBuilder {
 
   private walkComposition(f: TemplateElement) {
     formatCompositionHeader(this, f)
-    formatNodeHeader(this, f);
+    formatNodeHeader(this);
     this.walkRmChildren(f);
     formatNodeFooter(this,f);
     this.walkNonRMChildren(f)
@@ -158,7 +158,7 @@ export class DocBuilder {
   private walkEntry(f: TemplateElement) {
 
     formatLeafHeader(this, f)
-    formatNodeHeader(this, f)
+    formatNodeHeader(this)
     this.walkRmChildren(f);
     this.walkNonRMChildren(f)
     formatNodeFooter(this,f)
@@ -169,7 +169,7 @@ export class DocBuilder {
 
     formatCompositionContextHeader(this, f);
     if (f.children?.length > 0) {
-      formatNodeHeader(this, f)
+      formatNodeHeader(this)
       this.walkChildren(f)
       formatNodeFooter(this,f)
     }
@@ -242,17 +242,16 @@ export class DocBuilder {
     }
   */
 
+  private adjustRmTypeForInterval  = (rmType): string => {
+    if (rmType.startsWith('DV_INTERVAL'))
+      return rmType.replace(/(^.*<|>.*$)/g, '')
+    else
+      return rmType
+  }
 
   private walkDataType(f: TemplateElement) {
 
-    const adjustRmTypeForInterval  = () => {
-      if (f.rmType.startsWith('DV_INTERVAL'))
-        return f.rmType.replace(/(^.*<|>.*$)/g, '')
-      else
-      return f.rmType
-    }
-
-    const adjustedRmType = adjustRmTypeForInterval();
+    const adjustedRmType = this.adjustRmTypeForInterval(f.rmType);
 
     switch (adjustedRmType){
       case 'ELEMENT':
@@ -300,7 +299,6 @@ export class DocBuilder {
   };
 
   private walkDvChoice(f: TemplateElement) {
-    this.walkElement(f, false)
 
     if (isAnyChoice(f.children.map(child => child.rmType)))
       return
