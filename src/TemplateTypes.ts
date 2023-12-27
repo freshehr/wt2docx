@@ -16,6 +16,7 @@ export function isAnyChoice(rmType: string[]) {
   const missing = Object.keys(DataValues).filter(item => rmType.indexOf(item) < 0 && isNaN(Number(item)))
  return missing.length === 0
 }
+
 export enum DataValues{
   'DV_CODED_TEXT',
   'DV_TEXT',
@@ -35,7 +36,6 @@ export enum DataValues{
   'DV_MULTIMEDIA',
   'DV_PARSABLE',
   'DV_STATE',
-
 }
 
 export enum OtherDisplayableNodes{

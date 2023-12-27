@@ -98,6 +98,7 @@ export const formatNodeHeader = (docBuilder: DocBuilder, f: TemplateElement): vo
   if (fn)
     fn(docBuilder);
 }
+
 export const formatNodeFooter = (docBuilder: DocBuilder, f: TemplateElement): void => {
 
   let fn: FormatElementFn;

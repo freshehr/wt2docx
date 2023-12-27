@@ -70,11 +70,8 @@ export const adoc = {
       resolvedNodeId = sb.backTick("RM");
 
     const nodeIdText = `NodeID: [${sb.backTick(resolvedNodeId)}] ${sb.backTick(f.id)}`;
-
     let nodeName = f.localizedName ? f.localizedName : f.name
-
     nodeName = nodeName ? nodeName : f.id
-
     let rmTypeText = '';
 
     if (isDisplayableNode(f.rmType)) {
@@ -249,7 +246,6 @@ export const adoc = {
       }
     },
 
-
     formatDvDefault: (dBuilder: DocBuilder, f: TemplateElement) => {
       const { sb } = dBuilder;
 
@@ -261,7 +257,16 @@ export const adoc = {
 
     formatDvChoice: (dBuilder: DocBuilder, f: TemplateElement) => {
       const { sb} = dBuilder;
-      sb.append('|');
+
+      sb.append('a|');
+
+      let subTypesAllowedText: string;
+      if (isAnyChoice(f.children.map(child =>  child.rmType)))
+        subTypesAllowedText = 'All'
+      else
+        subTypesAllowedText = 'Multiple'
+
+      sb.append(`_${subTypesAllowedText} data types allowed_`);
     },
 
     formatDvOrdinal: (dBuilder: DocBuilder, f: TemplateElement) => {

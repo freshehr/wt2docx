@@ -21,6 +21,23 @@ export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): v
     fn(docBuilder, f);
 }
 
+export const formatDvChoice = (docBuilder: DocBuilder, f: TemplateElement): void => {
+
+  let fn: FormatElementFn;
+
+  switch (docBuilder.exportFormat) {
+    case ExportFormat.xmind:
+    case ExportFormat.fsh:
+      break;
+    default:
+      fn = adoc.dvTypes.formatDvChoice
+      break;
+  }
+
+  if (fn)
+    fn(docBuilder, f);
+}
+
 export const formatDvText = (docBuilder: DocBuilder, f: TemplateElement): void => {
 
   let fn: FormatElementFn;
