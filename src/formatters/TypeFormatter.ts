@@ -4,7 +4,6 @@ import { ExportFormat, FormatElementFn } from "../DocFormatter";
 // import { xmind } from "./XmindFormatter";
 import { adoc } from "./AdocFormatter";
 
-
 export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): void => {
 
   let fn: FormatElementFn;
@@ -13,7 +12,6 @@ export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): v
     case ExportFormat.xmind:
     case ExportFormat.fsh:
       break;
-
     default:
       fn = adoc.dvTypes.formatDvCodedText
       break;
@@ -80,7 +78,7 @@ export const formatDvOrdinal = (docBuilder: DocBuilder, f: TemplateElement): voi
     case ExportFormat.fsh:
       break;
     default:
-      fn = adoc.dvTypes.formatDvQuantity
+      fn = adoc.dvTypes.formatDvOrdinal
       break;
   }
   if (fn)

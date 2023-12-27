@@ -53,10 +53,11 @@ export const adoc = {
   formatNodeContent: (dBuilder: DocBuilder, f: TemplateElement, isChoice: boolean) => {
     const { sb, config } = dBuilder;
 
-    const applyNodeIdFilter = (nameText: string, nodeIdText: string) => {
-      if (!config.hideNodeIds)
-        return nameText + ` + \n ${nodeIdText}`;
-      return nameText;
+    const applyNodeIdFilter = (name: string, nodeIdTxt: string) => {
+      if (config.hideNodeIds)
+        return name;
+
+      return name + ` + \n ${nodeIdTxt}`
     }
 
     let resolvedNodeId: string;
@@ -144,6 +145,7 @@ export const adoc = {
       }
     }
   },
+
   formatCompositionContextHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
     const { sb, config } = dBuilder;
 
@@ -155,6 +157,7 @@ export const adoc = {
       sb.append(`===== \`${f.rmType}: _${nodeId}_\``);
   }
 },
+
   dvTypes: {
     formatDvCodedText: (dBuilder: DocBuilder, f: TemplateElement) => {
       const { sb } = dBuilder;
@@ -240,7 +243,7 @@ export const adoc = {
 
 
     formatDvDefault: (dBuilder: DocBuilder, f: TemplateElement) => {
-      const { sb, config } = dBuilder;
+      const { sb } = dBuilder;
 
       if (!isDisplayableNode(f.rmType))
         sb.append("|" + sb.backTick("Unsupported RM type: " + f.rmType));

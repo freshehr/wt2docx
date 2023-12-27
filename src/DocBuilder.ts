@@ -88,7 +88,7 @@ export class DocBuilder {
     } else if (isSection(f.rmType)) {
       this.walkSection(f)
     } else if (f.rmType === 'ELEMENT') {
-      formatElement(this,f)
+      this.walkElement(f,false)
     } else if (f.rmType === 'CLUSTER') {
       this.walkCluster(f);
     } else if (isEvent(f.rmType)) {
@@ -141,6 +141,11 @@ export class DocBuilder {
     this.walkNonRMChildren(f)
   }
 
+  private walkElement(f: TemplateElement, isChoice: boolean) {
+    formatNodeContent(this, f, isChoice)
+    this.walkDataType(f)
+    formatAnnotations(this,f);
+  }
 
   private walkSection(f: TemplateElement) {
     if (!this.config?.skippedAQLPaths?.includes(f.aqlPath)) {
@@ -237,11 +242,6 @@ export class DocBuilder {
     }
   */
 
-  private walkElement(f: TemplateElement, isChoice: boolean) {
-    formatNodeContent(this, f, isChoice)
-    this.walkDataType(f)
-    formatAnnotations(this,f);
-  }
 
   private walkDataType(f: TemplateElement) {
 
