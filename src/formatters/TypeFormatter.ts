@@ -1,8 +1,9 @@
-import { DocBuilder } from "./DocBuilder";
-import { TemplateElement } from "./TemplateElement";
+import { DocBuilder } from "../DocBuilder";
+import { TemplateElement } from "../TemplateElement";
+import { ExportFormat, FormatElementFn } from "../DocFormatter";
 // import { xmind } from "./XmindFormatter";
 import { adoc } from "./AdocFormatter";
-import { ExportFormat, FormatElementFn } from "./DocFormatter";
+
 
 export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): void => {
 

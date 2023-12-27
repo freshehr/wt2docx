@@ -1,18 +1,13 @@
 import { TemplateElement } from "./TemplateElement";
 import { WebTemplate } from "./WebTemplate";
 import {
-  formatOccurrences,
   isAnyChoice,
   isDataValue,
-  isDisplayableNode,
   templateTypes,
   isEvent,
   isSection
 } from "./TemplateTypes";
 import { StringBuilder } from "./StringBuilder";
-import {  Workbook } from "xmind";
-
-import { TemplateInput } from "./TemplateInput";
 import { Config } from "./Config";
 import rmDescriptions from "../resources/rm_descriptions.json";
 import {
@@ -20,7 +15,6 @@ import {
   formatAnnotations,
   formatCluster, formatCompositionContextHeader,
   formatCompositionHeader,
-  formatElement,
   formatLeafHeader,
   formatNodeContent,
   formatNodeFooter,
@@ -36,14 +30,12 @@ import {
   formatDvOrdinal,
   formatDvQuantity,
   formatDvText
-} from "./TypeFormatter";
+} from "./formatters/TypeFormatter";
 
 
 export class DocBuilder {
 
   sb: StringBuilder = new StringBuilder();
-  wb: Workbook = new Workbook()
-
   defaultLang: string = 'en';
   config: Config;
   exportFormat: ExportFormat
