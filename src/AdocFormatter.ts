@@ -1,16 +1,18 @@
 import { DocBuilder } from "./DocBuilder";
 import fs from "fs";
 import { findParentNodeId, FormElement } from "./FormElement";
-import { dataValueLabelMapper, formatOccurrences, isDisplayableNode } from "./isEntry";
+import { dataValueLabelMapper, formatOccurrences, isAnyChoice, isDisplayableNode } from "./isEntry";
 import { formatOccurrencesText, mapRmTypeText } from "./DocFormatter";
+import { TemplateInput } from "./TemplateInput";
 
 export const adoc = {
 
   formatTemplateHeader: (dBuilder: DocBuilder): void => {
-    const { wb, sb, wt, config } = dBuilder;
+    const { sb, wt, config } = dBuilder;
     sb.append(`== Template: ${config.title ? config.title : wt.tree.name}`)
 
-    if (dBuilder.config.displayToC) dBuilder.sb.append(":toc: left");
+    if (dBuilder.config.displayToC)
+      dBuilder.sb.append(":toc: left");
 
     sb.newline()
     sb.append(`Template Id: **${wt.templateId}**`).newline()
@@ -19,7 +21,7 @@ export const adoc = {
   },
 
   formatCompositionHeader: (dBuilder: DocBuilder, f: FormElement) => {
-    const { wb, sb, wt, config } = dBuilder;
+    const { sb, config } = dBuilder;
     sb.append(`=== Composition: *${f.name}*`).newline()
     if (!config.hideNodeIds)
       sb.append(`==== Archetype Id: \`_${f.nodeId}_\``).newline();
@@ -31,25 +33,25 @@ export const adoc = {
   },
 
   formatNodeHeader: (dBuilder: DocBuilder, f: FormElement) => {
-    const { sb, } = dBuilder;
+    const { sb } = dBuilder;
     sb.append('[options="header","stretch", cols="20,30,30"]');
     sb.append('|====');
     sb.append('|Data item | Description | Allowed values');
   },
 
   formatLeafHeader: (dBuilder: DocBuilder, f: FormElement) => {
-      const { sb, config} = dBuilder;
+    const { sb, config } = dBuilder;
 
-      sb.append(`===  *${f.name}*`).newline()
-      if (!config.hideNodeIds) {
-          sb.append(`==== Type: \`_${f.rmType}_\``)
-          sb.append(`==== Id \`_${f.nodeId}_\``)
-      }
-      sb.append(`${f.localizedDescriptions.en}`).newline()
+    sb.append(`===  *${f.name}*`).newline()
+    if (!config.hideNodeIds) {
+      sb.append(`==== Type: \`_${f.rmType}_\``)
+      sb.append(`==== Id \`_${f.nodeId}_\``)
+    }
+    sb.append(`${f.localizedDescriptions.en}`).newline()
   },
 
   formatNodeContent: (dBuilder: DocBuilder, f: FormElement, isChoice: boolean) => {
-    const { wb, sb, wt, config } = dBuilder;
+    const { sb, config } = dBuilder;
 
     const applyNodeIdFilter = (nameText: string, nodeIdText: string) => {
       if (!config.hideNodeIds)
@@ -97,14 +99,18 @@ export const adoc = {
 
   },
 
-  formatNodeFooter:  (dBuilder: DocBuilder) => {
+  formatNodeFooter: (dBuilder: DocBuilder) => {
     dBuilder.sb.append('|====');
+  },
+
+  formatUnsupported: (dBuilder: DocBuilder, f: FormElement) => {
+    dBuilder.sb.append('// Not supported rmType ' + f.rmType);
   },
 
   formatObservationEvent: (dBuilder: DocBuilder, f: FormElement) => {
     const { sb, config } = dBuilder;
 
-    const formattedOccurrencesText = formatOccurrencesText(dBuilder,f);
+    const formattedOccurrencesText = formatOccurrencesText(dBuilder, f);
     const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
 
     if (config.hideNodeIds)
@@ -116,13 +122,163 @@ export const adoc = {
   formatCluster: (dBuilder: DocBuilder, f: FormElement) => {
     const { sb, config } = dBuilder;
 
-    const formattedOccurrencesText = formatOccurrencesText(dBuilder,f);
+    const formattedOccurrencesText = formatOccurrencesText(dBuilder, f);
     const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
 
     if (config.hideNodeIds)
       sb.append(clinicalText + '\n' + `\`${f.rmType}: _${f.nodeId}_\``);
-        else
+    else
       sb.append(clinicalText)
+  },
+
+  formatAnnotations: (dBuilder: DocBuilder, f: FormElement) => {
+    const { sb, config } = dBuilder;
+
+    if (f.annotations) {
+      sb.append(``);
+      for (const key in f.annotations) {
+        if (f.annotations.hasOwnProperty(key)) {
+          if (config?.includedAnnotations?.includes(key))
+            sb.newline().append(`*${key}*: ${f.annotations[key]}`);
+        }
+      }
+    }
+  },
+  formatCompositionContextHeader: (dBuilder: DocBuilder, f: FormElement) => {
+    const { sb, config } = dBuilder;
+
+    const nodeId = f.nodeId ? f.nodeId : `\`RM:${f.id}\``
+
+    sb.append(`==== ${f.name}`);
+
+    if (!config.hideNodeIds) {
+      sb.append(`===== \`${f.rmType}: _${nodeId}_\``);
+  }
+},
+  dvTypes: {
+    formatDvCodedText: (dBuilder: DocBuilder, f: FormElement) => {
+      const { sb } = dBuilder;
+      sb.append('a|');
+
+      f?.inputs.forEach((item) => {
+        const term = item.terminology === undefined ? 'local' : item.terminology;
+        if (item.list) {
+//          sb.append(`**Allowed Coded terms**`)
+          sb.append('')
+          item.list.forEach((list) => {
+            const termPhrase = `${term}:${list.value}`
+            if (term === 'local') {
+              sb.append(`* ${list.label} +\n ${sb.backTick(termPhrase)}`);
+            } else {
+
+              sb.append(`* ${list.label} +\n ${sb.backTick(termPhrase)}`);
+            }
+          })
+        } else
+          // Pick up an external valueset description annotation
+        if (item.suffix === 'code' && f?.annotations?.vset_description) {
+          // Convert /n characters to linebreaks
+          const newLined = f.annotations?.vset_description.replace(/\\n/g, String.fromCharCode(10));
+          sb.append(newLined)
+        }
+
+        if (item.listOpen)
+          sb.append(`* _Other text/ coded text allowed_`);
+//          appendDescription(f);
+      });
+    },
+
+    formatDvText: (dBuilder: DocBuilder, f: FormElement) => {
+      const { sb } = dBuilder;
+
+      sb.append('a|');
+      if (f.inputs.length > 0) {
+        sb.append('')
+        f.inputs.forEach((item) => {
+          if (item.list) {
+            item.list.forEach((val) => {
+              sb.append(`* ${val.value}`);
+            });
+          } else
+            // Pick up an external valueset description annotation
+          if (item.suffix !== 'other' && f?.annotations?.vset_description) {
+            // Convert /n characters to linebreaks
+            const newLined = sb.newLineCoded(f.annotations?.vset_description);
+            sb.append(newLined)
+          }
+
+          if (item.listOpen)
+            sb.append(`* _Other text/coded text allowed_`);
+
+        });
+//      appendDescription(f);
+      }
+    },
+
+    formatDvQuantity: (dBuilder: DocBuilder, f: FormElement) => {
+      const { sb } = dBuilder;
+
+      sb.append('a|');
+      if (f.inputs?.length > 0) {
+        sb.append('')
+        f.inputs.forEach((item) => {
+          if (item.list && item.suffix === 'unit') {
+            item.list.forEach((val) => {
+              sb.append('Units: +\n')
+              sb.append(`* ${val.value}`);
+            });
+          }
+        });
+      }
+    },
+
+    formatDvCount: (dBuilder: DocBuilder, f: FormElement) => {
+      const { sb, config } = dBuilder;
+
+
+    },
+
+
+    formatDvDefault: (dBuilder: DocBuilder, f: FormElement) => {
+      const { sb, config } = dBuilder;
+
+      if (!isDisplayableNode(f.rmType))
+        sb.append("|" + sb.backTick("Unsupported RM type: " + f.rmType));
+      else
+        sb.append('|')
+    },
+
+    formatDvChoice: (dBuilder: DocBuilder, f: FormElement) => {
+      const { sb} = dBuilder;
+      sb.append('|');
+    },
+
+    formatDvOrdinal: (dBuilder: DocBuilder, f: FormElement) => {
+      const { sb } = dBuilder;
+
+      sb.append('a|');
+      if (f.inputs) {
+        const fi: TemplateInput[] = f.inputs;
+        fi.forEach((item) => {
+          const formItems = item.list === undefined ? [] : item.list;
+          formItems.forEach((n) => {
+            const termPhrase = `local:${n.value}`
+            sb.append(`* [${n.ordinal}] ${n.label} +\n ${sb.backTick(termPhrase)}`);
+          });
+        });
+      }
+    },
+
+    formatChoiceHeader: (dBuilder: DocBuilder, f: FormElement) => {
+      const { sb } = dBuilder;
+      sb.append('a|');
+      let subTypesAllowedText: string;
+      if (isAnyChoice(f.children.map(child => child.rmType)))
+        subTypesAllowedText = 'All'
+      else
+        subTypesAllowedText = 'Multiple'
+
+      sb.append(`_${subTypesAllowedText} data types allowed_`);
+    }
   }
 }
-

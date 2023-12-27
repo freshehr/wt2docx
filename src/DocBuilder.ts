@@ -12,17 +12,31 @@ import {
 import { StringBuilder } from "./StringBuilder";
 import {  Workbook } from "xmind";
 
-import { FormInput } from "./FormInput";
+import { TemplateInput } from "./TemplateInput";
 import { Config } from "./Config";
 import rmDescriptions from "../resources/rm_descriptions.json";
 import {
-  addCompositionHeader,
-  addNodeFooter,
-  addNodeHeader,
-  ExportFormat, formatCluster,
+  ExportFormat,
+  formatAnnotations,
+  formatCluster, formatCompositionContextHeader,
   formatCompositionHeader,
-  formatLeafHeader, formatNodeContent, formatObservationEvent, formatOccurrencesText, formatTemplateHeader
+  formatElement,
+  formatLeafHeader,
+  formatNodeContent,
+  formatNodeFooter,
+  formatNodeHeader,
+  formatObservationEvent,
+  formatTemplateHeader,
+  formatUnsupported
 } from "./DocFormatter";
+import {
+  formatDvCodedText,
+  formatDvCount,
+  formatDvDefault,
+  formatDvOrdinal,
+  formatDvQuantity,
+  formatDvText
+} from "./TypeFormatter";
 
 
 export class DocBuilder {
@@ -82,7 +96,7 @@ export class DocBuilder {
     } else if (isSection(f.rmType)) {
       this.walkSection(f)
     } else if (f.rmType === 'ELEMENT') {
-      this.walkChoice(f)
+      formatElement(this,f)
     } else if (f.rmType === 'CLUSTER') {
       this.walkCluster(f);
     } else if (isEvent(f.rmType)) {
@@ -95,7 +109,7 @@ export class DocBuilder {
         //        break;
         case 'EVENT_CONTEXT':
           f.name = 'Composition context';
-          this.walkEventContext(f);
+          this.walkCompositionContext(f);
           break;
         case 'CODE_PHRASE':
           f.name = f.id;
@@ -105,72 +119,66 @@ export class DocBuilder {
           f.name = f.id;
           this.walkElement(f, false);
           break;
-
         default:
-          this.sb.append('// Not supported rmType ' + f.rmType);
-
+          this.walkUnsupported(f)
           break;
       }
     }
   }
 
+  private walkUnsupported(f: FormElement)
+  {
+    formatUnsupported(this,f);
+  }
+
   private walkCluster(f: FormElement) {
-    formatCluster(this,f )
+    formatCluster(this, f)
     this.walkChildren(f);
   }
 
   private walkEvent(f: FormElement) {
-    formatObservationEvent(this,f)
+    formatObservationEvent(this, f)
     this.walkChildren(f);
   }
 
   private walkComposition(f: FormElement) {
-    addCompositionHeader(this, f)
     formatCompositionHeader(this, f)
-    addNodeHeader(this, f);
-    this.walkRmAttributes(f);
-    addNodeFooter(this);
+    formatNodeHeader(this, f);
+    this.walkRmChildren(f);
+    formatNodeFooter(this,f);
     this.walkNonRMChildren(f)
   }
 
 
   private walkSection(f: FormElement) {
     if (!this.config?.skippedAQLPaths?.includes(f.aqlPath)) {
-      formatLeafHeader(this,f)
+      formatLeafHeader(this, f)
     }
     this.walkChildren(f)
   }
 
 
-
   private walkEntry(f: FormElement) {
 
-    formatLeafHeader(this,f)
-    addNodeHeader(this, f)
-    this.walkRmAttributes(f);
+    formatLeafHeader(this, f)
+    formatNodeHeader(this, f)
+    this.walkRmChildren(f);
     this.walkNonRMChildren(f)
-    addNodeFooter(this)
+    formatNodeFooter(this,f)
 
   }
 
-  private walkEventContext(f: FormElement) {
+  private walkCompositionContext(f: FormElement) {
 
-    const nodeId = f.nodeId ? f.nodeId : `\`RM:${f.id}\``
-
-    this.sb.append(`==== ${f.name}`);
-
-    if (!this.config.hideNodeIds) {
-      this.sb.append(`===== \`${f.rmType}: _${nodeId}_\``);
-    }
-
+    formatCompositionContextHeader(this, f);
     if (f.children?.length > 0) {
-      addNodeHeader(this, f)
+      formatNodeHeader(this, f)
       this.walkChildren(f)
-      addNodeFooter(this)
+      formatNodeFooter(this,f)
     }
   }
 
-  private walkRmAttributes(f: FormElement) {
+  private walkRmChildren(f: FormElement) {
 
     const rmAttributes = new Array<FormElement>();
 
@@ -240,88 +248,48 @@ export class DocBuilder {
   private walkElement(f: FormElement, isChoice: boolean) {
     formatNodeContent(this, f, isChoice)
     this.walkDataType(f)
-    this.walkAnnotations(f);
+    formatAnnotations(this,f);
   }
 
   private walkDataType(f: FormElement) {
 
-    let rmType = f.rmType
-
-    if (f.rmType.startsWith('DV_INTERVAL')) {
-      rmType = f.rmType.replace(/(^.*<|>.*$)/g, '')
+    const adjustRmTypeForInterval  = () => {
+      if (f.rmType.startsWith('DV_INTERVAL'))
+        return f.rmType.replace(/(^.*<|>.*$)/g, '')
+      else
+      return f.rmType
     }
 
-    switch (rmType) {
+    const adjustedRmType = adjustRmTypeForInterval();
+
+    switch (adjustedRmType){
       case 'ELEMENT':
         this.walkDvChoice(f)
         break
       case 'DV_CODED_TEXT':
-        this.walkDvCodedText(f)
+        formatDvCodedText(this,f)
         break;
       case 'DV_TEXT':
-        this.walkDvText(f)
+        formatDvText(this,f)
         break;
       case 'DV_ORDINAL':
-        this.walkDvOrdinal(f)
+        formatDvOrdinal(this,f)
         break;
       case 'DV_SCALE':
-        this.walkDvOrdinal(f);
+        formatDvOrdinal(this,f);
         break;
       case 'DV_QUANTITY':
-        this.walkDvQuantity(f);
+        formatDvQuantity(this,f);
         break;
-
       case 'DV_COUNT':
-        this.walkDvCount(f);
+        formatDvCount(this,f);
         break;
-
       default:
-        if (!isDisplayableNode(rmType)) {
-          this.sb.append("|" + this.sb.backTick("Unsupported RM type: " + rmType));
-        } else {
-          this.walkDvDefault();
-        }
-    }
-  }
-
-  private walkAnnotations(f: FormElement) {
-    if (f.annotations) {
-
-      this.sb.append(``);
-      for (const key in f.annotations) {
-        if (f.annotations.hasOwnProperty(key)) {
-          if (this.config?.includedAnnotations?.includes(key))
-            this.sb.newline().append(`*${key}*: ${f.annotations[key]}`);
-        }
-      }
+        formatDvDefault(this,f);
     }
   }
 
 
-  private walkDvChoice(f: FormElement) {
-    this.sb.append('a|');
-    let subTypesAllowedText: string;
-    if (isAnyChoice(f.children.map(child => child.rmType)))
-      subTypesAllowedText = 'All'
-    else
-      subTypesAllowedText = 'Multiple'
-
-    this.sb.append(`_${subTypesAllowedText} data types allowed_`);
-  }
-
-  private walkDvOrdinal(f: FormElement) {
-    this.sb.append('a|');
-    if (f.inputs) {
-      const fi: FormInput[] = f.inputs;
-      fi.forEach((item) => {
-        const formItems = item.list === undefined ? [] : item.list;
-        formItems.forEach((n) => {
-          const termPhrase = `local:${n.value}`
-          this.sb.append(`* [${n.ordinal}] ${n.label} +\n ${this.sb.backTick(termPhrase)}`);
-        });
-      });
-    }
-  }
 
   private getValueOfRecord(record?: Record<string, string>): string {
     if (record) {
@@ -339,7 +307,7 @@ export class DocBuilder {
       return rmDescriptions[f.id] ? rmDescriptions[f.id][language] : ''
   };
 
-  private walkChoice(f: FormElement) {
+  private walkDvChoice(f: FormElement) {
     this.walkElement(f, false)
 
     if (isAnyChoice(f.children.map(child => child.rmType)))
@@ -352,92 +320,5 @@ export class DocBuilder {
     });
   }
 
-  private walkDvDefault() {
-    this.sb.append('|');
-  }
 
-  private walkDvText(f: FormElement) {
-    this.sb.append('a|');
-    if (f.inputs.length > 0) {
-      this.sb.append('')
-      f.inputs.forEach((item) => {
-        if (item.list) {
-          item.list.forEach((val) => {
-            this.sb.append(`* ${val.value}`);
-          });
-        } else
-          // Pick up an external valueset description annotation
-        if (item.suffix !== 'other' && f?.annotations?.vset_description) {
-          // Convert /n characters to linebreaks
-          const newLined = f.annotations?.vset_description.replace(/\\n/g, String.fromCharCode(10));
-          this.sb.append(newLined)
-        }
-
-        if (item.listOpen)
-          this.sb.append(`* _Other text/coded text allowed_`);
-
-      });
-//      this.appendDescription(f);
-    }
-  }
-
-  private walkDvQuantity(f: FormElement) {
-    this.sb.append('a|');
-    if (f.inputs?.length > 0) {
-      this.sb.append('')
-      f.inputs.forEach((item) => {
-        if (item.list && item.suffix === 'unit') {
-          item.list.forEach((val) => {
-            this.sb.append('Units: +\n')
-            this.sb.append(`* ${val.value}`);
-          });
-        }
-      });
-//      this.appendDescription(f);
-    }
-  }
-
-  private walkDvCount(f: FormElement) {
-    this.sb.append('a|');
-    if (f.inputs.length > 0) {
-      this.sb.append('')
-      f.inputs.forEach((item) => {
-        if ((item.type === 'INTEGER') && (item?.validation?.range)) {
-          this.sb.append('Range: +\n')
-          this.sb.append(`* ${item.validation.range.minOp} ${item.validation.range.min} and ${item.validation.range.maxOp} ${item.validation.range.max}`);
-        }
-      });
-    }
-  }
-
-  private walkDvCodedText(f: FormElement) {
-    this.sb.append('a|');
-
-    f?.inputs.forEach((item) => {
-      const term = item.terminology === undefined ? 'local' : item.terminology;
-      if (item.list) {
-//          this.sb.append(`**Allowed Coded terms**`)
-        this.sb.append('')
-        item.list.forEach((list) => {
-          const termPhrase = `${term}:${list.value}`
-          if (term === 'local') {
-            this.sb.append(`* ${list.label} +\n ${this.sb.backTick(termPhrase)}`);
-          } else {
-
-            this.sb.append(`* ${list.label} +\n ${this.sb.backTick(termPhrase)}`);
-          }
-        })
-      } else
-        // Pick up an external valueset description annotation
-      if (item.suffix === 'code' && f?.annotations?.vset_description) {
-        // Convert /n characters to linebreaks
-        const newLined = f.annotations?.vset_description.replace(/\\n/g, String.fromCharCode(10));
-        this.sb.append(newLined)
-      }
-
-      if (item.listOpen)
-        this.sb.append(`* _Other text/ coded text allowed_`);
-//          this.appendDescription(f);
-    });
-  }
 }

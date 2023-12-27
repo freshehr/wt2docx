@@ -1,4 +1,4 @@
-import { FormInput } from './FormInput';
+import { TemplateInput } from './TemplateInput';
 
 export interface FormElement {
   id: string;
@@ -13,7 +13,7 @@ export interface FormElement {
   localizedDescriptions: Record<string, string>;
   annotations?:  Record<string, string> ;
   aqlPath: string;
-  inputs?: FormInput[];
+  inputs?: TemplateInput[];
   inContext?: boolean;
   children: FormElement[];
   parentNode: FormElement;

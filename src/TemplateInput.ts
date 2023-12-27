@@ -1,6 +1,6 @@
 import { FormList } from './FormList';
 
-export interface FormInput {
+export interface TemplateInput {
   suffix?: string;
   type: string;
   list?: FormList[];
