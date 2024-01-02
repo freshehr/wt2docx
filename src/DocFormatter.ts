@@ -3,6 +3,7 @@ import  {adoc }from "./formatters/AdocFormatter"
 import {xmind } from "./formatters/XmindFormatter"
 import { TemplateElement } from "./TemplateElement";
 import { dataValueLabelMapper, formatOccurrences, isDisplayableNode } from "./TemplateTypes";
+import { docx } from "./formatters/PanDocFormatter";
 
 export enum ExportFormat {
   adoc = 'adoc',
@@ -38,17 +39,13 @@ export const formatTemplateHeader = (docBuilder: DocBuilder): void => {
 
    let fn: FormatHeaderFn;
    switch (docBuilder.exportFormat){
-     case ExportFormat.adoc:
-      fn = adoc.formatTemplateHeader
-      break;
     case ExportFormat.xmind:
       fn= xmind.formatHeader
       break;
-     case ExportFormat.docx:
-     case ExportFormat.pdf:
      case ExportFormat.fsh:
        break;
      default:
+       fn = adoc.formatTemplateHeader
        break;
    }
 
@@ -206,6 +203,10 @@ export const saveFile  = async (docBuilder: DocBuilder, outFile: string): Promis
       fn = xmind.saveFile
       break
     case ExportFormat.fsh:
+      break;
+    case ExportFormat.docx:
+      fn = docx.saveFile
+      break;
     default:
       fn = adoc.saveFile
       break

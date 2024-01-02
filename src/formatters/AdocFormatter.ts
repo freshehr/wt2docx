@@ -5,6 +5,9 @@ import { formatOccurrences, isAnyChoice, isDisplayableNode } from "../TemplateTy
 import { formatOccurrencesText, mapRmTypeText } from "../DocFormatter";
 import { TemplateInput } from "../TemplateInput";
 
+
+
+
 export const adoc = {
 
   formatTemplateHeader: (dBuilder: DocBuilder): void => {
@@ -90,11 +93,6 @@ export const adoc = {
       nameText = `Type: ${rmTypeText}`
       sb.append(`| ${applyNodeIdFilter(nameText, nodeIdText)} |`);
     }
-
-    if (f.name === undefined) {
-      sb.append(`// ${f.id} -  ${f.aqlPath}`);
-    }
-
   },
 
   formatNodeFooter: (dBuilder: DocBuilder) => {
@@ -146,7 +144,7 @@ export const adoc = {
   formatCompositionContextHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
     const { sb, config } = dBuilder;
 
-    const nodeId = f.nodeId ? f.nodeId : `\`RM:${f.id}\``
+    const nodeId = f.nodeId ? f.nodeId : `RM:${f.id}`
 
     sb.append(`==== ${f.name}`);
 
