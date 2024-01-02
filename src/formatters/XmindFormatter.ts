@@ -2,10 +2,9 @@ import fs from "fs";
 import { parseXMindMarkToXMindFile} from "xmindmark";
 
 import { DocBuilder } from "../DocBuilder";
-import { findParentNodeId, TemplateElement } from "../TemplateElement";
-import { formatOccurrences, isAnyChoice, isDisplayableNode } from "../TemplateTypes";
+import {  TemplateElement } from "../TemplateElement";
+import { formatOccurrences, isAnyChoice } from "../TemplateTypes";
 import { formatRawOccurrencesText, mapRmTypeText } from "../DocFormatter";
-import { InputItem } from "../InputItem";
 import { TemplateInput } from "../TemplateInput";
 
 const headerIndent: string = '  -';
@@ -15,7 +14,7 @@ const dvIndent:     string = '        -';
 
 function extractTextInBrackets(input: string): string[] {
   // The regular expression matches text within square brackets.
-  const regex = /\[(.*?)\]/g;
+  const regex = /\[(.*?)]/g;
   let match;
   const matches: string[] = [];
 
@@ -42,7 +41,7 @@ export const xmind = {
   },
 
   formatCompositionContextHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
-    const { sb, config } = dBuilder;
+    const { sb} = dBuilder;
     sb.append(`${headerIndent} context`);
   },
 
@@ -68,7 +67,7 @@ export const xmind = {
   },
 
   formatObservationEvent: (dBuilder: DocBuilder, f: TemplateElement) => {
-    const { sb, config } = dBuilder;
+    const { sb} = dBuilder;
     sb.append(`${eventIndent} ${f.name}  ${formatRawOccurrencesText(dBuilder, f)}`)
   },
 

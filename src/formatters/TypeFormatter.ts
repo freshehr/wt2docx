@@ -49,6 +49,7 @@ export const formatDvText = (docBuilder: DocBuilder, f: TemplateElement): void =
   switch (docBuilder.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.dvTypes.formatDvText
+      break;
     case ExportFormat.fsh:
       break;
     default:

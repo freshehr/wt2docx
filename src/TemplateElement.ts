@@ -1,5 +1,4 @@
 
-import { InputItem } from "./InputItem";
 import { TemplateInput } from "./TemplateInput";
 
 export interface TemplateElement {
