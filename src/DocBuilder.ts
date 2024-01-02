@@ -171,7 +171,8 @@ export class DocBuilder {
     formatCompositionContextHeader(this, f);
     if (f.children?.length > 0) {
       formatNodeHeader(this)
-      this.walkChildren(f)
+      this.walkRmChildren(f);
+      this.walkNonRMChildren(f)
       formatNodeFooter(this,f)
     }
   }
