@@ -3,7 +3,7 @@ import  {adoc }from "./formatters/AdocFormatter"
 import {xmind } from "./formatters/XmindFormatter"
 import { TemplateElement } from "./TemplateElement";
 import { dataValueLabelMapper, formatOccurrences, isDisplayableNode } from "./TemplateTypes";
-import { docx } from "./formatters/PanDocFormatter";
+import { docx, pdf } from "./formatters/PanDocFormatter";
 
 export enum ExportFormat {
   adoc = 'adoc',
@@ -206,6 +206,9 @@ export const saveFile  = async (docBuilder: DocBuilder, outFile: string): Promis
       break;
     case ExportFormat.docx:
       fn = docx.saveFile
+      break;
+    case ExportFormat.pdf:
+      fn = pdf.saveFile
       break;
     default:
       fn = adoc.saveFile

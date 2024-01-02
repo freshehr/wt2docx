@@ -1,34 +1,29 @@
 import { DocBuilder } from "../DocBuilder";
-import fs from "fs";
-import pandoc from "node-pandoc"
-import { promisify } from 'util';
-// import asciidoctor from "asciidoctor";
-import Asciidoctor from '@asciidoctor/core'
 import { exec } from "child_process";
+import { adoc } from "./AdocFormatter";
 
-//import docbookConverter from  '@asciidoctor/docbook-converter'
-//import { asciidoctor } from "asciidoctor";
+const CreateDocbook = (src: string): void => {
 
-//docbookConverter.register() // register the DocBook converter
-const pandocPromise = promisify(pandoc);
-
-const runPandoc = async (src: string, format: string, outFile: string ): Promise<void> => {
-  const args = `-f docbook -t ${format}  -o './${outFile}'`
-
-//  const asciidoctor = Asciidoctor()
   const asciidoctor = require('@asciidoctor/core')()
   const docbookConverter = require('@asciidoctor/docbook-converter')
+
   docbookConverter.register();
 
   const docbookContent = asciidoctor.convert(src, { backend: "docbook" });
 
-    // Write DocBook content to a temporary file
-    const fs = require('fs');
-    fs.writeFileSync(`./temp.xml`, docbookContent.toString());
+  // Write DocBook content to a temporary file
+  const fs = require('fs');
+  fs.writeFileSync(`./tmpDocbook.xml`, docbookContent.toString());
 
+}
+
+const runPandoc = async (src: string, format: string, outFile: string ): Promise<void> => {
   const { exec } = require('child_process');
+  const args = `-f docbook -t ${format}  -o './${outFile}'`
 
-  const command = `pandoc ${args} ./temp.xml`
+  CreateDocbook(src)
+
+  const command = `pandoc ${args} ./tmpDocbook.xml`
 
   exec(command, (error, stdout, stderr) => {
     if (error) {
@@ -39,17 +34,30 @@ const runPandoc = async (src: string, format: string, outFile: string ): Promise
       console.log(`stderr: ${stderr}`);
       return;
     }
-    console.log(`stdout: ${stdout}`);
+    console.log(`Export file: ${outFile}`);
+
   });
 
-//    try {
-//    const result = await pandocPromise(`${process.cwd()}/temp.xml`, args);
-//    console.log(result);
-//  } catch(err) {
-//    console.error('Oh Nos: ', err);
-//  }
+};
 
-  //pandoc(src, args, callback);
+const runAsciidocPDF = async (src: string, outFile: string ): Promise<void> => {
+  const { exec } = require('child_process');
+
+  const command = `asciidoctor-pdf ./tmp.adoc`
+
+  exec(command, (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      console.log(`stderr: ${stderr}`);
+      return;
+    }
+    console.log(`Export file: ${outFile}`);
+
+  });
+
 };
 
 export const docx = {
@@ -62,6 +70,7 @@ export const docx = {
 export const pdf = {
 
   saveFile:  async (dBuilder: DocBuilder, outFile: string) => {
-    await runPandoc(dBuilder.sb.toString(),'pdf', outFile)
+    await adoc.saveFile(dBuilder,'./tmp.adoc')
+    await runAsciidocPDF(dBuilder.sb.toString(), outFile)
   },
 }
