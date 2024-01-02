@@ -1,4 +1,6 @@
-import { TemplateInput } from './TemplateInput';
+
+import { InputItem } from "./InputItem";
+import { TemplateInput } from "./TemplateInput";
 
 export interface TemplateElement {
   id: string;

@@ -1,9 +1,9 @@
 import { TemplateElement } from "./TemplateElement";
 import { WebTemplate } from "./WebTemplate";
 import {
-  isAnyChoice,
+  isAnyChoice, isChoice,
   isDataValue,
-  templateTypes,
+  isEntry,
   isEvent,
   isSection
 } from "./TemplateTypes";
@@ -12,7 +12,7 @@ import { Config } from "./Config";
 import rmDescriptions from "../resources/rm_descriptions.json";
 import {
   ExportFormat,
-  formatAnnotations,
+  formatAnnotations, formatChoiceHeader,
   formatCluster, formatCompositionContextHeader,
   formatCompositionHeader,
   formatLeafHeader,
@@ -81,19 +81,17 @@ export class DocBuilder {
   }
 
   private walk(f: TemplateElement) {
-    if (templateTypes(f.rmType)) {
+     if (isEntry(f.rmType))
       this.walkEntry(f)
-    } else if (isDataValue(f.rmType)) {
-      this.walkElement(f, false)
-    } else if (isSection(f.rmType)) {
+     else if (isDataValue(f.rmType))
+      this.walkElement(f)
+     else if (isSection(f.rmType))
       this.walkSection(f)
-    } else if (f.rmType === 'ELEMENT') {
-      this.walkElement(f,false)
-    } else if (f.rmType === 'CLUSTER') {
+     else if (isEvent(f.rmType))
+      this.walkObservationEvent(f)
+     else if (f.rmType === 'CLUSTER')
       this.walkCluster(f);
-    } else if (isEvent(f.rmType)) {
-      this.walkEvent(f)
-    } else {
+     else {
       switch (f.rmType) {
 
         //      case 'ISM_TRANSITION':
@@ -105,11 +103,11 @@ export class DocBuilder {
           break;
         case 'CODE_PHRASE':
           f.name = f.id;
-          this.walkElement(f, false);
+          this.walkElement(f);
           break;
         case 'PARTY_PROXY':
           f.name = f.id;
-          this.walkElement(f, false);
+          this.walkElement(f);
           break;
         default:
           this.walkUnsupported(f)
@@ -128,7 +126,7 @@ export class DocBuilder {
     this.walkChildren(f);
   }
 
-  private walkEvent(f: TemplateElement) {
+  private walkObservationEvent(f: TemplateElement) {
     formatObservationEvent(this, f)
     this.walkChildren(f);
   }
@@ -141,8 +139,14 @@ export class DocBuilder {
     this.walkNonRMChildren(f)
   }
 
-  private walkElement(f: TemplateElement, isChoice: boolean) {
-    formatNodeContent(this, f, isChoice)
+  private walkElement(f: TemplateElement) {
+    formatNodeContent(this, f, false)
+    this.walkDataType(f)
+    formatAnnotations(this,f);
+  }
+
+  private walkChoice(f: TemplateElement) {
+    formatNodeContent(this, f, true)
     this.walkDataType(f)
     formatAnnotations(this,f);
   }
@@ -156,17 +160,14 @@ export class DocBuilder {
 
 
   private walkEntry(f: TemplateElement) {
-
     formatLeafHeader(this, f)
     formatNodeHeader(this)
     this.walkRmChildren(f);
     this.walkNonRMChildren(f)
     formatNodeFooter(this,f)
-
   }
 
   private walkCompositionContext(f: TemplateElement) {
-
     formatCompositionContextHeader(this, f);
     if (f.children?.length > 0) {
       formatNodeHeader(this)
@@ -242,7 +243,7 @@ export class DocBuilder {
     }
   */
 
-  private adjustRmTypeForInterval  = (rmType): string => {
+  private adjustRmTypeForInterval  = (rmType: string): string => {
     if (rmType.startsWith('DV_INTERVAL'))
       return rmType.replace(/(^.*<|>.*$)/g, '')
     else
@@ -255,7 +256,7 @@ export class DocBuilder {
 
     switch (adjustedRmType){
       case 'ELEMENT':
-        this.walkDvChoice(f)
+        this.walkChoiceHeader(f)
         break
       case 'DV_CODED_TEXT':
         formatDvCodedText(this,f)
@@ -296,15 +297,16 @@ export class DocBuilder {
       return rmDescriptions[f.id] ? rmDescriptions[f.id][language] : ''
   };
 
-  private walkDvChoice(f: TemplateElement) {
+  private walkChoiceHeader(f: TemplateElement) {
 
+    formatChoiceHeader(this,f)
     if (isAnyChoice(f.children.map(child => child.rmType)))
       return
 
     this.sb.append(`|_SubTypes_ | |`)
     f.children.forEach((child) => {
       child.parentNode = f
-      this.walkElement(child, true)
+      this.walkChoice(child)
     });
   }
 

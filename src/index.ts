@@ -20,7 +20,7 @@ function handleOutPath(infile :string, outputFile: string , ext: string) {
 }
 
 function writeOutput(docBuilder: DocBuilder, outFile: string) {
-  saveFile(docBuilder,outFile)
+  saveFile(docBuilder, outFile)
 }
 
 const args = yargs.options({
@@ -28,7 +28,7 @@ const args = yargs.options({
   'out-file': { type: 'string', demandOption: false, alias: 'o' },
   'out-dir': { type: 'string', demandOption: false, alias: 'od', default: 'out'},
   'config-file': { type: 'string', demandOption: false, alias: 'cf', default: "config/wtconfig.json"},
-  'export-format': { type: 'string', demandOption: false, alias: 'ex', default: "xmind"},
+  'export-format': { type: 'string', demandOption: false, alias: 'ex', default: "adoc"},
 }).argv;
 
 const spinner = ora(`Running test on ${args['web-template']}`).start();
@@ -36,8 +36,10 @@ const spinner = ora(`Running test on ${args['web-template']}`).start();
 const inFilePath = args['web-template'];
 const config:Config = importConfig(args['config-file']);
 const outFileDir: string = args['out-dir'];
-const outFilePath = handleOutPath(inFilePath, args['out-file'], 'xmind');
+
 const exportFormat = args['export-format'];
+const outFilePath = handleOutPath(inFilePath, args['out-file'], exportFormat);
+
 
 const inputFileExist = fs.existsSync(inFilePath);
 

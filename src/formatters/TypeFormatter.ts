@@ -3,6 +3,7 @@ import { TemplateElement } from "../TemplateElement";
 import { ExportFormat, FormatElementFn } from "../DocFormatter";
 // import { xmind } from "./XmindFormatter";
 import { adoc } from "./AdocFormatter";
+import { xmind } from "./XmindFormatter";
 
 export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): void => {
 
@@ -10,6 +11,8 @@ export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): v
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.xmind:
+      fn = xmind.dvTypes.formatDvCodedText
+      break
     case ExportFormat.fsh:
       break;
     default:
@@ -27,6 +30,7 @@ export const formatDvChoice = (docBuilder: DocBuilder, f: TemplateElement): void
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.xmind:
+      break;
     case ExportFormat.fsh:
       break;
     default:
@@ -44,6 +48,7 @@ export const formatDvText = (docBuilder: DocBuilder, f: TemplateElement): void =
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.xmind:
+      fn = xmind.dvTypes.formatDvText
     case ExportFormat.fsh:
       break;
     default:
@@ -92,6 +97,8 @@ export const formatDvOrdinal = (docBuilder: DocBuilder, f: TemplateElement): voi
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.xmind:
+      fn = xmind.dvTypes.formatDvOrdinal
+      break;
     case ExportFormat.fsh:
       break;
     default:

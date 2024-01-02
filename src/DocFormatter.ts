@@ -75,15 +75,30 @@ export const formatCompositionHeader = (docBuilder: DocBuilder, f: TemplateEleme
     fn(docBuilder, f);
 }
 
+export const formatChoiceHeader = (docBuilder: DocBuilder, f: TemplateElement): void => {
+
+  let fn: FormatElementFn;
+
+  switch (docBuilder.exportFormat) {
+    case ExportFormat.xmind:
+      break;
+    case ExportFormat.fsh:
+      break;
+    default:
+      fn = adoc.formatChoiceHeader
+      break;
+  }
+
+  if (fn)
+    fn(docBuilder, f);
+}
+
 export const formatNodeHeader = (docBuilder: DocBuilder): void => {
 
   let fn: FormatHeaderFn;
 
   switch (docBuilder.exportFormat) {
-    case ExportFormat.adoc:
     case ExportFormat.xmind:
-    case ExportFormat.docx:
-    case ExportFormat.pdf:
     case ExportFormat.fsh:
       break;
     default:
@@ -118,7 +133,9 @@ export const formatCompositionContextHeader = (docBuilder: DocBuilder, f: Templa
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.xmind:
-    case ExportFormat.fsh:
+      fn = xmind.formatCompositionContextHeader
+      break;
+      case ExportFormat.fsh:
       break;
     default:
       fn = adoc.formatCompositionContextHeader
@@ -134,7 +151,9 @@ export const formatLeafHeader = (docBuilder: DocBuilder, f: TemplateElement): vo
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.xmind:
-    case ExportFormat.fsh:
+      fn = xmind.formatLeafHeader
+      break;
+      case ExportFormat.fsh:
       break;
     default:
       fn = adoc.formatLeafHeader
@@ -150,6 +169,8 @@ export const formatObservationEvent = (docBuilder: DocBuilder, f: TemplateElemen
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.xmind:
+      fn = xmind.formatObservationEvent
+      break;
     case ExportFormat.fsh:
       break;
     default:
@@ -198,6 +219,8 @@ export const formatNodeContent= (dBuilder: DocBuilder, f: TemplateElement, isCho
 
   switch (dBuilder.exportFormat) {
     case ExportFormat.xmind:
+      fn = xmind.formatNodeContent
+      break;
     case ExportFormat.fsh:
       break;
     default:
@@ -242,8 +265,13 @@ export const formatUnsupported= (dBuilder: DocBuilder, f: TemplateElement) =>{
 }
 
 export const formatOccurrencesText= (dBuilder: DocBuilder, f: TemplateElement) => {
+  const occurrencesText = formatRawOccurrencesText(dBuilder,f);
+  return occurrencesText ? `**${occurrencesText}**` : ``;
+}
+
+export const formatRawOccurrencesText= (dBuilder: DocBuilder, f: TemplateElement) => {
   const occurrencesText = formatOccurrences(f, dBuilder.config.displayTechnicalOccurrences);
-  return occurrencesText ? `[**${occurrencesText}**]` : ``;
+  return occurrencesText ? `[${occurrencesText}]` : ``;
 }
 
 

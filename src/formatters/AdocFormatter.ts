@@ -57,7 +57,7 @@ export const adoc = {
       if (config.hideNodeIds)
         return name;
 
-      return name + ` + \n ${nodeIdTxt}`
+      return `${name} + \n ${nodeIdTxt}`
     }
 
     let resolvedNodeId: string;
@@ -67,9 +67,9 @@ export const adoc = {
     else if (isChoice)
       resolvedNodeId = `${findParentNodeId(f).nodeId}`;
     else
-      resolvedNodeId = sb.backTick("RM");
+      resolvedNodeId = 'RM'
 
-    const nodeIdText = `NodeID: [${sb.backTick(resolvedNodeId)}] ${sb.backTick(f.id)}`;
+    const nodeIdText = `NodeID: [${sb.backTick(resolvedNodeId)}] + \n ${sb.backTick(f.id)}`;
     let nodeName = f.localizedName ? f.localizedName : f.name
     nodeName = nodeName ? nodeName : f.id
     let rmTypeText = '';
@@ -123,7 +123,7 @@ export const adoc = {
     const formattedOccurrencesText = formatOccurrencesText(dBuilder, f);
     const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
 
-    if (config.hideNodeIds)
+    if (!config.hideNodeIds)
       sb.append(clinicalText + '\n' + `\`${f.rmType}: _${f.nodeId}_\``);
     else
       sb.append(clinicalText)
@@ -153,7 +153,19 @@ export const adoc = {
     if (!config.hideNodeIds) {
       sb.append(`===== \`${f.rmType}: _${nodeId}_\``);
   }
-},
+
+  },
+  formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+    const { sb } = dBuilder;
+    sb.append('a|');
+    let subTypesAllowedText: string;
+    if (isAnyChoice(f.children.map(child => child.rmType)))
+      subTypesAllowedText = 'All'
+    else
+      subTypesAllowedText = 'Multiple'
+
+    sb.append(`_${subTypesAllowedText} data types allowed_`);
+  },
 
   dvTypes: {
     formatDvCodedText: (dBuilder: DocBuilder, f: TemplateElement) => {
@@ -283,18 +295,6 @@ export const adoc = {
           });
         });
       }
-    },
-
-    formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
-      const { sb } = dBuilder;
-      sb.append('a|');
-      let subTypesAllowedText: string;
-      if (isAnyChoice(f.children.map(child => child.rmType)))
-        subTypesAllowedText = 'All'
-      else
-        subTypesAllowedText = 'Multiple'
-
-      sb.append(`_${subTypesAllowedText} data types allowed_`);
     }
   }
 }

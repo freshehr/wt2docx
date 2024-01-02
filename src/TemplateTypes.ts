@@ -1,6 +1,6 @@
 import { TemplateElement } from './TemplateElement';
 
-export function templateTypes(rmType: string) {
+export function isEntry(rmType: string) {
   return ['OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY'].includes(rmType);
 }
 
@@ -11,10 +11,19 @@ export function isSection(rmType: string) {
   return ['SECTION'].includes(rmType);
 }
 
+export function isDvChoice(rmType: string) {
+  return ['ELEMENT'].includes(rmType);
+}
 export function isAnyChoice(rmType: string[]) {
   // compares the list of Choices with the whole DataValues array and sends true if all the values exist.
   const missing = Object.keys(DataValues).filter(item => rmType.indexOf(item) < 0 && isNaN(Number(item)))
  return missing.length === 0
+}
+
+export function isChoice(rmType: string[]) {
+  // compares the list of Choices with the whole DataValues array and sends true if all the values exist.
+  const missing = Object.keys(DataValues).filter(item => rmType.indexOf(item) < 0 && isNaN(Number(item)))
+  return missing.length === 0
 }
 
 export enum DataValues{
@@ -36,6 +45,7 @@ export enum DataValues{
   'DV_MULTIMEDIA',
   'DV_PARSABLE',
   'DV_STATE',
+  'ELEMENT'
 }
 
 export enum OtherDisplayableNodes{
@@ -79,7 +89,7 @@ const displayableNodeTextTable = {
   PARTY_PROXY: "Party"
 }
 
-export const dataValueLabelMapper = (dataValue:string) => displayableNodeTextTable[dataValue] || `Missing mapping ${dataValue}`
+export const dataValueLabelMapper = (dataValue:string) => displayableNodeTextTable[dataValue] || `Not supported ${dataValue}`
 
 export const formatOccurrences = (f: TemplateElement, techDisplay :boolean = true) => {
 

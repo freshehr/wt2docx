@@ -1,4 +1,4 @@
-export interface TemplateList {
+export interface InputItem {
   value: string;
   label?: string;
   localizedLabels?: Record<string, string>;
