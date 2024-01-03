@@ -1,5 +1,4 @@
 import { DocBuilder } from "../DocBuilder";
-import { exec } from "child_process";
 import { adoc } from "./AdocFormatter";
 
 const CreateDocbook = (src: string): void => {
@@ -25,7 +24,7 @@ const runPandoc = async (src: string, format: string, outFile: string ): Promise
 
   const command = `pandoc ${args} ./tmpDocbook.xml`
 
-  exec(command, (error, stdout, stderr) => {
+  exec(command, (error: { message: any; }, stdout: any, stderr: any) => {
     if (error) {
       console.log(`error: ${error.message}`);
       return;
@@ -34,31 +33,13 @@ const runPandoc = async (src: string, format: string, outFile: string ): Promise
       console.log(`stderr: ${stderr}`);
       return;
     }
-    console.log(`Export file: ${outFile}`);
-
+    if (stdout) {
+      console.log(`Export file: ${outFile}`);
+    }
   });
 
 };
 
-const runAsciidocPDF = async (src: string, outFile: string ): Promise<void> => {
-  const { exec } = require('child_process');
-
-  const command = `rvm use ruby-2.5.3 && asciidoctor-pdf ./tmp.adoc`
-
-  exec(command, (error, stdout, stderr) => {
-    if (error) {
-      console.log(`error: ${error.message}`);
-      return;
-    }
-    if (stderr) {
-      console.log(`stderr: ${stderr}`);
-      return;
-    }
-    console.log(`Export file: ${outFile}`);
-
-  });
-
-};
 
 export const docx = {
 
