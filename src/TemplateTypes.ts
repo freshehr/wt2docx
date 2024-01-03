@@ -7,6 +7,15 @@ export function isEntry(rmType: string) {
 export function isEvent(rmType: string) {
   return ['EVENT', 'POINT_EVENT', 'INTERVAL_EVENT'].includes(rmType);
 }
+
+export function isActivity(rmType: string) {
+  return ['ACTIVITY'].includes(rmType);
+}
+
+export function isISMTransition(rmType: string) {
+  return ['ISM_TRANSITION'].includes(rmType);
+}
+
 export function isSection(rmType: string) {
   return ['SECTION'].includes(rmType);
 }
@@ -45,13 +54,13 @@ export enum DataValues{
   'DV_MULTIMEDIA',
   'DV_PARSABLE',
   'DV_STATE',
-  'ELEMENT'
+  'ELEMENT',
+  'STRING'
 }
 
 export enum OtherDisplayableNodes{
   'CODE_PHRASE',
-  'PARTY_PROXY',
-  'ELEMENT'
+  'PARTY_PROXY'
 }
 
 // type DisplayableNodes = DataValues | OtherDisplayableNodes
@@ -86,7 +95,8 @@ const displayableNodeTextTable = {
   DV_DATE: "Date",
   DV_TIME: "Time",
   CODE_PHRASE: "Code phrase",
-  PARTY_PROXY: "Party"
+  PARTY_PROXY: "Party",
+  STRING: "String"
 }
 
 export const dataValueLabelMapper = (dataValue:string) => displayableNodeTextTable[dataValue] || `Not supported ${dataValue}`

@@ -179,6 +179,24 @@ export const formatObservationEvent = (docBuilder: DocBuilder, f: TemplateElemen
     fn(docBuilder, f);
 }
 
+export const formatInstructionActivity = (docBuilder: DocBuilder, f: TemplateElement): void => {
+  let fn: FormatElementFn;
+
+  switch (docBuilder.exportFormat) {
+    case ExportFormat.xmind:
+  //    fn = xmind.formatObservationEvent
+      break;
+    case ExportFormat.fsh:
+      break;
+    default:
+      fn = adoc.formatInstructionActivity
+      break;
+  }
+
+  if (fn)
+    fn(docBuilder, f);
+}
+
 export const formatCluster = (docBuilder: DocBuilder, f: TemplateElement): void => {
   let fn: FormatElementFn;
 

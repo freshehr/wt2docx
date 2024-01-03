@@ -33,6 +33,7 @@ export const adoc = {
 
   saveFile: async (dBuilder: DocBuilder, outFile: string) => {
     fs.writeFileSync(outFile, dBuilder.toString());
+    console.log( `Exported : ${outFile}`)
   },
 
   formatNodeHeader: (dBuilder: DocBuilder) => {
@@ -115,6 +116,18 @@ export const adoc = {
       sb.append(clinicalText)
   },
 
+  formatInstructionActivity: (dBuilder: DocBuilder, f: TemplateElement) => {
+    const { sb, config } = dBuilder;
+
+    const formattedOccurrencesText = formatOccurrencesText(dBuilder, f);
+    const clinicalText = `3+a|===== ${f.name}  ${formattedOccurrencesText}`
+
+    if (config.hideNodeIds)
+      sb.append(clinicalText + '\n' + `\`${f.rmType}: _${f.nodeId}_\``);
+    else
+      sb.append(clinicalText)
+  },
+
   formatCluster: (dBuilder: DocBuilder, f: TemplateElement) => {
     const { sb, config } = dBuilder;
 
@@ -156,13 +169,14 @@ export const adoc = {
   formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
     const { sb } = dBuilder;
     sb.append('a|');
-    let subTypesAllowedText: string;
-    if (isAnyChoice(f.children.map(child => child.rmType)))
-      subTypesAllowedText = 'All'
-    else
-      subTypesAllowedText = 'Multiple'
 
-    sb.append(`_${subTypesAllowedText} data types allowed_`);
+    if (isAnyChoice(f.children.map(child => child.rmType))) {
+      sb.append(`_All data types allowed_`);
+      return
+    }
+
+    sb.append(`_Multiple data types allowed_`);
+    sb.append(`|_SubTypes_ | |`);
   },
 
   dvTypes: {
@@ -233,8 +247,8 @@ export const adoc = {
         sb.append('')
         f.inputs.forEach((item) => {
           if (item.list && item.suffix === 'unit') {
+            sb.append('Valid units: +\n')
             item.list.forEach((val) => {
-              sb.append('Units: +\n')
               sb.append(`* ${val.value}`);
             });
           }

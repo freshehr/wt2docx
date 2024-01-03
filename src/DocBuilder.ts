@@ -1,6 +1,7 @@
 import { TemplateElement } from "./TemplateElement";
 import { WebTemplate } from "./WebTemplate";
 import {
+  isActivity,
   isAnyChoice, isChoice,
   isDataValue,
   isEntry,
@@ -14,7 +15,7 @@ import {
   ExportFormat,
   formatAnnotations, formatChoiceHeader,
   formatCluster, formatCompositionContextHeader,
-  formatCompositionHeader,
+  formatCompositionHeader, formatInstructionActivity,
   formatLeafHeader,
   formatNodeContent,
   formatNodeFooter,
@@ -89,13 +90,15 @@ export class DocBuilder {
       this.walkSection(f)
      else if (isEvent(f.rmType))
       this.walkObservationEvent(f)
+     else if (isActivity(f.rmType))
+       this.walkInstructionActivity(f)
      else if (f.rmType === 'CLUSTER')
       this.walkCluster(f);
      else {
       switch (f.rmType) {
 
-        //      case 'ISM_TRANSITION':
-        //        this.walkChildren(f)
+      //       case 'ISM_TRANSITION':
+       //         this.walkChildren(f)
         //        break;
         case 'EVENT_CONTEXT':
           f.name = 'Composition context';
@@ -304,7 +307,6 @@ export class DocBuilder {
     if (isAnyChoice(f.children.map(child => child.rmType)))
       return
 
-    this.sb.append(`|_SubTypes_ | |`)
     f.children.forEach((child) => {
       child.parentNode = f
       this.walkChoice(child)
@@ -312,4 +314,8 @@ export class DocBuilder {
   }
 
 
+  private walkInstructionActivity(f: TemplateElement) {
+    formatInstructionActivity(this, f)
+    this.walkChildren(f);
+  }
 }
