@@ -43,7 +43,7 @@ const runPandoc = async (src: string, format: string, outFile: string ): Promise
 const runAsciidocPDF = async (src: string, outFile: string ): Promise<void> => {
   const { exec } = require('child_process');
 
-  const command = `asciidoctor-pdf ./tmp.adoc`
+  const command = `rvm use ruby-2.5.3 && asciidoctor-pdf ./tmp.adoc`
 
   exec(command, (error, stdout, stderr) => {
     if (error) {
@@ -71,6 +71,7 @@ export const pdf = {
 
   saveFile:  async (dBuilder: DocBuilder, outFile: string) => {
     await adoc.saveFile(dBuilder,'./tmp.adoc')
-    await runAsciidocPDF(dBuilder.sb.toString(), outFile)
+//    await runAsciidocPDF(dBuilder.sb.toString(), outFile)
+    await runPandoc(dBuilder.sb.toString(),'pdf', outFile)
   },
 }
