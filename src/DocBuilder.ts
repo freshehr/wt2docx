@@ -2,7 +2,7 @@ import { TemplateElement } from "./TemplateElement";
 import { WebTemplate } from "./WebTemplate";
 import {
   isActivity,
-  isAnyChoice, isChoice,
+  isAnyChoice,
   isDataValue,
   isEntry,
   isEvent,
