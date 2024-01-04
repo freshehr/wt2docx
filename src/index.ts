@@ -24,11 +24,11 @@ function writeOutput(docBuilder: DocBuilder, outFile: string) {
 }
 
 const args = yargs.options({
-  'web-template': { type: 'string', demandOption: true, alias: 'wt' },
-  'out-file': { type: 'string', demandOption: false, alias: 'o' },
-  'out-dir': { type: 'string', demandOption: false, alias: 'od', default: 'out'},
-  'config-file': { type: 'string', demandOption: false, alias: 'cf', default: "config/wtconfig.json"},
-  'export-format': { type: 'string', demandOption: false, alias: 'ex', default: "adoc"},
+  'web-template': { type: 'string', describe: 'web template name',demandOption: true, alias: 'wt' },
+  'out-file': { type: 'string', describe: 'Output file (Default: web template root name ',demandOption: false, alias: 'o' },
+  'out-dir': { type: 'string', demandOption: false, describe: 'Output folder (Default ./out', alias: 'od', default: 'out'},
+  'config-file': { type: 'string', demandOption: false, describe: 'Config file',alias: 'cf', default: "config/wtconfig.json"},
+  'export-format': { type: 'string', demandOption: false, alias: 'ex', describe: 'Export format: adoc|docx|xmind|pdf (default: adoc)',default: "adoc"},
 }).argv;
 
 
