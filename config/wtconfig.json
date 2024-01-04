@@ -9,5 +9,6 @@
   "title": "",
   "hideParticipations": true,
   "displayAQLPaths": false,
-  "displayToc": false
+  "displayToc": false,
+  "hideXmindValues" : true
 }

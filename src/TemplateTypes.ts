@@ -25,17 +25,30 @@ export function isDvChoice(rmType: string) {
 }
 export function isAnyChoice(rmType: string[]) {
   // compares the list of Choices with the whole DataValues array and sends true if all the values exist.
-  const missing = Object.keys(DataValues).filter(item => rmType.indexOf(item) < 0 && isNaN(Number(item)))
- return missing.length === 0
+  const dvDataTypes: string[] = Object.keys(DvDataValues).filter(key => isNaN(+key))
+
+  const missing: string[] = dvDataTypes.filter(item =>  (rmType.indexOf(item) < 0 ))
+
+  return (missing.length === 0)
+
 }
 
-export function isChoice(rmType: string[]) {
-  // compares the list of Choices with the whole DataValues array and sends true if all the values exist.
-  const missing = Object.keys(DataValues).filter(item => rmType.indexOf(item) < 0 && isNaN(Number(item)))
-  return missing.length === 0
+export const mapRmTypeText = (rmTypeString: string) => {
+
+  // if (!isDisplayableNode(rmTypeString)) return ''
+
+  let rmType = rmTypeString
+  let intervalPrefix = ''
+
+  if (rmTypeString.startsWith('DV_INTERVAL')) {
+    intervalPrefix = "Interval of "
+    rmType = rmTypeString.replace(/(^.*<|>.*$)/g, '');
+  }
+
+  return `${intervalPrefix}${dataValueLabelMapper(rmType)}`
 }
 
-export enum DataValues{
+export enum DvDataValues{
   'DV_CODED_TEXT',
   'DV_TEXT',
   'DV_DATE',
@@ -53,7 +66,10 @@ export enum DataValues{
   'DV_EHR_URI',
   'DV_MULTIMEDIA',
   'DV_PARSABLE',
-  'DV_STATE',
+}
+
+export enum NonDvDataValues{
+  'DV_STATE' ,
   'ELEMENT',
   'STRING'
 }
@@ -67,12 +83,12 @@ export enum OtherDisplayableNodes{
 
 export function isDataValue(rmType: string)
 {
-  return Object.keys(DataValues).includes(rmType)
+  return Object.keys(DvDataValues).includes(rmType) || Object.keys(NonDvDataValues).includes(rmType)
 }
 
 export function isDisplayableNode(rmType: string)
 {
-  return Object.keys(DataValues).includes(rmType) || Object.keys(OtherDisplayableNodes).includes(rmType)
+  return Object.keys(DvDataValues).includes(rmType) || Object.keys(OtherDisplayableNodes).includes(rmType)
 }
 const displayableNodeTextTable = {
   ELEMENT: 'Choice',

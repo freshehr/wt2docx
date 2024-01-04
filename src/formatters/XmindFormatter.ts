@@ -3,8 +3,8 @@ import { parseXMindMarkToXMindFile} from "xmindmark";
 
 import { DocBuilder } from "../DocBuilder";
 import {  TemplateElement } from "../TemplateElement";
-import { formatOccurrences, isAnyChoice } from "../TemplateTypes";
-import { formatRawOccurrencesText, mapRmTypeText } from "../DocFormatter";
+import { formatOccurrences, isAnyChoice, mapRmTypeText } from '../TemplateTypes';
+import { formatRawOccurrencesText } from "../DocFormatter";
 import { TemplateInput } from "../TemplateInput";
 
 const headerIndent: string = '  -';
@@ -72,14 +72,22 @@ export const xmind = {
     sb.append(`${eventIndent} ${f.name}  ${formatRawOccurrencesText(dBuilder, f)}`)
   },
 
+  formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+    const { sb} = dBuilder;
+
+    if (isAnyChoice(f.children.map(child =>  child.rmType)))
+      sb.append(`${dvIndent} All data types allowed`);
+  },
+
   dvTypes: {
     formatDvCodedText: (dBuilder: DocBuilder, f: TemplateElement) => {
-      const { sb } = dBuilder;
+      const { sb, config} = dBuilder;
 
       f?.inputs.forEach((item :TemplateInput) => {
-        if (item.list) {
+        if (item.list ) {
           item.list.forEach((list) => {
-              sb.append(`${dvIndent} ${list.label} [B]`);
+          if (!config.hideXmindValues)
+            sb.append(`${dvIndent} ${list.label} [B]`);
           })
         } else
           // Pick up an external valueset description annotation
@@ -89,18 +97,22 @@ export const xmind = {
           sb.append(`${dvIndent} ${extRef[0]} [B]`)
         }
 
-        if (item.listOpen)
+        if (item.listOpen  && !config.hideXmindValues)
           sb.append( `${dvIndent} Other text/ coded text allowed [B]`);
       });
     },
 
     formatDvText: (dBuilder: DocBuilder, f: TemplateElement) => {
-      const { sb } = dBuilder;
+      const { sb , config} = dBuilder;
 
       if (f.inputs.length > 0) {
         f.inputs.forEach((input) => {
-          if (input.list)
-            input.list.forEach((listItem) => sb.append(`${dvIndent} ${listItem.value} [B]`));
+          if (input.list ) {
+            input.list.forEach((listItem) => {
+              if (!config.hideXmindValues)
+                sb.append(`${dvIndent} ${listItem.value} [B]`)
+            })
+          }
           else
           if (input.suffix !== 'other' && f?.annotations?.vset_description) {
             // Pick up an external valueset description annotation
@@ -108,7 +120,7 @@ export const xmind = {
             sb.append(`${dvIndent} ${extRef[0]} [B]`)
           }
 
-          if (input.listOpen)
+          if (input.listOpen  && !config.hideXmindValues)
             sb.append(`${dvIndent} Other text/coded text allowed [B]`);
 
         });
@@ -117,28 +129,16 @@ export const xmind = {
     },
 
     formatDvOrdinal: (dBuilder: DocBuilder, f: TemplateElement) => {
-      const { sb } = dBuilder;
+      const { sb , config} = dBuilder;
+
       f.inputs.forEach((input) => {
         if (input.list)
-          input.list.forEach((listItem) =>sb.append(`${dvIndent} (${listItem.ordinal}) ${listItem.label} [B]`))
+          input.list.forEach((listItem) => {
+          if (!config.hideXmindValues)
+            sb.append(`${dvIndent} (${listItem.ordinal}) ${listItem.label} [B]`)
+          })
       })
     },
 
-    formatDvChoice: (dBuilder: DocBuilder, f: TemplateElement) => {
-      const { sb} = dBuilder;
-      let subTypesAllowedText: string = '';
-
-      if (isAnyChoice(f.children.map(child =>  child.rmType)))
-        subTypesAllowedText = 'All'
-      else {
-        const fc: TemplateElement[] = f.children
-        fc.forEach((n) => {
-          subTypesAllowedText = `${subTypesAllowedText} , ${n.rmTypeText}`
-        })
-
-      }
-      sb.append(`${subTypesAllowedText} data types allowed`);
-
-    }
   }
 }

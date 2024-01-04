@@ -8,5 +8,6 @@ export type Config = {
   hideParticipations: boolean;
   displayAQLPaths: boolean;
   displayToC: boolean;
+  hideXmindValues: boolean
 }
 

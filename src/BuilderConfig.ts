@@ -10,14 +10,15 @@ const defaultConfig: Config = {
   title: "",
   hideParticipations: true,
   displayAQLPaths: false,
-  displayToC: false
+  displayToC: false,
+  hideXmindValues: true
 };
 
  export function importConfig(path: string): Config {
 
    if (fs.existsSync(path)) {
-     const rawContent = fs.readFileSync(path, { encoding: 'utf8', flag: 'r' });
-     return JSON.parse(rawContent);
+     const localConfig = JSON.parse(fs.readFileSync(path, { encoding: 'utf8', flag: 'r' }));
+     return { ...defaultConfig, ...localConfig } ;
    }
    else
      return defaultConfig;

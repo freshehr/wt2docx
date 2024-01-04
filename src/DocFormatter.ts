@@ -2,7 +2,7 @@ import { DocBuilder } from "./DocBuilder";
 import  {adoc }from "./formatters/AdocFormatter"
 import {xmind } from "./formatters/XmindFormatter"
 import { TemplateElement } from "./TemplateElement";
-import { dataValueLabelMapper, formatOccurrences } from "./TemplateTypes";
+import { formatOccurrences } from "./TemplateTypes";
 import { docx, pdf } from "./formatters/PanDocFormatter";
 
 export enum ExportFormat {
@@ -19,21 +19,6 @@ type FormatCompositionHeaderFn = (dBuilder: DocBuilder, f: TemplateElement) => v
 export type FormatElementFn  = (docBuilder: DocBuilder, f: TemplateElement) => void;
 type FormatNodeContentFn = (dBuilder: DocBuilder, f: TemplateElement, isChoice: boolean) => void;
 
-
-export const mapRmTypeText = (rmTypeString: string) => {
-
- // if (!isDisplayableNode(rmTypeString)) return ''
-
-  let rmType = rmTypeString
-  let intervalPrefix = ''
-
-  if (rmTypeString.startsWith('DV_INTERVAL')) {
-    intervalPrefix = "Interval of "
-    rmType = rmTypeString.replace(/(^.*<|>.*$)/g, '');
-  }
-
-  return `${intervalPrefix}${dataValueLabelMapper(rmType)}`
-}
 
 export const formatTemplateHeader = (docBuilder: DocBuilder): void => {
 
@@ -78,6 +63,7 @@ export const formatChoiceHeader = (docBuilder: DocBuilder, f: TemplateElement): 
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.xmind:
+      fn = xmind.formatChoiceHeader
       break;
     case ExportFormat.fsh:
       break;
