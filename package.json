@@ -1,7 +1,7 @@
 {
-  "name": "wt2doc",
+  "name": "wt2docx",
   "version": "1.0.0-rc1",
-  "description": "WebTemplate to Asciidoc documentation - a util by Bifrost modified by freshEHR ",
+  "description": "openEHR WebTemplate to Asciidoc/ Docx/Xmind documentation - a util by Bifrost modified by freshEHR ",
   "main": "lib/index.js",
   "bin": {
     "wt2doc": "lib/index.js"
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/freshehr/wt2doc"
+    "url": "https://github.com/freshehr/wt2docx"
   },
   "keywords": [
     "openEHR",
