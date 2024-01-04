@@ -5,12 +5,11 @@ const defaultConfig: Config = {
   displayTechnicalOccurrences: false,
   hideNodeIds: true,
   skippedAQLPaths: [],
-  includedAnnotations: ['comments'],
-  hideComments: true,
+  includedAnnotations: [],
   excludedRMTags: ['territory','language', 'encoding','subject', 'transition','category','context', 'current_state', 'careflow_step'],
   title: "",
   hideParticipations: true,
-  hideAQLPaths: true,
+  displayAQLPaths: false,
   displayToC: false
 };
 

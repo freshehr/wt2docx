@@ -3,11 +3,10 @@ export type Config = {
   hideNodeIds: boolean;
   skippedAQLPaths: string[];
   includedAnnotations: string[];
-  hideComments: boolean;
   excludedRMTags: string[];
   title: string;
   hideParticipations: boolean;
-  hideAQLPaths: boolean;
+  displayAQLPaths: boolean;
   displayToC: boolean;
 }
 

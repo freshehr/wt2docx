@@ -49,6 +49,7 @@ export const xmind = {
     const xmindArrayBuffer = await parseXMindMarkToXMindFile(dBuilder.toString())
     fs.writeFileSync('./out/tmp.md', dBuilder.toString(), {encoding: "utf8"});
     fs.writeFileSync(outFile, Buffer.from(xmindArrayBuffer), {encoding: "utf8"});
+    console.log(`\n Exported : ${outFile}`)
   },
 
   formatNodeContent: (dBuilder: DocBuilder, f: TemplateElement, isChoice: boolean) => {

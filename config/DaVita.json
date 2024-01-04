@@ -1,14 +1,13 @@
 {
+  "title": "",
+  "displayToc": false,
   "hideParticipations" : true,
   "hideLanguageTerritory": true,
-  "displayToc": false,
   "hideNodeIds": false,
   "displayTechnicalOccurrences": false,
   "skippedAQLPaths": [],
-  "includedAnnotations": ["comments"],
-  "hideComments": true,
+  "includedAnnotations": [],
   "excludedRMTags": ["territory","language", "encoding","subject", "transition", "current_state", "careflow_step"],
-  "title": "",
-  "hideAQLPaths": true
+  "displayAQLPaths": false
 }
 

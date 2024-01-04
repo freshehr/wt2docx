@@ -9,13 +9,13 @@ import { importConfig } from './BuilderConfig';
 import { Config } from "./Config";
 import { saveFile } from "./DocFormatter";
 
-function handleOutPath(infile :string, outputFile: string , ext: string) {
+function handleOutPath(infile :string, outputFile: string , ext: string, outdir: string) {
   {
     if (outputFile)
       return outputFile;
 
     const pathSeg = path.parse(infile);
-    return  `out/${pathSeg.name}.${ext}`;
+    return  `${outdir}/${pathSeg.name}.${ext}`;
   }
 }
 
@@ -31,16 +31,16 @@ const args = yargs.options({
   'export-format': { type: 'string', demandOption: false, alias: 'ex', default: "adoc"},
 }).argv;
 
-const spinner = ora(`Running test on ${args['web-template']}`).start();
 
-const inFilePath = args['web-template'];
-const config:Config = importConfig(args['config-file']);
-const outFileDir: string = args['out-dir'];
+const inFilePath = args['web-template']
+const spinner = ora(`Processing ${inFilePath}`).start();
 
+
+const config:Config = importConfig(args['config-file'])
+const outFileDir: string = args['out-dir']
+const outFileName: string = args['out-file']
 const exportFormat = args['export-format'];
-const outFilePath = handleOutPath(inFilePath, args['out-file'], exportFormat);
-
-
+const outFilePath = handleOutPath(inFilePath, outFileName, exportFormat,outFileDir);
 const inputFileExist = fs.existsSync(inFilePath);
 
 if (inputFileExist) {

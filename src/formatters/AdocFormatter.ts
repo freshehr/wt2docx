@@ -6,8 +6,6 @@ import { formatOccurrencesText, mapRmTypeText } from "../DocFormatter";
 import { TemplateInput } from "../TemplateInput";
 
 
-
-
 export const adoc = {
 
   formatTemplateHeader: (dBuilder: DocBuilder): void => {
@@ -33,7 +31,7 @@ export const adoc = {
 
   saveFile: async (dBuilder: DocBuilder, outFile: string) => {
     fs.writeFileSync(outFile, dBuilder.toString());
-    console.log( `Exported : ${outFile}`)
+    console.log(`\n Exported : ${outFile}`)
   },
 
   formatNodeHeader: (dBuilder: DocBuilder) => {
@@ -49,7 +47,7 @@ export const adoc = {
     sb.append(`===  *${f.name}*`).newline()
     if (!config.hideNodeIds) {
       sb.append(`==== Type: \`_${f.rmType}_\``)
-      sb.append(`==== Id \`_${f.nodeId}_\``)
+      sb.append(`==== Id: \`_${f.nodeId}_\``)
     }
     sb.append(`${f.localizedDescriptions.en}`).newline()
   },
@@ -76,24 +74,35 @@ export const adoc = {
     const nodeIdText = `NodeID: [${sb.backTick(resolvedNodeId)}] + \n ${sb.backTick(f.id)}`;
     let nodeName = f.localizedName ? f.localizedName : f.name
     nodeName = nodeName ? nodeName : f.id
-    let rmTypeText = '';
+    // let rmTypeText:string;
 
-    if (isDisplayableNode(f.rmType)) {
-      rmTypeText = `${sb.backTick(mapRmTypeText(f.rmType))}`;
-    } else
-      sb.append('|' + sb.backTick('Unsupported RM type: ' + f.rmType))
+  //  if (isDisplayableNode(f.rmType)) {
+      const rmTypeText = `${sb.backTick(mapRmTypeText(f.rmType))}`;
+  //  } else
+  //    rmTypeText = sb.backTick(`Unsupported RM type:  ${f.rmType}`)
+
 
     let nameText: string
     const occurrencesText = formatOccurrences(f, config.displayTechnicalOccurrences)
     const formattedOccurrencesText = occurrencesText ? `(_${occurrencesText}_)` : ``
 
+    let descriptionText: string;
+
+    if (config.displayAQLPaths)
+      descriptionText = `**AQL**: ${f.aqlPath}`
+    else
+      descriptionText = dBuilder.getDescription(f)
+
     if (!isChoice) {
       nameText = `**${nodeName}** + \n Type: ${rmTypeText} ${formattedOccurrencesText}`
-      sb.append(`| ${applyNodeIdFilter(nameText, nodeIdText)} | ${dBuilder.getDescription(f)} `);
+      sb.append(`| ${applyNodeIdFilter(nameText, nodeIdText)} | ${descriptionText} `);
     } else {
       nameText = `Type: ${rmTypeText}`
       sb.append(`| ${applyNodeIdFilter(nameText, nodeIdText)} |`);
     }
+
+
+
   },
 
   formatNodeFooter: (dBuilder: DocBuilder) => {
@@ -166,6 +175,7 @@ export const adoc = {
   }
 
   },
+
   formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
     const { sb } = dBuilder;
     sb.append('a|');

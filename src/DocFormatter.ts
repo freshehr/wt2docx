@@ -22,7 +22,7 @@ type FormatNodeContentFn = (dBuilder: DocBuilder, f: TemplateElement, isChoice: 
 
 export const mapRmTypeText = (rmTypeString: string) => {
 
-  if (!isDisplayableNode(rmTypeString)) return ''
+ // if (!isDisplayableNode(rmTypeString)) return ''
 
   let rmType = rmTypeString
   let intervalPrefix = ''

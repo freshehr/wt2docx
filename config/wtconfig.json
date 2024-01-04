@@ -3,10 +3,11 @@
   "displayTechnicalOccurrences": false,
   "hideNodeIds": true,
   "skippedAQLPaths": [],
-  "includedAnnotations": ["comments"],
-  "hideComments": true,
+  "includedAnnotations": ["comment"],
+  "hideComments": false,
   "excludedRMTags": ["territory","language", "encoding","subject", "transition","current_state", "careflow_step"],
   "title": "",
   "hideParticipations": true,
-  "hideAQLPaths": true
+  "displayAQLPaths": false,
+  "displayToc": false
 }
