@@ -4,7 +4,7 @@
   "description": "openEHR WebTemplate to Asciidoc/ Docx/Xmind documentation - a util by Bifrost modified by freshEHR ",
   "main": "lib/index.js",
   "bin": {
-    "wt2doc": "lib/index.js"
+    "wt2docx": "lib/index.js"
   },
   "scripts": {
     "dev": "ts-node src/index.ts",
