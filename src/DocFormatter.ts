@@ -2,7 +2,7 @@ import { DocBuilder } from "./DocBuilder";
 import  {adoc }from "./formatters/AdocFormatter"
 import {xmind } from "./formatters/XmindFormatter"
 import { TemplateElement } from "./TemplateElement";
-import { dataValueLabelMapper, formatOccurrences, isDisplayableNode } from "./TemplateTypes";
+import { dataValueLabelMapper, formatOccurrences } from "./TemplateTypes";
 import { docx, pdf } from "./formatters/PanDocFormatter";
 
 export enum ExportFormat {

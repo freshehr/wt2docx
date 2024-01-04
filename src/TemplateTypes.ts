@@ -99,7 +99,7 @@ const displayableNodeTextTable = {
   STRING: "String"
 }
 
-export const dataValueLabelMapper = (dataValue:string) => displayableNodeTextTable[dataValue] || `Not supported ${dataValue}`
+export const dataValueLabelMapper = (dataValue:string) => displayableNodeTextTable[dataValue] || `RM type not supported ${dataValue}`
 
 export const formatOccurrences = (f: TemplateElement, techDisplay :boolean = true) => {
 
