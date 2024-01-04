@@ -2,7 +2,6 @@
 import yargs from 'yargs';
 import ora from 'ora';
 import  * as fs from 'fs';
-// import { WebTemplate } from './WebTemplate';
 import { DocBuilder } from './DocBuilder';
 import  path  from 'path';
 import { importConfig } from './BuilderConfig';
