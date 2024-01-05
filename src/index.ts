@@ -7,6 +7,7 @@ import  path  from 'path';
 import { importConfig } from './BuilderConfig';
 import { Config } from "./Config";
 import { saveFile } from "./DocFormatter";
+import { searchCKMRepo, searchGHRepo } from './openEProvenance';
 
 function handleOutPath(infile :string, outputFile: string , ext: string, outDir: string) {
   {
@@ -43,8 +44,10 @@ if (inputFileExist) {
   const docBuilder : DocBuilder = new DocBuilder(JSON.parse(inDoc), config, exportFormat,outFileDir);
 
   saveFile(docBuilder, outFilePath);
+  searchGHRepo("ian.mcnicoll","vQum0C12K1Lx","openEHR/CKM-mirror")
 }
 else {
+
   console.log('The input file does not exist:' + inFilePath);
 }
 
