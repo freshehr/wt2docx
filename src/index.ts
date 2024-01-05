@@ -18,10 +18,6 @@ function handleOutPath(infile :string, outputFile: string , ext: string, outdir:
   }
 }
 
-function writeOutput(docBuilder: DocBuilder, outFile: string) {
-  saveFile(docBuilder, outFile)
-}
-
 const args = yargs.options({
   'web-template': { type: 'string', describe: 'web template name',demandOption: true, alias: 'wt' },
   'out-file': { type: 'string', describe: 'Output file (Default: web template root name ',demandOption: false, alias: 'o' },
@@ -45,7 +41,8 @@ const inputFileExist = fs.existsSync(inFilePath);
 if (inputFileExist) {
   const inDoc:string = fs.readFileSync(inFilePath, { encoding: 'utf8', flag: 'r' });
   const docBuilder : DocBuilder = new DocBuilder(JSON.parse(inDoc), config, exportFormat,outFileDir);
-  writeOutput(docBuilder, outFilePath);
+
+  saveFile(docBuilder, outFilePath);
 }
 else {
   console.log('The input file does not exist:' + inFilePath);
