@@ -13,7 +13,7 @@ import { Config } from "./Config";
 import rmDescriptions from "../resources/rm_descriptions.json";
 import {
   ExportFormat,
-  formatAnnotations, formatChoiceHeader,
+  formatChoiceHeader,
   formatCluster, formatCompositionContextHeader,
   formatCompositionHeader, formatInstructionActivity,
   formatLeafHeader,
