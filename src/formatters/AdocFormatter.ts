@@ -2,9 +2,8 @@ import { DocBuilder } from "../DocBuilder";
 import fs from "fs";
 import { findParentNodeId, TemplateElement } from "../TemplateElement";
 import { formatOccurrences, isAnyChoice, isDisplayableNode, mapRmTypeText} from "../TemplateTypes";
-import { formatOccurrencesText } from "../DocFormatter";
+import { formatAnnotations, formatOccurrencesText } from '../DocFormatter';
 import { TemplateInput } from "../TemplateInput";
-
 
 export const adoc = {
 
@@ -36,7 +35,7 @@ export const adoc = {
 
   formatNodeHeader: (dBuilder: DocBuilder) => {
     const { sb } = dBuilder;
-    sb.append('[options="header","stretch", cols="20,30,30"]');
+    sb.append('[options="header","stretch", cols="20,50,30"]');
     sb.append('|====');
     sb.append('|Data item | Description | Allowed values');
   },
@@ -96,6 +95,7 @@ export const adoc = {
     if (!isChoice) {
       nameText = `**${nodeName}** + \n Type: ${rmTypeText} ${formattedOccurrencesText}`
       sb.append(`| ${applyNodeIdFilter(nameText, nodeIdText)} | ${descriptionText} `);
+      formatAnnotations(dBuilder,f)
     } else {
       nameText = `Type: ${rmTypeText}`
       sb.append(`| ${applyNodeIdFilter(nameText, nodeIdText)} |`);
@@ -153,7 +153,7 @@ export const adoc = {
     const { sb, config } = dBuilder;
 
     if (f.annotations) {
-      sb.append(``);
+      sb.append(`\n`);
       for (const key in f.annotations) {
         if (f.annotations.hasOwnProperty(key)) {
           if (config?.includedAnnotations?.includes(key))
@@ -191,7 +191,7 @@ export const adoc = {
 
   dvTypes: {
     formatDvCodedText: (dBuilder: DocBuilder, f: TemplateElement) => {
-      const { sb } = dBuilder;
+      const { sb, config } = dBuilder;
       sb.append('a|');
 
       f?.inputs.forEach((item) => {
@@ -202,7 +202,10 @@ export const adoc = {
           item.list.forEach((list) => {
             const termPhrase = `${term}:${list.value}`
             if (term === 'local') {
-              sb.append(`* ${list.label} +\n ${sb.backTick(termPhrase)}`);
+              if (config.hideNodeIds)
+                sb.append(`* ${list.label}`)
+              else
+                sb.append(`* ${list.label} +\n ${sb.backTick(termPhrase)}`)
             } else {
 
               sb.append(`* ${list.label} +\n ${sb.backTick(termPhrase)}`);

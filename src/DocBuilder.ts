@@ -1,4 +1,4 @@
-import { TemplateElement } from "./TemplateElement";
+import { findParentNodeId, TemplateElement } from './TemplateElement';
 import { WebTemplate } from "./WebTemplate";
 import {
   isActivity,
@@ -151,13 +151,13 @@ export class DocBuilder {
   private walkElement(f: TemplateElement) {
     formatNodeContent(this, f, false)
     this.walkDataType(f)
-    formatAnnotations(this,f);
+ //   formatAnnotations(this,f);
   }
 
   private walkChoice(f: TemplateElement) {
     formatNodeContent(this, f, true)
     this.walkDataType(f)
-    formatAnnotations(this,f);
+ //   formatAnnotations(this,f);
   }
 
   private walkSection(f: TemplateElement) {
@@ -194,11 +194,13 @@ export class DocBuilder {
 
     if (f.children) {
       f.children.forEach((child) => {
+        child.parentNode = f;
         if (!child?.inContext) return
 
         if (['ism_transition'].includes(child.id)) {
           if (child.children) {
             child.children.forEach((ismChild) => {
+              ismChild.parentNode = f;
               this.stripExcludedRmTypes(ismChild, rmAttributes);
             });
           }
@@ -305,8 +307,25 @@ export class DocBuilder {
     const language: string = 'en'
     if (!f.inContext)
       return this.getValueOfRecord(f.localizedDescriptions)
-    else
-      return rmDescriptions[f.id] ? rmDescriptions[f.id][language] : ''
+    else {
+      let rmTag = f.id;
+      if (f.id === 'time') {
+
+        const parent: TemplateElement = findParentNodeId(f);
+        switch (parent.rmType){
+          case 'ACTION':
+            rmTag = 'action_time'
+            break;
+          case 'EVENT':
+            rmTag = 'event_time'
+            break
+          default:
+            break;
+        }
+      }
+      return rmDescriptions[rmTag] ? rmDescriptions[rmTag][language] : ''
+
+    }
   };
 
   private walkChoiceHeader(f: TemplateElement) {

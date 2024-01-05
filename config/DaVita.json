@@ -5,7 +5,7 @@
   "displayTechnicalOccurrences": false,
   "skippedAQLPaths": [],
   "includedAnnotations": [],
-  "excludedRMTags": ["territory","language", "encoding","subject", "transition", "current_state", "careflow_step"],
+  "excludedRMTags": ["territory","language", "encoding"],
   "displayAQLPaths": false,
   "hideXmindValues" : false
 }

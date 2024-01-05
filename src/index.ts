@@ -8,22 +8,22 @@ import { importConfig } from './BuilderConfig';
 import { Config } from "./Config";
 import { saveFile } from "./DocFormatter";
 
-function handleOutPath(infile :string, outputFile: string , ext: string, outdir: string) {
+function handleOutPath(infile :string, outputFile: string , ext: string, outDir: string) {
   {
     if (outputFile)
       return outputFile;
 
     const pathSeg = path.parse(infile);
-    return  `${outdir}/${pathSeg.name}.${ext}`;
+    return  `${outDir}/${pathSeg.name}.${ext}`;
   }
 }
 
 const args = yargs.options({
   'web-template': { type: 'string', describe: 'web template name',demandOption: true, alias: 'wt' },
-  'out-file': { type: 'string', describe: 'Output file (Default: web template root name ',demandOption: false, alias: 'o' },
-  'out-dir': { type: 'string', demandOption: false, describe: 'Output folder (Default ./out', alias: 'od', default: 'out'},
+  'out-file': { type: 'string', describe: 'Output file',demandOption: false, alias: 'o' },
+  'out-dir': { type: 'string', demandOption: false, describe: 'Output folder', alias: 'od', default: './out'},
   'config-file': { type: 'string', demandOption: false, describe: 'Config file',alias: 'cf', default: "config/wtconfig.json"},
-  'export-format': { type: 'string', demandOption: false, alias: 'ex', describe: 'Export format: adoc|docx|xmind|pdf (default: adoc)',default: "adoc"},
+  'export-format': { type: 'string', demandOption: false, describe: 'Export format: adoc|docx|xmind|pdf (default: adoc)',alias: 'ex', default: "adoc"},
 }).argv;
 
 
