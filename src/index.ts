@@ -7,7 +7,9 @@ import  path  from 'path';
 import { importConfig } from './BuilderConfig';
 import { Config } from "./Config";
 import { saveFile } from "./DocFormatter";
-import { searchCKMRepo, searchGHRepo } from './openEProvenance';
+import {
+  updateArchetypeList,
+} from "./openEProvenance";
 
 function handleOutPath(infile :string, outputFile: string , ext: string, outDir: string) {
   {
@@ -40,15 +42,19 @@ const outFilePath = handleOutPath(inFilePath, outFileName, exportFormat,outFileD
 const inputFileExist = fs.existsSync(inFilePath);
 
 if (inputFileExist) {
-  const inDoc:string = fs.readFileSync(inFilePath, { encoding: 'utf8', flag: 'r' });
-  const docBuilder : DocBuilder = new DocBuilder(JSON.parse(inDoc), config, exportFormat,outFileDir);
+  const inDoc: string = fs.readFileSync(inFilePath, { encoding: 'utf8', flag: 'r' });
+  const docBuilder: DocBuilder = new DocBuilder(JSON.parse(inDoc), config, exportFormat, outFileDir);
 
   saveFile(docBuilder, outFilePath);
-  searchGHRepo("ian.mcnicoll","vQum0C12K1Lx","openEHR/CKM-mirror")
-}
-else {
 
-  console.log('The input file does not exist:' + inFilePath);
+  updateArchetypeList('openEHR/CKM-mirror', 'org.openehr', docBuilder.archetypeList,false) .then( result => {
+   docBuilder.archetypeList = result; // Outputs: 'Hello, World!'
+  })
+    .catch(error => console.log("Caught Error: ", error));
+
 }
+else
+  console.log('The input file does not exist:' + inFilePath);
+
 
 spinner.stop();
