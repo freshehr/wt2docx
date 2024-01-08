@@ -47,7 +47,7 @@ if (inputFileExist) {
 
   saveFile(docBuilder, outFilePath);
 
-  updateArchetypeList('openEHR/CKM-mirror', 'org.openehr', docBuilder.archetypeList,false) .then( result => {
+  updateArchetypeList('openEHR','CKM-mirror', 'org.openehr', docBuilder.archetypeList,false) .then( result => {
    docBuilder.archetypeList = result; // Outputs: 'Hello, World!'
   })
     .catch(error => console.log("Caught Error: ", error));

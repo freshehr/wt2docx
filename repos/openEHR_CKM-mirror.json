@@ -1,0 +1,2654 @@
+[
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.address.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.adhoc_cluster_heading.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.anatomical_location.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.anatomical_location_circle.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.anatomical_location_precise.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.anatomical_location_relative.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.anatomical_pathology_exam.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.art_container_details.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.bioreagent.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.birth_detail.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.boston_bowel_preparation_scale.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.case_identification.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.cessation_attempts.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.change.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.citation.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.clinical_evidence.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.cobb_angle.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.conditional_medication_rules.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.consent_details.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.crowding.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.ctcae.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.delay_details.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.device.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.device_details.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.dietary_nutrients.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.dietary_phytochemicals.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.distribution.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.dob_alternative.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.document_entry_metadata.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.dod_alternative.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.dosage.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.dwelling.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.ear_cleaning.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.education_record.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.electronic_communication.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.embryo_specimen.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.environmental_conditions.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-abdomen.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-anterior_chamber_eye.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-anus.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-aqueous_humour.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-auscultation-bowel_sounds.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-auscultation-breath_sounds.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-auscultation.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-breast.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-breasts.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-cardiovascular_system.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-chest.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-conjunctiva.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-cornea.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-cranial_nerves.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-ear.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-ears.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-external_auditory_canal.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-eye.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-eyelid.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-eyes.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-face.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-finger.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-fingernail.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-foot.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-fundus_eye.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-hand.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-heart.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-hip_joint.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-inspection-cervix.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-inspection-rectum.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-inspection-vagina.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-inspection.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-iris.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-lens.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-lower_limb.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-lung.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-middle_ear.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-mouth.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-muscle_group.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-neck.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-nervous_system.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-optic_disc.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-palpation-cervix.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-palpation-prostate.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-palpation-rectum.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-palpation-uterus.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-palpation-vagina.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-palpation.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-penis.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-peripheral_nervous_system.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-placenta.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-posterior_chamber_eye.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-pupil.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-respiratory_system.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-sclera.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-scrotum.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-skin.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-testicle.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-throat.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-thyroid.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-toe.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-toenail.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-tongue.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-tooth.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-tympanic_membrane.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-upper_limb.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam-vulva.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam_blastocyst.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam_burn.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam_embryo.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam_faeces.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam_hydration.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam_lesion.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam_oocyte.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam_tendon_reflexes.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam_wound.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exam_zygote.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exclusion_exam.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.exclusion_symptom_sign.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.family_prevalence.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.fetus_abdominal.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.fetus_vaginal.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.financial_record.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.fnclcc.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.free_text.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.gait.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.genetic_variant_presence.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.genomic_conversion_variant.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.genomic_copy_number_variant.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.genomic_deletion_insertion_variant.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.genomic_deletion_variant.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.genomic_duplication_variant.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.genomic_insertion_variant.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.genomic_inversion_variant.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.genomic_repeated_sequence_variant.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.genomic_substitution_variant.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.genomic_variant_result.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.gleason_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.health_event.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.hip_arthroplasty_component.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.housing_record.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-bladder.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-cervix.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-fallopian_tube.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-foetus.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-gestational_sac.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-hip_joint.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-lesion-adnexal_mass.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-liver.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-lymph_node.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-lymph_node_group.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-ovary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-pelvis.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-placenta.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-pregnant_uterus.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-rectouterine_pouch.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-sacrum.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-scrotum.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-spine.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-testicle.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-umbilical_cord.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam-uterus.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_exam_anomaly.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_myometrial_lesion.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.imaging_series.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.information_resource.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.inspection_body_fluid-sputum.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.inspection_body_fluid-urine.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.inspection_body_fluid.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.inspired_oxygen.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.interpreter_request.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.issue.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.item_transport.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.knowledge_base_reference.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.laboratory_test_panel.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.language.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.level_of_exertion.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.lymph_node_metastases.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.macronutrients.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.macroscopy_colorectal_carcinoma.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.macroscopy_lung_carcinoma.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.media_file.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.medication.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.medication_authorisation.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.medication_order_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.medication_supply_amount.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.micronutrients.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.microscopy_breast_carcinoma.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.microscopy_colorectal_carcinoma.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.microscopy_lymphoma.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.microscopy_melanoma.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.microscopy_prostate_carcinoma.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.myringoplasty.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.myringotomy.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.notifiable_condition.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.occupation_record.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.oedema.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.oocyte_specimen.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.operative_procedure.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.organisation.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.other_significant_conditions.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.outbreak_identification.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.person.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.pews_original.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.pharmacogenetic_analyte_result.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.physiological_monitoring.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.problem_qualifier.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.procedure_preparation.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.promis_bank_v10_anxiety.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.promis_bank_v10_depression.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.promis_bank_v10_fatigue.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.promis_bank_v10_sleep_disturbance.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.promis_bank_v11_pain_interference.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.promis_bank_v20_ability_participate.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.promis_bank_v20_physical_function.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.promis_scale_v12_global_health.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.range_of_motion.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.reference_sequence.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.refraction_details.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.religion.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.sade.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.sequencing_assay.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.service_direction.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.severity_rating_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.simple_variant.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.skin_sensation.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.specimen.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.specimen_container.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.specimen_measurements.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.specimen_processing.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.strategy.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.structured_name.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.symptom_sign.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.therapeutic_direction.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.timing_daily.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.timing_nondaily.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.tnm-pathological.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.tnm.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.tos.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.translocation_variant.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.tumour_colorectal_staging_non_tnm.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.tumour_invasion.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.tumour_resection_margins.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.vascularisation_ultrasound.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.waveform.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.advance_care.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.adverse_reaction_list.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.care_plan.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.encounter.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.event_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.family_history.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.health_certificate.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.health_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.lifestyle_factors.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.medication_list.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.notification.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.obstetric_history.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.pregnancy_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.prescription.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.problem_list.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.progress_note.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.report-clinical_investigation.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.report-post_mortem.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.report-procedure.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.report-result.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.report.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.request.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.review.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.self_reported_data.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.social_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.therapeutic_precautions.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.transfer_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-COMPOSITION.vaccination_list.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-ADDRESS.address-provider.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-ADDRESS.address.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-ADDRESS.electronic_communication-provider.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-ADDRESS.electronic_communication.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CAPABILITY.individual_credentials.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.biometric_identifier_iso.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.birth_data_additional_detail_br.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.high_level_address_other_data_br.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.identifier_other_details.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.individual_credentials_iso.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.individual_provider_credentials_iso.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.person_additional_data_br.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.person_additional_data_iso.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.person_birth_data_iso.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.person_death_data_iso.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.person_identifier-provider.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.person_identifier.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.person_other_birth_data_br.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.person_other_death_data.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.provider_identifier.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-CLUSTER.registration_other_data.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-ITEM_TREE.person_details.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-ORGANISATION.organisation.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-PARTY_IDENTITY.organisation_name.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-PARTY_IDENTITY.person_name-individual_provider.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-PARTY_IDENTITY.person_name.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-PERSON.person-patient.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-PERSON.person.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-ROLE.healthcare_consumer.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-ROLE.healthcare_provider_organisation.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-ROLE.individual_provider.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-DEMOGRAPHIC-ROLE.third_party_payer.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ACTION.care_plan.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ACTION.health_education.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ACTION.imaging_exam.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ACTION.informed_consent.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ACTION.medication.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ACTION.procedure.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ACTION.review.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ACTION.screening.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ACTION.service.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ACTION.transfusion.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ADMIN_ENTRY.demographics.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ADMIN_ENTRY.episode_institution.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ADMIN_ENTRY.three_delays_model.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ADMIN_ENTRY.transfer_of_care.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ADMIN_ENTRY.translation_requirements.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ADMIN_ENTRY.travel_event.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-ADMIN_ENTRY.triage.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.absence.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.advance_care_directive.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.advance_intervention_decisions.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.adverse_reaction_risk.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.alcohol_consumption_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.art_cycle_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.birth_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.blood_group.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.breast_feeding_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.cause_of_death.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.clinical_synopsis.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.communication_capability.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.consumer_note.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.container.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.contraceptive_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.contraindication.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.death_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.device_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.differential_diagnoses.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.education_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.estimated_date_delivery.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.ethnicity.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.exclusion_global.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.exclusion_specific.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.exposure.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.family_history.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.financial_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.food_nutrition_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.gambling_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.gender.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.goal.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.health_risk.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.housing_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.infant_feeding.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.infectious_disease_investigation_classification.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.infectious_disease_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.last_menstrual_period.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.living_arrangement.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.maternal_mortality_classification.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.medication_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.menstruation_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.obstetric_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.occupation_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.pharmacogenetic_gene_profile.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.physical_activity_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.physical_appearance.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.precaution.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.pregnancy_care_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.pregnancy_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.problem_diagnosis.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.reason_for_encounter.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.recommendation.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.sexual_health_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.smokeless_tobacco_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.social_network.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.social_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.source.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.specimen_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.substance_use_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.tobacco_smoking_summary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-EVALUATION.vaccination_summary.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-INSTRUCTION.care_plan_request.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-INSTRUCTION.health_education_request.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-INSTRUCTION.informed_consent_request.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-INSTRUCTION.medication_order.v3",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-INSTRUCTION.notification.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-INSTRUCTION.service_request.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-INSTRUCTION.supplemental_oxygen_order.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-INSTRUCTION.therapeutic_item_order.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-INSTRUCTION.transfusion_order.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.abbey_pain_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.abc_score_massive_transfusion.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.abc_stroke_risk_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.abcd2_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.acoustic_reflex_result.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.acvpu.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.adl.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.adverse_reaction_monitoring.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.affected_body_surface_area-burn.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.affected_body_surface_area.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.age.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.air_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.alcohol_audit.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.alcohol_intake.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.aldrete_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.alsfrs_r.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.alvarado_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.apgar.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.asa_status.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.atria_bleeding_risk.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.atria_stroke_risk.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.audiogram_result.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.audiology_speech_test_result.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.auditory_brainstem_response_result.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.avpu.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.behavioural_observation_audiometry_result.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.bishop_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.blood_pressure.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.body_composition.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.body_mass_index.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.body_segment_area.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.body_segment_circumference.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.body_segment_discrepancy.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.body_segment_length.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.body_surface_area.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.body_temperature.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.body_weight.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.braden_scale.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.braden_scale_q.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.bristol_stool_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.bvc.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.cage.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.capillary_refill.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.caprini_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.ccs_angina_status.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.cgas.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.chadsvas_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.charlson_comorbidity_index.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.cheop_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.chest_circumference.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.child_growth.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.child_pugh_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.clinical_frailty_scale.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.clinical_frailty_scale2.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.comfort_behaviour_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.conference.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.container.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.cormack_lehane.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.cow_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.cpax.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.crb_65.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.critical_pain_observation_tool.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.crusade_bleeding.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.crusade_bleeding_risk_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.curb_65.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.das28-CRP.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.das28.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.dash_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.demo.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.device_screening.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.diabetic_wound_wagner.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.downton_fall_risk_index.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.easi_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.ecg_result.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.ecog.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.edinburgh_pnd_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.ejection_fraction.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.embryo_assessment.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.epic_cp.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.esas_r.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.estimated_glomerular_filtration_rate.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.exam.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.exposure_screening.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.fact_g-Hep.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.fact_g.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.faecal_output.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.fagerstrom.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.family_history_screening_questionnaire.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.fetal_biometry.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.fetal_heart-monitoring.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.fetal_heart.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.fitzpatrick_skin_type.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.fluid_balance.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.fluid_input.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.fluid_output-blood.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.fluid_output.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.foetal_growth.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.foetal_movement.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.food_item.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.four_a_test.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.four_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.fundoscopic_examination.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.gad_7_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.gestational_age.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.glasgow_coma_scale.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.glasgow_coma_scale_paediatric.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.glasgow_outcome_scale_extended.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.gpaq.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.grace_admission.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.grace_discharge.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.growth_velocity.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.hannallah_pain_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.harris_hip_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.has_bled.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.head_circumference.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.hearing_screening_result.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.heart_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.height.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.hip_circumference.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.hirsutism_scales.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.honos.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.hscore.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.humpty_dumpty_falls_risk_assessment_tool.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.iga_eczema_treat.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.imaging_exam_result.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.infant_feeding.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.intermacs_profile.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.intraocular_pressure.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.intravascular_pressure.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.investigation_screening.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.ipss.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.iss-revised.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.iss.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.jugular_venous_pressure.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.kads.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.karnofsky_performance_status_scale.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.laboratory_test_result.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.lenke_classification.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.malinas_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.malnutrition_screening_tool.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.management_screening.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.mantoux_test_result.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.mayo_score.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.medication_screening.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.medication_statement.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.menstrual_diary.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.menstruation.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.modified_aldrete_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.modified_barthel_index.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.modified_rankin_scale.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.msfc_score.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.mskcc_bowel_function_instrument.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.mskcc_motzer.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.murray_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.must.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.neonatal_skin_risk_assessment.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.neurologic_assessment_in_neuro_oncology_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.news2.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.news_uk_rcp.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.nihss.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.nine_hole_peg_test.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.nutrition_intake.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.nyha_heart_failure.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.oucher_pain_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.paced_auditory_serial_addition_test.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.padss.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.pasi_score.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.penetration_aspiration_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.pews.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.pf_ratio.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.pga_eczema_treat.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.phfrat1.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.phq_9.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.physical_activity.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.poem_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.pregnancy_finding.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.pregnancy_test.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.problem_screening.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.procedure_screening.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.progress_note.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.promis.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.pulse.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.pulse_deficit.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.pulse_oximetry.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.qsofa_score.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.reach_b.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.refraction.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.respiration.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.richmond_agitation_sedation_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.rinne_weber_result.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.sara_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.scoff_questionnaire.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.scorad_index.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.simplified_tanner_whitehouse_3.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.six_cit.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.skeletal_age.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.soas_r.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.soas_re.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.social_context_screening.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.sofa_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.speech.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.spirometry_result.v2",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.story.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.substance_use.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.substance_use_screening.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.symptom_sign_screening.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.tanner.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.telecommunication.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.temperature.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.testicular_volume.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.third_party_observation.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.timed_25_foot_walk.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.travel_screening.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.trunk_impairment_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.tympanogram_226hz.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.tympanogram_hf.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.urinalysis.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.uterine_contractions.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.visual_acuity.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.visual_field_measurement.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.waist_circumference.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.waist_height_ratio.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.waist_hip_ratio.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.waterlow_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.ygtss_revised.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.ymrs.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-SECTION.adhoc.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-SECTION.adverse_reaction_list.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-SECTION.conclusion.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-SECTION.diagnostic_reports.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-SECTION.family_history.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-SECTION.immunisation_list.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-SECTION.lifestyle_risk_factors.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-SECTION.medication_list.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-SECTION.problem_list.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-SECTION.referral_details.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-SECTION.soap.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-SECTION.vital_signs.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.microscopy_renal_biopsy_non_neoplastic.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.kessler_k10_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.mallampati_classification.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.nutritional_risk_screening.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.stratify_no.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-CLUSTER.radiotherapy.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.aofas.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.aos_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.atrs.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.beighton_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.boston_carpal_tunnel.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.briganti_risk_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.chaq.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.cmas_score.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.edmonton_frail_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.gpcog_screening_test.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.haq.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.howru.v1",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.iciq_ui_short.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.iief_5.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.ikdc.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.moxfq.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.oxford_elbow.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.oxford_hip.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.oxford_knee.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.oxford_shoulder.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.oxford_shoulder_instability.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.safas.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.sprs.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.tegner_activity_level_scale.v0",
+    "provenance": "org.openehr"
+  },
+  {
+    "archetypeId": "openEHR-EHR-OBSERVATION.visaa.v0",
+    "provenance": "org.openehr"
+  }
+]

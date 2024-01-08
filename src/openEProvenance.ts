@@ -6,8 +6,23 @@ import fs from "fs";
 type ArchetypeProvenance = {
   archetypeId: string,
   provenance?: string,
+  remoteId?: string
   semver?:string
 }
+
+type RemoteGHRepo = {
+  repoTag: string,
+  repoAccount: string,
+  repoName: string,
+  repoNamespace: string
+}
+export const remoteGHRepos: RemoteGHRepo[] =
+  [{
+      repoTag: 'intCKM',
+      repoAccount: 'openEHR',
+      repoName: 'CKM-mirror',
+      repoNamespace: 'org.openehr'
+    }]
 
 export type ArchetypeList = ArchetypeProvenance[];
 
@@ -68,14 +83,14 @@ export const getADTemplatesList = (username: string, password: string, repositor
 };
 */
 
-export const searchGHRepo = async (username: string, password: string, repoName: string, repoNamespace: string): Promise<ArchetypeList> => {
+export const searchGHRepo = async (username: string, password: string, repoAccount: string, repoName: string, repoNamespace: string): Promise<ArchetypeList> => {
 
 //  const token = btoa(username + ":" + password);
 
     try {
       // 👇️ const data: GetUsersResponse
       const { data, status } = await axios.get(
-        formatGHSearchUrl(repoName),
+        formatGHSearchUrl(`${repoAccount}/${repoName}`),
         {
           headers: {
             Accept: 'application/vnd.github+json',
@@ -115,54 +130,60 @@ export const searchCKMRepo = async (username: string, password: string, repoName
     return data;
 };
 
-const cacheFileName = (repoName:string ) => `./repos/${repoName}.json`
+const cacheFileName = (repoAccount: string, repoName:string ) => `./repos/${repoAccount}_${repoName}.json`
 
-const saveRemoteRepoCache =  async ( repoName: string, repoList: ArchetypeList) => {
-  fs.writeFileSync(cacheFileName(repoName), JSON.stringify(repoList))
-  console.log(`\n Saved : ${cacheFileName(repoName)}`)
+const saveRemoteRepoCache =  async ( repoAccount: string, repoName: string, repoList: ArchetypeList) => {
+  if (!fs.existsSync('repos')) {
+    fs.mkdirSync('repos', { recursive: true })
+  }
+ const cacheFilePath :string = cacheFileName(repoAccount, repoName)
+  fs.writeFileSync(cacheFilePath, JSON.stringify(repoList))
+  console.log(`\n Saved : ${cacheFilePath}`)
 }
 
-const readRemoteFileCache = async (repoName : string, repoNamespace: string ,forceRefresh: boolean) => {
+const readRemoteFileCache = async (repoAccount: string, repoName : string, repoNamespace: string ,forceRefresh: boolean) => {
 
-  const fileName = cacheFileName(repoName)
+  const fileName = cacheFileName(repoAccount, repoName)
   const inputFileExist = fs.existsSync(fileName);
 
-  if (inputFileExist || forceRefresh) {
+  if (inputFileExist && !forceRefresh) {
     const inDoc: string = fs.readFileSync(fileName, { encoding: 'utf8', flag: 'r' });
     remoteRepo = JSON.parse(inDoc)
 
   }
   else
   {
-    refreshGHList(repoName, repoNamespace)
-    await saveRemoteRepoCache(repoName,remoteRepo)
+    await searchGHRepo("ian.mcnicoll", "vQum0C12K1Lx", repoAccount, repoName, repoNamespace)
+      .then( result => {
+        return remoteRepo = result; // Outputs: 'Hello, World!'
+      })
+      .catch(error => console.log("Caught Error: ", error));
+
+    await saveRemoteRepoCache(repoAccount, repoName,remoteRepo)
   }
 }
 
-const refreshGHList =  (repoName: string, repoNamespace: string): void => {
+export const updateArchetypeList = async (repoAccount: string,repoName: string, repoNamespace: string, list: ArchetypeList, refreshCache: boolean) : Promise<ArchetypeList> => {
 
-  searchGHRepo("ian.mcnicoll", "vQum0C12K1Lx", repoName, repoNamespace)
-    .then( result => {
-      return remoteRepo = result; // Outputs: 'Hello, World!'
-    })
-    .catch(error => console.log("Caught Error: ", error));
-
-}
-
-export const updateArchetypeList = async (repoName: string, repoNamespace: string, list: ArchetypeList, refreshCache: boolean) : Promise<ArchetypeList> => {
-
-  await readRemoteFileCache(repoName, repoNamespace,refreshCache)
+  await readRemoteFileCache(repoAccount,repoName, repoNamespace,refreshCache)
 
   const upDatedList: ArchetypeList = [];
 
-    list.forEach(item => {
+    list.forEach(localItem => {
 
-      const match = remoteRepo.find(element => element.archetypeId === item.archetypeId);
+    //  upDatedList.push({...item, provenance: 'local'})
+      const match = remoteRepo.find(remoteItem =>
+      {
+        const local: string = path.parse(remoteItem.archetypeId).name
+        const remote: string = path.parse(localItem.archetypeId).name
+
+        return local===remote
+      })
 
       if (match)
-        upDatedList.push(match)
+        upDatedList.push({...localItem, provenance: 'org.openehr', remoteId: match.archetypeId})
       else
-        upDatedList.push(item)
+        upDatedList.push({...localItem, provenance: 'local', remoteId: '' })
     });
 
     return upDatedList
