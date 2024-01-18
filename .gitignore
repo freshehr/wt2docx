@@ -20,31 +20,23 @@ build/Release
 # Optional npm cache directory
 .npm
 
-
 # dotenv environment variables file
 .env
 .env.test
 
-
 # Dependency directories
 node_modules/
 jspm_packages/
-/out/
-/templates/
 
-
-/templates/Davita Nephrology Portugal - Patient Information.json
-/templates/DaVita Nephrology Register Portugal - Encounter.json
-/templates/DaVita Nephrology Register Portugal - Imaging.json
-/templates/DaVita Nephrology Register Portugal - Medication.opt
-/templates/DaVita Nephrology Register Portugal - Prescriptions.json
-/out/DaVita Nephrology Register Portugal - Prescriptions.pdf
+tmp/
+out/hidden/
+templates/hidden/
+config/hidden/
 /out/Generic Nurse Encounter.adoc
-/out/DA VITA  - PD REgistry extension.adoc
-/out/DaVita Nephrology Register Portugal - Prescriptions.adoc
- /templates/Generic Nurse Encounter.json
-/templates/DA VITA  - PD REgistry extension.json
-
-
-/tmp.adoc
-/tmpDocbook.xml
+/templates/Generic Nurse Encounter.json
+/out/HSE - HealthLink Laboratory report.adoc
+/templates/HSE - HealthLink Laboratory report.json
+/out/HSE -  Remote monitoring.adoc
+/templates/HSE -  Remote monitoring.json
+/out/OL - Advance intervention information.adoc
+/templates/ROSI - Emergency contacts.json
