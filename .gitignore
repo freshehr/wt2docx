@@ -16,7 +16,7 @@ coverage
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
-
+build/
 # Optional npm cache directory
 .npm
 
@@ -28,15 +28,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# wt2docs folders
 tmp/
 out/hidden/
 templates/hidden/
 config/hidden/
-/out/Generic Nurse Encounter.adoc
-/templates/Generic Nurse Encounter.json
-/out/HSE - HealthLink Laboratory report.adoc
-/templates/HSE - HealthLink Laboratory report.json
-/out/HSE -  Remote monitoring.adoc
-/templates/HSE -  Remote monitoring.json
-/out/OL - Advance intervention information.adoc
-/templates/ROSI - Emergency contacts.json
+
