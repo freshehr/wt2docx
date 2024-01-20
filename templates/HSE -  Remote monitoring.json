@@ -1,0 +1,1039 @@
+{
+  "templateId" : "HSE -  Remote monitoring",
+  "semVer" : "0.4.0",
+  "version" : "2.3",
+  "defaultLanguage" : "en",
+  "languages" : [ "en" ],
+  "tree" : {
+    "id" : "remote_monitoring",
+    "name" : "Remote monitoring",
+    "localizedName" : "Remote monitoring",
+    "rmType" : "COMPOSITION",
+    "nodeId" : "openEHR-EHR-COMPOSITION.encounter.v1",
+    "min" : 1,
+    "max" : 1,
+    "localizedNames" : {
+      "en" : "Remote monitoring"
+    },
+    "localizedDescriptions" : {
+      "en" : "Interaction, contact or care event between a subject of care and healthcare provider(s)."
+    },
+    "aqlPath" : "",
+    "children" : [ {
+      "id" : "context",
+      "rmType" : "EVENT_CONTEXT",
+      "nodeId" : "",
+      "min" : 1,
+      "max" : 1,
+      "aqlPath" : "/context"
+    }, {
+      "id" : "blood_pressure",
+      "name" : "Blood pressure",
+      "localizedName" : "Blood pressure",
+      "rmType" : "OBSERVATION",
+      "nodeId" : "openEHR-EHR-OBSERVATION.blood_pressure.v2",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Blood pressure"
+      },
+      "localizedDescriptions" : {
+        "en" : "The local measurement of arterial blood pressure which is a surrogate for arterial pressure in the systemic circulation."
+      },
+      "annotations" : {
+        "comment" : "Most commonly, use of the term 'blood pressure' refers to measurement of brachial artery pressure in the upper arm."
+      },
+      "aqlPath" : "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]",
+      "children" : [ {
+        "id" : "systolic",
+        "name" : "Systolic",
+        "localizedName" : "Systolic",
+        "rmType" : "DV_QUANTITY",
+        "nodeId" : "at0004",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Systolic"
+        },
+        "localizedDescriptions" : {
+          "en" : "Peak systemic arterial blood pressure  - measured in systolic or contraction phase of the heart cycle."
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value",
+        "inputs" : [ {
+          "suffix" : "magnitude",
+          "type" : "DECIMAL",
+          "validation" : {
+            "range" : {
+              "minOp" : ">=",
+              "min" : 0.0,
+              "maxOp" : "<",
+              "max" : 1000.0
+            },
+            "precision" : {
+              "minOp" : ">=",
+              "min" : 0,
+              "maxOp" : "<=",
+              "max" : 0
+            }
+          }
+        }, {
+          "suffix" : "unit",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "mm[Hg]",
+            "label" : "mm[Hg]",
+            "localizedLabels" : {
+              "en" : "mmHg"
+            },
+            "validation" : {
+              "range" : {
+                "minOp" : ">=",
+                "min" : 0.0,
+                "maxOp" : "<",
+                "max" : 1000.0
+              },
+              "precision" : {
+                "minOp" : ">=",
+                "min" : 0,
+                "maxOp" : "<=",
+                "max" : 0
+              }
+            }
+          } ]
+        } ],
+        "termBindings" : {
+          "SNOMED-CT" : {
+            "value" : "[SNOMED-CT(2003)::271649006]",
+            "terminologyId" : "SNOMED-CT"
+          }
+        }
+      }, {
+        "id" : "diastolic",
+        "name" : "Diastolic",
+        "localizedName" : "Diastolic",
+        "rmType" : "DV_QUANTITY",
+        "nodeId" : "at0005",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Diastolic"
+        },
+        "localizedDescriptions" : {
+          "en" : "Minimum systemic arterial blood pressure - measured in the diastolic or relaxation phase of the heart cycle."
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value",
+        "inputs" : [ {
+          "suffix" : "magnitude",
+          "type" : "DECIMAL",
+          "validation" : {
+            "range" : {
+              "minOp" : ">=",
+              "min" : 0.0,
+              "maxOp" : "<",
+              "max" : 1000.0
+            },
+            "precision" : {
+              "minOp" : ">=",
+              "min" : 0,
+              "maxOp" : "<=",
+              "max" : 0
+            }
+          }
+        }, {
+          "suffix" : "unit",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "mm[Hg]",
+            "label" : "mm[Hg]",
+            "localizedLabels" : {
+              "en" : "mmHg"
+            },
+            "validation" : {
+              "range" : {
+                "minOp" : ">=",
+                "min" : 0.0,
+                "maxOp" : "<",
+                "max" : 1000.0
+              },
+              "precision" : {
+                "minOp" : ">=",
+                "min" : 0,
+                "maxOp" : "<=",
+                "max" : 0
+              }
+            }
+          } ]
+        } ],
+        "termBindings" : {
+          "SNOMED-CT" : {
+            "value" : "[SNOMED-CT(2003)::271650006]",
+            "terminologyId" : "SNOMED-CT"
+          }
+        }
+      }, {
+        "id" : "time",
+        "name" : "Time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/data[at0001]/events[at0006]/time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/subject",
+        "inputs" : [ {
+          "suffix" : "id",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_scheme",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_namespace",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "name",
+          "type" : "TEXT"
+        } ],
+        "inContext" : true
+      } ],
+      "termBindings" : {
+        "SNOMED-CT" : {
+          "value" : "[SNOMED-CT(2003)::364090009]",
+          "terminologyId" : "SNOMED-CT"
+        }
+      }
+    }, {
+      "id" : "pulse_heart_beat",
+      "name" : "Pulse/Heart beat",
+      "localizedName" : "Pulse/Heart beat",
+      "rmType" : "OBSERVATION",
+      "nodeId" : "openEHR-EHR-OBSERVATION.pulse.v2",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Pulse/Heart beat"
+      },
+      "localizedDescriptions" : {
+        "en" : "The rate and associated attributes for a pulse or heart beat."
+      },
+      "aqlPath" : "/content[openEHR-EHR-OBSERVATION.pulse.v2]",
+      "children" : [ {
+        "id" : "rate",
+        "name" : "Rate",
+        "localizedName" : "Rate",
+        "rmType" : "DV_QUANTITY",
+        "nodeId" : "at0004",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Rate"
+        },
+        "localizedDescriptions" : {
+          "en" : "The rate of the pulse or heart beat, measured in beats per minute."
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.pulse.v2]/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value",
+        "inputs" : [ {
+          "suffix" : "magnitude",
+          "type" : "DECIMAL",
+          "validation" : {
+            "range" : {
+              "minOp" : ">=",
+              "min" : 0.0,
+              "maxOp" : "<",
+              "max" : 1000.0
+            },
+            "precision" : {
+              "minOp" : ">=",
+              "min" : 0,
+              "maxOp" : "<=",
+              "max" : 0
+            }
+          }
+        }, {
+          "suffix" : "unit",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "/min",
+            "label" : "/min",
+            "validation" : {
+              "range" : {
+                "minOp" : ">=",
+                "min" : 0.0,
+                "maxOp" : "<",
+                "max" : 1000.0
+              },
+              "precision" : {
+                "minOp" : ">=",
+                "min" : 0,
+                "maxOp" : "<=",
+                "max" : 0
+              }
+            }
+          } ]
+        } ]
+      }, {
+        "id" : "time",
+        "name" : "Time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.pulse.v2]/data[at0002]/events[at0003]/time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.pulse.v2]/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.pulse.v2]/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.pulse.v2]/subject",
+        "inputs" : [ {
+          "suffix" : "id",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_scheme",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_namespace",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "name",
+          "type" : "TEXT"
+        } ],
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "body_weight",
+      "name" : "Body weight",
+      "localizedName" : "Body weight",
+      "rmType" : "OBSERVATION",
+      "nodeId" : "openEHR-EHR-OBSERVATION.body_weight.v2",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Body weight"
+      },
+      "localizedDescriptions" : {
+        "en" : "Measurement of the body weight of an individual."
+      },
+      "aqlPath" : "/content[openEHR-EHR-OBSERVATION.body_weight.v2]",
+      "children" : [ {
+        "id" : "weight",
+        "name" : "Weight",
+        "localizedName" : "Weight",
+        "rmType" : "DV_QUANTITY",
+        "nodeId" : "at0004",
+        "min" : 1,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Weight"
+        },
+        "localizedDescriptions" : {
+          "en" : "The weight of the individual."
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.body_weight.v2]/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value",
+        "inputs" : [ {
+          "suffix" : "magnitude",
+          "type" : "DECIMAL"
+        }, {
+          "suffix" : "unit",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "kg",
+            "label" : "kg",
+            "validation" : {
+              "range" : {
+                "minOp" : ">=",
+                "min" : 0.0,
+                "maxOp" : "<=",
+                "max" : 1000.0
+              }
+            }
+          }, {
+            "value" : "[lb_av]",
+            "label" : "[lb_av]",
+            "localizedLabels" : {
+              "en" : "lbm"
+            },
+            "validation" : {
+              "range" : {
+                "minOp" : ">=",
+                "min" : 0.0,
+                "maxOp" : "<=",
+                "max" : 2000.0
+              }
+            }
+          }, {
+            "value" : "g",
+            "label" : "g",
+            "validation" : {
+              "range" : {
+                "minOp" : ">=",
+                "min" : 0.0,
+                "maxOp" : "<=",
+                "max" : 1000000.0
+              }
+            }
+          } ]
+        } ],
+        "termBindings" : {
+          "LOINC" : {
+            "value" : "[LOINC::29463-7]",
+            "terminologyId" : "LOINC"
+          }
+        }
+      }, {
+        "id" : "time",
+        "name" : "Time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.body_weight.v2]/data[at0002]/events[at0003]/time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.body_weight.v2]/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.body_weight.v2]/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.body_weight.v2]/subject",
+        "inputs" : [ {
+          "suffix" : "id",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_scheme",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_namespace",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "name",
+          "type" : "TEXT"
+        } ],
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "who-5_well-being_index",
+      "name" : "WHO-5 Well-Being Index",
+      "localizedName" : "WHO-5 Well-Being Index",
+      "rmType" : "OBSERVATION",
+      "nodeId" : "openEHR-EHR-OBSERVATION.who_5_well_being_index.v0",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "WHO-5 Well-Being Index"
+      },
+      "localizedDescriptions" : {
+        "en" : "The World Health Organisation- Five Well-Being Index (WHO-5) is a short self-reported measure of current mental wellbeing."
+      },
+      "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]",
+      "children" : [ {
+        "id" : "cheerful_and_in_good_spirits",
+        "name" : "Cheerful and in good spirits",
+        "localizedName" : "Cheerful and in good spirits",
+        "rmType" : "DV_ORDINAL",
+        "nodeId" : "at0009",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Cheerful and in good spirits"
+        },
+        "localizedDescriptions" : {
+          "en" : "1. I have felt cheerful and in good spirits."
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value",
+        "inputs" : [ {
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0010",
+            "label" : "All of the time",
+            "localizedLabels" : {
+              "en" : "All of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 5
+          }, {
+            "value" : "at0011",
+            "label" : "Most of the time",
+            "localizedLabels" : {
+              "en" : "Most of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 4
+          }, {
+            "value" : "at0012",
+            "label" : "More than half of the time",
+            "localizedLabels" : {
+              "en" : "More than half of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 3
+          }, {
+            "value" : "at0013",
+            "label" : "Less than half of the time",
+            "localizedLabels" : {
+              "en" : "Less than half of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 2
+          }, {
+            "value" : "at0014",
+            "label" : "Some of the time",
+            "localizedLabels" : {
+              "en" : "Some of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 1
+          }, {
+            "value" : "at0015",
+            "label" : "At no time",
+            "localizedLabels" : {
+              "en" : "At no time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 0
+          } ]
+        } ]
+      }, {
+        "id" : "calm_and_relaxed",
+        "name" : "Calm and relaxed",
+        "localizedName" : "Calm and relaxed",
+        "rmType" : "DV_ORDINAL",
+        "nodeId" : "at0023",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Calm and relaxed"
+        },
+        "localizedDescriptions" : {
+          "en" : "2. I have felt calm and relaxed."
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0023]/value",
+        "inputs" : [ {
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0024",
+            "label" : "All of the time",
+            "localizedLabels" : {
+              "en" : "All of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 5
+          }, {
+            "value" : "at0025",
+            "label" : "Most of the time",
+            "localizedLabels" : {
+              "en" : "Most of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 4
+          }, {
+            "value" : "at0026",
+            "label" : "More than half of the time",
+            "localizedLabels" : {
+              "en" : "More than half of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 3
+          }, {
+            "value" : "at0027",
+            "label" : "Less than half of the time",
+            "localizedLabels" : {
+              "en" : "Less than half of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 2
+          }, {
+            "value" : "at0028",
+            "label" : "Some of the time",
+            "localizedLabels" : {
+              "en" : "Some of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 1
+          }, {
+            "value" : "at0029",
+            "label" : "At no time",
+            "localizedLabels" : {
+              "en" : "At no time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 0
+          } ]
+        } ]
+      }, {
+        "id" : "active_and_vigorous",
+        "name" : "Active and vigorous",
+        "localizedName" : "Active and vigorous",
+        "rmType" : "DV_ORDINAL",
+        "nodeId" : "at0016",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Active and vigorous"
+        },
+        "localizedDescriptions" : {
+          "en" : "3. I have felt active and vigorous."
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0016]/value",
+        "inputs" : [ {
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0017",
+            "label" : "All of the time",
+            "localizedLabels" : {
+              "en" : "All of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 5
+          }, {
+            "value" : "at0018",
+            "label" : "Most of the time",
+            "localizedLabels" : {
+              "en" : "Most of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 4
+          }, {
+            "value" : "at0019",
+            "label" : "More than half of the time",
+            "localizedLabels" : {
+              "en" : "More than half of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 3
+          }, {
+            "value" : "at0020",
+            "label" : "Less than half of the time",
+            "localizedLabels" : {
+              "en" : "Less than half of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 2
+          }, {
+            "value" : "at0021",
+            "label" : "Some of the time",
+            "localizedLabels" : {
+              "en" : "Some of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 1
+          }, {
+            "value" : "at0022",
+            "label" : "At no time",
+            "localizedLabels" : {
+              "en" : "At no time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 0
+          } ]
+        } ]
+      }, {
+        "id" : "wake_up_feeling_fresh_and_rested",
+        "name" : "Wake up feeling fresh and rested",
+        "localizedName" : "Wake up feeling fresh and rested",
+        "rmType" : "DV_ORDINAL",
+        "nodeId" : "at0030",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Wake up feeling fresh and rested"
+        },
+        "localizedDescriptions" : {
+          "en" : "3. I wake up feeling fresh and rested."
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0030]/value",
+        "inputs" : [ {
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0031",
+            "label" : "All of the time",
+            "localizedLabels" : {
+              "en" : "All of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 5
+          }, {
+            "value" : "at0032",
+            "label" : "Most of the time",
+            "localizedLabels" : {
+              "en" : "Most of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 4
+          }, {
+            "value" : "at0033",
+            "label" : "More than half of the time",
+            "localizedLabels" : {
+              "en" : "More than half of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 3
+          }, {
+            "value" : "at0034",
+            "label" : "Less than half of the time",
+            "localizedLabels" : {
+              "en" : "Less than half of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 2
+          }, {
+            "value" : "at0035",
+            "label" : "Some of the time",
+            "localizedLabels" : {
+              "en" : "Some of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 1
+          }, {
+            "value" : "at0036",
+            "label" : "At no time",
+            "localizedLabels" : {
+              "en" : "At no time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 0
+          } ]
+        } ]
+      }, {
+        "id" : "daily_life_interesting",
+        "name" : "Daily life interesting",
+        "localizedName" : "Daily life interesting",
+        "rmType" : "DV_ORDINAL",
+        "nodeId" : "at0037",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Daily life interesting"
+        },
+        "localizedDescriptions" : {
+          "en" : "5. My daily life has been filled by things that interest me."
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0037]/value",
+        "inputs" : [ {
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0038",
+            "label" : "All of the time",
+            "localizedLabels" : {
+              "en" : "All of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 5
+          }, {
+            "value" : "at0039",
+            "label" : "Most of the time",
+            "localizedLabels" : {
+              "en" : "Most of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 4
+          }, {
+            "value" : "at0040",
+            "label" : "More than half of the time",
+            "localizedLabels" : {
+              "en" : "More than half of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 3
+          }, {
+            "value" : "at0041",
+            "label" : "Less than half of the time",
+            "localizedLabels" : {
+              "en" : "Less than half of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 2
+          }, {
+            "value" : "at0042",
+            "label" : "Some of the time",
+            "localizedLabels" : {
+              "en" : "Some of the time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 1
+          }, {
+            "value" : "at0043",
+            "label" : "At no time",
+            "localizedLabels" : {
+              "en" : "At no time"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "ordinal" : 0
+          } ]
+        } ]
+      }, {
+        "id" : "total_score",
+        "name" : "Total score",
+        "localizedName" : "Total score",
+        "rmType" : "DV_COUNT",
+        "nodeId" : "at0006",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Total score"
+        },
+        "localizedDescriptions" : {
+          "en" : ""
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value",
+        "inputs" : [ {
+          "type" : "INTEGER",
+          "validation" : {
+            "range" : {
+              "minOp" : ">=",
+              "min" : 0,
+              "maxOp" : "<=",
+              "max" : 25
+            }
+          }
+        } ]
+      }, {
+        "id" : "percentage_score",
+        "name" : "Percentage score",
+        "localizedName" : "Percentage score",
+        "rmType" : "DV_PROPORTION",
+        "nodeId" : "at0007",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Percentage score"
+        },
+        "localizedDescriptions" : {
+          "en" : ""
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0007]/value",
+        "proportionTypes" : [ "percent" ],
+        "inputs" : [ {
+          "suffix" : "numerator",
+          "type" : "DECIMAL",
+          "validation" : {
+            "range" : {
+              "minOp" : ">=",
+              "min" : 0.0,
+              "maxOp" : "<=",
+              "max" : 100.0
+            }
+          }
+        }, {
+          "suffix" : "denominator",
+          "type" : "DECIMAL",
+          "validation" : {
+            "range" : {
+              "minOp" : ">=",
+              "min" : 100.0,
+              "maxOp" : "<=",
+              "max" : 100.0
+            }
+          }
+        } ]
+      }, {
+        "id" : "comment",
+        "name" : "Comment",
+        "localizedName" : "Comment",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0044",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Comment"
+        },
+        "localizedDescriptions" : {
+          "en" : ""
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0044]/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "time",
+        "name" : "Time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]/data[at0001]/events[at0002]/time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.who_5_well_being_index.v0]/subject",
+        "inputs" : [ {
+          "suffix" : "id",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_scheme",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_namespace",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "name",
+          "type" : "TEXT"
+        } ],
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "category",
+      "rmType" : "DV_CODED_TEXT",
+      "nodeId" : "",
+      "min" : 1,
+      "max" : 1,
+      "aqlPath" : "/category",
+      "inputs" : [ {
+        "suffix" : "code",
+        "type" : "CODED_TEXT",
+        "list" : [ {
+          "value" : "433",
+          "label" : "event",
+          "localizedLabels" : {
+            "en" : "event"
+          }
+        } ],
+        "terminology" : "openehr"
+      } ],
+      "inContext" : true
+    } ]
+  }
+}
