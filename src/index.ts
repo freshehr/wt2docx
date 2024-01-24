@@ -7,6 +7,7 @@ import  path  from 'path';
 import { importConfig } from './BuilderConfig';
 import { Config } from "./Config";
 import { saveFile } from "./DocFormatter";
+import { updateArchetypeList } from './provenance/openEProvenance';
 
 function handleOutPath(infile :string, outputFile: string , ext: string, outDir: string) {
   {
@@ -43,6 +44,10 @@ if (inputFileExist) {
   const docBuilder : DocBuilder = new DocBuilder(JSON.parse(inDoc), config, exportFormat,outFileDir);
 
   saveFile(docBuilder, outFilePath);
+
+  updateArchetypeList('openEHR/CKM-mirror', 'org.openehr', docBuilder.archetypeList,false)
+
+
 }
 else {
   console.log('The input file does not exist:' + inFilePath);

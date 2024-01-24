@@ -32,6 +32,7 @@ import {
   formatDvQuantity,
   formatDvText
 } from "./formatters/TypeFormatter";
+import { ArchetypeList } from './provenance/openEProvenance';
 
 
 export class DocBuilder {
@@ -41,7 +42,7 @@ export class DocBuilder {
   config: Config;
   exportFormat: ExportFormat
   outFileDir: string;
-  archetypeList : string[] = [];
+  archetypeList :ArchetypeList = [];
 
   readonly _wt: WebTemplate;
 
@@ -128,7 +129,7 @@ export class DocBuilder {
 
   private walkCluster(f: TemplateElement) {
     if (f.nodeId.includes('CLUSTER'))
-      this.archetypeList.push(f.nodeId)
+      this.archetypeList.push({archetypeId: f.nodeId})
 
     formatCluster(this, f)
     this.walkChildren(f);
@@ -140,7 +141,7 @@ export class DocBuilder {
   }
 
   private walkComposition(f: TemplateElement) {
-    this.archetypeList.push(f.nodeId)
+    this.archetypeList.push({archetypeId: f.nodeId})
     formatCompositionHeader(this, f)
     formatNodeHeader(this);
     this.walkRmChildren(f);
@@ -162,7 +163,7 @@ export class DocBuilder {
 
   private walkSection(f: TemplateElement) {
     if (!this.config?.skippedAQLPaths?.includes(f.aqlPath)) {
-      this.archetypeList.push(f.nodeId)
+      this.archetypeList.push({archetypeId: f.nodeId})
       formatLeafHeader(this, f)
     }
     this.walkChildren(f)
@@ -170,7 +171,7 @@ export class DocBuilder {
 
 
   private walkEntry(f: TemplateElement) {
-    this.archetypeList.push(f.nodeId)
+    this.archetypeList.push({archetypeId: f.nodeId})
     formatLeafHeader(this, f)
     formatNodeHeader(this)
     this.walkRmChildren(f);

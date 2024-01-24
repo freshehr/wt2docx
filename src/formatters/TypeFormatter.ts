@@ -13,7 +13,7 @@ export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): v
     case ExportFormat.xmind:
       fn = xmind.dvTypes.formatDvCodedText
       break
-    case ExportFormat.fsh:
+    case ExportFormat.fshl:
       break;
     default:
       fn = adoc.dvTypes.formatDvCodedText
@@ -50,7 +50,7 @@ export const formatDvText = (docBuilder: DocBuilder, f: TemplateElement): void =
     case ExportFormat.xmind:
       fn = xmind.dvTypes.formatDvText
       break;
-    case ExportFormat.fsh:
+    case ExportFormat.fshl:
       break;
     default:
       fn = adoc.dvTypes.formatDvText
@@ -66,7 +66,7 @@ export const formatDvCount = (docBuilder: DocBuilder, f: TemplateElement): void 
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.xmind:
-    case ExportFormat.fsh:
+    case ExportFormat.fshl:
       break;
     default:
       fn = adoc.dvTypes.formatDvCount
@@ -82,7 +82,7 @@ export const formatDvQuantity = (docBuilder: DocBuilder, f: TemplateElement): vo
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.xmind:
-    case ExportFormat.fsh:
+    case ExportFormat.fshl:
       break;
     default:
       fn = adoc.dvTypes.formatDvQuantity
@@ -100,7 +100,7 @@ export const formatDvOrdinal = (docBuilder: DocBuilder, f: TemplateElement): voi
     case ExportFormat.xmind:
       fn = xmind.dvTypes.formatDvOrdinal
       break;
-    case ExportFormat.fsh:
+    case ExportFormat.fshl:
       break;
     default:
       fn = adoc.dvTypes.formatDvOrdinal
@@ -115,7 +115,7 @@ export const formatDvDefault = (docBuilder: DocBuilder, f: TemplateElement): voi
 
   switch (docBuilder.exportFormat) {
     case ExportFormat.xmind:
-    case ExportFormat.fsh:
+    case ExportFormat.fshl:
       break;
     default:
       fn = adoc.dvTypes.formatDvDefault
