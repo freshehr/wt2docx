@@ -128,15 +128,14 @@ const readRemoteFileCache = async (repoName : string, repoNamespace: string ,for
   const fileName = cacheFileName(repoName)
   const inputFileExist = fs.existsSync(fileName);
 
-  if (inputFileExist || forceRefresh) {
-    const inDoc: string = fs.readFileSync(fileName, { encoding: 'utf8', flag: 'r' });
-    remoteRepo = JSON.parse(inDoc)
-
+  if (!inputFileExist || forceRefresh) {
+    refreshGHList(repoName, repoNamespace)
+    await saveRemoteRepoCache(repoName,remoteRepo)
   }
   else
   {
-    refreshGHList(repoName, repoNamespace)
-    await saveRemoteRepoCache(repoName,remoteRepo)
+    const inDoc: string = fs.readFileSync(fileName, { encoding: 'utf8', flag: 'r' });
+    remoteRepo = JSON.parse(inDoc)
   }
 }
 
@@ -144,6 +143,7 @@ const refreshGHList =  (repoName: string, repoNamespace: string): void => {
 
   searchGHRepo("ian.mcnicoll", "vQum0C12K1Lx", repoName, repoNamespace)
     .then( result => {
+      console.log('remoteRepo: ', result)
       return remoteRepo = result; // Outputs: 'Hello, World!'
     })
     .catch(error => console.log("Caught Error: ", error));
