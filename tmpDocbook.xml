@@ -1,0 +1,513 @@
+<section xml:id="_template_vaccination">
+<title>Template: Vaccination</title>
+<simpara>Template Id: <emphasis role="strong">FI - Vaccination</emphasis></simpara>
+<simpara>Version: <emphasis role="strong">0.23.0</emphasis></simpara>
+<simpara>Created: <emphasis role="strong">Fri Jan 05 2024</emphasis></simpara>
+<section xml:id="_composition_vaccination">
+<title>Composition: <emphasis role="strong">Vaccination</emphasis></title>
+<simpara>Vaccination record</simpara>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="25*"/>
+<colspec colname="col_2" colwidth="37.5*"/>
+<colspec colname="col_3" colwidth="37.5*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Data item</entry>
+<entry align="left" valign="top">Description</entry>
+<entry align="left" valign="top">Allowed values</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">coded_text</emphasis><?asciidoc-br?>
+ Type: <literal>Coded text</literal> (<emphasis>mandatory</emphasis>)</simpara></entry>
+<entry align="left" valign="top"></entry>
+<entry align="left" valign="top"><itemizedlist>
+<listitem>
+<simpara>event<?asciidoc-br?>
+<literal>openehr:433</literal></simpara>
+</listitem>
+</itemizedlist></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">composer</emphasis><?asciidoc-br?>
+ Type: <literal>Party</literal> (<emphasis>mandatory</emphasis>)</simpara></entry>
+<entry align="left" valign="top"><simpara>The person primarily responsible for the content of the Composition (but not necessarily its committal into the EHR system). This is the identifier which should appear on the screen. It may or may not be the person who entered the data. When it is the patient, the special self instance of <literal>PARTY_PROXY</literal> will be used.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<section xml:id="_composition_context">
+<title>Composition context</title>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="25*"/>
+<colspec colname="col_2" colwidth="37.5*"/>
+<colspec colname="col_3" colwidth="37.5*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Data item</entry>
+<entry align="left" valign="top">Description</entry>
+<entry align="left" valign="top">Allowed values</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">start_time</emphasis><?asciidoc-br?>
+ Type: <literal>Date/time</literal> (<emphasis>mandatory</emphasis>)</simpara></entry>
+<entry align="left" valign="top"><simpara>Start time of the clinical session or other kind of event during which a provider performs a service of any kind for the patient.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">setting</emphasis><?asciidoc-br?>
+ Type: <literal>Coded text</literal> (<emphasis>mandatory</emphasis>)</simpara></entry>
+<entry align="left" valign="top"><simpara>The setting in which the clinical session took place. Coded using the openEHR Terminology, setting group.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</section>
+</section>
+<section xml:id="_vaccination_management">
+<title><emphasis role="strong">Vaccination management</emphasis></title>
+<simpara>Any activity related to the planning, scheduling, prescription management, dispensing, administration, cessation and other use of a medication, vaccine, nutritional product or other therapeutic item.</simpara>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="25*"/>
+<colspec colname="col_2" colwidth="37.5*"/>
+<colspec colname="col_3" colwidth="37.5*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Data item</entry>
+<entry align="left" valign="top">Description</entry>
+<entry align="left" valign="top">Allowed values</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">current_state</emphasis><?asciidoc-br?>
+ Type: <literal>Coded text</literal> (<emphasis>mandatory</emphasis>)</simpara></entry>
+<entry align="left" valign="top"></entry>
+<entry align="left" valign="top"><itemizedlist>
+<listitem>
+<simpara>active<?asciidoc-br?>
+<literal>local:245</literal></simpara>
+</listitem>
+</itemizedlist></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">transition</emphasis><?asciidoc-br?>
+ Type: <literal>Coded text</literal></simpara></entry>
+<entry align="left" valign="top"></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">careflow_step</emphasis><?asciidoc-br?>
+ Type: <literal>Coded text</literal></simpara></entry>
+<entry align="left" valign="top"></entry>
+<entry align="left" valign="top"><itemizedlist>
+<listitem>
+<simpara>Dose administered<?asciidoc-br?>
+<literal>local:at0006</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Vaccine not given<?asciidoc-br?>
+<literal>local:at0018</literal></simpara>
+</listitem>
+</itemizedlist></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">time</emphasis><?asciidoc-br?>
+ Type: <literal>Date/time</literal> (<emphasis>mandatory</emphasis>)</simpara></entry>
+<entry align="left" valign="top"><simpara>Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">subject</emphasis><?asciidoc-br?>
+ Type: <literal>Party</literal> (<emphasis>mandatory</emphasis>)</simpara></entry>
+<entry align="left" valign="top"></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Vaccine name</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Name of the medication, vaccine or other therapeutic/prescribable item which was the focus of the activity.</simpara></entry>
+<entry align="left" valign="top"><simpara><emphasis role="strong">comment</emphasis>: For example: 'Atenolol 100mg' or 'Tenormin tablets 100mg'.
+It is strongly recommended that the 'Medication item' is coded with a terminology capable of triggering decision support, where possible. The extent of coding may vary from the simple name of the medication item through to structured details about the actual medication pack used. Free text entry should only be used if there is no appropriate terminology available.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><section xml:id="_vaccine">
+<title>Vaccine</title>
+
+</section></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Package batch number</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The identifier assigned to the production batch by the manufacturer during production.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><section xml:id="_medication_supply_amount">
+<title>Medication supply amount</title>
+
+</section></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Dosage</emphasis><?asciidoc-br?>
+ Type: <literal>Quantity</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The amount of medication, vaccine or therapeutic good intended to be supplied or actually supplied.</simpara></entry>
+<entry align="left" valign="top"><simpara>Valid units:<?asciidoc-br?></simpara>
+<itemizedlist>
+<listitem>
+<simpara>1</simpara>
+</listitem>
+</itemizedlist>
+<simpara><emphasis role="strong">comment</emphasis>: For example: 1, 1.5, or 0.125.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Unit</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The dose unit or pack unit associated with the dispense amount.</simpara></entry>
+<entry align="left" valign="top"><simpara><emphasis role="strong">comment</emphasis>: For example: 'tablets', 'packs', ml'.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><section xml:id="_administration_details">
+<title>Administration details</title>
+
+</section></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Administration method</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The route by which the ordered item was, or is to be, administered into the subject&#8217;s body.</simpara></entry>
+<entry align="left" valign="top"><itemizedlist>
+<listitem>
+<simpara>Oral</simpara>
+</listitem>
+<listitem>
+<simpara>Transdermal</simpara>
+</listitem>
+<listitem>
+<simpara>Subcutaneous</simpara>
+</listitem>
+<listitem>
+<simpara>Intramuscular</simpara>
+</listitem>
+<listitem>
+<simpara>Intranasal</simpara>
+</listitem>
+<listitem>
+<simpara>Other</simpara>
+</listitem>
+</itemizedlist>
+<simpara><emphasis role="strong">comment</emphasis>: Comment: For example: 'oral', 'intravenous', or 'topical'. Coding of the route with a terminology is preferred, where possible. Multiple potential routes may be specified.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Injection site</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Structured description of the site of administration of the ordered item.</simpara></entry>
+<entry align="left" valign="top"><itemizedlist>
+<listitem>
+<simpara>Left thigh</simpara>
+</listitem>
+<listitem>
+<simpara>Right thigh</simpara>
+</listitem>
+<listitem>
+<simpara>Left upper arm</simpara>
+</listitem>
+<listitem>
+<simpara>Right upper arm</simpara>
+</listitem>
+<listitem>
+<simpara>Left buttock</simpara>
+</listitem>
+<listitem>
+<simpara>Right buttock</simpara>
+</listitem>
+<listitem>
+<simpara>Other</simpara>
+</listitem>
+</itemizedlist>
+<simpara><emphasis role="strong">comment</emphasis>: For example: 'left upper arm', 'intravenous catheter right hand'.
+Coding of the body site with a terminology is preferred, where possible.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><section xml:id="_side_effects">
+<title>Side effects</title>
+
+</section></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Certainty</emphasis><?asciidoc-br?>
+ Type: <literal>Coded text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Statement about the degree of clinical certainty that the identified 'Specific substance' was the cause of the 'Manifestation' in this reaction event.</simpara></entry>
+<entry align="left" valign="top"><itemizedlist>
+<listitem>
+<simpara>Suspected<?asciidoc-br?>
+<literal>local:at0003</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Confirmed<?asciidoc-br?>
+<literal>local:at0005</literal></simpara>
+</listitem>
+</itemizedlist></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Vaccine reaction diagnosis</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal> (<emphasis>multiple</emphasis>)</simpara></entry>
+<entry align="left" valign="top"><simpara>Clinical symptoms and/or signs that are observed or associated with the adverse reaction.</simpara></entry>
+<entry align="left" valign="top"><simpara><emphasis role="strong">comment</emphasis>: Manifestation can be expressed as a single word, phrase or brief description. For example: nausea, rash.  'No reaction&#8217;may be appropriate where a previous reaction has been noted but the reaction did not re-occur after further exposure. It is preferable that 'Manifestation' should be coded with a terminology, where possible. The values entered here may be used to display on an application screen as part of a list of adverse reactions, as recommended in the UK NHS CUI guidelines.</simpara>
+<simpara>Terminologies commonly used include, but are not limited to, SNOMED-CT or ICD10.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Description</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Narrative description about the adverse reaction as a whole, including details of the manifestation if required.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Time</emphasis><?asciidoc-br?>
+ Type: <literal>Date/time</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Record of the date and/or time of the onset of the reaction.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><section xml:id="_extra_codes">
+<title>Extra codes</title>
+
+</section></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Primarity</emphasis><?asciidoc-br?>
+ Type: <literal>Coded text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>*</simpara></entry>
+<entry align="left" valign="top"><itemizedlist>
+<listitem>
+<simpara>Primary<?asciidoc-br?>
+<literal>local:at0039</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Secondary<?asciidoc-br?>
+<literal>local:at0040</literal></simpara>
+</listitem>
+</itemizedlist></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Permanence</emphasis><?asciidoc-br?>
+ Type: <literal>Coded text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>*</simpara></entry>
+<entry align="left" valign="top"><itemizedlist>
+<listitem>
+<simpara>Temporary<?asciidoc-br?>
+<literal>local:at0041</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Permanent<?asciidoc-br?>
+<literal>local:at0042</literal></simpara>
+</listitem>
+</itemizedlist></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><section xml:id="_vaccination_details_fi">
+<title>Vaccination details FI</title>
+
+</section></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Dosage number string</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Annoksen järjestysnumero.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Is research vaccine?</emphasis><?asciidoc-br?>
+ Type: <literal>Coded text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Ilmaisee onko kyseessä tutkimusrokote, jota ei vielä ole kansallisessa lääketietokannassa.</simpara></entry>
+<entry align="left" valign="top"><itemizedlist>
+<listitem>
+<simpara>Yes<?asciidoc-br?>
+<literal>local:at0003</literal></simpara>
+</listitem>
+<listitem>
+<simpara>No<?asciidoc-br?>
+<literal>local:at0004</literal></simpara>
+</listitem>
+</itemizedlist></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Research vaccine ID</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Tutkimusrokotteen tunniste.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Dosage number</emphasis><?asciidoc-br?>
+ Type: <literal>Count</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The sequence number specific to the pathway step being recorded.</simpara></entry>
+<entry align="left" valign="top"><simpara><emphasis role="strong">comment</emphasis>: For example: Vaccine sequence number.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Additional information</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Additional narrative about the activity or pathway step not captured in other fields, including details of any variance between the intended action and the action actually performed.</simpara></entry>
+<entry align="left" valign="top"><simpara><emphasis role="strong">comment</emphasis>: For example: 'Patient was in radiology department', 'Accidental injection into blood vessel during IM administration'.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><section xml:id="_nes_vaccination_protocol">
+<title>nes_vaccination_protocol</title>
+
+</section></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Immunizations</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal> (<emphasis>multiple</emphasis>)</simpara></entry>
+<entry align="left" valign="top"><simpara>Coded or textual data for the diseases against which the vaccination is intended to confer immunity.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Immunization specifier</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><section xml:id="_performer">
+<title>Performer</title>
+
+</section></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><section xml:id="_structured_name">
+<title>Structured name</title>
+
+</section></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">First name</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The person&#8217;s identifying first name(s) within the family group or by which they are uniquely socially identified.</simpara></entry>
+<entry align="left" valign="top"><simpara><emphasis role="strong">comment</emphasis>: Also known as a specific type of 'Given name'.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Last name</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>The part of a name a person usually has in common with some other members of their family, as distinguished from their own given names.</simpara></entry>
+<entry align="left" valign="top"><simpara><emphasis role="strong">comment</emphasis>: Also known as 'Family name' or 'Surname'.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">ID</emphasis><?asciidoc-br?>
+ Type: <literal>Identifier</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Identifier associated with the person.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Reg number</emphasis><?asciidoc-br?>
+ Type: <literal>Identifier</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Identifier associated with the person.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">ID number</emphasis><?asciidoc-br?>
+ Type: <literal>Identifier</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Identifier associated with the person.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">OID</emphasis><?asciidoc-br?>
+ Type: <literal>Identifier</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Identifier associated with the person.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><section xml:id="_performer_organisation">
+<title>Performer organisation</title>
+
+</section></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Organisation name</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal> (<emphasis>mandatory</emphasis>)</simpara></entry>
+<entry align="left" valign="top"><simpara>The unstructured name or label for the organisation.</simpara></entry>
+<entry align="left" valign="top"><simpara><emphasis role="strong">comment</emphasis>: For example: 'Royal Children&#8217;s Hospital'; 'ABC District Nursing Service'; 'YNWA Oslo' or 'JB Smith Lawyers'.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Identifier</emphasis><?asciidoc-br?>
+ Type: <literal>Identifier</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Identifier of organisation.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><section xml:id="_contact_details_multiple">
+<title>Contact details  <emphasis role="strong">[multiple]</emphasis></title>
+
+</section></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Role in organisation</emphasis><?asciidoc-br?>
+ Type: <literal>Text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Contact person&#8217;s role in organisation.</simpara></entry>
+<entry align="left" valign="top"></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><section xml:id="_information_source_fi">
+<title>Information source FI</title>
+
+</section></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara><emphasis role="strong">Source</emphasis><?asciidoc-br?>
+ Type: <literal>Coded text</literal></simpara></entry>
+<entry align="left" valign="top"><simpara>Ilmaisee mistä tieto on saatu.</simpara></entry>
+<entry align="left" valign="top"><itemizedlist>
+<listitem>
+<simpara>Mother<?asciidoc-br?>
+<literal>local:at0002</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Advocate<?asciidoc-br?>
+<literal>local:at0003</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Organization<?asciidoc-br?>
+<literal>local:at0004</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Father<?asciidoc-br?>
+<literal>local:at0005</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Other<?asciidoc-br?>
+<literal>local:at0006</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Patient<?asciidoc-br?>
+<literal>local:at0007</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Other organization<?asciidoc-br?>
+<literal>local:at0008</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Official<?asciidoc-br?>
+<literal>local:at0009</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Device<?asciidoc-br?>
+<literal>local:at0010</literal></simpara>
+</listitem>
+<listitem>
+<simpara>Employer<?asciidoc-br?>
+<literal>local:at0011</literal></simpara>
+</listitem>
+</itemizedlist></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</section>
+</section>

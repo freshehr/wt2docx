@@ -17,7 +17,12 @@ beforeAll(() => {
 
 describe('Provenance  tests', () => {
 
-  test('Should list archetypes used', () => {
+  test('Should list CKM archetypes used', () => {
+    updateArchetypeList('openEHR/CKM-mirror', 'org.openehr', builder.archetypeList,true)
+      .then(aList => console.log(aList))
+  });
+
+  test('Should fetch a local AD archetype', () => {
     updateArchetypeList('openEHR/CKM-mirror', 'org.openehr', builder.archetypeList,true)
       .then(aList => console.log(aList))
   });

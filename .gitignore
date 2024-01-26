@@ -34,3 +34,4 @@ out/hidden/
 templates/hidden/
 config/hidden/
 
+/out/tmp.md
