@@ -1,0 +1,280 @@
+== Template: Vaccination
+
+
+Template Id: **FI - Vaccination**
+
+
+Version: **0.23.0**
+
+
+Created: **Mon Jan 08 2024**
+
+
+=== Composition: *Vaccination*
+
+
+Vaccination record
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **coded_text** + 
+ Type: `Coded text` (_mandatory_) |  
+a|
+
+* event +
+ `openehr:433`
+| **composer** + 
+ Type: `Party` (_mandatory_) | The person primarily responsible for the content of the Composition (but not necessarily its committal into the EHR system). This is the identifier which should appear on the screen. It may or may not be the person who entered the data. When it is the patient, the special self instance of `PARTY_SELF` will be used. 
+|
+|====
+==== Composition context
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **start_time** + 
+ Type: `Date/time` (_mandatory_) | Start time of the clinical session or other kind of event during which a provider performs a service of any kind for the patient. 
+|
+| **setting** + 
+ Type: `Coded text` (_mandatory_) | The setting in which the clinical session took place. Coded using the openEHR Terminology, setting group. 
+a|
+|====
+===  *Vaccination management*
+
+
+Any activity related to the planning, scheduling, prescription management, dispensing, administration, cessation and other use of a medication, vaccine, nutritional product or other therapeutic item.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **careflow_step** + 
+ Type: `Coded text`  | `ISM_TRANSITION.care_flow_step` - The step in the careflow process which occurred as part of generating this action, e.g. dispense , start_administration. This attribute represents the clinical label for the activity, as opposed to current_state which represents the state machine (ISM) computable form. Defined in archetype. 
+a|
+
+* Dose administered
+* Vaccine not given
+| **time** + 
+ Type: `Date/time` (_mandatory_) | `ACTION.time` - Point in time at which this action took place. 
+
+
+|
+| **Vaccine name** + 
+ Type: `Text`  | Name of the medication, vaccine or other therapeutic/prescribable item which was the focus of the activity. 
+
+
+
+
+*comment*: For example: 'Atenolol 100mg' or 'Tenormin tablets 100mg'. 
+It is strongly recommended that the 'Medication item' is coded with a terminology capable of triggering decision support, where possible. The extent of coding may vary from the simple name of the medication item through to structured details about the actual medication pack used. Free text entry should only be used if there is no appropriate terminology available.
+a|
+
+3+a|===== Vaccine  
+| **Package batch number** + 
+ Type: `Text`  | The identifier assigned to the production batch by the manufacturer during production. 
+a|
+
+3+a|===== Medication supply amount  
+| **Dosage** + 
+ Type: `Quantity`  | The amount of medication, vaccine or therapeutic good intended to be supplied or actually supplied. 
+
+
+
+
+*comment*: For example: 1, 1.5, or 0.125.
+a|
+
+Valid units: +
+
+* 1
+| **Unit** + 
+ Type: `Text`  | The dose unit or pack unit associated with the dispense amount. 
+
+
+
+
+*comment*: For example: 'tablets', 'packs', ml'.
+a|
+
+3+a|===== Administration details  
+| **Administration method** + 
+ Type: `Text`  | The route by which the ordered item was, or is to be, administered into the subject's body. 
+
+
+
+
+*comment*: Comment: For example: 'oral', 'intravenous', or 'topical'. Coding of the route with a terminology is preferred, where possible. Multiple potential routes may be specified.
+a|
+
+* Oral
+* Transdermal
+* Subcutaneous
+* Intramuscular
+* Intranasal
+* Other
+| **Injection site** + 
+ Type: `Text`  | Structured description of the site of administration of the ordered item. 
+
+
+
+
+*comment*: For example: 'left upper arm', 'intravenous catheter right hand'. 
+Coding of the body site with a terminology is preferred, where possible.
+a|
+
+* Left thigh
+* Right thigh
+* Left upper arm
+* Right upper arm
+* Left buttock
+* Right buttock
+* Other
+3+a|===== Side effects  
+| **Certainty** + 
+ Type: `Coded text`  | Statement about the degree of clinical certainty that the identified 'Specific substance' was the cause of the 'Manifestation' in this reaction event. 
+a|
+
+* Suspected
+* Confirmed
+| **Vaccine reaction diagnosis** + 
+ Type: `Text` (_multiple_) | Clinical symptoms and/or signs that are observed or associated with the adverse reaction. 
+
+
+
+
+*comment*: Manifestation can be expressed as a single word, phrase or brief description. For example: nausea, rash.  'No reaction'may be appropriate where a previous reaction has been noted but the reaction did not re-occur after further exposure. It is preferable that 'Manifestation' should be coded with a terminology, where possible. The values entered here may be used to display on an application screen as part of a list of adverse reactions, as recommended in the UK NHS CUI guidelines.
+
+
+
+Terminologies commonly used include, but are not limited to, SNOMED-CT or ICD10.
+a|
+
+| **Description** + 
+ Type: `Text`  | Narrative description about the adverse reaction as a whole, including details of the manifestation if required. 
+a|
+
+| **Time** + 
+ Type: `Date/time`  | Record of the date and/or time of the onset of the reaction. 
+|
+3+a|===== Extra codes  
+| **Primarity** + 
+ Type: `Coded text`  | * 
+a|
+
+* Primary
+* Secondary
+| **Permanence** + 
+ Type: `Coded text`  | * 
+a|
+
+* Temporary
+* Permanent
+3+a|===== Vaccination details FI  
+| **Dosage number string** + 
+ Type: `Text`  | Annoksen järjestysnumero. 
+a|
+
+| **Is research vaccine?** + 
+ Type: `Coded text`  | Ilmaisee onko kyseessä tutkimusrokote, jota ei vielä ole kansallisessa lääketietokannassa. 
+a|
+
+* Yes
+* No
+| **Research vaccine ID** + 
+ Type: `Text`  | Tutkimusrokotteen tunniste. 
+a|
+
+| **Dosage number** + 
+ Type: `Count`  | The sequence number specific to the pathway step being recorded. 
+
+
+
+
+*comment*: For example: Vaccine sequence number.
+a|
+
+| **Additional information** + 
+ Type: `Text`  | Additional narrative about the activity or pathway step not captured in other fields, including details of any variance between the intended action and the action actually performed. 
+
+
+
+
+*comment*: For example: 'Patient was in radiology department', 'Accidental injection into blood vessel during IM administration'.
+a|
+
+3+a|===== nes_vaccination_protocol  
+| **Immunizations** + 
+ Type: `Text` (_multiple_) | Coded or textual data for the diseases against which the vaccination is intended to confer immunity. 
+a|
+
+| **Immunization specifier** + 
+ Type: `Text`  |  
+a|
+
+3+a|===== Performer  
+3+a|===== Structured name  
+| **First name** + 
+ Type: `Text`  | The person's identifying first name(s) within the family group or by which they are uniquely socially identified. 
+
+
+
+
+*comment*: Also known as a specific type of 'Given name'.
+a|
+
+| **Last name** + 
+ Type: `Text`  | The part of a name a person usually has in common with some other members of their family, as distinguished from their own given names. 
+
+
+
+
+*comment*: Also known as 'Family name' or 'Surname'.
+a|
+
+| **ID** + 
+ Type: `Identifier`  | Identifier associated with the person. 
+|
+| **Reg number** + 
+ Type: `Identifier`  | Identifier associated with the person. 
+|
+| **ID number** + 
+ Type: `Identifier`  | Identifier associated with the person. 
+|
+| **OID** + 
+ Type: `Identifier`  | Identifier associated with the person. 
+|
+3+a|===== Performer organisation  
+| **Organisation name** + 
+ Type: `Text` (_mandatory_) | The unstructured name or label for the organisation. 
+
+
+
+
+*comment*: For example: 'Royal Children's Hospital'; 'ABC District Nursing Service'; 'YNWA Oslo' or 'JB Smith Lawyers'.
+a|
+
+| **Identifier** + 
+ Type: `Identifier`  | Identifier of organisation. 
+|
+3+a|===== Contact details  **[multiple]**
+| **Role in organisation** + 
+ Type: `Text`  | Contact person's role in organisation. 
+a|
+
+3+a|===== Information source FI  
+| **Source** + 
+ Type: `Coded text`  | Ilmaisee mistä tieto on saatu. 
+a|
+
+* Mother
+* Advocate
+* Organization
+* Father
+* Other
+* Patient
+* Other organization
+* Official
+* Device
+* Employer
+|====

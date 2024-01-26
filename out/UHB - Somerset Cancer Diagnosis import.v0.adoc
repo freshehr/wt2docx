@@ -1,0 +1,1471 @@
+== Template: Somerset Cancer Diagnosis import
+
+
+Template Id: **UHB - Somerset Cancer Diagnosis import.v0**
+
+
+Version: **0.12.0**
+
+
+Created: **Thu Jan 11 2024**
+
+
+=== Composition: *Somerset Cancer Diagnosis import*
+
+
+Document to communicate information to others, commonly in response to a request from another party.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **category** + 
+ Type: `Coded text` (_mandatory_) | Temporal category of this Composition, persistent / episodic or event. 
+a|
+
+* event +
+ `openehr:433`
+| **composer** + 
+ Type: `Party` (_mandatory_) | The person primarily responsible for the content of the Composition (but not necessarily its committal into the EHR system). This is the identifier which should appear on the screen. It may or may not be the person who entered the data. When it is the patient, the special self instance of `PARTY_SELF` will be used. 
+|
+|====
+==== Composition context
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **start_time** + 
+ Type: `Date/time` (_mandatory_) | Start time of the clinical session or other kind of event during which a provider performs a service of any kind for the patient. 
+|
+| **setting** + 
+ Type: `Coded text` (_mandatory_) | The setting in which the clinical session took place. Coded using the openEHR Terminology, setting group. 
+a|
+| **UHB Request ID** + 
+ Type: `Text`  | Identification information about the report. 
+a|
+
+|====
+===  *Diagnosis*
+
+
+A generic section header which should be renamed in a template to suit a specific clinical context.
+
+
+===  *Problem/Diagnosis*
+
+
+Details about a single identified health condition, injury, disability or any other issue which impacts on the physical, mental and/or social well-being of an individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Diagnosis** + 
+ Type: `Text` (_mandatory_) | Identification of the problem or diagnosis, by name. 
+
+
+
+
+*comment*: Coding of the name of the problem or diagnosis with a terminology is preferred, where possible.
+a|
+
+| **Type** + 
+ Type: `Text`  | Identification of a simple body site for the location of the problem or diagnosis. 
+
+
+
+
+*comment*: Coding of the name of the anatomical location with a terminology is preferred, where possible.
+Use this data element to record precoordinated anatomical locations. If the requirements for recording the anatomical location are determined at run-time by the application or require more complex modelling such as relative locations then use the CLUSTER.anatomical_location or CLUSTER.relative_location within the 'Structured anatomical location' SLOT in this archetype. Occurrences for this data element are unbounded to allow for clinical scenarios such as describing a rash in multiple locations but where all of the other attributes are identical. If the anatomical location is included in the Problem/diagnosis name via precoordinated codes, this data element becomes redundant. 
+
+
+a|
+
+| **First seen date** + 
+ Type: `Date/time`  | Estimated or actual date/time that signs or symptoms of the problem/diagnosis were first observed. 
+
+
+
+
+*comment*: Data captured/imported as "Age at onset" should be converted to a date using the subject's date of birth.
+|
+| **Diagnosis date** + 
+ Type: `Date/time`  | Estimated or actual date/time the diagnosis or problem was recognised by a healthcare professional. 
+
+
+
+
+*comment*: Partial dates are acceptable. If the subject of care is under the age of one year, then the complete date or a minimum of the month and year is necessary to enable accurate age calculations - for example, if used to drive decision support. Data captured/imported as "Age at time of clinical recognition" should be converted to a date using the subject's date of birth.
+|
+3+a|===== Cancer diagnosis  
+| **Recurrence indicator** + 
+ Type: `Text`  | An indication of whether a diagnosis of recurrence has been recorded for which a new Cancer Care Plan is required. 
+a|
+
+| **Detailed diagnosis coding** + 
+ Type: `Text`  |  
+a|
+
+| **Cancer group** + 
+ Type: `Text`  |  
+a|
+
+| **Morphology** + 
+ Type: `Text`  | The morphology code for the diagnosed cancer as defined by ICDO3 or SNOMED CT or SNOMED RT. Terminology mappings should be used. 
+
+
+
+
+*comment*: The SNOMED version should be captured as part of the code string.
+a|
+
+| **Topography** + 
+ Type: `Text`  | The topography code for the diagnosed cancer as defined by ICDO3 or SNOMED CT or SNOMED RT. Terminology mappings should be used. 
+
+
+
+
+*comment*: The SNOMED version should be captured as part of the code string.
+a|
+
+| **Tumour laterality** + 
+ Type: `Text`  | Tumour laterality identifies the side of the body for a tumour relating to paired organs within a PATIENT based on the evidence from a pathological examination. 
+a|
+
+| **Basis of diagnosis** + 
+ Type: `Text`  |  
+a|
+
+3+a|===== Upper GI staging  
+3+a|===== BCLC stage  
+| **BCLC stage** + 
+ Type: `Coded text`  | Barcelona Clinic Liver Cancer stage. 
+a|
+
+* 0
+* A
+* B
+* C
+* D
+| **Pancreatic clinical stage** + 
+ Type: `Text`  | Details of clinical stage for pancreatic cancer. 
+a|
+
+3+a|===== Final FIGO grade  
+| **FIGO grade** + 
+ Type: `Coded text`  | Details of FIGO grade. 
+a|
+
+* FIGO 1
+* FIGO 2
+* FIGO 3
+| **FIGO version** + 
+ Type: `Text`  | Version of FIGO classification used. 
+a|
+
+3+a|===== Colorectal staging  
+| **Synchronous tumour indicator** + 
+ Type: `Text` (_multiple_) | Details of synchronous tumour indicator. 
+a|
+
+3+a|===== Modified Dukes stage  
+| **Modified Dukes stage** + 
+ Type: `Coded text`  | Details of colorectal cancer stage according to Dukes. 
+a|
+
+* Dukes Stage A
+* Dukes Stage B
+* Dukes Stage C1
+* Dukes Stage C2
+* Dukes Stage D
+* 99 Not known
+3+a|===== Testicular staging  
+| **Extranodal metastases** + 
+ Type: `Text`  | Details of extranodal metastases. 
+a|
+
+| **Lung metastases sub-stage grouping** + 
+ Type: `Text`  | Details of lung metastases sub-stage grouping. 
+a|
+
+3+a|===== Final TNM  
+| **Primary tumour (T)** + 
+ Type: `Text`  | Assessment of the the extent of the primary tumour. 
+
+
+
+
+*comment*: Coding with a T code appropriate for the tumour type and anatomical site is expected. For example: 'T1'; or 'cT3'. Represented as 'T' or 'cT' in the 'TNM assessment'.
+a|
+
+| **Regional lymph nodes (N)** + 
+ Type: `Text`  | Assessment of the the absence or presence and extent of regional lymph node metastasis. 
+
+
+
+
+*comment*: Coding with an N code appropriate for the tumour type and anatomical site is expected. For example: 'NX'; or 'cN2'. Represented as 'N' or 'cN' within the 'TNM assessment'.
+a|
+
+| **Distant metastasis (M)** + 
+ Type: `Text`  | Assessment of the absence or presence of distant metastasis. 
+
+
+
+
+*comment*: Coding with an M code appropriate for the tumour type and anatomical site is expected. For example: 'M1'; 'cM1a'; 'M1 PUL'; or 'cM0'. Represented as 'M' or 'cM' within the 'TNM assessment'.
+a|
+
+| **Differentiation** + 
+ Type: `Text`  | Histopathological grading of the tumour. 
+
+
+
+
+*comment*: Pretreatment histopathological assessment may be determined from a limited biopsy prior to formal resection. Coding with a G code appropriate for the identified tumour type and anatomical site is expected. For example: 'G2'; 'GX'; or 'low grade' for bone and soft tissue sarcoma classification. Represented as 'G' within the 'TNM assessment'.
+a|
+
+| **TNM Stage Group** + 
+ Type: `Text`  | The categorisation of the anatomical stage of the tumour, usually based on TNM assessment. 
+
+
+
+
+*comment*: For example: carcinoma in situ is categorised as stage 0; or tumours with distant metastasis are categorised as stage IV.
+a|
+
+| **TNM Version** + 
+ Type: `Text`  | The edition of the TNM classification system used for the assessment. 
+a|
+
+3+a|===== Tumour ID  
+| **Tumour identifier** + 
+ Type: `Identifier`  | The identifier for the tumour. 
+|
+3+a|===== Metasases summary  
+| **Tumour status** + 
+ Type: `Text`  |  
+a|
+
+3+a|===== Metastasis  **[multiple]**
+| **Primary cancer site** + 
+ Type: `Text`  |  
+a|
+
+| **Location** + 
+ Type: `Text`  |  
+a|
+
+| **Certainty** + 
+ Type: `Text`  |  
+a|
+
+3+a|===== Cancer times  
+| **Wait time** + 
+ Type: `Duration`  |  
+|
+| **Target** + 
+ Type: `Date/time`  |  
+|
+| **FDS Target** + 
+ Type: `Date/time`  |  
+|
+| **Known to Palliative care** + 
+ Type: `Coded text`  |  
+a|
+
+* Yes
+* No
+| **Somerset Care Id** + 
+ Type: `Identifier`  |  
+|
+| **Patient informed date** + 
+ Type: `Date/time`  |  
+|
+|====
+===  *Child-Pugh Score*
+
+
+Child-Pugh score used for chronic liver disease/cirrhosis prognosis.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **time** + 
+ Type: `Date/time` (_mandatory_) |  
+|
+| **Total Child-Pugh score** + 
+ Type: `Count`  | Total Child-Pugh score. 
+a|
+
+Range: +
+
+* >= 5 and <= 15
+|====
+===  *Comorbidities*
+
+
+An screeing questionnaire for conditions, including problems and diagnoses.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **time** + 
+ Type: `Date/time` (_mandatory_) |  
+|
+3+a|===== Specific condition  **[multiple]**
+| **Condition name** + 
+ Type: `Text` (_mandatory_) | Name of the condition being screened. 
+a|
+
+* Acute pancreatitis
+* Alcohol-induced pancreatitis
+* Anaemia
+* Angina
+* On Aspirin
+* Bowel
+* Cardiac disease
+* Cerebrovascular disease
+* Chronic pancreatitis
+* Cirrhosis/Liver disease
+* Clotting
+* Chronic obstructive airways disease
+* History of CVA
+* Type 1 Diabetes
+* Type 2 Diabetes
+* Failure
+* Heart
+* Hypertension
+* Liver
+* Mental illness
+* MI
+* Neuro
+* Other
+* Peripheral vascular disease
+* Renal disease
+* Respiratory disease
+* Creatinine more than 170 mmols/l
+* On steroids
+* Vascular
+* On Warfarin
+* DIP
+* CLOP
+* Pace
+* Barrett's Oesophagus
+| **Presence?** + 
+ Type: `Coded text`  | Presence of the condition. 
+a|
+
+* Present
+* Absent
+| **Comment** + 
+ Type: `Text`  | Additional narrative about the conditions, not captured in other fields.
+ 
+a|
+
+|====
+===  *Past medical history*
+
+
+Narrative summary or overview about a patient, specifically from the perspective of a healthcare provider, and with or without associated interpretations.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Synopsis** + 
+ Type: `Text` (_mandatory_) | The summary, assessment, conclusions or evaluation of the clinical findings. 
+a|
+
+|====
+===  *SCR Palliative care assessment*
+
+
+SCR Palliative care assessment
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Pain control** + 
+ Type: `Coded text`  |  
+a|
+
+* Yes
+* No
+| **Other symptom management** + 
+ Type: `Coded text`  |  
+a|
+
+* Yes
+* No
+| **Telephone support** + 
+ Type: `Coded text`  |  
+a|
+
+* Yes
+* No
+| **Psychological support** + 
+ Type: `Coded text`  |  
+a|
+
+* Yes
+* No
+| **Contact date** + 
+ Type: `Date/time`  |  
+|
+| **Assessment ID** + 
+ Type: `Identifier`  |  
+|
+|====
+===  *Holistic Needs Assessment Summary*
+
+
+Holistic Needs Assessment Summary
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Summary of HNA** + 
+ Type: `Text`  |  
+a|
+
+| **Date last updated** + 
+ Type: `Date/time`  |  
+|
+|====
+===  *Treatment*
+
+
+A generic section header which should be renamed in a template to suit a specific clinical context.
+
+
+===  *Brachytherapy*
+
+
+A clinical activity carried out for screening, investigative, diagnostic, curative, therapeutic, evaluative or palliative purposes.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **careflow_step** + 
+ Type: `Coded text`  | `ISM_TRANSITION.care_flow_step` - The step in the careflow process which occurred as part of generating this action, e.g. dispense , start_administration. This attribute represents the clinical label for the activity, as opposed to current_state which represents the state machine (ISM) computable form. Defined in archetype. 
+a|
+
+* Procedure completed
+| **time** + 
+ Type: `Date/time` (_mandatory_) | `ACTION.time` - Point in time at which this action took place. 
+|
+| **Procedure name** + 
+ Type: `Coded text` (_mandatory_) | Identification of the procedure by name. 
+
+
+
+
+*comment*: Coding of the specific procedure with a terminology is preferred, where possible.
+a|
+
+* Brachytherapy +
+ `SNOMED-CT:152198000`
+| **Brachytherapy type** + 
+ Type: `Text`  | Identification of specific method or technique for the procedure. 
+
+
+
+
+*comment*: Use this data element to record simple terms or a narrative description. If the requirements for recording the method require more complex modelling then this can be represented by additional archetypes within the 'Procedure detail' SLOT in this archetype. If the method is included in the 'Procedure name' via precoordinated codes, this data element becomes redundant.
+a|
+
+| **Brachytherapy ID** + 
+ Type: `Text`  | The ID assigned to the order by the healthcare provider or organisation receiving the request for service. This is also referred to as Filler Order Identifier. 
+
+
+
+
+*comment*: This is equivalent to Filler Order Number in HL7 v2 specifications.
+a|
+
+|====
+===  *Teletherapy*
+
+
+A clinical activity carried out for screening, investigative, diagnostic, curative, therapeutic, evaluative or palliative purposes.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **careflow_step** + 
+ Type: `Coded text`  | `ISM_TRANSITION.care_flow_step` - The step in the careflow process which occurred as part of generating this action, e.g. dispense , start_administration. This attribute represents the clinical label for the activity, as opposed to current_state which represents the state machine (ISM) computable form. Defined in archetype. 
+a|
+
+* Procedure completed
+| **time** + 
+ Type: `Date/time` (_mandatory_) | `ACTION.time` - Point in time at which this action took place. 
+|
+| **Procedure name** + 
+ Type: `Coded text` (_mandatory_) | Identification of the procedure by name. 
+
+
+
+
+*comment*: Coding of the specific procedure with a terminology is preferred, where possible.
+a|
+
+* Teletherapy +
+ `SNOMED-CT:33195004`
+| **Treatment site** + 
+ Type: `Text`  | Identification of the body site for the procedure. 
+
+
+
+
+*comment*: Occurrences for this data element are unbounded to allow for clinical scenarios such as removing multiple skin lesions in different places, but where all of the other attributes are identical. Use this data element to record simple terms or precoordinated anatomical locations. If the requirements for recording the anatomical location are determined at run-time by the application or require more complex modelling such as relative locations then use the CLUSTER.anatomical_location or CLUSTER.relative_location within the 'Procedure detail' SLOT in this archetype. If the anatomical location is included in the 'Procedure name' via precoordinated codes, this data element becomes redundant.
+a|
+
+| **Treatment intent** + 
+ Type: `Text`  | Reason that the activity or care pathway step for the identified procedure was carried out. 
+
+
+
+
+*comment*: For example: the reason for the cancellation or suspension of the procedure.
+a|
+
+| **Teletherapy ID** + 
+ Type: `Text`  | The ID assigned to the order by the healthcare provider or organisation receiving the request for service. This is also referred to as Filler Order Identifier. 
+
+
+
+
+*comment*: This is equivalent to Filler Order Number in HL7 v2 specifications.
+a|
+
+|====
+===  *Chemotherapy*
+
+
+A clinical activity carried out for screening, investigative, diagnostic, curative, therapeutic, evaluative or palliative purposes.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **careflow_step** + 
+ Type: `Coded text`  | `ISM_TRANSITION.care_flow_step` - The step in the careflow process which occurred as part of generating this action, e.g. dispense , start_administration. This attribute represents the clinical label for the activity, as opposed to current_state which represents the state machine (ISM) computable form. Defined in archetype. 
+a|
+
+* Procedure completed
+| **time** + 
+ Type: `Date/time` (_mandatory_) | `ACTION.time` - Point in time at which this action took place. 
+|
+| **Procedure name** + 
+ Type: `Coded text` (_mandatory_) | Identification of the procedure by name. 
+
+
+
+
+*comment*: Coding of the specific procedure with a terminology is preferred, where possible.
+a|
+
+* Chemotherapy +
+ `SNOMED-CT:367336001`
+| **Drug regimen** + 
+ Type: `Text` (_multiple_) | Identification of specific method or technique for the procedure. 
+
+
+
+
+*comment*: Use this data element to record simple terms or a narrative description. If the requirements for recording the method require more complex modelling then this can be represented by additional archetypes within the 'Procedure detail' SLOT in this archetype. If the method is included in the 'Procedure name' via precoordinated codes, this data element becomes redundant.
+a|
+
+| **Treatment intent** + 
+ Type: `Text`  | Reason that the activity or care pathway step for the identified procedure was carried out. 
+
+
+
+
+*comment*: For example: the reason for the cancellation or suspension of the procedure.
+a|
+
+| **Chemotherapy ID** + 
+ Type: `Text`  | The ID assigned to the order by the healthcare provider or organisation receiving the request for service. This is also referred to as Filler Order Identifier. 
+
+
+
+
+*comment*: This is equivalent to Filler Order Number in HL7 v2 specifications.
+a|
+
+|====
+===  *Surgery*
+
+
+A generic section header which should be renamed in a template to suit a specific clinical context.
+
+
+===  *Primary procedure*
+
+
+A clinical activity carried out for screening, investigative, diagnostic, curative, therapeutic, evaluative or palliative purposes.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **careflow_step** + 
+ Type: `Coded text`  | `ISM_TRANSITION.care_flow_step` - The step in the careflow process which occurred as part of generating this action, e.g. dispense , start_administration. This attribute represents the clinical label for the activity, as opposed to current_state which represents the state machine (ISM) computable form. Defined in archetype. 
+a|
+
+* Procedure completed
+| **time** + 
+ Type: `Date/time` (_mandatory_) | `ACTION.time` - Point in time at which this action took place. 
+|
+| **Procedure name** + 
+ Type: `Text` (_mandatory_) | Identification of the procedure by name. 
+
+
+
+
+*comment*: Coding of the specific procedure with a terminology is preferred, where possible.
+a|
+
+| **Surgery ID** + 
+ Type: `Text`  | The ID assigned to the order by the healthcare provider or organisation receiving the request for service. This is also referred to as Filler Order Identifier. 
+
+
+
+
+*comment*: This is equivalent to Filler Order Number in HL7 v2 specifications.
+a|
+
+|====
+===  *Secondary procedure*
+
+
+A clinical activity carried out for screening, investigative, diagnostic, curative, therapeutic, evaluative or palliative purposes.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **careflow_step** + 
+ Type: `Coded text`  | `ISM_TRANSITION.care_flow_step` - The step in the careflow process which occurred as part of generating this action, e.g. dispense , start_administration. This attribute represents the clinical label for the activity, as opposed to current_state which represents the state machine (ISM) computable form. Defined in archetype. 
+a|
+
+* Procedure completed
+| **time** + 
+ Type: `Date/time` (_mandatory_) | `ACTION.time` - Point in time at which this action took place. 
+|
+| **Procedure name** + 
+ Type: `Text` (_mandatory_) | Identification of the procedure by name. 
+
+
+
+
+*comment*: Coding of the specific procedure with a terminology is preferred, where possible.
+a|
+
+| **Surgery ID** + 
+ Type: `Text`  | The ID assigned to the order by the healthcare provider or organisation receiving the request for service. This is also referred to as Filler Order Identifier. 
+
+
+
+
+*comment*: This is equivalent to Filler Order Number in HL7 v2 specifications.
+a|
+
+|====
+===  *Investigations*
+
+
+A generic section header which should be renamed in a template to suit a specific clinical context.
+
+
+===  *Imaging*
+
+
+Record the findings and interpretation of an imaging examination performed.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **time** + 
+ Type: `Date/time` (_mandatory_) |  
+|
+| **Procedure** + 
+ Type: `Text` (_mandatory_) | The name of the imaging examination or procedure performed. 
+
+
+
+
+*comment*: Coding with a terminology, potentially a pre-coordinated term specifying both modality and anatomical location, is desirable where possible. Possible candidate terminologies: LOINC, SNOMED CT or RadLex.
+a|
+
+| **Modality** + 
+ Type: `Text`  | Type of equipment that originally acquired the image or series of images. 
+
+
+
+
+*comment*: Also known as 'Examination type'. For example: Ultrasound; Computed tomography; or X-ray. Coding with a terminology is desirable, where possible. If the modality is specified by a code in the Examination result name, then this field may be redundant.
+a|
+
+| **Anatomical site** + 
+ Type: `Text`  | Simple description about the physical place on, or in, the body that was imaged. 
+
+
+
+
+*comment*: This data element is redundant if the anatomical site is identified in the 'Test name'.
+a|
+
+| **Imaging outcome** + 
+ Type: `Text`  | Narrative concise, clinically relevant interpretation of all imaging findings, and include a comparison with previous studies where appropriate. 
+
+
+
+
+*comment*: Also referred to as 'Opinion' or 'Impression'.
+a|
+
+| **Procedure description** + 
+ Type: `Text`  | Narrative description about the technical details and procedure. 
+
+
+
+
+*comment*: For example: outline of technique; non-routine alternative or additional imaging; nature and route of administration of contrast agent, radiopharmaceuticals and/or treatments administered; adverse reactions to contrast media.
+a|
+
+3+a|===== Examination request details  **[multiple]**
+| **Image ID** + 
+ Type: `Identifier`  | The local identifier given to the imaging examination report. 
+|
+|====
+===  *Pathology*
+
+
+The result, including findings and the laboratory's interpretation, of an investigation performed on specimens collected from an individual or related to that individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **time** + 
+ Type: `Date/time` (_mandatory_) |  
+|
+| **Test name** + 
+ Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+a|
+
+3+a|===== Histopathology summary  
+| **Number of nodes positive** + 
+ Type: `Count`  | The number of local and regional nodes reported as being positive for the presence of Tumour metastases (in this specimen report only). 
+a|
+
+| **Number of nodes examined** + 
+ Type: `Count`  | Number of nodes examined, where applicable. 
+a|
+
+Range: +
+
+* >= 1 and undefined undefined
+| **Excision margin** + 
+ Type: `Text`  | Details of excision margins. 
+a|
+
+| **Synchronous tumour** + 
+ Type: `Text`  |  
+a|
+
+3+a|===== TNM pathological classification  
+| **Primary tumour (pT)** + 
+ Type: `Text`  | Assessment of the extent of the primary tumour. 
+
+
+
+
+*comment*: Coding with a T code appropriate for the tumour type and anatomical site is expected. For example: 'pT1'; or 'pT3'. Represented as 'pT' in the 'TNM assessment'.
+a|
+
+| **Regional lymph nodes (pN)** + 
+ Type: `Text`  | Assessment of the absence or presence and extent of regional lymph node metastasis. 
+
+
+
+
+*comment*: Coding with an N code appropriate for the tumour type and anatomical site is expected. For example: 'pNX'; or 'pN2'. Represented as 'pN' in the 'TNM assessment'.
+a|
+
+| **Distant metastasis (pM)** + 
+ Type: `Text`  | Assessment of the absence or presence of distant metastasis. 
+
+
+
+
+*comment*: Coding with an M code appropriate for the tumour type and anatomical site is expected. For example: 'pM1'. Represented as 'pM' in the 'TNM assessment'.
+a|
+
+| **Pathology text** + 
+ Type: `Text`  | Narrative description of the key findings. 
+
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+a|
+
+| **Report number** + 
+ Type: `Text`  | A local identifier assigned by the receiving Laboratory Information System (LIS) to track the test process. 
+
+
+
+
+*comment*: This identifier is an internal tracking number assigned by the LIS, and it not intended to be the name of the test.
+a|
+
+|====
+===  *Observations*
+
+
+A generic section header which should be renamed in a template to suit a specific clinical context.
+
+
+===  *Height*
+
+
+Height, or body length, is measured from crown of head to sole of foot.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **time** + 
+ Type: `Date/time` (_mandatory_) |  
+|
+| **Height/Length** + 
+ Type: `Quantity` (_mandatory_) | The length of the body from crown of head to sole of foot. 
+a|
+
+Valid units: +
+
+* cm
+|====
+===  *Weight*
+
+
+Measurement of the body weight of an individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **time** + 
+ Type: `Date/time` (_mandatory_) |  
+|
+| **Weight** + 
+ Type: `Quantity` (_mandatory_) | The weight of the individual. 
+a|
+
+Valid units: +
+
+* kg
+|====
+===  *Tobacco smoking summary*
+
+
+Summary or persistent information about the tobacco smoking habits of an individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Overall status** + 
+ Type: `Coded text`  | Statement about current smoking behaviour for all types of tobacco. 
+a|
+
+* Never smoked
+* Current smoker
+* Former smoker
+|====
+===  *Alcohol consumption*
+
+
+Alcohol consumption according to UK COSD standards
+
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== In past 3 months  **[multiple]**
+`POINT_EVENT: _at0002_`
+| **Status** + 
+ Type: `Text`  | COSD codes for alcohol status 
+
+
+
+
+*comment*: Heavy (>14 Units per week)	1
+Light (<=14 Units per week)	2
+Never	3
+Not Known	9
+Not Stated (person asked but declined to provide a response)	Z
+
+a|
+
+| **Daily amount** + 
+ Type: `Text`  |  
+a|
+
+| **Time** + 
+ Type: `Date/time` (_mandatory_) |  
+|
+|====
+===  *Gyn history*
+
+
+A generic section header which should be renamed in a template to suit a specific clinical context.
+
+
+===  *Menstruation summary*
+
+
+Summary or persistent information about an individual's menstruation history.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Age at menarche** + 
+ Type: `Duration`  | Age at onset of first menstrual cycle. 
+|
+|====
+===  *OCP use*
+
+
+Assessment of the potential and likelihood of future adverse health effects as determined by identified risk factors.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Health risk** + 
+ Type: `Text` (_mandatory_) | Identification of the potential future disease, condition or health issue for which the risk is being assessed, by name. 
+
+
+
+
+*comment*: Coding of 'Health risk' with a terminology is preferred, where possible. Free text should be used only if there is no appropriate terminology available. For example: risk of cardiovascular disease, with risk factors of hypertension and hypercholesterolaemia.
+a|
+
+| **Total OCP time** + 
+ Type: `Duration`  | The time period during which the predicted health risk is relevant. 
+
+
+
+
+*comment*: That is: the risk of experiencing the identified 'Health risk' in the next <X> years.
+|
+|====
+===  *HRT use*
+
+
+Assessment of the potential and likelihood of future adverse health effects as determined by identified risk factors.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Health risk** + 
+ Type: `Text` (_mandatory_) | Identification of the potential future disease, condition or health issue for which the risk is being assessed, by name. 
+
+
+
+
+*comment*: Coding of 'Health risk' with a terminology is preferred, where possible. Free text should be used only if there is no appropriate terminology available. For example: risk of cardiovascular disease, with risk factors of hypertension and hypercholesterolaemia.
+a|
+
+| **Total HRT time** + 
+ Type: `Duration`  | The time period during which the predicted health risk is relevant. 
+
+
+
+
+*comment*: That is: the risk of experiencing the identified 'Health risk' in the next <X> years.
+|
+|====
+===  *Coil*
+
+
+Assessment of the potential and likelihood of future adverse health effects as determined by identified risk factors.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Health risk** + 
+ Type: `Text` (_mandatory_) | Identification of the potential future disease, condition or health issue for which the risk is being assessed, by name. 
+
+
+
+
+*comment*: Coding of 'Health risk' with a terminology is preferred, where possible. Free text should be used only if there is no appropriate terminology available. For example: risk of cardiovascular disease, with risk factors of hypertension and hypercholesterolaemia.
+a|
+
+|====
+===  *Children*
+
+
+Assessment of the potential and likelihood of future adverse health effects as determined by identified risk factors.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Health risk** + 
+ Type: `Text` (_mandatory_) | Identification of the potential future disease, condition or health issue for which the risk is being assessed, by name. 
+
+
+
+
+*comment*: Coding of 'Health risk' with a terminology is preferred, where possible. Free text should be used only if there is no appropriate terminology available. For example: risk of cardiovascular disease, with risk factors of hypertension and hypercholesterolaemia.
+a|
+
+|====
+===  *Admin*
+
+
+A generic section header which should be renamed in a template to suit a specific clinical context.
+
+
+===  *Death details*
+
+
+Local archetype to capture death details in Genomics England cancer and rare diseases datasets.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Date of death** + 
+ Type: `Date/time`  | The date of death of the patient. 
+|
+| **Death location** + 
+ Type: `Coded text`  | The location where death occurred. 
+a|
+
+* 1: Hospital
+* 2: NHS hospice or specialist palliative care unit
+* 3: Voluntary hospice or specialist palliative care unit
+* 4: Patient's own home
+* 5: Care home
+* 6: Other
+| **Death cause** + 
+ Type: `Text`  | Immediate cause of death. Coded according to the International Classification of Diseases (ICD) code of the condition leading to death as recorded on the death certificate. 
+a|
+
+|====
+===  *Research participation*
+
+
+Research participation
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Trial number** + 
+ Type: `Identifier`  |  
+|
+|====
+===  *Key contacts*
+
+
+Care team details aligned with FHIR resource. This is an ADMIN ENTRY wrapper archetype to contain the Care team CLUSTER archetype where it has no natural ENTRY level parent.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Care team  
+| **Name** + 
+ Type: `Text`  | A label for human use intended to distinguish like teams. 
+
+
+
+
+*comment*: E.g. the "red" vs. "green" trauma teams.
+a|
+
+* Key contacts
+3+a|===== Key worker  **[multiple]**
+| **Role and Relationship** + 
+ Type: `Text` (_multiple_) | Indicates specific responsibility of an individual within the care team, such as "Primary care physician", "Trained social worker counselor", "Caregiver", etc. 
+a|
+
+* Key worker
+* GP
+* GP Practice
+* _Other text/coded text allowed_
+3+a|===== Member  
+3+a|===== Name  **[multiple]**
+| **Use** + 
+ Type: `Coded text` (_mandatory_) | Identification of the purpose for the name. 
+a|
+
+* Usual
+| **Contact name** + 
+ Type: `Text`  | A text representation of the full name. 
+a|
+
+3+a|===== GP  **[multiple]**
+| **Role and Relationship** + 
+ Type: `Text` (_multiple_) | Indicates specific responsibility of an individual within the care team, such as "Primary care physician", "Trained social worker counselor", "Caregiver", etc. 
+a|
+
+* Key worker
+* GP
+* GP Practice
+* _Other text/coded text allowed_
+3+a|===== Member  
+3+a|===== Name  **[multiple]**
+| **Use** + 
+ Type: `Coded text` (_mandatory_) | Identification of the purpose for the name. 
+a|
+
+* Usual
+| **Contact name** + 
+ Type: `Text`  | A text representation of the full name. 
+a|
+
+3+a|===== Anonymised person (PARENT)  
+| **Administrative Gender** + 
+ Type: `Coded text`  | Ther current administrative gender of the person. 
+a|
+
+* Male
+* Female
+* Undetermined
+* Not known
+| **Birth Sex** + 
+ Type: `Coded text`  | The sex of the person at birth. 
+a|
+
+* Male
+* Female
+* Undetermined
+* Not known
+| **Vital Status** + 
+ Type: `Coded text`  | Whether the patient is alive or dead. 
+a|
+
+* Alive
+* Dead
+| **Age** + 
+ Type: `Duration`  | The age of the person. This may be calculated. 
+|
+| **Anonymised current location** + 
+ Type: `Text`  | The patient's current location anonymised. 
+a|
+
+3+a|===== GP practice  
+| **Name** + 
+ Type: `Text`  | Name associated with the organisation. 
+a|
+
+3+a|===== Address  
+| **Address line 2** + 
+ Type: `Text`  | This component contains the house number, apartment number, street name, street direction, P.O. Box number, delivery hints, and similar address information. 
+a|
+
+| **Address line 3** + 
+ Type: `Text`  | This component contains the house number, apartment number, street name, street direction, P.O. Box number, delivery hints, and similar address information. 
+a|
+
+| **Address line 4** + 
+ Type: `Text`  | This component contains the house number, apartment number, street name, street direction, P.O. Box number, delivery hints, and similar address information. 
+a|
+
+| **Postal code** + 
+ Type: `Text`  | A postal code designating a region defined by the postal service. 
+a|
+
+| **Other details about contact** + 
+ Type: `Text`  | Comments made about the participant. 
+a|
+
+|====
+===  *MDT Referral*
+
+
+A generic section header which should be renamed in a template to suit a specific clinical context.
+
+
+===  *Service request*
+
+
+Request for a health-related service or activity to be delivered by a clinician, organisation or agency.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **narrative** + 
+ Type: `Text` (_mandatory_) |  
+a|
+
+3+a|===== Current Activity  **[mandatory]**
+`ACTIVITY: _at0001_`
+| **Service name** + 
+ Type: `Text` (_mandatory_) | The name of the single service or activity requested. 
+
+
+
+
+*comment*: Coding of the 'Service name' with a coding system is desirable, if available. For example: 'referral' to an endocrinologist for diabetes management.
+a|
+
+| **Reason for request** + 
+ Type: `Text`  | A short phrase describing the reason for the request. 
+
+
+
+
+*comment*: Coding of the 'Reason for request' with a coding system is desirable, if available. This data element allows multiple occurrences to enable the user to record a multiple responses, if required. For example: 'manage diabetes complications'.
+a|
+
+| **Timing** + 
+ Type: `Parsable text` (_mandatory_) |  
+|
+| **Action_archetype_id** + 
+ Type: `String` (_mandatory_) |  
+|`Unsupported RM type: STRING`
+3+a|===== ReferringClinician  
+3+a|===== Identifier  
+| **Referring clinician ID** + 
+ Type: `Identifier`  | The identifier value. 
+|
+3+a|===== Name  
+| **Use** + 
+ Type: `Coded text` (_mandatory_) | Identification of the purpose for the name. 
+a|
+
+* Usual
+| **Referring clinician name** + 
+ Type: `Text`  | A text representation of the full name. 
+a|
+
+3+a|===== Phone  
+| **System** + 
+ Type: `Coded text`  | Telecommunications form for contact point - what communications system is required to make use of the contact. 
+a|
+
+* Phone
+| **Referrer phone** + 
+ Type: `Text`  | The actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address). 
+a|
+
+3+a|===== Email  
+| **System** + 
+ Type: `Coded text`  | Telecommunications form for contact point - what communications system is required to make use of the contact. 
+a|
+
+* Email
+| **Referrer email** + 
+ Type: `Text`  | The actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address). 
+a|
+
+3+a|===== Organisation  
+| **Referring hospital** + 
+ Type: `Text`  | Name associated with the organisation. 
+a|
+
+3+a|===== Receiving clinician  
+3+a|===== Name  
+| **Use** + 
+ Type: `Coded text` (_mandatory_) | Identification of the purpose for the name. 
+a|
+
+* Usual
+| **Receiving clinician name** + 
+ Type: `Text`  | A text representation of the full name. 
+a|
+
+| **expiry_time** + 
+ Type: `Date/time`  |  
+|
+|====
+===  *Initial GP referral*
+
+
+A general clinical activity carried out for the patient to receive a specified service, advice or care from an expert healthcare provider.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **careflow_step** + 
+ Type: `Coded text`  | `ISM_TRANSITION.care_flow_step` - The step in the careflow process which occurred as part of generating this action, e.g. dispense , start_administration. This attribute represents the clinical label for the activity, as opposed to current_state which represents the state machine (ISM) computable form. Defined in archetype. 
+a|
+
+* Initial GP referral
+| **time** + 
+ Type: `Date/time` (_mandatory_) | `ACTION.time` - Point in time at which this action took place. 
+|
+| **Service name** + 
+ Type: `Text`  | Identification of the clinical service to be/being carried out. 
+
+
+
+
+*comment*: Coding of the specific service name with a terminology is preferred, where possible.
+a|
+
+|====
+===  *Tertiary Referral agreed*
+
+
+A general clinical activity carried out for the patient to receive a specified service, advice or care from an expert healthcare provider.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **careflow_step** + 
+ Type: `Coded text`  | `ISM_TRANSITION.care_flow_step` - The step in the careflow process which occurred as part of generating this action, e.g. dispense , start_administration. This attribute represents the clinical label for the activity, as opposed to current_state which represents the state machine (ISM) computable form. Defined in archetype. 
+a|
+
+* Tertiary referral agreed
+| **time** + 
+ Type: `Date/time` (_mandatory_) | `ACTION.time` - Point in time at which this action took place. 
+|
+| **Service name** + 
+ Type: `Text`  | Identification of the clinical service to be/being carried out. 
+
+
+
+
+*comment*: Coding of the specific service name with a terminology is preferred, where possible.
+a|
+
+|====
+===  *Initial Tertiary referral*
+
+
+A general clinical activity carried out for the patient to receive a specified service, advice or care from an expert healthcare provider.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **careflow_step** + 
+ Type: `Coded text`  | `ISM_TRANSITION.care_flow_step` - The step in the careflow process which occurred as part of generating this action, e.g. dispense , start_administration. This attribute represents the clinical label for the activity, as opposed to current_state which represents the state machine (ISM) computable form. Defined in archetype. 
+a|
+
+* Initial Tertiary referral
+| **time** + 
+ Type: `Date/time` (_mandatory_) | `ACTION.time` - Point in time at which this action took place. 
+|
+| **Service name** + 
+ Type: `Text`  | Identification of the clinical service to be/being carried out. 
+
+
+
+
+*comment*: Coding of the specific service name with a terminology is preferred, where possible.
+a|
+
+|====
+===  *MDT*
+
+
+A generic section header which should be renamed in a template to suit a specific clinical context.
+
+
+===  *MDT meeting*
+
+
+A general clinical activity carried out for the patient to receive a specified service, advice or care from an expert healthcare provider.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **careflow_step** + 
+ Type: `Coded text`  | `ISM_TRANSITION.care_flow_step` - The step in the careflow process which occurred as part of generating this action, e.g. dispense , start_administration. This attribute represents the clinical label for the activity, as opposed to current_state which represents the state machine (ISM) computable form. Defined in archetype. 
+a|
+
+* MDT Delivered
+| **time** + 
+ Type: `Date/time` (_mandatory_) | `ACTION.time` - Point in time at which this action took place. 
+|
+| **Service name** + 
+ Type: `Text`  | Identification of the clinical service to be/being carried out. 
+
+
+
+
+*comment*: Coding of the specific service name with a terminology is preferred, where possible.
+a|
+
+| **Care plan ID** + 
+ Type: `Identifier`  | The ID assigned to the order by the healthcare provider or organisation receiving the request for referral. This is also referred to as Filler Order Identifier. 
+|
+|====
+===  *WHO status*
+
+
+A scale used by clinicians to assess the functional performance status of a patient with a diagnosis of cancer. Also known as the WHO performance status or Zubrod performance status.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **time** + 
+ Type: `Date/time` (_mandatory_) |  
+|
+| **Status** + 
+ Type: `Ordinal` (_mandatory_) | The functional performance status of a patient with a diagnosis of cancer. 
+a|
+* [0] Asymptomatic +
+ `local:at0005`
+* [1] Symptomatic, fully ambulatory +
+ `local:at0006`
+* [2] Symptomatic, in bed <50% of the day +
+ `local:at0007`
+* [3] Symptomatic, in bed >50% of the day (but not bedridden) +
+ `local:at0008`
+* [4] Bedridden +
+ `local:at0009`
+* [5] Dead +
+ `local:at0010`
+| **Description** + 
+ Type: `Text`  | Additional narrative about the overall ECOG performance status not captured in other fields. 
+a|
+
+|====
+===  *MDT comments*
+
+
+Narrative summary or overview about a patient, specifically from the perspective of a healthcare provider, and with or without associated interpretations.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Synopsis** + 
+ Type: `Text` (_mandatory_) | The summary, assessment, conclusions or evaluation of the clinical findings. 
+a|
+
+|====
