@@ -28,8 +28,10 @@ export type ArchetypeList = ArchetypeProvenance[];
 
 let remoteRepo: ArchetypeList = [];
 
-const formatOpenEhrADUrl = (repositoryId: string, listType: string) =>
-`https://tools.openehr.org/designer/api/repository/entry/list?repositoryId=${repositoryId}&cache=false&type=${listType}&depth=-1`;
+const ADRootUrl = `https://tools.openehr.org/designer/api`
+
+const formatADUrl = (repositoryId: string, listType: string) =>
+`${ADRootUrl}/repository/entry/list?repositoryId=${repositoryId}&cache=false&type=${listType}&depth=-1`;
 
 const formatGHSearchUrl = (repositoryId: string) => {
   return `https://api.github.com/repos/${repositoryId}/git/trees/master?recursive=1`;
@@ -83,6 +85,30 @@ export const getADTemplatesList = (username: string, password: string, repositor
 };
 */
 
+
+export const fetchADArchetype = async (archetypeId: string, repositoryId: string) => {
+  try {
+    // 👇️ const data: GetUsersResponse
+    const url = `${ADRootUrl}/repository/archetype/get?repositoryId=${repositoryId}&archetypeId=${archetypeId}`
+    const { data, status } = await axios.get(url,
+      {
+        headers: {
+          Accept: 'application/json',
+        },
+      },
+    );
+  return data
+
+} catch (error) {
+  if (axios.isAxiosError(error)) {
+    console.log('error message: ', error.message);
+  } else {
+    console.log('unexpected error: ', error);
+  }
+}
+
+
+}
 export const searchGHRepo = async (username: string, password: string, repoAccount: string, repoName: string, repoNamespace: string): Promise<ArchetypeList> => {
 
 //  const token = btoa(username + ":" + password);
