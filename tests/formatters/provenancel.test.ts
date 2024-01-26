@@ -15,7 +15,7 @@ beforeAll(() => {
 
 });
 
-describe('Provenance tests', () => {
+describe('Provenance  tests', () => {
 
   test('Should list archetypes used', () => {
     updateArchetypeList('openEHR/CKM-mirror', 'org.openehr', builder.archetypeList,true)

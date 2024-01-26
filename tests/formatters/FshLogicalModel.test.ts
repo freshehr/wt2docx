@@ -15,7 +15,7 @@ beforeAll(() => {
 
 });
 
-describe('fsh Logical tests', () => {
+describe('fsh Logical test', () => {
   test('should  create FSH logical model header', () => {
 
     const expectedOutput =
