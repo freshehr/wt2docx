@@ -3,7 +3,7 @@ import fs from 'fs';
 import { Config } from '../../src/Config';
 import { importConfig } from '../../src/BuilderConfig';
 import { TemplateElement } from '../../src/TemplateElement';
-import { updateArchetypeList } from '../../src/provenance/openEProvenance';
+import { fetchADArchetype, updateArchetypeList } from '../../src/provenance/openEProvenance';
 
 let builder: DocBuilder;
 
@@ -18,14 +18,23 @@ beforeAll(() => {
 describe('Provenance  tests', () => {
 
   test('Should list CKM archetypes used', () => {
-    updateArchetypeList('openEHR/CKM-mirror', 'org.openehr', builder.archetypeList,true)
+    updateArchetypeList('openEHR','CKM-mirror', 'org.openehr', builder.archetypeList,true)
       .then(aList => console.log(aList))
+      .catch((error) => {
+        console.error("Error:", error)
+      } )
   });
 
-  test('Should fetch a local AD archetype', () => {
-    updateArchetypeList('openEHR/CKM-mirror', 'org.openehr', builder.archetypeList,true)
-      .then(aList => console.log(aList))
+  test('Should fetch archetype original namespace', async() => {
+    await fetchADArchetype('openEHR-EHR-ADMIN_ENTRY.visual_certification_uk.v0', 'freshehr-2ln')
+      .then(data => {
+       expect(data.description.otherDetails.original_namespace). toBe('uk-com.freshehr')
+      })
+      .catch((error) => {
+        console.error("Error:", error)
+      } )
   });
+
 
 });
 

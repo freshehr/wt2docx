@@ -16,7 +16,7 @@
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
-    "test": "jest"
+    "test": "jest --silent=false"
   },
   "repository": {
     "type": "git",

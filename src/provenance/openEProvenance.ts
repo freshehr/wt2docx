@@ -1,6 +1,5 @@
 import axios from 'axios';
 import path from 'path';
-import { DocBuilder } from "./DocBuilder";
 import fs from "fs";
 
 type ArchetypeProvenance = {
@@ -85,15 +84,20 @@ export const getADTemplatesList = (username: string, password: string, repositor
 };
 */
 
+const ADuserName = 'freshehr'
+const ADpassword = 'modellingrules'
 
 export const fetchADArchetype = async (archetypeId: string, repositoryId: string) => {
   try {
     // 👇️ const data: GetUsersResponse
+    const authString = `${ADuserName}:${ADpassword}`
+    const authToken = `BASIC ${btoa(authString)}`
     const url = `${ADRootUrl}/repository/archetype/get?repositoryId=${repositoryId}&archetypeId=${archetypeId}`
     const { data, status } = await axios.get(url,
       {
         headers: {
           Accept: 'application/json',
+          Authorization: authToken
         },
       },
     );

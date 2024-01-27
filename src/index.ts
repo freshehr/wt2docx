@@ -45,7 +45,7 @@ if (inputFileExist) {
 
   saveFile(docBuilder, outFilePath);
 
-  updateArchetypeList('openEHR/CKM-mirror', 'org.openehr', docBuilder.archetypeList,false)
+  updateArchetypeList('openEHR','CKM-mirror', 'org.openehr', docBuilder.archetypeList,false)
 
 
 }

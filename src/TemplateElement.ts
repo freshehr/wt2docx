@@ -20,6 +20,10 @@ export interface TemplateElement {
   parentNode: TemplateElement;
 }
 
+export interface TemplateXNode {
+
+}
+
 export function findParentNodeId (formElement: TemplateElement) :TemplateElement{
 
   let currentElement: TemplateElement = formElement
