@@ -6,7 +6,7 @@ import { DocBuilder } from './DocBuilder';
 import  path  from 'path';
 import { importConfig } from './BuilderConfig';
 import { Config } from "./Config";
-import { saveFile } from "./DocFormatter";
+import { saveFile } from "./formatters/DocFormatter";
 import { updateArchetypeList } from './provenance/openEProvenance';
 
 function handleOutPath(infile :string, outputFile: string , ext: string, outDir: string) {

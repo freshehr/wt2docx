@@ -1,10 +1,10 @@
-import { DocBuilder } from "./DocBuilder";
-import  {adoc }from "./formatters/AdocFormatter"
-import {xmind } from "./formatters/XmindFormatter"
-import { TemplateNode } from "./TemplateNodes";
-import { formatOccurrences } from "./TemplateTypes";
-import { docx, pdf } from "./formatters/PanDocFormatter";
-import { fshl } from './formatters/FshLogicalModelFormatter';
+import { DocBuilder } from "../DocBuilder";
+import  {adoc }from "./AdocFormatter"
+import {xmind } from "./XmindFormatter"
+import { TemplateNode } from "../TemplateNodes";
+import { formatOccurrences } from "../TemplateTypes";
+import { docx, pdf } from "./PanDocFormatter";
+import { fshl } from './FshLogicalModelFormatter';
 
 export enum ExportFormat {
   adoc = 'adoc',

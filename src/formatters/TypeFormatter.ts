@@ -1,6 +1,6 @@
 import { DocBuilder } from "../DocBuilder";
 import { TemplateNode } from "../TemplateNodes";
-import { ExportFormat, FormatElementFn } from "../DocFormatter";
+import { ExportFormat, FormatElementFn } from "./DocFormatter";
 // import { xmind } from "./XmindFormatter";
 import { adoc } from "./AdocFormatter";
 import { xmind } from "./XmindFormatter";

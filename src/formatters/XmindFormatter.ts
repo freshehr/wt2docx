@@ -4,7 +4,7 @@ import { parseXMindMarkToXMindFile} from "xmindmark";
 import { DocBuilder } from "../DocBuilder";
 import {  TemplateNode, TemplateInput } from "../TemplateNodes";
 import { formatOccurrences, isAnyChoice, mapRmTypeText } from '../TemplateTypes';
-import { formatRawOccurrencesText } from "../DocFormatter";
+import { formatRawOccurrencesText } from "./DocFormatter";
 
 
 const headerIndent: string = '  -';

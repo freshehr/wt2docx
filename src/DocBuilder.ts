@@ -23,7 +23,7 @@ import {
   formatObservationEvent,
   formatTemplateHeader,
   formatUnsupported
-} from "./DocFormatter";
+} from "./formatters/DocFormatter";
 import {
   formatDvCodedText,
   formatDvCount,

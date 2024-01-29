@@ -2,7 +2,7 @@ import { DocBuilder } from "../DocBuilder";
 import fs from "fs";
 import { findParentNodeId, TemplateNode,TemplateInput } from "../TemplateNodes";
 import { formatOccurrences, isAnyChoice, isDisplayableNode, mapRmTypeText} from "../TemplateTypes";
-import { formatAnnotations, formatOccurrencesText } from '../DocFormatter';
+import { formatAnnotations, formatOccurrencesText } from './DocFormatter';
 
 export const fshl = {
 

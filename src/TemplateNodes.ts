@@ -65,6 +65,11 @@ interface TemplateValidation {
   range: TemplateRange;
 }
 
+export interface TemplateAnnotation {
+  comment: string;
+}
+
+
 export function findParentNodeId (formElement: TemplateNode) :TemplateNode{
 
   let currentElement: TemplateNode = formElement
