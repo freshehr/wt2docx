@@ -172,7 +172,8 @@ export class DocBuilder {
 
   private walkEntry(f: TemplateNode) {
     this.archetypeList.push({archetypeId: f.nodeId})
-    f.
+
+
     formatLeafHeader(this, f)
     formatNodeHeader(this)
     this.walkRmChildren(f);

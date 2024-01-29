@@ -19,8 +19,8 @@ export interface WebTemplateNode {
   children: TemplateNode[];
 }
 
-export interface TemplateElement extends WebTemplateNode{
-  parentNode: TemplateElement;
+export interface TemplateNode extends WebTemplateNode{
+  parentNode: TemplateNode;
   // Extensions to formal webTemplate
   originalNamespace?: string;
   originalPublisher?: string;
