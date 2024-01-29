@@ -1,7 +1,7 @@
 import { DocBuilder } from "./DocBuilder";
 import  {adoc }from "./formatters/AdocFormatter"
 import {xmind } from "./formatters/XmindFormatter"
-import { TemplateElement } from "./TemplateElement";
+import { TemplateElement } from "./TemplateNodes";
 import { formatOccurrences } from "./TemplateTypes";
 import { docx, pdf } from "./formatters/PanDocFormatter";
 import { fshl } from './formatters/FshLogicalModelFormatter';

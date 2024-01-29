@@ -1,5 +1,5 @@
 import { DocBuilder } from "../DocBuilder";
-import { TemplateElement } from "../TemplateElement";
+import { TemplateElement } from "../TemplateNodes";
 import { ExportFormat, FormatElementFn } from "../DocFormatter";
 // import { xmind } from "./XmindFormatter";
 import { adoc } from "./AdocFormatter";

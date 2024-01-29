@@ -2,7 +2,6 @@ import { DocBuilder } from '../../src/DocBuilder';
 import fs from 'fs';
 import { Config } from '../../src/Config';
 import { importConfig } from '../../src/BuilderConfig';
-import { TemplateElement } from '../../src/TemplateElement';
 import { fetchADArchetype, updateArchetypeList } from '../../src/provenance/openEProvenance';
 
 let builder: DocBuilder;

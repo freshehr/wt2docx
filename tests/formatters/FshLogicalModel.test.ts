@@ -3,7 +3,7 @@ import { DocBuilder } from '../../src/DocBuilder';
 import fs from 'fs';
 import { Config } from '../../src/Config';
 import { importConfig } from '../../src/BuilderConfig';
-import { TemplateElement } from '../../src/TemplateElement';
+import { TemplateElement } from '../../src/TemplateNodes';
 
 let builder: DocBuilder;
 

@@ -1,4 +1,4 @@
-import { TemplateElement } from './TemplateElement';
+import { TemplateElement } from './TemplateNodes';
 
 export function isEntry(rmType: string) {
   return ['OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY'].includes(rmType);

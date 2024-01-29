@@ -1,4 +1,4 @@
-import { findParentNodeId, TemplateElement } from './TemplateElement';
+import { findParentNodeId, TemplateNode } from './TemplateNodes';
 import { WebTemplate } from "./WebTemplate";
 import {
   isActivity,
@@ -69,7 +69,7 @@ export class DocBuilder {
     this.walkComposition(this._wt.tree);
   }
 
-  private walkChildren(f: TemplateElement, nonContextOnly: boolean = false) {
+  private walkChildren(f: TemplateNode, nonContextOnly: boolean = false) {
     if (f.children) {
       f.children.forEach((child) => {
         child.parentNode = f;
@@ -80,11 +80,11 @@ export class DocBuilder {
     }
   }
 
-  private walkNonRMChildren(f: TemplateElement) {
+  private walkNonRMChildren(f: TemplateNode) {
     this.walkChildren(f, true)
   }
 
-  private walk(f: TemplateElement) {
+  private walk(f: TemplateNode) {
      if (isEntry(f.rmType))
       this.walkEntry(f)
      else if (isDataValue(f.rmType))
@@ -122,12 +122,12 @@ export class DocBuilder {
     }
   }
 
-  private walkUnsupported(f: TemplateElement)
+  private walkUnsupported(f: TemplateNode)
   {
     formatUnsupported(this,f);
   }
 
-  private walkCluster(f: TemplateElement) {
+  private walkCluster(f: TemplateNode) {
     if (f.nodeId.includes('CLUSTER'))
       this.archetypeList.push({archetypeId: f.nodeId})
 
@@ -135,12 +135,12 @@ export class DocBuilder {
     this.walkChildren(f);
   }
 
-  private walkObservationEvent(f: TemplateElement) {
+  private walkObservationEvent(f: TemplateNode) {
     formatObservationEvent(this, f)
     this.walkChildren(f);
   }
 
-  private walkComposition(f: TemplateElement) {
+  private walkComposition(f: TemplateNode) {
     this.archetypeList.push({archetypeId: f.nodeId})
     formatCompositionHeader(this, f)
     formatNodeHeader(this);
@@ -149,19 +149,19 @@ export class DocBuilder {
     this.walkNonRMChildren(f)
   }
 
-  private walkElement(f: TemplateElement) {
+  private walkElement(f: TemplateNode) {
     formatNodeContent(this, f, false)
     this.walkDataType(f)
  //   formatAnnotations(this,f);
   }
 
-  private walkChoice(f: TemplateElement) {
+  private walkChoice(f: TemplateNode) {
     formatNodeContent(this, f, true)
     this.walkDataType(f)
  //   formatAnnotations(this,f);
   }
 
-  private walkSection(f: TemplateElement) {
+  private walkSection(f: TemplateNode) {
     if (!this.config?.skippedAQLPaths?.includes(f.aqlPath)) {
       this.archetypeList.push({archetypeId: f.nodeId})
       formatLeafHeader(this, f)
@@ -170,7 +170,7 @@ export class DocBuilder {
   }
 
 
-  private walkEntry(f: TemplateElement) {
+  private walkEntry(f: TemplateNode) {
     this.archetypeList.push({archetypeId: f.nodeId})
     f.
     formatLeafHeader(this, f)
@@ -180,7 +180,7 @@ export class DocBuilder {
     formatNodeFooter(this,f)
   }
 
-  private walkCompositionContext(f: TemplateElement) {
+  private walkCompositionContext(f: TemplateNode) {
     formatCompositionContextHeader(this, f);
     if (f.children?.length > 0) {
       formatNodeHeader(this)
@@ -190,9 +190,9 @@ export class DocBuilder {
     }
   }
 
-  private walkRmChildren(f: TemplateElement) {
+  private walkRmChildren(f: TemplateNode) {
 
-    const rmAttributes = new Array<TemplateElement>();
+    const rmAttributes = new Array<TemplateNode>();
 
     if (f.children) {
       f.children.forEach((child) => {
@@ -221,7 +221,7 @@ export class DocBuilder {
 
   }
 
-  private stripExcludedRmTypes(childNode: TemplateElement, list: TemplateElement[]) {
+  private stripExcludedRmTypes(childNode: TemplateNode, list: TemplateNode[]) {
 
     if (!this.config.excludedRMTags.includes(childNode.id)) {
       list.push(childNode);
@@ -266,7 +266,7 @@ export class DocBuilder {
       return rmType
   }
 
-  private walkDataType(f: TemplateElement) {
+  private walkDataType(f: TemplateNode) {
 
     const adjustedRmType = this.adjustRmTypeForInterval(f.rmType);
 
@@ -305,7 +305,7 @@ export class DocBuilder {
     }
   }
 
-  public getDescription = (f: TemplateElement) => {
+  public getDescription = (f: TemplateNode) => {
     const language: string = 'en'
     if (!f.inContext)
       return this.getValueOfRecord(f.localizedDescriptions)
@@ -313,7 +313,7 @@ export class DocBuilder {
       let rmTag = f.id;
       if (f.id === 'time') {
 
-        const parent: TemplateElement = findParentNodeId(f);
+        const parent: TemplateNode = findParentNodeId(f);
         switch (parent.rmType){
           case 'ACTION':
             rmTag = 'action_time'
@@ -330,7 +330,7 @@ export class DocBuilder {
     }
   };
 
-  private walkChoiceHeader(f: TemplateElement) {
+  private walkChoiceHeader(f: TemplateNode) {
 
     formatChoiceHeader(this,f)
     if (isAnyChoice(f.children.map(child => child.rmType)))
@@ -343,7 +343,7 @@ export class DocBuilder {
   }
 
 
-  private walkInstructionActivity(f: TemplateElement) {
+  private walkInstructionActivity(f: TemplateNode) {
     formatInstructionActivity(this, f)
     this.walkChildren(f);
   }

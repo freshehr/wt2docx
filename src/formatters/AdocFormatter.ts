@@ -1,6 +1,6 @@
 import { DocBuilder } from "../DocBuilder";
 import fs from "fs";
-import { findParentNodeId, TemplateElement } from "../TemplateElement";
+import { findParentNodeId, TemplateElement } from "../TemplateNodes";
 import { formatOccurrences, isAnyChoice, isDisplayableNode, mapRmTypeText} from "../TemplateTypes";
 import { formatAnnotations, formatOccurrencesText } from '../DocFormatter';
 import { TemplateInput } from "../TemplateInput";

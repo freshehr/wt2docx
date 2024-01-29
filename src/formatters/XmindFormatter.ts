@@ -2,7 +2,7 @@ import fs from "fs";
 import { parseXMindMarkToXMindFile} from "xmindmark";
 
 import { DocBuilder } from "../DocBuilder";
-import {  TemplateElement } from "../TemplateElement";
+import {  TemplateElement } from "../TemplateNodes";
 import { formatOccurrences, isAnyChoice, mapRmTypeText } from '../TemplateTypes';
 import { formatRawOccurrencesText } from "../DocFormatter";
 import { TemplateInput } from "../TemplateInput";

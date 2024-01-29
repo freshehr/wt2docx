@@ -1,7 +1,7 @@
 
 import { TemplateInput } from "./TemplateInput";
 
-export interface TemplateElement {
+export interface WebTemplateNode {
   id: string;
   name: string;
   localizedName: string;
@@ -16,17 +16,22 @@ export interface TemplateElement {
   aqlPath: string;
   inputs?: TemplateInput[];
   inContext?: boolean;
-  children: TemplateElement[];
+  children: TemplateNode[];
+}
+
+export interface TemplateElement extends WebTemplateNode{
   parentNode: TemplateElement;
+  // Extensions to formal webTemplate
+  originalNamespace?: string;
+  originalPublisher?: string;
+  custodianNamespace?: string;
+  custodianOrganisation?: string;
 }
 
-export interface TemplateXNode {
 
-}
+export function findParentNodeId (formElement: TemplateNode) :TemplateNode{
 
-export function findParentNodeId (formElement: TemplateElement) :TemplateElement{
-
-  let currentElement: TemplateElement = formElement
+  let currentElement: TemplateNode = formElement
 
   while (currentElement !== null && currentElement.nodeId === null) {
     currentElement = currentElement.parentNode

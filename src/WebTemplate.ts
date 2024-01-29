@@ -6,5 +6,5 @@ export interface WebTemplate {
   version: string;
   defaultLanguage: string;
   languages: string[];
-  tree: TemplateElement;
+  tree: TemplateNode;
 }
