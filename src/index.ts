@@ -4,8 +4,7 @@ import ora from 'ora';
 import  * as fs from 'fs';
 import { DocBuilder } from './DocBuilder';
 import  path  from 'path';
-import { importConfig } from './BuilderConfig';
-import { Config } from "./Config";
+import { Config, importConfig } from './BuilderConfig';
 import { saveFile } from "./formatters/DocFormatter";
 import { updateArchetypeList } from './provenance/openEProvenance';
 

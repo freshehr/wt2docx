@@ -1,5 +1,18 @@
-import fs from "fs";
-import { Config } from "./Config";
+import fs from 'fs';
+
+export type Config = {
+  displayTechnicalOccurrences: boolean;
+  hideNodeIds: boolean;
+  skippedAQLPaths: string[];
+  includedAnnotations: string[];
+  excludedRMTags: string[];
+  title: string;
+  hideParticipations: boolean;
+  displayAQLPaths: boolean;
+  displayToC: boolean;
+  hideXmindValues: boolean
+}
+
 
 const defaultConfig: Config = {
   displayTechnicalOccurrences: false,

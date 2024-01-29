@@ -1,8 +1,7 @@
 import { fshl } from '../../src/formatters/FshLogicalModelFormatter'
 import { DocBuilder } from '../../src/DocBuilder';
 import fs from 'fs';
-import { Config } from '../../src/Config';
-import { importConfig } from '../../src/BuilderConfig';
+import { Config, importConfig } from '../../src/BuilderConfig';
 import { TemplateElement } from '../../src/TemplateNodes';
 
 let builder: DocBuilder;

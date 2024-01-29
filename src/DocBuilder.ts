@@ -9,7 +9,6 @@ import {
   isSection
 } from "./TemplateTypes";
 import { StringBuilder } from "./StringBuilder";
-import { Config } from "./Config";
 import rmDescriptions from "../resources/rm_descriptions.json";
 import {
   ExportFormat,
@@ -33,6 +32,7 @@ import {
   formatDvText
 } from "./formatters/TypeFormatter";
 import { ArchetypeList } from './provenance/openEProvenance';
+import { Config } from './BuilderConfig';
 
 
 export class DocBuilder {
