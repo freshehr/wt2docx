@@ -1,9 +1,9 @@
 import { DocBuilder } from "../DocBuilder";
 import fs from "fs";
-import { findParentNodeId, TemplateElement } from "../TemplateNodes";
+import { findParentNodeId, TemplateNode,  TemplateInput } from "../TemplateNodes";
 import { formatOccurrences, isAnyChoice, isDisplayableNode, mapRmTypeText} from "../TemplateTypes";
 import { formatAnnotations, formatOccurrencesText } from '../DocFormatter';
-import { TemplateInput } from "../TemplateInput";
+
 
 export const adoc = {
 
@@ -20,7 +20,7 @@ export const adoc = {
     sb.append(`Created: **${new Date().toDateString()}**`).newline()
   },
 
-  formatCompositionHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatCompositionHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb, config } = dBuilder;
     sb.append(`=== Composition: *${f.name}*`).newline()
     if (!config.hideNodeIds)
@@ -40,7 +40,7 @@ export const adoc = {
     sb.append('|Data item | Description | Allowed values');
   },
 
-  formatLeafHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatLeafHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb, config } = dBuilder;
 
     sb.append(`===  *${f.name}*`).newline()
@@ -51,7 +51,7 @@ export const adoc = {
     sb.append(`${f.localizedDescriptions.en}`).newline()
   },
 
-  formatNodeContent: (dBuilder: DocBuilder, f: TemplateElement, isChoice: boolean) => {
+  formatNodeContent: (dBuilder: DocBuilder, f: TemplateNode, isChoice: boolean) => {
     const { sb, config } = dBuilder;
 
     const applyNodeIdFilter = (name: string, nodeIdTxt: string) => {
@@ -109,11 +109,11 @@ export const adoc = {
     dBuilder.sb.append('|====');
   },
 
-  formatUnsupported: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatUnsupported: (dBuilder: DocBuilder, f: TemplateNode) => {
     dBuilder.sb.append('// Not supported rmType ' + f.rmType);
   },
 
-  formatObservationEvent: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatObservationEvent: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb, config } = dBuilder;
 
     const formattedOccurrencesText = formatOccurrencesText(dBuilder, f);
@@ -125,7 +125,7 @@ export const adoc = {
       sb.append(clinicalText)
   },
 
-  formatInstructionActivity: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatInstructionActivity: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb, config } = dBuilder;
 
     const formattedOccurrencesText = formatOccurrencesText(dBuilder, f);
@@ -137,7 +137,7 @@ export const adoc = {
       sb.append(clinicalText)
   },
 
-  formatCluster: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatCluster: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb, config } = dBuilder;
 
     const formattedOccurrencesText = formatOccurrencesText(dBuilder, f);
@@ -149,7 +149,7 @@ export const adoc = {
       sb.append(clinicalText)
   },
 
-  formatAnnotations: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatAnnotations: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb, config } = dBuilder;
 
     if (f.annotations) {
@@ -163,7 +163,7 @@ export const adoc = {
     }
   },
 
-  formatCompositionContextHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatCompositionContextHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb, config } = dBuilder;
 
     const nodeId = f.nodeId ? f.nodeId : `RM:${f.id}`
@@ -176,7 +176,7 @@ export const adoc = {
 
   },
 
-  formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb } = dBuilder;
     sb.append('a|');
 
@@ -190,7 +190,7 @@ export const adoc = {
   },
 
   dvTypes: {
-    formatDvCodedText: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvCodedText: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb, config } = dBuilder;
       sb.append('a|');
 
@@ -225,7 +225,7 @@ export const adoc = {
       });
     },
 
-    formatDvText: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvText: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb } = dBuilder;
 
       sb.append('a|');
@@ -252,7 +252,7 @@ export const adoc = {
       }
     },
 
-    formatDvQuantity: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvQuantity: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb } = dBuilder;
 
       sb.append('a|');
@@ -269,7 +269,7 @@ export const adoc = {
       }
     },
 
-    formatDvCount: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvCount: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb } = dBuilder;
       sb.append('a|');
       if (f.inputs.length > 0) {
@@ -283,7 +283,7 @@ export const adoc = {
       }
     },
 
-    formatDvDefault: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvDefault: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb } = dBuilder;
 
       if (!isDisplayableNode(f.rmType))
@@ -292,7 +292,7 @@ export const adoc = {
         sb.append('|')
     },
 
-    formatDvChoice: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvChoice: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb} = dBuilder;
 
       sb.append('a|');
@@ -306,7 +306,7 @@ export const adoc = {
       sb.append(`_${subTypesAllowedText} data types allowed_`);
     },
 
-    formatDvOrdinal: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvOrdinal: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb } = dBuilder;
 
       sb.append('a|');

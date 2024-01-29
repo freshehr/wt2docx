@@ -1,6 +1,4 @@
 
-import { TemplateInput } from "./TemplateInput";
-
 export interface WebTemplateNode {
   id: string;
   name: string;
@@ -28,6 +26,44 @@ export interface TemplateNode extends WebTemplateNode{
   custodianOrganisation?: string;
 }
 
+
+export interface TemplateInput {
+  suffix?: string;
+  type: string;
+  list?: InputItem[];
+  validation?: AmountValidation;
+  listOpen?: boolean;
+  terminology?: string;
+  defaultValue?: any;
+}
+
+interface AmountValidation {
+  range: {
+    "minOp"?: string;
+    "min"? : number;
+    "maxOp"? : string;
+    "max"? : number;
+  }
+}
+
+export interface InputItem {
+  value: string;
+  label?: string;
+  localizedLabels?: Record<string, string>;
+  localizedDescriptions?: Record<string, string>;
+  ordinal?: number;
+  currentStates?: string;
+}
+
+export interface TemplateRange {
+  minOp: string;
+  min: number;
+}
+
+
+interface TemplateValidation {
+  range: TemplateRange;
+}
 
 export function findParentNodeId (formElement: TemplateNode) :TemplateNode{
 

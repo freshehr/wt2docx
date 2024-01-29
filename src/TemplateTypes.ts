@@ -1,4 +1,4 @@
-import { TemplateElement } from './TemplateNodes';
+import { TemplateNode } from './TemplateNodes';
 
 export function isEntry(rmType: string) {
   return ['OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY'].includes(rmType);
@@ -117,7 +117,7 @@ const displayableNodeTextTable = {
 
 export const dataValueLabelMapper = (dataValue:string) => displayableNodeTextTable[dataValue] || `RM type not supported ${dataValue}`
 
-export const formatOccurrences = (f: TemplateElement, techDisplay :boolean = true) => {
+export const formatOccurrences = (f: TemplateNode, techDisplay :boolean = true) => {
 
   let min =''
   let max = ''

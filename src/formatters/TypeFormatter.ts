@@ -1,11 +1,11 @@
 import { DocBuilder } from "../DocBuilder";
-import { TemplateElement } from "../TemplateNodes";
+import { TemplateNode } from "../TemplateNodes";
 import { ExportFormat, FormatElementFn } from "../DocFormatter";
 // import { xmind } from "./XmindFormatter";
 import { adoc } from "./AdocFormatter";
 import { xmind } from "./XmindFormatter";
 
-export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
@@ -24,7 +24,7 @@ export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): v
     fn(docBuilder, f);
 }
 
-// export const formatDvChoice = (docBuilder: DocBuilder, f: TemplateElement): void => {
+// export const formatDvChoice = (docBuilder: DocBuilder, f: TemplateNode): void => {
 //
 //   let fn: FormatElementFn;
 //
@@ -42,7 +42,7 @@ export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): v
 //     fn(docBuilder, f);
 // }
 
-export const formatDvText = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatDvText = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
@@ -60,7 +60,7 @@ export const formatDvText = (docBuilder: DocBuilder, f: TemplateElement): void =
     fn(docBuilder, f);
 }
 
-export const formatDvCount = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatDvCount = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
@@ -76,7 +76,7 @@ export const formatDvCount = (docBuilder: DocBuilder, f: TemplateElement): void 
     fn(docBuilder, f);
 }
 
-export const formatDvQuantity = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatDvQuantity = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
@@ -92,7 +92,7 @@ export const formatDvQuantity = (docBuilder: DocBuilder, f: TemplateElement): vo
     fn(docBuilder, f);
 }
 
-export const formatDvOrdinal = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatDvOrdinal = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
@@ -109,7 +109,7 @@ export const formatDvOrdinal = (docBuilder: DocBuilder, f: TemplateElement): voi
   if (fn)
     fn(docBuilder, f);
 }
-export const formatDvDefault = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatDvDefault = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 

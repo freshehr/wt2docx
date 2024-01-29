@@ -2,10 +2,10 @@ import fs from "fs";
 import { parseXMindMarkToXMindFile} from "xmindmark";
 
 import { DocBuilder } from "../DocBuilder";
-import {  TemplateElement } from "../TemplateNodes";
+import {  TemplateNode, TemplateInput } from "../TemplateNodes";
 import { formatOccurrences, isAnyChoice, mapRmTypeText } from '../TemplateTypes';
 import { formatRawOccurrencesText } from "../DocFormatter";
-import { TemplateInput } from "../TemplateInput";
+
 
 const headerIndent: string = '  -';
 const eventIndent:  string = '    -';
@@ -32,7 +32,7 @@ export const xmind = {
     sb.append(sb.newLineCoded(`Template: ${wt.templateId} \n ${wt.semVer} \n ${new Date().toDateString()}`));
   },
 
-  formatCompositionHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatCompositionHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const {  sb } = dBuilder;
     sb.append(sb.newLineCoded(`- Composition: ${f.name}`))
 
@@ -40,7 +40,7 @@ export const xmind = {
       sb.append(`${headerIndent} attributes`)
   },
 
-  formatCompositionContextHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatCompositionContextHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb} = dBuilder;
     sb.append(`${headerIndent} context`);
   },
@@ -52,7 +52,7 @@ export const xmind = {
     console.log(`\n Exported : ${outFile}`)
   },
 
-  formatNodeContent: (dBuilder: DocBuilder, f: TemplateElement, isChoice: boolean) => {
+  formatNodeContent: (dBuilder: DocBuilder, f: TemplateNode, isChoice: boolean) => {
     const { sb, config } = dBuilder;
     const localName = f.localizedName ? f.localizedName : f.name
     const nodeName = localName ? localName : f.id
@@ -62,17 +62,17 @@ export const xmind = {
 
   },
 
-  formatLeafHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatLeafHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb} = dBuilder;
     sb.append(`${headerIndent} ${f.name} ${f.rmType}`)
   },
 
-  formatObservationEvent: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatObservationEvent: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb} = dBuilder;
     sb.append(`${eventIndent} ${f.name}  ${formatRawOccurrencesText(dBuilder, f)}`)
   },
 
-  formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb} = dBuilder;
 
     if (isAnyChoice(f.children.map(child =>  child.rmType)))
@@ -80,7 +80,7 @@ export const xmind = {
   },
 
   dvTypes: {
-    formatDvCodedText: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvCodedText: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb, config} = dBuilder;
 
       f?.inputs.forEach((item :TemplateInput) => {
@@ -102,7 +102,7 @@ export const xmind = {
       });
     },
 
-    formatDvText: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvText: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb , config} = dBuilder;
 
       if (f.inputs.length > 0) {
@@ -128,7 +128,7 @@ export const xmind = {
       }
     },
 
-    formatDvOrdinal: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvOrdinal: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb , config} = dBuilder;
 
       f.inputs.forEach((input) => {

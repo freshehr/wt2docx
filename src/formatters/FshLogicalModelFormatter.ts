@@ -1,9 +1,8 @@
 import { DocBuilder } from "../DocBuilder";
 import fs from "fs";
-import { findParentNodeId, TemplateNode } from "../TemplateNodes";
+import { findParentNodeId, TemplateNode,TemplateInput } from "../TemplateNodes";
 import { formatOccurrences, isAnyChoice, isDisplayableNode, mapRmTypeText} from "../TemplateTypes";
 import { formatAnnotations, formatOccurrencesText } from '../DocFormatter';
-import { TemplateInput } from "../TemplateInput";
 
 export const fshl = {
 

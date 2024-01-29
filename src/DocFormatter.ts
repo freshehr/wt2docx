@@ -1,7 +1,7 @@
 import { DocBuilder } from "./DocBuilder";
 import  {adoc }from "./formatters/AdocFormatter"
 import {xmind } from "./formatters/XmindFormatter"
-import { TemplateElement } from "./TemplateNodes";
+import { TemplateNode } from "./TemplateNodes";
 import { formatOccurrences } from "./TemplateTypes";
 import { docx, pdf } from "./formatters/PanDocFormatter";
 import { fshl } from './formatters/FshLogicalModelFormatter';
@@ -16,9 +16,9 @@ export enum ExportFormat {
 
 type FormatHeaderFn = (db: DocBuilder) => void;
 type SaveFileFn = (db: DocBuilder, outFile: string) =>  Promise<void>;
-type FormatCompositionHeaderFn = (dBuilder: DocBuilder, f: TemplateElement) => void;
-export type FormatElementFn  = (docBuilder: DocBuilder, f: TemplateElement) => void;
-type FormatNodeContentFn = (dBuilder: DocBuilder, f: TemplateElement, isChoice: boolean) => void;
+type FormatCompositionHeaderFn = (dBuilder: DocBuilder, f: TemplateNode) => void;
+export type FormatElementFn  = (docBuilder: DocBuilder, f: TemplateNode) => void;
+type FormatNodeContentFn = (dBuilder: DocBuilder, f: TemplateNode, isChoice: boolean) => void;
 
 
 export const formatTemplateHeader = (docBuilder: DocBuilder): void => {
@@ -39,7 +39,7 @@ export const formatTemplateHeader = (docBuilder: DocBuilder): void => {
     fn(docBuilder);
  }
 
-export const formatCompositionHeader = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatCompositionHeader = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatCompositionHeaderFn;
 
@@ -59,7 +59,7 @@ export const formatCompositionHeader = (docBuilder: DocBuilder, f: TemplateEleme
     fn(docBuilder, f);
 }
 
-export const formatChoiceHeader = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatChoiceHeader = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
@@ -95,7 +95,7 @@ export const formatNodeHeader = (docBuilder: DocBuilder): void => {
     fn(docBuilder);
 }
 
-export const formatNodeFooter = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatNodeFooter = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
@@ -112,7 +112,7 @@ export const formatNodeFooter = (docBuilder: DocBuilder, f: TemplateElement): vo
     fn(docBuilder, f);
 }
 
-export const formatCompositionContextHeader = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatCompositionContextHeader = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
@@ -131,7 +131,7 @@ export const formatCompositionContextHeader = (docBuilder: DocBuilder, f: Templa
     fn(docBuilder, f);
 }
 
-export const formatLeafHeader = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatLeafHeader = (docBuilder: DocBuilder, f: TemplateNode): void => {
   let fn: FormatElementFn;
 
   switch (docBuilder.exportFormat) {
@@ -149,7 +149,7 @@ export const formatLeafHeader = (docBuilder: DocBuilder, f: TemplateElement): vo
     fn(docBuilder, f);
 }
 
-export const formatObservationEvent = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatObservationEvent = (docBuilder: DocBuilder, f: TemplateNode): void => {
   let fn: FormatElementFn;
 
   switch (docBuilder.exportFormat) {
@@ -167,7 +167,7 @@ export const formatObservationEvent = (docBuilder: DocBuilder, f: TemplateElemen
     fn(docBuilder, f);
 }
 
-export const formatInstructionActivity = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatInstructionActivity = (docBuilder: DocBuilder, f: TemplateNode): void => {
   let fn: FormatElementFn;
 
   switch (docBuilder.exportFormat) {
@@ -185,7 +185,7 @@ export const formatInstructionActivity = (docBuilder: DocBuilder, f: TemplateEle
     fn(docBuilder, f);
 }
 
-export const formatCluster = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatCluster = (docBuilder: DocBuilder, f: TemplateNode): void => {
   let fn: FormatElementFn;
 
   switch (docBuilder.exportFormat) {
@@ -224,7 +224,7 @@ export const saveFile  = async (docBuilder: DocBuilder, outFile: string): Promis
     await fn(docBuilder, outFile)
 }
 
-export const formatNodeContent= (dBuilder: DocBuilder, f: TemplateElement, isChoice: boolean) => {
+export const formatNodeContent= (dBuilder: DocBuilder, f: TemplateNode, isChoice: boolean) => {
   let fn: FormatNodeContentFn;
 
   switch (dBuilder.exportFormat) {
@@ -242,7 +242,7 @@ export const formatNodeContent= (dBuilder: DocBuilder, f: TemplateElement, isCho
     fn(dBuilder, f, isChoice)
 }
 
-export const formatAnnotations= (dBuilder: DocBuilder, f: TemplateElement) =>{
+export const formatAnnotations= (dBuilder: DocBuilder, f: TemplateNode) =>{
   let fn: FormatElementFn;
 
   switch (dBuilder.exportFormat) {
@@ -258,7 +258,7 @@ export const formatAnnotations= (dBuilder: DocBuilder, f: TemplateElement) =>{
     fn(dBuilder, f)
 }
 
-export const formatUnsupported= (dBuilder: DocBuilder, f: TemplateElement) =>{
+export const formatUnsupported= (dBuilder: DocBuilder, f: TemplateNode) =>{
   let fn: FormatElementFn;
 
   switch (dBuilder.exportFormat) {
@@ -274,12 +274,12 @@ export const formatUnsupported= (dBuilder: DocBuilder, f: TemplateElement) =>{
     fn(dBuilder, f)
 }
 
-export const formatOccurrencesText= (dBuilder: DocBuilder, f: TemplateElement) => {
+export const formatOccurrencesText= (dBuilder: DocBuilder, f: TemplateNode) => {
   const occurrencesText = formatRawOccurrencesText(dBuilder,f);
   return occurrencesText ? `**${occurrencesText}**` : ``;
 }
 
-export const formatRawOccurrencesText= (dBuilder: DocBuilder, f: TemplateElement) => {
+export const formatRawOccurrencesText= (dBuilder: DocBuilder, f: TemplateNode) => {
   const occurrencesText = formatOccurrences(f, dBuilder.config.displayTechnicalOccurrences);
   return occurrencesText ? `[${occurrencesText}]` : ``;
 }
