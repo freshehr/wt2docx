@@ -20,6 +20,14 @@ export function isSection(rmType: string) {
   return ['SECTION'].includes(rmType);
 }
 
+export function isComposition(rmType: string) {
+  return ['COMPOSITION'].includes(rmType);
+}
+
+export function isCluster(rmType: string) {
+  return ['CLUSTER'].includes(rmType);
+}
+
 export function isDvChoice(rmType: string) {
   return ['ELEMENT'].includes(rmType);
 }
@@ -31,6 +39,11 @@ export function isAnyChoice(rmType: string[]) {
 
   return (missing.length === 0)
 
+}
+
+export const isArchetype= (rmType: string, nodeId: string) => {
+  return ['OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY', 'CLUSTER', 'ELEMENT'].includes(rmType)
+         &&  nodeId.substring(0,1) !== 'at'
 }
 
 export const mapRmTypeText = (rmTypeString: string) => {
