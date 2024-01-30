@@ -1,0 +1,17 @@
+{
+  "hideLanguageTerritory": false,
+  "displayTechnicalOccurrences": false,
+  "hideNodeIds": true,
+  "skippedAQLPaths": [],
+  "includedAnnotations": ["comment"],
+  "hideComments": false,
+  "excludedRMTags": ["territory","language", "encoding", "subject", "current_state","transition"],
+  "title": "",
+  "hideParticipations": true,
+  "displayAQLPaths": false,
+  "displayToc": false,
+  "hideXmindValues" : true,
+  "ADRepositoryId": "freshehr-2ln",
+  "ADUsername": "freshehr",
+  "ADPassword": "modellingrules"
+}

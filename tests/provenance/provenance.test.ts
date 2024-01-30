@@ -24,7 +24,7 @@ describe('Provenance  tests', () => {
   });
 
   test('Should fetch archetype original namespace', async() => {
-    await fetchADArchetype('openEHR-EHR-ADMIN_ENTRY.visual_certification_uk.v0', 'freshehr-2ln')
+    await fetchADArchetype('openEHR-EHR-ADMIN_ENTRY.visual_certification_uk.v0', builder.config.ADUsername, builder.config.ADPassword, builder.config.ADRepositoryId,)
       .then(data => {
        expect(data.description.otherDetails.original_namespace). toBe('uk-com.freshehr')
       })

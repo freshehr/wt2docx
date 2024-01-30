@@ -21,8 +21,8 @@ import {
   formatNodeHeader,
   formatObservationEvent,
   formatTemplateHeader,
-  formatUnsupported
-} from "./formatters/DocFormatter";
+  formatUnsupported, saveFile,
+} from './formatters/DocFormatter';
 import {
   formatDvCodedText,
   formatDvCount,
@@ -31,8 +31,9 @@ import {
   formatDvQuantity,
   formatDvText
 } from "./formatters/TypeFormatter";
-import { ArchetypeList } from './provenance/openEProvenance';
+import { ArchetypeList, fetchADArchetype, updateArchetypeList } from './provenance/openEProvenance';
 import { Config } from './BuilderConfig';
+import path from 'path';
 
 
 export class DocBuilder {
@@ -41,21 +42,40 @@ export class DocBuilder {
   defaultLang: string = 'en';
   config: Config;
   exportFormat: ExportFormat
+  inFilePath: string
+  outFileName: string
   outFileDir: string;
   archetypeList :ArchetypeList = [];
 
   readonly _wt: WebTemplate;
 
-  constructor(wt: WebTemplate, config: Config, exportFormatString: string, outFileDir: string) {
+  constructor(wt: WebTemplate, config: Config,  inFilePath:string, outFileName:string ,exportFormatString: string, outFileDir: string) {
     this._wt = wt;
     this.defaultLang = wt.defaultLanguage;
     this.config = config;
     this.exportFormat = ExportFormat[exportFormatString];
     this.outFileDir = outFileDir
+    this.outFileName = outFileName
+    this.inFilePath = inFilePath
 
-    this.generate();
+    this.generate().then( result => {
+      const outFilePath = this.handleOutPath(inFilePath, outFileName, this.exportFormat,outFileDir);
+      saveFile(this, outFilePath);
+      updateArchetypeList('openEHR','CKM-mirror', 'org.openehr', this.archetypeList,false)
+    });
+
   }
 
+  private handleOutPath(infile :string, outputFile: string , ext: string, outDir: string) {
+    {
+      if (outputFile) return outputFile;
+
+      const fExt:string = ext === 'wtx'?'wtx.json': ext;
+      const pathSeg = path.parse(infile);
+
+      return  `${outDir}/${pathSeg.name}.${fExt}`;
+    }
+  }
   public toString(): string {
     return this.sb.toString();
   }
@@ -64,7 +84,7 @@ export class DocBuilder {
     return this._wt;
   }
 
-  private generate() {
+  private async generate() {
     formatTemplateHeader(this)
     this.walkComposition(this._wt.tree);
   }
@@ -170,9 +190,38 @@ export class DocBuilder {
   }
 
 
-  private walkEntry(f: TemplateNode) {
+  private async augmentWebTemplate(docBuilder: DocBuilder,f: TemplateNode) {
+
+    const {config} = docBuilder
+
+    await fetchADArchetype(f.nodeId,config.ADUsername, config.ADPassword, config.ADRepositoryId)
+      .then(data => {
+        if(typeof data?.description?.otherDetails === 'object') {
+          const {
+            original_publisher,
+            original_namespace,
+            custodian_namespace,
+            custodian_organisation
+          } = data.description.otherDetails;
+          f = {
+            ...f,
+            original_publisher,
+            original_namespace,
+            custodian_namespace,
+            custodian_organisation
+          }
+        }
+
+      })
+      .catch((error) => {
+        console.error("Error:", error)
+      } )
+  }
+
+  private async walkEntry(f: TemplateNode) {
     this.archetypeList.push({archetypeId: f.nodeId})
 
+    await this.augmentWebTemplate(this,f)
 
     formatLeafHeader(this, f)
     formatNodeHeader(this)

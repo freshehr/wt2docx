@@ -35,3 +35,4 @@ templates/hidden/
 config/hidden/
 
 /out/tmp.md
+!/config/freshehr.json

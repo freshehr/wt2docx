@@ -84,13 +84,12 @@ export const getADTemplatesList = (username: string, password: string, repositor
 };
 */
 
-const ADuserName = 'freshehr'
-const ADpassword = 'modellingrules'
 
-export const fetchADArchetype = async (archetypeId: string, repositoryId: string) => {
+
+export const fetchADArchetype = async ( archetypeId: string,ADUsername: string, ADPassword: string, repositoryId: string) => {
   try {
     // 👇️ const data: GetUsersResponse
-    const authString = `${ADuserName}:${ADpassword}`
+    const authString = `${ADUsername}:${ADPassword}`
     const authToken = `BASIC ${btoa(authString)}`
     const url = `${ADRootUrl}/repository/archetype/get?repositoryId=${repositoryId}&archetypeId=${archetypeId}`
     const { data, status } = await axios.get(url,
@@ -101,7 +100,7 @@ export const fetchADArchetype = async (archetypeId: string, repositoryId: string
         },
       },
     );
-  return data
+  return await data
 
 } catch (error) {
   if (axios.isAxiosError(error)) {
