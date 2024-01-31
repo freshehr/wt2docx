@@ -2,7 +2,7 @@ import { findParentNodeId, TemplateNode } from './TemplateNodes';
 import { WebTemplate } from "./WebTemplate";
 import {
   isActivity,
-  isAnyChoice, isArchetype,
+  isAnyChoice, isArchetype, isCluster, isComposition,
   isDataValue,
   isEntry,
   isEvent,
@@ -31,7 +31,11 @@ import {
   formatDvQuantity,
   formatDvText
 } from "./formatters/TypeFormatter";
-import { ArchetypeList, fetchADArchetype, updateArchetypeList } from './provenance/openEProvenance';
+import {
+  ArchetypeList,
+  fetchADArchetype, getProvenance,
+  updateArchetypeLists,
+} from './provenance/openEProvenance';
 import { Config } from './BuilderConfig';
 import path from 'path';
 
@@ -45,7 +49,9 @@ export class DocBuilder {
   inFilePath: string
   outFileName: string
   outFileDir: string;
-  archetypeList :ArchetypeList = [];
+  localArchetypeList :ArchetypeList = [];
+  candidateArchetypeList: ArchetypeList = []
+  remoteArchetypeList: ArchetypeList = [];
 
   readonly _wt: WebTemplate;
 
@@ -62,9 +68,7 @@ export class DocBuilder {
       const outFilePath = this.handleOutPath(inFilePath, outFileName, this.exportFormat,outFileDir);
       console.log(`SaveFile `)
       saveFile(this, outFilePath);
-
-
-      updateArchetypeList('openEHR','CKM-mirror', 'org.openehr', this.archetypeList,false)
+     // updateArchetypeList('openEHR','CKM-mirror', 'org.openehr', this.archetypeList,false)
     });
 
   }
@@ -89,7 +93,7 @@ export class DocBuilder {
 
   private async generate() {
     formatTemplateHeader(this)
-    await this.walkComposition(this._wt.tree);
+    await this.walk(this._wt.tree);
   }
 
   private async walkChildren(f: TemplateNode, nonContextOnly: boolean = false) {
@@ -108,28 +112,28 @@ export class DocBuilder {
   }
 
   private async walk(f: TemplateNode) {
-     if (isEntry(f.rmType))
-     {
 
-       await this.walkEntry(f)
-       console.log('f Out', f.original_namespace)
-     }
-     else if (isDataValue(f.rmType))
+    if (isArchetype(f.rmType,f.nodeId)) {
+      await this.augmentWebTemplate(this,f)
+      updateArchetypeLists(this.remoteArchetypeList, this.candidateArchetypeList,this.localArchetypeList,getProvenance(f))
+    }
+
+    if (isComposition(f.rmType))
+      await this.walkEntry(f)
+    else if (isCluster(f.rmType))
+    await this.walkCluster(f)
+    else if (isEntry(f.rmType))
+      await this.walkEntry(f)
+    else if (isDataValue(f.rmType))
       this.walkElement(f)
-     else if (isSection(f.rmType))
+    else if (isSection(f.rmType))
       await this.walkSection(f)
-     else if (isEvent(f.rmType))
+    else if (isEvent(f.rmType))
       this.walkObservationEvent(f)
-     else if (isActivity(f.rmType))
+    else if (isActivity(f.rmType))
        this.walkInstructionActivity(f)
-     else if (f.rmType === 'CLUSTER')
-      await this.walkCluster(f);
-     else {
+    else {
       switch (f.rmType) {
-
-      //       case 'ISM_TRANSITION':
-       //         this.walkChildren(f)
-        //        break;
         case 'EVENT_CONTEXT':
           f.name = 'Composition context';
           await this.walkCompositionContext(f);
@@ -147,11 +151,6 @@ export class DocBuilder {
           break;
       }
     }
-     if (isArchetype(f.rmType,f.nodeId)){
-       this.archetypeList.push({archetypeId: f.nodeId})
-       await this.augmentWebTemplate(this,f)
-     }
-
   }
 
   private walkUnsupported(f: TemplateNode)
@@ -160,12 +159,8 @@ export class DocBuilder {
   }
 
   private async walkCluster(f: TemplateNode) {
-    console.log(`Cluster in ${f.nodeId}`)
-    if (f.nodeId.includes('CLUSTER'))
-      this.archetypeList.push({archetypeId: f.nodeId})
     formatCluster(this, f)
     await this.walkChildren(f);
-    console.log(`Cluster in ${f.nodeId}`)
   }
 
   private walkObservationEvent(f: TemplateNode) {
@@ -174,21 +169,16 @@ export class DocBuilder {
   }
 
   private async walkComposition(f: TemplateNode) {
-    console.log('WalkComposition in')
-    this.archetypeList.push({archetypeId: f.nodeId})
     formatCompositionHeader(this, f)
     formatNodeHeader(this);
     this.walkRmChildren(f);
     formatNodeFooter(this,f);
     await this.walkNonRMChildren(f)
-    console.log('WalkComposition out')
-
   }
 
   private walkElement(f: TemplateNode) {
     formatNodeContent(this, f, false)
     this.walkDataType(f)
- //   formatAnnotations(this,f);
   }
 
   private walkChoice(f: TemplateNode) {
@@ -201,7 +191,6 @@ export class DocBuilder {
     console.log(`WalkSection in ${f.nodeId}`)
 
     if (!this.config?.skippedAQLPaths?.includes(f.aqlPath)) {
-      this.archetypeList.push({archetypeId: f.nodeId})
       formatLeafHeader(this, f)
     }
     await this.walkChildren(f)
@@ -216,17 +205,22 @@ export class DocBuilder {
 
     await fetchADArchetype(f.nodeId,config.ADUsername, config.ADPassword, config.ADRepositoryId)
       .then(data => {
+
+        f.lifecycleState = data?.description?.lifecycleState.codeString
+
         if(typeof data?.description?.otherDetails === 'object') {
           const {
             original_publisher,
             original_namespace,
             custodian_namespace,
-            custodian_organisation
+            custodian_organisation,
+            revision
           } = data.description.otherDetails;
           f.original_namespace = original_namespace;
           f.original_publisher = original_publisher;
           f.custodian_namespace = custodian_namespace;
           f.custodian_organisation = custodian_organisation
+          f.revision = revision
         }
         console.log('F Augmented ', f.original_namespace)
 

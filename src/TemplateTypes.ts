@@ -1,4 +1,5 @@
 import { TemplateNode } from './TemplateNodes';
+import { ArchetypeProvenance } from './provenance/openEProvenance';
 
 export function isEntry(rmType: string) {
   return ['OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY'].includes(rmType);
@@ -42,8 +43,8 @@ export function isAnyChoice(rmType: string[]) {
 }
 
 export const isArchetype= (rmType: string, nodeId: string) => {
-  return ['OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY', 'CLUSTER', 'ELEMENT'].includes(rmType)
-         &&  nodeId.substring(0,1) !== 'at'
+  return ['COMPOSITION','OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY', 'CLUSTER', 'ELEMENT'].includes(rmType)
+         &&  nodeId.substring(0,2) !== 'at'
 }
 
 export const mapRmTypeText = (rmTypeString: string) => {

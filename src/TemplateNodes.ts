@@ -24,6 +24,9 @@ export interface TemplateNode extends WebTemplateNode{
   original_publisher?: string;
   custodian_namespace?: string;
   custodian_organisation?: string;
+  revision?: string;
+  lifecycleState?:string;
+  build_id?:string;
 }
 
 

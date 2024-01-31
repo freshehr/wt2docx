@@ -47,7 +47,7 @@ export const xmind = {
 
   saveFile: async (dBuilder: DocBuilder, outFile: any): Promise <void>  => {
     const xmindArrayBuffer = await parseXMindMarkToXMindFile(dBuilder.toString())
-    fs.writeFileSync('./out/tmp.md', dBuilder.toString(), {encoding: "utf8"});
+    fs.writeFileSync('./tmp/tmp.md', dBuilder.toString(), {encoding: "utf8"});
     fs.writeFileSync(outFile, Buffer.from(xmindArrayBuffer), {encoding: "utf8"});
     console.log(`\n Exported : ${outFile}`)
   },
@@ -59,7 +59,6 @@ export const xmind = {
     const rmTypeText = mapRmTypeText(f.rmType);
     const occurrencesText = formatOccurrences(f, config.displayTechnicalOccurrences)
     sb.append(`${nodeIndent} ${nodeName} [${rmTypeText} ${occurrencesText}]`)
-
   },
 
   formatLeafHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
@@ -74,7 +73,6 @@ export const xmind = {
 
   formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb} = dBuilder;
-
     if (isAnyChoice(f.children.map(child =>  child.rmType)))
       sb.append(`${dvIndent} All data types allowed`);
   },
