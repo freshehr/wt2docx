@@ -11,7 +11,6 @@ import {
 import { StringBuilder } from "./StringBuilder";
 import rmDescriptions from "../resources/rm_descriptions.json";
 import {
-  ExportFormat,
   formatChoiceHeader,
   formatCluster, formatCompositionContextHeader,
   formatCompositionHeader, formatInstructionActivity,
@@ -33,12 +32,12 @@ import {
 } from "./formatters/TypeFormatter";
 import {
   ArchetypeList,
-  fetchADArchetype, getProvenance,
+  getProvenance,
   updateArchetypeLists,
 } from './provenance/openEProvenance';
 import { Config } from './BuilderConfig';
 import path from 'path';
-import { augmentWebTemplate, ResolvedTemplateFiles } from './provenance/wtxBuilder';
+import { augmentWebTemplate, ResolvedTemplateFiles, saveWtxFile } from './provenance/wtxBuilder';
 
 
 export class DocBuilder {
@@ -62,8 +61,8 @@ export class DocBuilder {
     const outFilePath = this.handleOutPath(this.config.inFilePath, this.config.outFilePath, this.config.exportFormat,this.config.outFileDir);
     saveFile(this, outFilePath);
 
-    if (this.resolvedTemplateFiles.wtxOutPath)
-      saveFile(this, this.resolvedTemplateFiles.wtxOutPath)
+    if (this.regenWtx())
+      saveWtxFile(this)
     });
 
   }

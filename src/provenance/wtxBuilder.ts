@@ -68,4 +68,14 @@ export const resolveTemplateFiles = (config: Config): ResolvedTemplateFiles => {
     } )
 }
 
+export const saveWtxFile = async (dBuilder: DocBuilder) => {
+
+  const outFile = dBuilder.resolvedTemplateFiles.wtxOutPath
+  const wtString: string = JSON.stringify(dBuilder.wt, (key, value) => key==='parentNode' ? undefined : value)
+
+  fs.writeFileSync(outFile, wtString);
+  console.log(`\n Exported : ${outFile}`)
+}
+
+
 
