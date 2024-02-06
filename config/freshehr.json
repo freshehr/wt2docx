@@ -11,6 +11,7 @@
   "displayAQLPaths": false,
   "displayToc": false,
   "hideXmindValues" : true,
+  "generateWtx": true,
   "ADRepositoryId": "freshehr-2ln",
   "ADUsername": "freshehr",
   "ADPassword": "modellingrules"

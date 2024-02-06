@@ -11,9 +11,11 @@ export type Config = {
   displayAQLPaths: boolean;
   displayToC: boolean;
   hideXmindValues: boolean
+  generateWtx: boolean
   ADRepositoryId: string
   ADUsername: string
   ADPassword:string
+
 }
 
 
@@ -28,9 +30,11 @@ const defaultConfig: Config = {
   displayAQLPaths: false,
   displayToC: false,
   hideXmindValues: true,
+  generateWtx: false,
   ADRepositoryId: 'freshehr-2ln',
   ADUsername: "",
-  ADPassword: ""
+  ADPassword: "",
+
 };
 
  export function importConfig(path: string): Config {

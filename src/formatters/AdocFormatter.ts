@@ -3,6 +3,7 @@ import fs from "fs";
 import { findParentNodeId, TemplateNode,  TemplateInput } from "../TemplateNodes";
 import { formatOccurrences, isAnyChoice, isDisplayableNode, mapRmTypeText} from "../TemplateTypes";
 import { formatAnnotations, formatOccurrencesText } from './DocFormatter';
+import { ArchetypeList} from '../provenance/openEProvenance';
 
 
 export const adoc = {
@@ -321,5 +322,50 @@ export const adoc = {
         });
       }
     }
-  }
+  },
+
+  formatProvenanceTable: (dBuilder: DocBuilder) => {
+
+    const { localArchetypeList, candidateArchetypeList, remoteArchetypeList, sb, config } = dBuilder;
+
+    const formatList = (aList: ArchetypeList) => {
+      sb.append('a|');
+      aList.forEach((item) => {
+        const trimmedId = item.archetypeId.replace(new RegExp('^' + 'openEHR-EHR-'), "");
+        sb.append(`* ${trimmedId} 
+        **           ${item.originalNamespace} : ${item.semver}`);
+      });
+    }
+
+    const calcPercent = (numerator: number) : string => {
+      return (numerator/overallTotal * 100).toFixed(1)
+    }
+
+    const formatTotal = (total: number) : string => {
+      return `Total: ${total}     Percent: (${calcPercent(total)}%)`
+    }
+
+    const localTotal: number = localArchetypeList.length;
+    const candidateTotal: number = candidateArchetypeList.length;
+    const remoteTotal: number = remoteArchetypeList.length;
+    const overallTotal = localTotal + candidateTotal + remoteTotal;
+
+    sb.newline()
+
+    sb.append(`== Archetype provenance`)
+
+    sb.append('[options="header","stretch", cols="33,33,33"]');
+    sb.append('|====');
+    sb.append('|Internal | Candidate | External');
+
+    sb.append(`| Internal archetypes which are not intended to be shared | Internal archetypes which are candidates for external publication| Archetypes published or managed externally`)
+    sb.append(`| **${formatTotal(localTotal)}** | **${formatTotal(candidateTotal)}** | **${formatTotal(remoteTotal)}**`)
+    formatList(localArchetypeList)
+    formatList(candidateArchetypeList)
+    formatList(remoteArchetypeList)
+
+    sb.append('====|');
+
+  },
+
 }

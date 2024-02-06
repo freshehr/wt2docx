@@ -19,7 +19,7 @@ import {
   formatNodeContent,
   formatNodeFooter,
   formatNodeHeader,
-  formatObservationEvent,
+  formatObservationEvent, formatProvenanceTable,
   formatTemplateHeader,
   formatUnsupported, saveFile,
 } from './formatters/DocFormatter';
@@ -49,7 +49,7 @@ export class DocBuilder {
   inFilePath: string
   outFileName: string
   outFileDir: string;
-  localArchetypeList :ArchetypeList = [];
+  localArchetypeList : ArchetypeList = [];
   candidateArchetypeList: ArchetypeList = []
   remoteArchetypeList: ArchetypeList = [];
 
@@ -65,10 +65,9 @@ export class DocBuilder {
     this.inFilePath = inFilePath
 
     this.generate().then( result => {
-      const outFilePath = this.handleOutPath(inFilePath, outFileName, this.exportFormat,outFileDir);
-      console.log(`SaveFile `)
-      saveFile(this, outFilePath);
-     // updateArchetypeList('openEHR','CKM-mirror', 'org.openehr', this.archetypeList,false)
+
+    const outFilePath = this.handleOutPath(inFilePath, outFileName, this.exportFormat,outFileDir);
+    saveFile(this, outFilePath);
     });
 
   }
@@ -94,6 +93,7 @@ export class DocBuilder {
   private async generate() {
     formatTemplateHeader(this)
     await this.walk(this._wt.tree);
+    formatProvenanceTable(this)
   }
 
   private async walkChildren(f: TemplateNode, nonContextOnly: boolean = false) {
@@ -113,15 +113,15 @@ export class DocBuilder {
 
   private async walk(f: TemplateNode) {
 
-    if (isArchetype(f.rmType,f.nodeId)) {
+    if (isArchetype(f.rmType,f.nodeId) && (this.config.generateWtx || this.exportFormat === 'wtx.json') ) {
       await this.augmentWebTemplate(this,f)
       updateArchetypeLists(this.remoteArchetypeList, this.candidateArchetypeList,this.localArchetypeList,getProvenance(f))
     }
 
     if (isComposition(f.rmType))
-      await this.walkEntry(f)
+      await this.walkComposition(f)
     else if (isCluster(f.rmType))
-    await this.walkCluster(f)
+     await this.walkCluster(f)
     else if (isEntry(f.rmType))
       await this.walkEntry(f)
     else if (isDataValue(f.rmType))

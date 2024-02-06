@@ -123,8 +123,7 @@ export const searchGHRepo = async (username: string, password: string, repoAccou
 //  const token = btoa(username + ":" + password);
 
     try {
-      // 👇️ const data: GetUsersResponse
-      const { data, status } = await axios.get(
+      const { data } = await axios.get(
         formatGHSearchUrl(`${repoAccount}/${repoName}`),
         {
           headers: {
@@ -133,8 +132,8 @@ export const searchGHRepo = async (username: string, password: string, repoAccou
         },
       );
 
-      const files = data.tree.filter(file => file.type === 'blob' && file.path.endsWith('.adl'))
-      return files.map(file =>  {
+      const files = data.tree.filter((file: { type: string; path: string; }) => file.type === 'blob' && file.path.endsWith('.adl'))
+      return files.map( (file: { path: string; }) =>  {
         return { archetypeId: path.parse(file.path).name, provenance: repoNamespace }
       })
 
@@ -188,9 +187,9 @@ const readRemoteFileCache = async (repoAccount: string, repoName : string, repoN
   }
   else
   {
-    await searchGHRepo("ian.mcnicoll", "vQum0C12K1Lx", repoAccount, repoName, repoNamespace)
+    await searchGHRepo("", "", repoAccount, repoName, repoNamespace)
       .then( result => {
-        return archetypeList = result; // Outputs: 'Hello, World!'
+        return archetypeList = result;
       })
       .catch(error => console.log("Caught Error: ", error));
 

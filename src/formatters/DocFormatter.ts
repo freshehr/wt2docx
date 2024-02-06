@@ -64,6 +64,29 @@ export const formatCompositionHeader = (docBuilder: DocBuilder, f: TemplateNode)
     fn(docBuilder, f);
 }
 
+export const formatProvenanceTable = (docBuilder: DocBuilder) => {
+
+  let fn: FormatHeaderFn;
+
+  switch (docBuilder.exportFormat) {
+    case ExportFormat.docx:
+    case ExportFormat.pdf:
+    case ExportFormat.adoc:
+      fn = adoc.formatProvenanceTable
+      break;
+    case ExportFormat.xmind:
+      break;
+    case ExportFormat.fshl:
+      break;
+    case ExportFormat.wtx:
+      break;
+  }
+
+  if (fn)
+    fn(docBuilder);
+
+}
+
 export const formatChoiceHeader = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
