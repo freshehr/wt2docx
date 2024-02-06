@@ -5,32 +5,35 @@ import path from 'path';
 import fs from 'fs';
 import { Config, WtxRegenerate } from '../BuilderConfig';
 
-const resolveWtSource = (config: Config) => {
+export type ResolvedTemplateFiles = {
+  wtxOutPath: string
+  templateInPath: string
+}
+
+export const resolveTemplateFiles = (config: Config): ResolvedTemplateFiles => {
    const {inFilePath , regenerateWtx } = config
 
    const extension: string  = path.extname(inFilePath);
    const inFileRoot: string = path.basename(inFilePath,extension)
    const pathTo: string = path.dirname(inFilePath)
-   const wtxPath = path.join(pathTo,inFileRoot,'wtx.json')
+   const wtxPath:string = path.join(pathTo,inFileRoot,'wtx.json')
 
-   if (extension === 'json') {
-     checkIfRegenerateWtx(regenerateWtx, inFilePath, wtxPath)
-   }
- }
+  if (regenerateWtx === WtxRegenerate.never) return {
+    wtxOutPath: null,
+    templateInPath: inFilePath
+  }
 
+  if (regenerateWtx === WtxRegenerate.always) return {
+    wtxOutPath: wtxPath,
+    templateInPath: inFilePath
+  }
 
- const checkIfRegenerateWtx = (wtxRegen: WtxRegenerate, wtPath, wtxPath : string): boolean =>{
+  const regenWtx = !fs.existsSync(wtxPath) ||  (fs.statSync(wtxPath).mtime < fs.statSync(inFilePath).mtime)
 
-   // check the infilePath to see if a matching .xtx.json file exists and has a more recent date, in which case return true and use that
-
-   if (!fs.existsSync(wtxPath) || wtxRegen === WtxRegenerate.always) return true
-
-   if (wtxRegen === WtxRegenerate.never) return false
-
-    const wtxStats = fs.statSync(wtxPath)
-    const wtStats = fs.statSync(wtPath)
-
-   return wtxStats.mtime < wtStats.mtime
+  return {
+    wtxOutPath: regenWtx? wtxPath: null,
+    templateInPath: inFilePath
+  }
 
  }
 

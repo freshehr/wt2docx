@@ -38,7 +38,7 @@ import {
 } from './provenance/openEProvenance';
 import { Config } from './BuilderConfig';
 import path from 'path';
-import { augmentWebTemplate } from './provenance/wtxBuilder';
+import { augmentWebTemplate, ResolvedTemplateFiles } from './provenance/wtxBuilder';
 
 
 export class DocBuilder {
@@ -48,6 +48,7 @@ export class DocBuilder {
   localArchetypeList : ArchetypeList = [];
   candidateArchetypeList: ArchetypeList = []
   remoteArchetypeList: ArchetypeList = [];
+  resolvedTemplateFiles: ResolvedTemplateFiles;
 
   readonly _wt: WebTemplate;
 
@@ -60,10 +61,16 @@ export class DocBuilder {
 
     const outFilePath = this.handleOutPath(this.config.inFilePath, this.config.outFilePath, this.config.exportFormat,this.config.outFileDir);
     saveFile(this, outFilePath);
+
+    if (this.resolvedTemplateFiles.wtxOutPath)
+      saveFile(this, this.resolvedTemplateFiles.wtxOutPath)
     });
 
   }
 
+  private regenWtx(): boolean {
+    return (this.resolvedTemplateFiles.wtxOutPath !== null)
+}
   private handleOutPath(infile :string, outputFile: string , ext: string, outDir: string) {
     {
       if (outputFile) return outputFile;
@@ -105,7 +112,7 @@ export class DocBuilder {
 
   private async walk(f: TemplateNode) {
 
-    if (isArchetype(f.rmType,f.nodeId) && (this.config.generateWtx) ) {
+    if (isArchetype(f.rmType,f.nodeId) && this.regenWtx() ) {
       await augmentWebTemplate(this,f)
       updateArchetypeLists(this.remoteArchetypeList, this.candidateArchetypeList,this.localArchetypeList,getProvenance(f))
     }
