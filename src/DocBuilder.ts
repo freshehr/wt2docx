@@ -38,14 +38,13 @@ import {
 } from './provenance/openEProvenance';
 import { Config } from './BuilderConfig';
 import path from 'path';
+import { augmentWebTemplate } from './provenance/wtxBuilder';
 
 
 export class DocBuilder {
 
   sb: StringBuilder = new StringBuilder();
-  defaultLang: string = 'en';
   config: Config;
-  outFileDir: string;
   localArchetypeList : ArchetypeList = [];
   candidateArchetypeList: ArchetypeList = []
   remoteArchetypeList: ArchetypeList = [];
@@ -54,8 +53,8 @@ export class DocBuilder {
 
   constructor(wt: WebTemplate, config: Config) {
     this._wt = wt;
-    this.defaultLang = wt.defaultLanguage;
     this.config = config;
+    this.config.defaultLang = wt.defaultLanguage;
 
     this.generate().then( result => {
 
@@ -107,7 +106,7 @@ export class DocBuilder {
   private async walk(f: TemplateNode) {
 
     if (isArchetype(f.rmType,f.nodeId) && (this.config.generateWtx) ) {
-      await this.augmentWebTemplate(this,f)
+      await augmentWebTemplate(this,f)
       updateArchetypeLists(this.remoteArchetypeList, this.candidateArchetypeList,this.localArchetypeList,getProvenance(f))
     }
 
@@ -192,36 +191,6 @@ export class DocBuilder {
   }
 
 
-  private async augmentWebTemplate(docBuilder: DocBuilder,f: TemplateNode) {
-
-    const {config} = docBuilder
-
-    await fetchADArchetype(f.nodeId,config.ADUsername, config.ADPassword, config.ADRepositoryId)
-      .then(data => {
-
-        f.lifecycleState = data?.description?.lifecycleState.codeString
-
-        if(typeof data?.description?.otherDetails === 'object') {
-          const {
-            original_publisher,
-            original_namespace,
-            custodian_namespace,
-            custodian_organisation,
-            revision
-          } = data.description.otherDetails;
-          f.original_namespace = original_namespace;
-          f.original_publisher = original_publisher;
-          f.custodian_namespace = custodian_namespace;
-          f.custodian_organisation = custodian_organisation
-          f.revision = revision
-        }
-        console.log('F Augmented ', f.original_namespace)
-
-      })
-      .catch((error) => {
-        console.error("Error:", error)
-      } )
-  }
 
   private async walkEntry(f: TemplateNode) {
     formatLeafHeader(this, f)
@@ -354,14 +323,14 @@ export class DocBuilder {
 
   private getValueOfRecord(record?: Record<string, string>): string {
     if (record) {
-      return record[this.defaultLang];
+      return record[this.config.defaultLang];
     } else {
       return '';
     }
   }
 
   public getDescription = (f: TemplateNode) => {
-    const language: string = 'en'
+    const language: string = this.config.defaultLang
     if (!f.inContext)
       return this.getValueOfRecord(f.localizedDescriptions)
     else {

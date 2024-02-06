@@ -1,6 +1,12 @@
 import fs from 'fs';
 import { ExportFormat } from './formatters/DocFormatter';
 
+export enum WtxRegenerate  {
+  always = 'always',
+  never = 'never',
+  whenStale = 'whenStale'
+}
+
 export type Config = {
   displayTechnicalOccurrences: boolean;
   hideNodeIds: boolean;
@@ -21,7 +27,8 @@ export type Config = {
   outFileDir: string
   inFileDir: string
   exportFormat: ExportFormat
-
+  defaultLang: string
+  regenerateWtx: WtxRegenerate
 }
 
 
@@ -44,7 +51,9 @@ const defaultConfig: Config = {
   outFilePath: '',
   outFileDir: './out',
   inFileDir: './templates',
-  exportFormat: ExportFormat.adoc
+  exportFormat: ExportFormat.adoc,
+  defaultLang: 'en',
+  regenerateWtx: WtxRegenerate.whenStale
 
 };
 

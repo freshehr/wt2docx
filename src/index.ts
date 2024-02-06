@@ -10,13 +10,15 @@ const args = yargs.options({
   'web-template': { type: 'string', describe: 'web template name',demandOption: true, alias: 'wt' },
   'out-file': { type: 'string', describe: 'Output file',demandOption: false, alias: 'o' },
   'out-dir': { type: 'string', demandOption: false, describe: 'Output folder', alias: 'od', default: './out'},
-  'config-file': { type: 'string', demandOption: false, describe: 'Config file',alias: 'cf', default: "config/wtconfig.json"},
+  'in-dir': { type: 'string', demandOption: false, describe: 'Input folder', alias: 'id', default: './templates'},
+  'config-file': { type: 'string', demandOption: false, describe: 'Config file',alias: 'cf', default: "./config/wtconfig.json"},
   'export-format': { type: 'string', demandOption: false, describe: 'Export format: adoc|docx|xmind|pdf (default: adoc)',alias: 'ex', default: "adoc"},
 }).argv;
 
 const config:Config = importConfig(args['config-file'])
 
 config.inFilePath = args['web-template']
+config.inFileDir = args['in-dir']
 config.exportFormat  = ExportFormat[args['export-format']];
 config.outFileDir = args['out-dir']
 config.outFilePath = args['out-file']
