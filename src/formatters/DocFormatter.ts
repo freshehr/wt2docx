@@ -26,7 +26,7 @@ type FormatNodeContentFn = (dBuilder: DocBuilder, f: TemplateNode, isChoice: boo
 export const formatTemplateHeader = (docBuilder: DocBuilder): void => {
 
    let fn: FormatHeaderFn;
-   switch (docBuilder.exportFormat){
+   switch (docBuilder.config.exportFormat){
     case ExportFormat.xmind:
       fn= xmind.formatHeader
       break;
@@ -46,7 +46,7 @@ export const formatCompositionHeader = (docBuilder: DocBuilder, f: TemplateNode)
 
   let fn: FormatCompositionHeaderFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.formatCompositionHeader
       break;
@@ -68,7 +68,7 @@ export const formatProvenanceTable = (docBuilder: DocBuilder) => {
 
   let fn: FormatHeaderFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.docx:
     case ExportFormat.pdf:
     case ExportFormat.adoc:
@@ -91,7 +91,7 @@ export const formatChoiceHeader = (docBuilder: DocBuilder, f: TemplateNode): voi
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.formatChoiceHeader
       break;
@@ -112,7 +112,7 @@ export const formatNodeHeader = (docBuilder: DocBuilder): void => {
 
   let fn: FormatHeaderFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
     case ExportFormat.fshl:
     case ExportFormat.wtx:
@@ -130,7 +130,7 @@ export const formatNodeFooter = (docBuilder: DocBuilder, f: TemplateNode): void 
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
     case ExportFormat.fshl:
     case ExportFormat.wtx:
@@ -148,7 +148,7 @@ export const formatCompositionContextHeader = (docBuilder: DocBuilder, f: Templa
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.formatCompositionContextHeader
       break;
@@ -167,7 +167,7 @@ export const formatCompositionContextHeader = (docBuilder: DocBuilder, f: Templa
 export const formatLeafHeader = (docBuilder: DocBuilder, f: TemplateNode): void => {
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.formatLeafHeader
       break;
@@ -186,7 +186,7 @@ export const formatLeafHeader = (docBuilder: DocBuilder, f: TemplateNode): void 
 export const formatObservationEvent = (docBuilder: DocBuilder, f: TemplateNode): void => {
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.formatObservationEvent
       break;
@@ -205,7 +205,7 @@ export const formatObservationEvent = (docBuilder: DocBuilder, f: TemplateNode):
 export const formatInstructionActivity = (docBuilder: DocBuilder, f: TemplateNode): void => {
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
   //    fn = xmind.formatObservationEvent
       break;
@@ -224,7 +224,7 @@ export const formatInstructionActivity = (docBuilder: DocBuilder, f: TemplateNod
 export const formatCluster = (docBuilder: DocBuilder, f: TemplateNode): void => {
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
     case ExportFormat.fshl:
     case ExportFormat.wtx:
@@ -241,7 +241,7 @@ export const formatCluster = (docBuilder: DocBuilder, f: TemplateNode): void => 
 export const saveFile  = async (docBuilder: DocBuilder, outFile: string): Promise<void> => {
   let fn: SaveFileFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.saveFile
       break
@@ -266,7 +266,7 @@ export const saveFile  = async (docBuilder: DocBuilder, outFile: string): Promis
 export const formatNodeContent= (dBuilder: DocBuilder, f: TemplateNode, isChoice: boolean) => {
   let fn: FormatNodeContentFn;
 
-  switch (dBuilder.exportFormat) {
+  switch (dBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.formatNodeContent
       break;
@@ -285,7 +285,7 @@ export const formatNodeContent= (dBuilder: DocBuilder, f: TemplateNode, isChoice
 export const formatAnnotations= (dBuilder: DocBuilder, f: TemplateNode) =>{
   let fn: FormatElementFn;
 
-  switch (dBuilder.exportFormat) {
+  switch (dBuilder.config.exportFormat) {
     case ExportFormat.xmind:
     case ExportFormat.fshl:
     case ExportFormat.wtx:
@@ -302,7 +302,7 @@ export const formatAnnotations= (dBuilder: DocBuilder, f: TemplateNode) =>{
 export const formatUnsupported= (dBuilder: DocBuilder, f: TemplateNode) =>{
   let fn: FormatElementFn;
 
-  switch (dBuilder.exportFormat) {
+  switch (dBuilder.config.exportFormat) {
     case ExportFormat.xmind:
     case ExportFormat.fshl:
     case ExportFormat.wtx:

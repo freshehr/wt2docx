@@ -4,6 +4,7 @@ import ora from 'ora';
 import  * as fs from 'fs';
 import { DocBuilder } from './DocBuilder';
 import { Config, importConfig } from './BuilderConfig';
+import { ExportFormat } from './formatters/DocFormatter';
 
 const args = yargs.options({
   'web-template': { type: 'string', describe: 'web template name',demandOption: true, alias: 'wt' },
@@ -13,20 +14,20 @@ const args = yargs.options({
   'export-format': { type: 'string', demandOption: false, describe: 'Export format: adoc|docx|xmind|pdf (default: adoc)',alias: 'ex', default: "adoc"},
 }).argv;
 
-const inFilePath = args['web-template']
 const config:Config = importConfig(args['config-file'])
-const outFileDir: string = args['out-dir']
-const outFileName: string = args['out-file']
-const exportFormat = args['export-format'];
 
+config.inFilePath = args['web-template']
+config.exportFormat  = ExportFormat[args['export-format']];
+config.outFileDir = args['out-dir']
+config.outFilePath = args['out-file']
 
-const spinner = ora(`Processing ${inFilePath}`).start();
+const spinner = ora(`Processing ${config.inFilePath}`).start();
 
-if (fs.existsSync(inFilePath)) {
-  const inDoc:string = fs.readFileSync(inFilePath, { encoding: 'utf8', flag: 'r' });
-  const docBuilder : DocBuilder = new DocBuilder(JSON.parse(inDoc), config, inFilePath, outFileName,exportFormat,outFileDir);
+if (fs.existsSync(config.inFilePath)) {
+  const inDoc:string = fs.readFileSync(config.inFilePath, { encoding: 'utf8', flag: 'r' });
+  const docBuilder : DocBuilder = new DocBuilder(JSON.parse(inDoc), config);
 }
 else
-  console.log('The input file does not exist:' + inFilePath);
+  console.log('The input file does not exist:' + config.inFilePath);
 
 spinner.stop();

@@ -45,9 +45,6 @@ export class DocBuilder {
   sb: StringBuilder = new StringBuilder();
   defaultLang: string = 'en';
   config: Config;
-  exportFormat: ExportFormat
-  inFilePath: string
-  outFileName: string
   outFileDir: string;
   localArchetypeList : ArchetypeList = [];
   candidateArchetypeList: ArchetypeList = []
@@ -55,18 +52,14 @@ export class DocBuilder {
 
   readonly _wt: WebTemplate;
 
-  constructor(wt: WebTemplate, config: Config,  inFilePath:string, outFileName:string ,exportFormatString: string, outFileDir: string) {
+  constructor(wt: WebTemplate, config: Config) {
     this._wt = wt;
     this.defaultLang = wt.defaultLanguage;
     this.config = config;
-    this.exportFormat = ExportFormat[exportFormatString];
-    this.outFileDir = outFileDir
-    this.outFileName = outFileName
-    this.inFilePath = inFilePath
 
     this.generate().then( result => {
 
-    const outFilePath = this.handleOutPath(inFilePath, outFileName, this.exportFormat,outFileDir);
+    const outFilePath = this.handleOutPath(this.config.inFilePath, this.config.outFilePath, this.config.exportFormat,this.config.outFileDir);
     saveFile(this, outFilePath);
     });
 
@@ -113,7 +106,7 @@ export class DocBuilder {
 
   private async walk(f: TemplateNode) {
 
-    if (isArchetype(f.rmType,f.nodeId) && (this.config.generateWtx || this.exportFormat === 'wtx.json') ) {
+    if (isArchetype(f.rmType,f.nodeId) && (this.config.generateWtx) ) {
       await this.augmentWebTemplate(this,f)
       updateArchetypeLists(this.remoteArchetypeList, this.candidateArchetypeList,this.localArchetypeList,getProvenance(f))
     }

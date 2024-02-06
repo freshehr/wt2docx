@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { ExportFormat } from './formatters/DocFormatter';
 
 export type Config = {
   displayTechnicalOccurrences: boolean;
@@ -15,6 +16,11 @@ export type Config = {
   ADRepositoryId: string
   ADUsername: string
   ADPassword:string
+  inFilePath: string
+  outFilePath: string
+  outFileDir: string
+  inFileDir: string
+  exportFormat: ExportFormat
 
 }
 
@@ -31,9 +37,14 @@ const defaultConfig: Config = {
   displayToC: false,
   hideXmindValues: true,
   generateWtx: false,
-  ADRepositoryId: 'freshehr-2ln',
-  ADUsername: "",
-  ADPassword: "",
+  ADRepositoryId: '',
+  ADUsername: '',
+  ADPassword: '',
+  inFilePath: '',
+  outFilePath: '',
+  outFileDir: './out',
+  inFileDir: './templates',
+  exportFormat: ExportFormat.adoc
 
 };
 
