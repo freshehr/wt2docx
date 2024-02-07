@@ -93,7 +93,6 @@ export const getADTemplatesList = (username: string, password: string, repositor
 
 
 export const fetchADArchetype = async ( archetypeId: string,ADUsername: string, ADPassword: string, repositoryId: string) => {
-  try {
     // 👇️ const data: GetUsersResponse
     const authString = `${ADUsername}:${ADPassword}`
     const authToken = `BASIC ${btoa(authString)}`
@@ -106,18 +105,10 @@ export const fetchADArchetype = async ( archetypeId: string,ADUsername: string, 
         },
       },
     );
-  return await data
-
-} catch (error) {
-  if (axios.isAxiosError(error)) {
-    console.log('error message: ', error.message);
-  } else {
-    console.log('unexpected error: ', error);
-  }
-}
-
+  return data
 
 }
+
 export const searchGHRepo = async (username: string, password: string, repoAccount: string, repoName: string, repoNamespace: string): Promise<ArchetypeList> => {
 
 //  const token = btoa(username + ":" + password);

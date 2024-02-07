@@ -9,7 +9,7 @@ export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateNode): void
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.dvTypes.formatDvCodedText
       break
@@ -28,7 +28,7 @@ export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateNode): void
 //
 //   let fn: FormatElementFn;
 //
-//   switch (docBuilder.exportFormat) {
+//   switch (docBuilder.config.exportFormat) {
 //     case ExportFormat.xmind:
 //       break;
 //     case ExportFormat.fsh:
@@ -46,7 +46,7 @@ export const formatDvText = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.dvTypes.formatDvText
       break;
@@ -64,7 +64,7 @@ export const formatDvCount = (docBuilder: DocBuilder, f: TemplateNode): void => 
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
     case ExportFormat.fshl:
       break;
@@ -80,7 +80,7 @@ export const formatDvQuantity = (docBuilder: DocBuilder, f: TemplateNode): void 
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
     case ExportFormat.fshl:
       break;
@@ -96,7 +96,7 @@ export const formatDvOrdinal = (docBuilder: DocBuilder, f: TemplateNode): void =
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.dvTypes.formatDvOrdinal
       break;
@@ -113,7 +113,7 @@ export const formatDvDefault = (docBuilder: DocBuilder, f: TemplateNode): void =
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
     case ExportFormat.fshl:
       break;

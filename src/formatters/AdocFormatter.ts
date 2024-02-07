@@ -213,7 +213,7 @@ export const adoc = {
             }
           })
         } else
-          // Pick up an external valueset description annotation
+          // Pick up an external Valueset description annotation
         if (item.suffix === 'code' && f?.annotations?.vset_description) {
           // Convert /n characters to linebreaks
           const newLined = f.annotations?.vset_description.replace(/\\n/g, String.fromCharCode(10));
@@ -326,7 +326,7 @@ export const adoc = {
 
   formatProvenanceTable: (dBuilder: DocBuilder) => {
 
-    const { localArchetypeList, candidateArchetypeList, remoteArchetypeList, sb, config } = dBuilder;
+    const { localArchetypeList, candidateArchetypeList, remoteArchetypeList, sb } = dBuilder;
 
     const formatList = (aList: ArchetypeList) => {
       sb.append('a|');

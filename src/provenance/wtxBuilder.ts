@@ -16,7 +16,7 @@ export const resolveTemplateFiles = (config: Config): ResolvedTemplateFiles => {
    const extension: string  = path.extname(inFilePath);
    const inFileRoot: string = path.basename(inFilePath,extension)
    const pathTo: string = path.dirname(inFilePath)
-   const wtxPath:string = path.join(pathTo,inFileRoot,'wtx.json')
+   const wtxPath:string = path.join(pathTo,inFileRoot)+'.wtx.json'
 
   if (regenerateWtx === WtxRegenerate.never) return {
     wtxOutPath: null,
@@ -28,7 +28,7 @@ export const resolveTemplateFiles = (config: Config): ResolvedTemplateFiles => {
     templateInPath: inFilePath
   }
 
-  const regenWtx = !fs.existsSync(wtxPath) ||  (fs.statSync(wtxPath).mtime < fs.statSync(inFilePath).mtime)
+  const regenWtx  = !fs.existsSync(wtxPath) ||  (fs.statSync(wtxPath).mtime < fs.statSync(inFilePath).mtime)
 
   return {
     wtxOutPath: regenWtx? wtxPath: null,
@@ -42,7 +42,7 @@ export const resolveTemplateFiles = (config: Config): ResolvedTemplateFiles => {
   const {config} = docBuilder
 
   await fetchADArchetype(f.nodeId,config.ADUsername, config.ADPassword, config.ADRepositoryId)
-    .then(data => {
+    .then((data) => {
 
       f.lifecycleState = data?.description?.lifecycleState.codeString
 
@@ -63,9 +63,7 @@ export const resolveTemplateFiles = (config: Config): ResolvedTemplateFiles => {
     //  console.log('F Augmented ', f.original_namespace)
 
     })
-    .catch((error) => {
-      console.error("Error:", error)
-    } )
+
 }
 
 export const saveWtxFile = async (dBuilder: DocBuilder) => {

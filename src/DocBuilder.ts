@@ -37,7 +37,8 @@ import {
 } from './provenance/openEProvenance';
 import { Config } from './BuilderConfig';
 import path from 'path';
-import { augmentWebTemplate, ResolvedTemplateFiles, saveWtxFile } from './provenance/wtxBuilder';
+import { augmentWebTemplate, ResolvedTemplateFiles, resolveTemplateFiles, saveWtxFile } from './provenance/wtxBuilder';
+import axios from 'axios';
 
 
 export class DocBuilder {
@@ -61,7 +62,7 @@ export class DocBuilder {
     const outFilePath = this.handleOutPath(this.config.inFilePath, this.config.outFilePath, this.config.exportFormat,this.config.outFileDir);
     saveFile(this, outFilePath);
 
-    if (this.regenWtx())
+    if (this.regenWtx() && this.isWtxAugmented() )
       saveWtxFile(this)
     });
 
@@ -70,6 +71,14 @@ export class DocBuilder {
   private regenWtx(): boolean {
     return (this.resolvedTemplateFiles.wtxOutPath !== null)
 }
+
+
+// If the archetypeLists are empty, then the wtx Augmentation process has failed
+  private isWtxAugmented(): boolean {
+    const archetypesAdded = this.localArchetypeList.length + this .candidateArchetypeList.length + this.remoteArchetypeList.length
+   return (archetypesAdded > 0)
+ }
+
   private handleOutPath(infile :string, outputFile: string , ext: string, outDir: string) {
     {
       if (outputFile) return outputFile;
@@ -89,6 +98,9 @@ export class DocBuilder {
   }
 
   private async generate() {
+
+    this.resolvedTemplateFiles = resolveTemplateFiles(this.config)
+    console.log('resolvedTemplateFiles', this.resolvedTemplateFiles)
     formatTemplateHeader(this)
     await this.walk(this._wt.tree);
     formatProvenanceTable(this)
@@ -112,11 +124,12 @@ export class DocBuilder {
   private async walk(f: TemplateNode) {
 
     if (isArchetype(f.rmType,f.nodeId) && this.regenWtx() ) {
-      await augmentWebTemplate(this,f)
-      updateArchetypeLists(this.remoteArchetypeList, this.candidateArchetypeList,this.localArchetypeList,getProvenance(f))
+      // Only Update the lists if the augment operation has been successful
+      await this.augmentArchetypeMetadata(f);
     }
 
     if (isComposition(f.rmType))
+
       await this.walkComposition(f)
     else if (isCluster(f.rmType))
      await this.walkCluster(f)
@@ -149,6 +162,25 @@ export class DocBuilder {
           break;
       }
     }
+  }
+
+
+  private async augmentArchetypeMetadata(f: TemplateNode) {
+    await augmentWebTemplate(this, f)
+      .then(result => updateArchetypeLists(this.remoteArchetypeList, this.candidateArchetypeList, this.localArchetypeList, getProvenance(f)))
+      .catch(error => {
+        if (axios.isAxiosError(error)) {
+          switch (error.response.status) {
+            case 403:
+              console.log(`error: ${error.message}
+                      Could not read archetype details: Check your Archetype Designer credentials and Repository Id`);
+              break;
+            default:
+              console.log('error message: ', error.message);
+          }
+        } else
+          console.log('unexpected error: ', error.message);
+      });
   }
 
   private walkUnsupported(f: TemplateNode)
@@ -186,13 +218,12 @@ export class DocBuilder {
   }
 
   private async walkSection(f: TemplateNode) {
-    console.log(`WalkSection in ${f.nodeId}`)
 
     if (!this.config?.skippedAQLPaths?.includes(f.aqlPath)) {
       formatLeafHeader(this, f)
     }
     await this.walkChildren(f)
-    console.log(`WalkSection out ${f.nodeId}`)
+
 
   }
 
@@ -206,7 +237,7 @@ export class DocBuilder {
     await this.walkNonRMChildren(f)
 
     formatNodeFooter(this,f)
-    console.log(`WalkEntry out ${f.nodeId}`)
+  //  console.log(`WalkEntry out ${f.nodeId}`)
   }
 
   private async walkCompositionContext(f: TemplateNode) {

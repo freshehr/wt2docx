@@ -14,5 +14,12 @@
   "generateWtx": true,
   "ADRepositoryId": "freshehr-2ln",
   "ADUsername": "freshehr",
-  "ADPassword": "modellingrules"
+  "ADPassword": "modellingrules",
+  "inFilePath": "",
+  "outFilePath": "",
+  "outFileDir": "./out",
+  "inFileDir": "./templates",
+  "exportFormat": "adoc",
+  "defaultLang": "en",
+  "regenerateWtx": "whenStale"
 }
