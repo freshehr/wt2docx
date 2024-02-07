@@ -57,7 +57,7 @@ export class DocBuilder {
     this.config = config;
     this.config.defaultLang = wt.defaultLanguage;
 
-    this.generate().then( result => {
+    this.generate().then( () => {
 
     const outFilePath = this.handleOutPath(this.config.inFilePath, this.config.outFilePath, this.config.exportFormat,this.config.outFileDir);
     saveFile(this, outFilePath);
@@ -167,7 +167,7 @@ export class DocBuilder {
 
   private async augmentArchetypeMetadata(f: TemplateNode) {
     await augmentWebTemplate(this, f)
-      .then(result => updateArchetypeLists(this.remoteArchetypeList, this.candidateArchetypeList, this.localArchetypeList, getProvenance(f)))
+      .then(() => updateArchetypeLists(this.remoteArchetypeList, this.candidateArchetypeList, this.localArchetypeList, getProvenance(f)))
       .catch(error => {
         if (axios.isAxiosError(error)) {
           switch (error.response.status) {
@@ -246,7 +246,6 @@ export class DocBuilder {
       formatNodeHeader(this)
       this.walkRmChildren(f);
       await this.walkNonRMChildren(f)
-      console.log('Walk CompContext Out')
       formatNodeFooter(this,f)
     }
   }
