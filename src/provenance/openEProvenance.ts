@@ -133,7 +133,7 @@ export const searchGHRepo = async (username: string, password: string, repoAccou
 export const searchCKMRepo = async (username: string, password: string, repoName: string): Promise<any> => {
 
   const token = btoa(username + ":" + password);
-  const url:string = formatCKMSearchUrl(repoName)
+  const url:string = formatCKMSearchUrl()
     // 👇️ const data: GetUsersResponse
     const { data, status } = await axios.get(
       url,
