@@ -1,6 +1,5 @@
 import axios from 'axios';
 import path from 'path';
-import fs from "fs";
 import { TemplateNode } from '../TemplateNodes';
 
 export type ArchetypeProvenance = {
@@ -18,17 +17,10 @@ type RemoteGHRepo = {
   repoNamespace: string
 }
 
-export const remoteGHRepos: RemoteGHRepo[] =
-  [{
-      repoTag: 'intCKM',
-      repoAccount: 'openEHR',
-      repoName: 'CKM-mirror',
-      repoNamespace: 'org.openehr'
-    }]
-
 export type ArchetypeList = ArchetypeProvenance[];
 
-let archetypeList: ArchetypeList = []
+const archetypeList: ArchetypeList = []
+
 const formalPublicationNamespaces: string[] = ['org.openehr', 'org.apperta']
 
 const ADRootUrl = `https://tools.openehr.org/designer/api`
@@ -40,7 +32,7 @@ const formatGHSearchUrl = (repositoryId: string) => {
   return `https://api.github.com/repos/${repositoryId}/git/trees/master?recursive=1`;
 };
 
-const formatCKMSearchUrl = (repositoryId: string) => {
+const formatCKMSearchUrl = () => {
   return `https://ckm.openehr.org/ckm/rest/v1/archetypes?owned-only=true&restrict-search-to-main-data=false&require-all-search-words=true&require-all-classes=false&include-subclasses=false&size=20`;
 };
 
@@ -155,40 +147,7 @@ export const searchCKMRepo = async (username: string, password: string, repoName
     return data;
 };
 
-const cacheFileName = (repoAccount: string, repoName:string ) => `./repos/${repoAccount}_${repoName}.json`
-
-const saveRemoteRepoCache =  async ( repoAccount: string, repoName: string, repoList: ArchetypeList) => {
-  if (!fs.existsSync('repos')) {
-    fs.mkdirSync('repos', { recursive: true })
-  }
- const cacheFilePath :string = cacheFileName(repoAccount, repoName)
-  fs.writeFileSync(cacheFilePath, JSON.stringify(repoList))
-  console.log(`\n Saved : ${cacheFilePath}`)
-}
-
-const readRemoteFileCache = async (repoAccount: string, repoName : string, repoNamespace: string ,forceRefresh: boolean) => {
-
-  const fileName = cacheFileName(repoAccount, repoName)
-  const inputFileExist = fs.existsSync(fileName);
-
-  if (inputFileExist && !forceRefresh) {
-    const inDoc: string = fs.readFileSync(fileName, { encoding: 'utf8', flag: 'r' });
-    archetypeList = JSON.parse(inDoc)
-
-  }
-  else
-  {
-    await searchGHRepo("", "", repoAccount, repoName, repoNamespace)
-      .then( result => {
-        return archetypeList = result;
-      })
-      .catch(error => console.log("Caught Error: ", error));
-
-    await saveRemoteRepoCache(repoAccount, repoName,archetypeList)
-  }
-}
-
-export const updateArchetypeList = async (repoAccount: string,repoName: string, repoNamespace: string, list: ArchetypeList, refreshCache: boolean) : Promise<ArchetypeList> => {
+export const updateArchetypeList = async (repoAccount: string,repoName: string, repoNamespace: string, list: ArchetypeList) : Promise<ArchetypeList> => {
 
  // await readRemoteFileCache(repoAccount,repoName, repoNamespace,refreshCache)
 
@@ -201,14 +160,8 @@ export const updateArchetypeList = async (repoAccount: string,repoName: string, 
       {
         const local: string = path.parse(remoteItem.archetypeId).name
         const remote: string = path.parse(localItem.archetypeId).name
-
         return local===remote
       })
-
-//      if (match)
-  ///      upDatedList.push({...localItem, provenance: 'org.openehr', remoteId: match.archetypeId})
-  //    else
-  ///      upDatedList.push({...localItem, provenance: 'local', remoteId: '' })
     });
 
     return upDatedList
