@@ -41,6 +41,11 @@ const exportFormat = args['export-format'];
 const outFilePath = handleOutPath(inFilePath, outFileName, exportFormat,outFileDir);
 const inputFileExist = fs.existsSync(inFilePath);
 
+// Create default out folder
+if (!fs.existsSync('out')) {
+  fs.mkdirSync('out', { recursive: true })
+}
+
 if (inputFileExist) {
   const inDoc: string = fs.readFileSync(inFilePath, { encoding: 'utf8', flag: 'r' });
   const docBuilder: DocBuilder = new DocBuilder(JSON.parse(inDoc), config, exportFormat, outFileDir);

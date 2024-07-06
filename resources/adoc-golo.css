@@ -300,7 +300,7 @@ p a > code:hover { color: #541312; }
 
 #header { margin-bottom: 2.5em; }
 #header > h1 { color: #693c16; font-weight: normal; border-bottom: 1px solid #dcd2c9; margin-bottom: -28px; padding-bottom: 32px; }
-#header span { color: #846b55; }
+#header span { color: #82acdc; }
 #header #revnumber { text-transform: capitalize; }
 #header br { display: none; }
 #header br + span { padding-left: 3px; }
