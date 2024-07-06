@@ -1,0 +1,1080 @@
+== Template: Generic Nurse Encounter
+
+
+Template Id: **Generic Nurse Encounter**
+
+
+Version: **3.0.0**
+
+
+Created: **Sat Jul 06 2024**
+
+
+=== Composition: *Generic Nurse Encounter*
+
+
+Interaction, contact or care event between a subject of care and healthcare provider(s).
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **category** + 
+ Type: `Coded text` (_mandatory_) | Temporal category of this Composition, persistent / episodic or event. 
+a|
+
+* event +
+ `openehr:433`
+|====
+==== Composition context
+===  *Vital Signs*
+
+
+A generic section header which should be renamed in a template to suit a specific clinical context.
+
+
+===  *Body temperature*
+
+
+A measurement of the body temperature, which is a surrogate for the core body temperature of the individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Body temperature reading  **[multiple]**
+`EVENT: _at0003_`
+| **Temperature** + 
+ Type: `Quantity` (_mandatory_) | The measured body temperature (as a surrogate for the core of the body). 
+a|
+
+Valid units: +
+
+* [degF]
+* Cel
+| **Confounding factors** + 
+ Type: `Text` (_multiple_) | Additional issues or factors that may impact on the measurement of body temperature, not captured in other fields. 
+a|
+
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+|====
+===  *Respirations*
+
+
+The observed characteristics of spontaneous breathing as would commonly be recorded as part of a 'vital signs' examination.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Respiration rate  **[multiple]**
+`EVENT: _at0002_`
+| **Respiratory rate** + 
+ Type: `Quantity`  | Rate of respiration. 
+a|
+
+Valid units: +
+
+* /min
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+|====
+===  *Heart Rate*
+
+
+The rate and associated attributes for a pulse or heart beat.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Heart rate reading  **[multiple]**
+`EVENT: _at0003_`
+| **Heart rate** + 
+ Type: `Quantity`  | The rate of the pulse or heart beat, measured in beats per minute. 
+a|
+
+Valid units: +
+
+* /min
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+|====
+===  *Blood pressure*
+
+
+The local measurement of arterial blood pressure which is a surrogate for arterial pressure in the systemic circulation.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Blood pressure reading  **[multiple]**
+`EVENT: _at0006_`
+| **Systolic** + 
+ Type: `Quantity`  | Peak systemic arterial blood pressure  - measured in systolic or contraction phase of the heart cycle. 
+a|
+
+Valid units: +
+
+* mm[Hg]
+| **Diastolic** + 
+ Type: `Quantity`  | Minimum systemic arterial blood pressure - measured in the diastolic or relaxation phase of the heart cycle. 
+a|
+
+Valid units: +
+
+* mm[Hg]
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+| **Location of measurement** + 
+ Type: `Coded text`  | Simple body site where blood pressure was measured. 
+a|
+
+* Right arm
+* Left arm
+* Right thigh
+* Left thigh
+* Right wrist
+* Left wrist
+* Right ankle
+* Left ankle
+* Finger
+* Toe
+* Dorsum of foot
+* Intra-arterial
+* _Other text/ coded text allowed_
+|====
+===  *Oxygen saturation*
+
+
+Blood oxygen and related measurements, measured by pulse oximetry or pulse CO-oximetry.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== SPO2 reading  **[multiple]**
+`EVENT: _at0002_`
+| **SpO₂** + 
+ Type: `Proportion`  | The saturation of oxygen in the peripheral blood, measured via pulse oximetry. 
+
+
+
+
+*comment*: SpO₂ is defined as the percentage of oxyhaemoglobin (HbO₂) to the total concentration of haemoglobin (HbO₂ + deoxyhaemoglobin) in peripheral blood.
+|
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+|====
+===  *Point of care tests*
+
+
+A generic section header which should be renamed in a template to suit a specific clinical context.
+
+
+===  *Random blood glucose*
+
+
+The result, including findings and the laboratory's interpretation, of an investigation performed on specimens collected from an individual or related to that individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== RBG test  **[multiple]**
+`EVENT: _at0002_`
+| **Test name** + 
+ Type: `Coded text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+a|
+
+* Glucose [Moles/volume] in Capillary blood by Glucometer +
+ `LOINC:14743-9`
+3+a|===== Glucose result  **[multiple]**
+| **Analyte name** + 
+ Type: `Coded text`  | The name of the analyte result. 
+
+
+
+
+*comment*: The value for this element is normally supplied in a specialisation, in a template or at run-time to reflect the actual analyte. For example: 'Serum sodium', 'Haemoglobin'. Coding with an external terminology is strongly recommended, such as LOINC, NPU, SNOMED CT, or local lab terminologies.
+a|
+
+* Glucose [Moles/volume] in Capillary blood by Glucometer +
+ `LOINC:14743-9`
+| **Result** + 
+ Type: `Quantity` (_multiple_) | The value of the analyte result. 
+
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+a|
+
+Valid units: +
+
+* mg/dl
+* mmol/L
+| **Test method** + 
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+
+
+
+
+*comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
+a|
+_All data types allowed_
+| **Conclusion** + 
+ Type: `Text`  | Narrative description of the key findings. 
+
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+a|
+
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+| **Point-of-care test** + 
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|
+|====
+===  *HIV rapid test*
+
+
+The result, including findings and the laboratory's interpretation, of an investigation performed on specimens collected from an individual or related to that individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== HIV test  **[multiple]**
+`EVENT: _at0002_`
+| **Test name** + 
+ Type: `Coded text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+a|
+
+* HIV rapid test +
+ `LOINC:LOINC3`
+3+a|===== HIV result  **[multiple]**
+| **Result** + 
+ Type: `Text` (_multiple_) | The value of the analyte result. 
+
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+a|
+
+* Positive
+* Negative
+* Indeterminate
+| **Test method** + 
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+
+
+
+
+*comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
+a|
+_All data types allowed_
+| **Conclusion** + 
+ Type: `Text`  | Narrative description of the key findings. 
+
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+a|
+
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+| **Point-of-care test** + 
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|
+|====
+===  *Urine Dipstick*
+
+
+Qualitative and semi-quantitative test array using reagent test strips to indicate possible abnormalities in a sample of urine, often performed as part of Point of Care Testing (POCT).
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Point in Time  **[multiple]**
+`POINT_EVENT: _at0002_`
+| **Glucose** + 
+ Type: `Ordinal`  | Detection of glucose in urine sample. 
+a|
+* [1] Negative +
+ `local:at0115`
+* [2] Trace +
+ `local:at0116`
+* [3] 1+ +
+ `local:at0117`
+* [4] 2+ +
+ `local:at0118`
+* [5] 3+ +
+ `local:at0119`
+* [6] 4+ +
+ `local:at0120`
+| **Bilirubin** + 
+ Type: `Ordinal`  | Detection of bilirubin in urine sample. 
+a|
+* [1] Negative +
+ `local:at0121`
+* [2] 1+ +
+ `local:at0122`
+* [3] 2+ +
+ `local:at0123`
+* [4] 3+ +
+ `local:at0124`
+| **Ketones** + 
+ Type: `Ordinal`  | Detection of ketones in urine sample. 
+a|
+* [1] Negative +
+ `local:at0109`
+* [2] Trace +
+ `local:at0110`
+* [3] Small +
+ `local:at0111`
+* [4] Moderate +
+ `local:at0112`
+* [5] Large +
+ `local:at0113`
+* [6] Large+ +
+ `local:at0114`
+| **Specific gravity** + 
+ Type: `Ordinal`  | Measurement of the concentration of substances dissolved (solutes) in the urine sample relative to distilled water. 
+a|
+* [1] 1.000 +
+ `local:at0152`
+* [2] 1.005 +
+ `local:at0153`
+* [3] 1.010 +
+ `local:at0154`
+* [4] 1.015 +
+ `local:at0155`
+* [5] 1.020 +
+ `local:at0156`
+* [6] 1.025 +
+ `local:at0157`
+* [7] 1.030 +
+ `local:at0158`
+| **Blood** + 
+ Type: `Ordinal`  | Detection of blood in urine sample. 
+a|
+* [1] Negative +
+ `local:at0102`
+* [2] Non-haemolysed Trace +
+ `local:at0103`
+* [3] Non-haemolysed Moderate +
+ `local:at0104`
+* [4] Haemolysed Trace +
+ `local:at0105`
+* [5] 1+ +
+ `local:at0106`
+* [6] 2+ +
+ `local:at0107`
+* [7] 3+ +
+ `local:at0108`
+| **pH** + 
+ Type: `Ordinal`  | Measurement of pH in urine sample. 
+a|
+* [1] 5.0 +
+ `local:at0127`
+* [2] 5.5 +
+ `local:at0128`
+* [3] 6.0 +
+ `local:at0129`
+* [4] 6.5 +
+ `local:at0130`
+* [5] 7.0 +
+ `local:at0131`
+* [6] 7.5 +
+ `local:at0132`
+* [7] 8.0 +
+ `local:at0133`
+* [8] 8.5 +
+ `local:at0134`
+* [9] 9.0 +
+ `local:at0176`
+* [10] 9.5 +
+ `local:at0177`
+* [11] 10.0 +
+ `local:at0179`
+| **Protein** + 
+ Type: `Ordinal`  | Detection of protein in urine sample. 
+a|
+* [1] Negative +
+ `local:at0096`
+* [2] Trace +
+ `local:at0097`
+* [3] 1+ +
+ `local:at0098`
+* [4] 2+ +
+ `local:at0099`
+* [5] 3+ +
+ `local:at0100`
+* [6] 4+ +
+ `local:at0101`
+| **Urobilinogen** + 
+ Type: `Ordinal`  | Detection of urobilinogen in urine sample. 
+a|
+* [1] Normal (lower) +
+ `local:at0161`
+* [2] Normal (upper) +
+ `local:at0162`
+* [3] 2 mg/dL +
+ `local:at0163`
+* [4] 4 mg/dL +
+ `local:at0164`
+* [5] 8 mg/dL +
+ `local:at0165`
+| **Nitrite** + 
+ Type: `Ordinal`  | Detection of nitrites in urine sample. 
+a|
+* [1] Negative +
+ `local:at0159`
+* [2] Positive +
+ `local:at0160`
+| **Leukocytes** + 
+ Type: `Ordinal`  | Detection of white blood cells in urine sample. 
+a|
+* [1] Negative +
+ `local:at0135`
+* [2] Trace +
+ `local:at0136`
+* [3] 1+ +
+ `local:at0137`
+* [4] 2+ +
+ `local:at0138`
+* [5] 3+ +
+ `local:at0139`
+| **Clinical interpretation** + 
+ Type: `Text` (_multiple_) | Single word, phrase or brief description represents the clinical meaning and significance of the urinalysis findings. 
+
+
+
+
+*comment*: Comment: Coding with a terminology is preferred, where possible. For example: normal urinalysis; mild proteinuria; or trace of blood. Multiple statements are allowed.
+a|
+
+| **Comment** + 
+ Type: `Text`  | Narrative about the urinalysis not captured in other fields. 
+
+
+
+
+*comment*: For example: the freshness or small volume of the urine sample, method of collection or any problems with testing.
+a|
+
+| **Time** + 
+ Type: `Date/time` (_mandatory_) |  
+|
+| **Method** + 
+ Type: `Coded text`  | Method by which the reagent strips were read. 
+a|
+
+* Manual
+* Automatic
+|====
+===  *Syphilis test result*
+
+
+The result, including findings and the laboratory's interpretation, of an investigation performed on specimens collected from an individual or related to that individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Syphilis test  **[multiple]**
+`EVENT: _at0002_`
+| **Test name** + 
+ Type: `Coded text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+a|
+
+* VDRL +
+ `LOINC:LOINC4`
+* SD Bioline +
+ `LOINC:LOINC5`
+3+a|===== Syphilis test result  **[multiple]**
+| **Result** + 
+ Type: `Text` (_multiple_) | The value of the analyte result. 
+
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+a|
+
+* Positive
+* Negative
+* Invalid
+| **Test method** + 
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+
+
+
+
+*comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
+a|
+_All data types allowed_
+| **Conclusion** + 
+ Type: `Text`  | Narrative description of the key findings. 
+
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+a|
+
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+|====
+===  *HbA1c*
+
+
+The result, including findings and the laboratory's interpretation, of an investigation performed on specimens collected from an individual or related to that individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== HBa1c test  **[multiple]**
+`EVENT: _at0002_`
+| **Test name** + 
+ Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+a|
+
+* HbA1c
+3+a|===== HbA1c result  **[multiple]**
+| **Result** + 
+ Type: `Quantity` (_multiple_) | The value of the analyte result. 
+
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+a|
+
+Valid units: +
+
+* mmol/mol
+* %
+| **Test method** + 
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+
+
+
+
+*comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
+a|
+_All data types allowed_
+| **Conclusion** + 
+ Type: `Text`  | Narrative description of the key findings. 
+
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+a|
+
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+| **Point-of-care test** + 
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|
+|====
+===  *Cholesterol*
+
+
+The result, including findings and the laboratory's interpretation, of an investigation performed on specimens collected from an individual or related to that individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Cholesterol test  **[multiple]**
+`EVENT: _at0002_`
+| **Test name** + 
+ Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+a|
+
+* Cholesterol
+3+a|===== Cholesterol result  **[multiple]**
+| **Result** + 
+ Type: `Quantity` (_multiple_) | The value of the analyte result. 
+
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+a|
+
+Valid units: +
+
+* mg/dl
+* mmol/L
+| **Test method** + 
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+
+
+
+
+*comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
+a|
+_All data types allowed_
+| **Conclusion** + 
+ Type: `Text`  | Narrative description of the key findings. 
+
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+a|
+
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+| **Point-of-care test** + 
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|
+|====
+===  *CD4 count*
+
+
+The result, including findings and the laboratory's interpretation, of an investigation performed on specimens collected from an individual or related to that individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== CD4 test  **[multiple]**
+`EVENT: _at0002_`
+| **Test name** + 
+ Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+a|
+
+* CD4 Count
+3+a|===== CD4 count  **[multiple]**
+| **Result** + 
+ Type: `Choice` (_multiple_) | The value of the analyte result. 
+
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+a|
+_Multiple data types allowed_
+|_SubTypes_ | |
+| Type: `Quantity` |
+a|
+
+Valid units: +
+
+* mm3
+* 1/mm3
+| Type: `Proportion` |
+|
+| **Test method** + 
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+
+
+
+
+*comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
+a|
+_All data types allowed_
+| **Conclusion** + 
+ Type: `Text`  | Narrative description of the key findings. 
+
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+a|
+
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+| **Point-of-care test** + 
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|
+|====
+===  *Covid antigen test result*
+
+
+The result, including findings and the laboratory's interpretation, of an investigation performed on specimens collected from an individual or related to that individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Covid antigen test  **[multiple]**
+`EVENT: _at0002_`
+| **Test name** + 
+ Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+a|
+
+* Covid antigen test
+3+a|===== Covid antigen test  **[multiple]**
+| **Result** + 
+ Type: `Text` (_multiple_) | The value of the analyte result. 
+
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+a|
+
+* Positive
+* Negative
+* Indeterminate
+| **Test method** + 
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+
+
+
+
+*comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
+a|
+_All data types allowed_
+| **Conclusion** + 
+ Type: `Text`  | Narrative description of the key findings. 
+
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+a|
+
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+| **Point-of-care test** + 
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|
+|====
+===  *Pregnancy test result*
+
+
+Result of a simple test to detect early pregnancy, usually a commercial product tested on urine.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Point in time  **[multiple]**
+`POINT_EVENT: _at0002_`
+| **Result** + 
+ Type: `Coded text` (_mandatory_) | The result of the test. 
+a|
+
+* Negative
+* Inconclusive
+* Weakly positive
+* Strongly positive
+* Indeterminate
+| **Time** + 
+ Type: `Date/time` (_mandatory_) |  
+|
+| **Method** + 
+ Type: `Text`  | Description of the method used to perform the test. 
+a|
+
+|====
+===  *Cardiac enzymes*
+
+
+The result, including findings and the laboratory's interpretation, of an investigation performed on specimens collected from an individual or related to that individual.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Cardiac enzyme test  **[multiple]**
+`EVENT: _at0002_`
+| **Test name** + 
+ Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+a|
+
+* Troponin
+3+a|===== Cardiac enzyme result  
+| **Analyte result** + 
+ Type: `Text` (_multiple_) | The value of the analyte result. 
+
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+a|
+
+* Normal
+* Abnormal
+* Equivocal
+* Incomplete
+| **Test method** + 
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+
+
+
+
+*comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
+a|
+_All data types allowed_
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+| **Point-of-care test** + 
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|
+|====
+===  *Family history*
+
+
+A generic section header which should be renamed in a template to suit a specific clinical context.
+
+
+===  *Family history*
+
+
+Summary information about the significant health-related problems found in family members.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Per problem  **[multiple]**
+| **Problem/diagnosis name** + 
+ Type: `Text`  | Identification of the significant problem or diagnosis in the family overall. 
+
+
+
+
+*comment*: This is the problem for which aggregated data involving all family members will be collected. Coding of the index problem with a terminology is preferred, where possible.
+a|
+
+* Hypertension
+* Heart attack/heart disease
+* Stroke/transient ischaemic attack
+* Other cardiovascular disease
+* Kidney disease
+* Diabetes Mellitus
+* Dyslipidaemia
+* Prostate Cancer
+* Breast Cancer
+* Colon Cancer
+| **Description** + 
+ Type: `Text`  | Narrative description about occurrence of the problem or diagnosis in family members. 
+a|
+
+3+a|===== Per family member  **[multiple]**
+| **Relationship** + 
+ Type: `Text`  | The relationship of the family member to the subject of care. 
+
+
+
+
+*comment*: For example: mother, step-father, maternal grandmother, or paternal uncle. Coding of the relationship with a terminology is preferred, where possible and including specification of maternal and paternal as required.
+a|
+
+* Mother
+* Father
+* Sister
+* Brother
+* Son
+* Daughter
+| **Relationship degree** + 
+ Type: `Coded text`  | The degree of relationship between the subject of care and the family member. 
+
+
+
+
+*comment*: If the 'Relationship' data element uses pre-coordinated terms that include the degree of relationship, then this data element is redundant.
+a|
+
+* First degree relative
+* Second degree relative
+* Third degree relative
+| **Family line** + 
+ Type: `Coded text`  | Identification of the maternal or paternal family line in the relationship. 
+
+
+
+
+*comment*: If the 'Relationship' data element uses pre-coordinated terms that include the family line, then this data element is redundant.
+a|
+
+* Maternal line
+* Paternal line
+| **Deceased?** + 
+ Type: `Boolean`  | Is the family member deceased? 
+
+
+
+
+*comment*: Record as 'True' if family member is deceased.
+|
+3+a|===== Clinical history  **[multiple]**
+| **Age at onset** + 
+ Type: `Duration`  | Estimated or actual age of the family member when the problem/diagnosis was clinically recognised. 
+
+
+
+
+*comment*: For health problems with multiple occurrences, this describes the first nown occurrence.
+|
+| **Cause of death?** + 
+ Type: `Coded text`  | Relationship of the problem/diagnosis to the death of this family member. 
+a|
+
+* Direct cause or closely related
+* Unrelated
+* Indeterminate
+* _Other text/ coded text allowed_
+| **Comment** + 
+ Type: `Text`  | Additional narrative about the family member not captured in other fields. 
+a|
+
+| **Last Updated** + 
+ Type: `Date/time`  | The date this family history summary was last updated. 
+|
+|====
+===  *Sexual Health*
+
+
+Summary or persistent information about an individual's sexual health and history.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+| **Have you ever had any of the following diseases?** + 
+ Type: `Text`  | Narrative description about the sexual health history of an individual. 
+a|
+
+* Gonorrhea
+* HIV/AIDS
+* HPV
+* Chlamydia
+* Herpes Simplex
+* Hepatitis B
+* Syphilis
+| **Are you sexually active?** + 
+ Type: `Coded text`  | Is the individual sexually active? 
+a|
+
+* Sexually active, regular partner
+* Sexually active, no regular partner
+* Never sexually active
+| **Comment** + 
+ Type: `Text`  | Additional narrative about the sexual health history not captured in other fields. 
+a|
+
+|====
+===  *Progress note*
+
+
+Narrative description of health-related events at a specific point-in-time about an individual, specifically from the perspective of a healthcare provider.
+
+
+[options="header","stretch", cols="20,50,30"]
+|====
+|Data item | Description | Allowed values
+3+a|===== Any event  **[multiple]**
+`EVENT: _at0002_`
+| **Progress Note** + 
+ Type: `Text`  | Narrative description of health-related events, health status, findings, opinions at a specific point-in-time. 
+a|
+
+| **Time** + 
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+|
+|====
