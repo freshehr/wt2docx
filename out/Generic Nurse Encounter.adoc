@@ -1,0 +1,2228 @@
+= Generic Nurse Encounter
+
+
+== *Generic Nurse Encounter*
+
+
+=== `COMPOSITION: _openEHR-EHR-COMPOSITION.encounter.v1_`
+
+
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|====
+=== context
+===== `EVENT_CONTEXT: _`RM:context`_`
+== Vital Signs
+=== Body temperature
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.body_temperature.v2_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*Body temperature reading* +
+ `EVENT: _at0003_`
+|at0004 + 
+ `temperature`| 1..1| DV_QUANTITY | Temperature
+|
+
+
+*Description*: The measured body temperature (as a surrogate for the core of the body).
+|at0066 + 
+ `confounding_factors`| 0..*| DV_TEXT | Confounding factors
+a|
+
+
+*Description*: Additional issues or factors that may impact on the measurement of body temperature, not captured in other fields.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|====
+=== Respirations
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.respiration.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*Respiration rate* +
+ `EVENT: _at0002_`
+|at0004 + 
+ `respiratory_rate`| 0..1| DV_QUANTITY | Respiratory rate
+|
+
+
+*Description*: Rate of respiration.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|====
+=== Heart Rate
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.pulse.v2_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*Heart rate reading* +
+ `EVENT: _at0003_`
+|at0004 + 
+ `heart_rate`| 0..1| DV_QUANTITY | Heart rate
+|
+
+
+*Description*: The rate of the pulse or heart beat, measured in beats per minute.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|====
+=== Blood pressure
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.blood_pressure.v2_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*Blood pressure reading* +
+ `EVENT: _at0006_`
+|at0004 + 
+ `systolic`| 0..1| DV_QUANTITY | Systolic
+|
+
+
+*Description*: Peak systemic arterial blood pressure  - measured in systolic or contraction phase of the heart cycle.
+|at0005 + 
+ `diastolic`| 0..1| DV_QUANTITY | Diastolic
+|
+
+
+*Description*: Minimum systemic arterial blood pressure - measured in the diastolic or relaxation phase of the heart cycle.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|at0014 + 
+ `location_of_measurement`| 0..1| DV_CODED_TEXT | Location of measurement
+a|
+* at0025 -> Right arm 
+* at0026 -> Left arm 
+* at0027 -> Right thigh 
+* at0028 -> Left thigh 
+* at1020 -> Right wrist 
+* at1021 -> Left wrist 
+* at1026 -> Right ankle 
+* at1031 -> Left ankle 
+* at1032 -> Finger 
+* at1051 -> Toe 
+* at1056 -> Dorsum of foot 
+* at1053 -> Intra-arterial 
+* _Other text allowed_
+
+
+*Description*: Simple body site where blood pressure was measured.
+|====
+=== Oxygen saturation
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.pulse_oximetry.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*SPO2 reading* +
+ `EVENT: _at0002_`
+|at0006 + 
+ `spo`| 0..1| DV_PROPORTION | SpO₂
+|
+
+
+*Description*: The saturation of oxygen in the peripheral blood, measured via pulse oximetry.
+
+
+
+*comment*: SpO₂ is defined as the percentage of oxyhaemoglobin (HbO₂) to the total concentration of haemoglobin (HbO₂ + deoxyhaemoglobin) in peripheral blood.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|====
+== Point of care tests
+=== Random blood glucose
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.laboratory_test_result.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*RBG test* +
+ `EVENT: _at0002_`
+|at0005 + 
+ `test_name`| 1..1| DV_CODED_TEXT | Test name
+a|
+* Glucose [Moles/volume] in Capillary blood by Glucometer (LOINC: 14743-9)
+
+
+*Description*: Name of the laboratory investigation performed on the specimen(s).
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+5+a|*Glucose result* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.laboratory_test_analyte.v1_`
+|at0024 + 
+ `analyte_name`| 0..1| DV_CODED_TEXT | Analyte name
+a|
+* Glucose [Moles/volume] in Capillary blood by Glucometer (LOINC: 14743-9)
+
+
+*Description*: The name of the analyte result.
+
+
+
+*comment*: The value for this element is normally supplied in a specialisation, in a template or at run-time to reflect the actual analyte. For example: 'Serum sodium', 'Haemoglobin'. Coding with an external terminology is strongly recommended, such as LOINC, NPU, SNOMED CT, or local lab terminologies.
+
+
+*hl7v2_mapping*: OBX.3
+
+
+*fhir_mapping*: Observation.code
+|at0001 + 
+ `result`| 0..*| DV_QUANTITY | Result
+|
+
+
+*Description*: The value of the analyte result.
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+
+
+*hl7v2_mapping*: OBX.2, OBX.5, OBX.6, OBX.7, OBX.8
+
+
+*fhir_mapping*: Observation.value[x]
+|SubType + 
+ `test_method`| 0..1| ELEMENT | Test method | Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `coded_text_value`| 0..1| DV_CODED_TEXT | Test method
+a|
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Test method
+a|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `multimedia_value`| 0..1| DV_MULTIMEDIA | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `parsable_value`| 0..1| DV_PARSABLE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `state_value`| 0..1| DV_STATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `boolean_value`| 0..1| DV_BOOLEAN | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `identifier_value`| 0..1| DV_IDENTIFIER | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ehr_uri_value`| 0..1| DV_EHR_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `duration_value`| 0..1| DV_DURATION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `quantity_value`| 0..1| DV_QUANTITY | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `count_value`| 0..1| DV_COUNT | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `proportion_value`| 0..1| DV_PROPORTION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_time_value`| 0..1| DV_DATE_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_value`| 0..1| DV_DATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `time_value`| 0..1| DV_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ordinal_value`| 0..1| DV_ORDINAL | Test method
+a|
+|RM: + 
+ `scale_value`| 0..1| DV_SCALE | Test method
+a|
+|at0057 + 
+ `conclusion`| 0..1| DV_TEXT | Conclusion
+a|
+
+
+*Description*: Narrative description of the key findings.
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|at0111 + 
+ `point-of-care_test`| 0..1| DV_BOOLEAN | Point-of-care test
+|
+
+
+*Description*: This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|====
+=== HIV rapid test
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.laboratory_test_result.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*HIV test* +
+ `EVENT: _at0002_`
+|at0005 + 
+ `test_name`| 1..1| DV_CODED_TEXT | Test name
+a|
+* HIV rapid test (LOINC: LOINC3)
+
+
+*Description*: Name of the laboratory investigation performed on the specimen(s).
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+5+a|*HIV result* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.laboratory_test_analyte.v1_`
+|at0001 + 
+ `result`| 0..*| DV_TEXT | Result
+a|
+* Positive
+* Negative
+* Indeterminate
+
+
+*Description*: The value of the analyte result.
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+
+
+*hl7v2_mapping*: OBX.2, OBX.5, OBX.6, OBX.7, OBX.8
+
+
+*fhir_mapping*: Observation.value[x]
+|SubType + 
+ `test_method`| 0..1| ELEMENT | Test method | Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `coded_text_value`| 0..1| DV_CODED_TEXT | Test method
+a|
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Test method
+a|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `multimedia_value`| 0..1| DV_MULTIMEDIA | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `parsable_value`| 0..1| DV_PARSABLE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `state_value`| 0..1| DV_STATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `boolean_value`| 0..1| DV_BOOLEAN | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `identifier_value`| 0..1| DV_IDENTIFIER | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ehr_uri_value`| 0..1| DV_EHR_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `duration_value`| 0..1| DV_DURATION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `quantity_value`| 0..1| DV_QUANTITY | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `count_value`| 0..1| DV_COUNT | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `proportion_value`| 0..1| DV_PROPORTION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_time_value`| 0..1| DV_DATE_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_value`| 0..1| DV_DATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `time_value`| 0..1| DV_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ordinal_value`| 0..1| DV_ORDINAL | Test method
+a|
+|RM: + 
+ `scale_value`| 0..1| DV_SCALE | Test method
+a|
+|at0057 + 
+ `conclusion`| 0..1| DV_TEXT | Conclusion
+a|
+
+
+*Description*: Narrative description of the key findings.
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|at0111 + 
+ `point-of-care_test`| 0..1| DV_BOOLEAN | Point-of-care test
+|
+
+
+*Description*: This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|====
+=== Urine Dipstick
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.urinalysis.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*Point in Time* +
+ `POINT_EVENT: _at0002_`
+|at0050 + 
+ `glucose`| 0..1| DV_ORDINAL | Glucose
+a|
+* 1 - Negative No glucose detected.
+* 2 - Trace Amount equivalent to 1/10 g/dl (100mg/dL or 5 mmol/L) detected.
+* 3 - 1+ Amount equivalent to 1/4 g/dL (250 mg/dL or 15 mmol/L) detected.
+* 4 - 2+ Amount equivalent to 1/2 g/dl (500mg/dL or 30 mmol/L) detected.
+* 5 - 3+ Amount equivalent to 1 g/dl (1000mg/dL or 60 mmol/L) detected.
+* 6 - 4+ Amount equivalent >2 g/dl (>2000mg/dL or >120 mmol/L) detected.
+|at0062 + 
+ `bilirubin`| 0..1| DV_ORDINAL | Bilirubin
+a|
+* 1 - Negative No bilirubin detected.
+* 2 - 1+ Small amount detected.
+* 3 - 2+ Moderate amount detected.
+* 4 - 3+ Large amount detected.
+|at0037 + 
+ `ketones`| 0..1| DV_ORDINAL | Ketones
+a|
+* 1 - Negative No ketones detected.
+* 2 - Trace Amount equivalent to 5mg/dL (or 0.5 mmol/L) detected.
+* 3 - Small Amount equivalent to 15mg/dL (or 1.5 mmlol/L) detected.
+* 4 - Moderate Amount equivalent to 40mg/dL (or 4.0 mmol/L) detected.
+* 5 - Large Amount equivalent to 80mg/dL (or 8.0 mmol/L) detected.
+* 6 - Large+ Amount equivalent to 160mg/dL (or 16 mmol/L) detected.
+|at0151 + 
+ `specific_gravity`| 0..1| DV_ORDINAL | Specific gravity
+a|
+* 1 - 1.000 Specific gravity is equivalent to 1.000.
+* 2 - 1.005 Specific gravity is equivalent to 1.005.
+* 3 - 1.010 Specific gravity is equivalent to 1.010.
+* 4 - 1.015 Specific gravity is equivalent to 1.015.
+* 5 - 1.020 Specific gravity is equivalent to 1.020.
+* 6 - 1.025 Specific gravity is equivalent to 1.025.
+* 7 - 1.030 Specific gravity is equivalent to 1.030.
+|at0032 + 
+ `blood`| 0..1| DV_ORDINAL | Blood
+a|
+* 1 - Negative No blood detected.
+* 2 - Non-haemolysed Trace Trace of non-haemolysed blood detected.
+* 3 - Non-haemolysed Moderate Moderate amount of non-haemolysed blood detected.
+* 4 - Haemolysed Trace Trace of haemolysed blood detected.
+* 5 - 1+ Small amount of blood detected.
+* 6 - 2+ Moderate amount of blood detected.
+* 7 - 3+ Large amount of blood detected.
+|at0126 + 
+ `ph`| 0..1| DV_ORDINAL | pH
+a|
+* 1 - 5.0 pH of urine is equivalent to 5.0.
+* 2 - 5.5 pH of urine is equivalent to 5.5.
+* 3 - 6.0 pH of urine is equivalent to 6.0.
+* 4 - 6.5 pH of urine is equivalent to 6.5.
+* 5 - 7.0 pH of urine is equivalent to 7.0.
+* 6 - 7.5 pH of urine is equivalent to 7.5.
+* 7 - 8.0 pH of urine is equivalent to 8.0.
+* 8 - 8.5 pH of urine is equivalent to 8.5.
+* 9 - 9.0 pH of urine is equivalent to 9.0.
+* 10 - 9.5 pH of urine is equivalent to 9.5.
+* 11 - 10.0 pH of urine is equivalent to 10.0.
+|at0095 + 
+ `protein`| 0..1| DV_ORDINAL | Protein
+a|
+* 1 - Negative No protein detected.
+* 2 - Trace Trace of protein detected.
+* 3 - 1+ Amount equivalent to 30mg/dL (or 0.3 g/L) detected.
+* 4 - 2+ Amount equivalent to 100mg/dL (or 1.0 g/L) detected.
+* 5 - 3+ Amount equivalent to 300mg/dL (or 3.0 g/L) detected.
+* 6 - 4+ Amount equivalent to >2000mg/dL (or >20 g/L) detected.
+|at0056 + 
+ `urobilinogen`| 0..1| DV_ORDINAL | Urobilinogen
+a|
+* 1 - Normal (lower) Amount equivalent to 0.2 mg/dL detected.
+* 2 - Normal (upper) Amount equivalent to 1 mg/dL detected.
+* 3 - 2 mg/dL Amount equivalent to 2mg/dL detected.
+* 4 - 4 mg/dL Amount equivalent to 4mg/dL detected.
+* 5 - 8 mg/dL Amount equivalent to 8mg/dL detected.
+|at0043 + 
+ `nitrite`| 0..1| DV_ORDINAL | Nitrite
+a|
+* 1 - Negative No nitrites detected.
+* 2 - Positive Nitrites were detected.
+|at0068 + 
+ `leukocytes`| 0..1| DV_ORDINAL | Leukocytes
+a|
+* 1 - Negative No leukocytes detected.
+* 2 - Trace Trace detected.
+* 3 - 1+ Small amount detected.
+* 4 - 2+ Moderate amount detected.
+* 5 - 3+ Large amount detected.
+|at0181 + 
+ `clinical_interpretation`| 0..*| DV_TEXT | Clinical interpretation
+a|
+
+
+*Description*: Single word, phrase or brief description represents the clinical meaning and significance of the urinalysis findings.
+
+
+
+*comment*: Comment: Coding with a terminology is preferred, where possible. For example: normal urinalysis; mild proteinuria; or trace of blood. Multiple statements are allowed.
+|at0030 + 
+ `comment`| 0..1| DV_TEXT | Comment
+a|
+
+
+*Description*: Narrative about the urinalysis not captured in other fields.
+
+
+
+*comment*: For example: the freshness or small volume of the urine sample, method of collection or any problems with testing.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|at0186 + 
+ `method`| 0..1| DV_CODED_TEXT | Method
+a|
+* at0187 -> Manual 
+* at0188 -> Automatic 
+
+
+*Description*: Method by which the reagent strips were read.
+|====
+=== Syphilis test result
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.laboratory_test_result.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*Syphilis test* +
+ `EVENT: _at0002_`
+|at0005 + 
+ `test_name`| 1..1| DV_CODED_TEXT | Test name
+a|
+* VDRL (LOINC: LOINC4)
+* SD Bioline (LOINC: LOINC5)
+
+
+*Description*: Name of the laboratory investigation performed on the specimen(s).
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+5+a|*Syphilis test result* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.laboratory_test_analyte.v1_`
+|at0001 + 
+ `result`| 0..*| DV_TEXT | Result
+a|
+* Positive
+* Negative
+* Invalid
+
+
+*Description*: The value of the analyte result.
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+
+
+*hl7v2_mapping*: OBX.2, OBX.5, OBX.6, OBX.7, OBX.8
+
+
+*fhir_mapping*: Observation.value[x]
+|SubType + 
+ `test_method`| 0..1| ELEMENT | Test method | Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `coded_text_value`| 0..1| DV_CODED_TEXT | Test method
+a|
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Test method
+a|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `multimedia_value`| 0..1| DV_MULTIMEDIA | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `parsable_value`| 0..1| DV_PARSABLE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `state_value`| 0..1| DV_STATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `boolean_value`| 0..1| DV_BOOLEAN | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `identifier_value`| 0..1| DV_IDENTIFIER | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ehr_uri_value`| 0..1| DV_EHR_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `duration_value`| 0..1| DV_DURATION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `quantity_value`| 0..1| DV_QUANTITY | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `count_value`| 0..1| DV_COUNT | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `proportion_value`| 0..1| DV_PROPORTION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_time_value`| 0..1| DV_DATE_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_value`| 0..1| DV_DATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `time_value`| 0..1| DV_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ordinal_value`| 0..1| DV_ORDINAL | Test method
+a|
+|RM: + 
+ `scale_value`| 0..1| DV_SCALE | Test method
+a|
+|at0057 + 
+ `conclusion`| 0..1| DV_TEXT | Conclusion
+a|
+
+
+*Description*: Narrative description of the key findings.
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|====
+=== HbA1c
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.laboratory_test_result.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*HBa1c test* +
+ `EVENT: _at0002_`
+|at0005 + 
+ `test_name`| 1..1| DV_TEXT | Test name
+a|
+* HbA1c
+
+
+*Description*: Name of the laboratory investigation performed on the specimen(s).
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+5+a|*HbA1c result* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.laboratory_test_analyte.v1_`
+|at0001 + 
+ `result`| 0..*| DV_QUANTITY | Result
+|
+
+
+*Description*: The value of the analyte result.
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+
+
+*hl7v2_mapping*: OBX.2, OBX.5, OBX.6, OBX.7, OBX.8
+
+
+*fhir_mapping*: Observation.value[x]
+|SubType + 
+ `test_method`| 0..1| ELEMENT | Test method | Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `coded_text_value`| 0..1| DV_CODED_TEXT | Test method
+a|
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Test method
+a|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `multimedia_value`| 0..1| DV_MULTIMEDIA | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `parsable_value`| 0..1| DV_PARSABLE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `state_value`| 0..1| DV_STATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `boolean_value`| 0..1| DV_BOOLEAN | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `identifier_value`| 0..1| DV_IDENTIFIER | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ehr_uri_value`| 0..1| DV_EHR_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `duration_value`| 0..1| DV_DURATION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `quantity_value`| 0..1| DV_QUANTITY | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `count_value`| 0..1| DV_COUNT | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `proportion_value`| 0..1| DV_PROPORTION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_time_value`| 0..1| DV_DATE_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_value`| 0..1| DV_DATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `time_value`| 0..1| DV_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ordinal_value`| 0..1| DV_ORDINAL | Test method
+a|
+|RM: + 
+ `scale_value`| 0..1| DV_SCALE | Test method
+a|
+|at0057 + 
+ `conclusion`| 0..1| DV_TEXT | Conclusion
+a|
+
+
+*Description*: Narrative description of the key findings.
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|at0111 + 
+ `point-of-care_test`| 0..1| DV_BOOLEAN | Point-of-care test
+|
+
+
+*Description*: This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|====
+=== Cholesterol
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.laboratory_test_result.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*Cholesterol test* +
+ `EVENT: _at0002_`
+|at0005 + 
+ `test_name`| 1..1| DV_TEXT | Test name
+a|
+* Cholesterol
+
+
+*Description*: Name of the laboratory investigation performed on the specimen(s).
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+5+a|*Cholesterol result* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.laboratory_test_analyte.v1_`
+|at0001 + 
+ `result`| 0..*| DV_QUANTITY | Result
+|
+
+
+*Description*: The value of the analyte result.
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+
+
+*hl7v2_mapping*: OBX.2, OBX.5, OBX.6, OBX.7, OBX.8
+
+
+*fhir_mapping*: Observation.value[x]
+|SubType + 
+ `test_method`| 0..1| ELEMENT | Test method | Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `coded_text_value`| 0..1| DV_CODED_TEXT | Test method
+a|
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Test method
+a|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `multimedia_value`| 0..1| DV_MULTIMEDIA | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `parsable_value`| 0..1| DV_PARSABLE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `state_value`| 0..1| DV_STATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `boolean_value`| 0..1| DV_BOOLEAN | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `identifier_value`| 0..1| DV_IDENTIFIER | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ehr_uri_value`| 0..1| DV_EHR_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `duration_value`| 0..1| DV_DURATION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `quantity_value`| 0..1| DV_QUANTITY | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `count_value`| 0..1| DV_COUNT | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `proportion_value`| 0..1| DV_PROPORTION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_time_value`| 0..1| DV_DATE_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_value`| 0..1| DV_DATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `time_value`| 0..1| DV_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ordinal_value`| 0..1| DV_ORDINAL | Test method
+a|
+|RM: + 
+ `scale_value`| 0..1| DV_SCALE | Test method
+a|
+|at0057 + 
+ `conclusion`| 0..1| DV_TEXT | Conclusion
+a|
+
+
+*Description*: Narrative description of the key findings.
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|at0111 + 
+ `point-of-care_test`| 0..1| DV_BOOLEAN | Point-of-care test
+|
+
+
+*Description*: This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|====
+=== CD4 count
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.laboratory_test_result.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*CD4 test* +
+ `EVENT: _at0002_`
+|at0005 + 
+ `test_name`| 1..1| DV_TEXT | Test name
+a|
+* CD4 Count
+
+
+*Description*: Name of the laboratory investigation performed on the specimen(s).
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+5+a|*CD4 count* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.laboratory_test_analyte.v1_`
+|SubType + 
+ `result`| 0..*| ELEMENT | Result | The value of the analyte result.
+|RM: + 
+ `quantity_value`| 0..1| DV_QUANTITY | Result
+// quantity_value -  /content[openEHR-EHR-SECTION.adhoc.v1,'Point of care tests']/items[openEHR-EHR-OBSERVATION.laboratory_test_result.v1,'CD4 count']/data[at0001]/events[at0002,'CD4 test']/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'CD4 count']/items[at0001,'Result']/value
+|
+
+
+*Description*: The value of the analyte result.
+|RM: + 
+ `proportion_value`| 0..1| DV_PROPORTION | Result
+// proportion_value -  /content[openEHR-EHR-SECTION.adhoc.v1,'Point of care tests']/items[openEHR-EHR-OBSERVATION.laboratory_test_result.v1,'CD4 count']/data[at0001]/events[at0002,'CD4 test']/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'CD4 count']/items[at0001,'Result']/value
+|
+
+
+*Description*: The value of the analyte result.
+|SubType + 
+ `test_method`| 0..1| ELEMENT | Test method | Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `coded_text_value`| 0..1| DV_CODED_TEXT | Test method
+a|
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Test method
+a|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `multimedia_value`| 0..1| DV_MULTIMEDIA | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `parsable_value`| 0..1| DV_PARSABLE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `state_value`| 0..1| DV_STATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `boolean_value`| 0..1| DV_BOOLEAN | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `identifier_value`| 0..1| DV_IDENTIFIER | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ehr_uri_value`| 0..1| DV_EHR_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `duration_value`| 0..1| DV_DURATION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `quantity_value`| 0..1| DV_QUANTITY | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `count_value`| 0..1| DV_COUNT | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `proportion_value`| 0..1| DV_PROPORTION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_time_value`| 0..1| DV_DATE_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_value`| 0..1| DV_DATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `time_value`| 0..1| DV_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ordinal_value`| 0..1| DV_ORDINAL | Test method
+a|
+|RM: + 
+ `scale_value`| 0..1| DV_SCALE | Test method
+a|
+|at0057 + 
+ `conclusion`| 0..1| DV_TEXT | Conclusion
+a|
+
+
+*Description*: Narrative description of the key findings.
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|at0111 + 
+ `point-of-care_test`| 0..1| DV_BOOLEAN | Point-of-care test
+|
+
+
+*Description*: This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|====
+=== Covid antigen test result
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.laboratory_test_result.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*Covid antigen test* +
+ `EVENT: _at0002_`
+|at0005 + 
+ `test_name`| 1..1| DV_TEXT | Test name
+a|
+* Covid antigen test
+
+
+*Description*: Name of the laboratory investigation performed on the specimen(s).
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+5+a|*Covid antigen test* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.laboratory_test_analyte.v1_`
+|at0001 + 
+ `result`| 0..*| DV_TEXT | Result
+a|
+* Positive
+* Negative
+* Indeterminate
+
+
+*Description*: The value of the analyte result.
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+
+
+*hl7v2_mapping*: OBX.2, OBX.5, OBX.6, OBX.7, OBX.8
+
+
+*fhir_mapping*: Observation.value[x]
+|SubType + 
+ `test_method`| 0..1| ELEMENT | Test method | Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `coded_text_value`| 0..1| DV_CODED_TEXT | Test method
+a|
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Test method
+a|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `multimedia_value`| 0..1| DV_MULTIMEDIA | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `parsable_value`| 0..1| DV_PARSABLE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `state_value`| 0..1| DV_STATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `boolean_value`| 0..1| DV_BOOLEAN | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `identifier_value`| 0..1| DV_IDENTIFIER | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ehr_uri_value`| 0..1| DV_EHR_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `duration_value`| 0..1| DV_DURATION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `quantity_value`| 0..1| DV_QUANTITY | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `count_value`| 0..1| DV_COUNT | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `proportion_value`| 0..1| DV_PROPORTION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_time_value`| 0..1| DV_DATE_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_value`| 0..1| DV_DATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `time_value`| 0..1| DV_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ordinal_value`| 0..1| DV_ORDINAL | Test method
+a|
+|RM: + 
+ `scale_value`| 0..1| DV_SCALE | Test method
+a|
+|at0057 + 
+ `conclusion`| 0..1| DV_TEXT | Conclusion
+a|
+
+
+*Description*: Narrative description of the key findings.
+
+
+
+*comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|at0111 + 
+ `point-of-care_test`| 0..1| DV_BOOLEAN | Point-of-care test
+|
+
+
+*Description*: This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|====
+=== Pregnancy test result
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.pregnancy_test.v0_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*Point in time* +
+ `POINT_EVENT: _at0002_`
+|at0004 + 
+ `result`| 1..1| DV_CODED_TEXT | Result
+a|
+* at0005 -> Negative 
+* at0006 -> Inconclusive 
+* at0007 -> Weakly positive 
+* at0008 -> Strongly positive 
+* at0011 -> Indeterminate 
+
+
+*Description*: The result of the test.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|at0014 + 
+ `method`| 0..1| DV_TEXT | Method
+a|
+
+
+*Description*: Description of the method used to perform the test.
+|====
+=== Cardiac enzymes
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.laboratory_test_result.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*Cardiac enzyme test* +
+ `EVENT: _at0002_`
+|at0005 + 
+ `test_name`| 1..1| DV_TEXT | Test name
+a|
+* Troponin
+
+
+*Description*: Name of the laboratory investigation performed on the specimen(s).
+
+
+
+*comment*: A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'.
+5+a|*Cardiac enzyme result* +
+ `CLUSTER: _openEHR-EHR-CLUSTER.laboratory_test_analyte.v1_`
+|at0001 + 
+ `analyte_result`| 0..*| DV_TEXT | Analyte result
+a|
+* Normal
+* Abnormal
+* Equivocal
+* Incomplete
+
+
+*Description*: The value of the analyte result.
+
+
+
+*comment*: For example '7.3 mmol/l', 'Raised'. The 'Any' data type will need to be constrained to an appropriate data type in a specialisation, a template or at run-time to reflect the actual analyte result. The Quantity data type has reference model attributes that include flags for normal/abnormal, reference ranges and approximations - see https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class for more details.
+
+
+*hl7v2_mapping*: OBX.2, OBX.5, OBX.6, OBX.7, OBX.8
+
+
+*fhir_mapping*: Observation.value[x]
+|SubType + 
+ `test_method`| 0..1| ELEMENT | Test method | Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `coded_text_value`| 0..1| DV_CODED_TEXT | Test method
+a|
+|RM: + 
+ `text_value`| 0..1| DV_TEXT | Test method
+a|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `multimedia_value`| 0..1| DV_MULTIMEDIA | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `parsable_value`| 0..1| DV_PARSABLE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `state_value`| 0..1| DV_STATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `boolean_value`| 0..1| DV_BOOLEAN | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `identifier_value`| 0..1| DV_IDENTIFIER | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `uri_value`| 0..1| DV_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ehr_uri_value`| 0..1| DV_EHR_URI | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `duration_value`| 0..1| DV_DURATION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `quantity_value`| 0..1| DV_QUANTITY | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `count_value`| 0..1| DV_COUNT | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `proportion_value`| 0..1| DV_PROPORTION | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_time_value`| 0..1| DV_DATE_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `date_value`| 0..1| DV_DATE | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `time_value`| 0..1| DV_TIME | Test method
+|
+
+
+*Description*: Description about the method used to perform the test on this analyte only.
+|RM: + 
+ `ordinal_value`| 0..1| DV_ORDINAL | Test method
+a|
+|RM: + 
+ `scale_value`| 0..1| DV_SCALE | Test method
+a|
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|at0111 + 
+ `point-of-care_test`| 0..1| DV_BOOLEAN | Point-of-care test
+|
+
+
+*Description*: This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
+
+
+
+*comment*: True if the test was performed directly at Point-of-Care (POCT).
+|====
+== Family history
+=== Family history
+===== `EVALUATION: _openEHR-EHR-EVALUATION.family_history.v2_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*Per problem* +
+ `CLUSTER: _at0028_`
+|at0029 + 
+ `problem_diagnosis_name`| 0..1| DV_TEXT | Problem/diagnosis name
+a|
+* Hypertension
+* Heart attack/heart disease
+* Stroke/transient ischaemic attack
+* Other cardiovascular disease
+* Kidney disease
+* Diabetes Mellitus
+* Dyslipidaemia
+* Prostate Cancer
+* Breast Cancer
+* Colon Cancer
+
+
+*Description*: Identification of the significant problem or diagnosis in the family overall.
+
+
+
+*comment*: This is the problem for which aggregated data involving all family members will be collected. Coding of the index problem with a terminology is preferred, where possible.
+|at0030 + 
+ `description`| 0..1| DV_TEXT | Description
+a|
+
+
+*Description*: Narrative description about occurrence of the problem or diagnosis in family members.
+5+a|*Per family member* +
+ `CLUSTER: _at0003_`
+|at0016 + 
+ `relationship`| 0..1| DV_TEXT | Relationship
+a|
+* Mother
+* Father
+* Sister
+* Brother
+* Son
+* Daughter
+
+
+*Description*: The relationship of the family member to the subject of care.
+
+
+
+*comment*: For example: mother, step-father, maternal grandmother, or paternal uncle. Coding of the relationship with a terminology is preferred, where possible and including specification of maternal and paternal as required.
+|at0064 + 
+ `relationship_degree`| 0..1| DV_CODED_TEXT | Relationship degree
+a|
+* at0065 -> First degree relative 
+* at0066 -> Second degree relative 
+* at0067 -> Third degree relative 
+
+
+*Description*: The degree of relationship between the subject of care and the family member.
+
+
+
+*comment*: If the 'Relationship' data element uses pre-coordinated terms that include the degree of relationship, then this data element is redundant.
+|at0068 + 
+ `family_line`| 0..1| DV_CODED_TEXT | Family line
+a|
+* at0069 -> Maternal line 
+* at0070 -> Paternal line 
+
+
+*Description*: Identification of the maternal or paternal family line in the relationship.
+
+
+
+*comment*: If the 'Relationship' data element uses pre-coordinated terms that include the family line, then this data element is redundant.
+|at0023 + 
+ `deceased`| 0..1| DV_BOOLEAN | Deceased?
+|
+
+
+*Description*: Is the family member deceased?
+
+
+
+*comment*: Record as 'True' if family member is deceased.
+5+a|*Clinical history* +
+ `CLUSTER: _at0008_`
+|at0010 + 
+ `age_at_onset`| 0..1| DV_DURATION | Age at onset
+|
+
+
+*Description*: Estimated or actual age of the family member when the problem/diagnosis was clinically recognised.
+
+
+
+*comment*: For health problems with multiple occurrences, this describes the first nown occurrence.
+|at0014 + 
+ `cause_of_death`| 0..1| DV_CODED_TEXT | Cause of death?
+a|
+* at0061 -> Direct cause or closely related 
+* at0062 -> Unrelated 
+* at0063 -> Indeterminate 
+* _Other text allowed_
+
+
+*Description*: Relationship of the problem/diagnosis to the death of this family member.
+|at0046 + 
+ `comment`| 0..1| DV_TEXT | Comment
+a|
+
+
+*Description*: Additional narrative about the family member not captured in other fields.
+|at0026 + 
+ `last_updated`| 0..1| DV_DATE_TIME | Last Updated
+|
+
+
+*Description*: The date this family history summary was last updated.
+|====
+=== Sexual Health
+===== `EVALUATION: _openEHR-EHR-EVALUATION.sexual_health_summary.v0_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|at0012 + 
+ `have_you_ever_had_any_of_the_following_diseases`| 0..1| DV_TEXT | Have you ever had any of the following diseases?
+a|
+* Gonorrhea
+* HIV/AIDS
+* HPV
+* Chlamydia
+* Herpes Simplex
+* Hepatitis B
+* Syphilis
+
+
+*Description*: Narrative description about the sexual health history of an individual.
+|at0002 + 
+ `are_you_sexually_active`| 0..1| DV_CODED_TEXT | Are you sexually active?
+a|
+* at0009 -> Sexually active, regular partner 
+* at0010 -> Sexually active, no regular partner 
+* at0011 -> Never sexually active 
+
+
+*Description*: Is the individual sexually active?
+|at0015 + 
+ `comment`| 0..1| DV_TEXT | Comment
+a|
+
+
+*Description*: Additional narrative about the sexual health history not captured in other fields.
+|====
+=== Progress note
+===== `OBSERVATION: _openEHR-EHR-OBSERVATION.progress_note.v1_`
+===== RM attributes
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+|RM: + 
+ `language`| 1..1| CODE_PHRASE | language
+|
+
+
+*Description*: 
+|RM: + 
+ `encoding`| 1..1| CODE_PHRASE | encoding
+|
+
+
+*Description*: 
+|RM: + 
+ `subject`| 1..1| PARTY_PROXY | subject
+|
+
+
+*Description*: 
+|====
+[options="header", cols="5,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name | Description
+5+a|*Any event* +
+ `EVENT: _at0002_`
+|at0004 + 
+ `progress_note`| 0..1| DV_TEXT | Progress Note
+a|
+
+
+*Description*: Narrative description of health-related events, health status, findings, opinions at a specific point-in-time.
+|RM: + 
+ `time`| 1..1| DV_DATE_TIME | undefined
+|
+
+
+*Description*: 
+|====

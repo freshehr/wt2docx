@@ -1,0 +1,331 @@
+= Advance intervention information
+
+
+== Metadata
+
+
+TemplateId:: OL - Advance intervention information
+
+
+Archetype:: openEHR-EHR-COMPOSITION.anticipatory_care_information.v0
+
+
+
+
+:toc:
+
+
+
+
+// Not supported rmType COMPOSITION
+|at0001| 1..1| DV_CODED_TEXT | Coded text
+a|
+* event (openehr: 433)
+== EVENT_CONTEXT
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*EVENT_CONTEXT* + 
+EVENT_CONTEXT: _at0002_
+5+a|*XDS Metadata* + 
+CLUSTER: _openEHR-EHR-CLUSTER.xds_metadata.v0_
+|at0003| 0..1| DV_CODED_TEXT | Document type
+a|
+* Advance care plan (SNOMED-CT: 736366004)
+
+
+for example:  Pulmonary History and Physical, Discharge Summary, Ultrasound Report.
+These codes are specific to an XDS Affinity Domain.
+5+a|*Care journey metadata* + 
+CLUSTER: _openEHR-EHR-CLUSTER.care_journey_metadata.v0_
+|at0001| 0..1| DV_TEXT | Care plan name
+a|
+|at0002| 0..1| DV_TEXT | Care plan identifier
+a|
+|at0003| 0..1| DV_TEXT | Patient journey identifier
+a|
+|====
+== CPR
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*CPR* + 
+EVALUATION: _openEHR-EHR-EVALUATION.advance_intervention_decisions.v1_
+|at0002| 0..1| DV_CODED_TEXT | Clinical focus
+a|
+* Full active treatment including CPR (CMC-LevelOfTrtmnt: FULLACTIVCPR)
+* Full active treatment including in acute hospital setting, but not CPR (CMC-LevelOfTrtmnt: FULLACTIVHOSP)
+* Other (CMC-LevelOfTrtmnt: OTHER)
+* Symptomatic treatment only: keep comfortable (CMC-LevelOfTrtmnt: SYMPTRTONLY)
+* Treatment of any reversible conditions but only in the home/hospice setting: keep comfortable (CMC-LevelOfTrtmnt: TRTREVHOME)
+* Treatment of any reversible conditions (including acute hospital setting if needed) but not for any ventilation or CPR (CMC-LevelOfTrtmnt: TRTREVNOVENTCPR)
+
+
+The proposed value set is based on the MJA reference. 
+Coding the intent of care with an external terminology is preferred, where possible.
+|at0056| 0..1| DV_TEXT | Further details
+a|
+|at0008| 0..1| DV_TEXT | Clinician position
+a|
+
+
+May be used to record a narrative overview of the advance intervention decision that reflect the specific circumstances for the individual. This includes any limitations, or conditional circumstances applicable, to interventions. This description may or may not be supported by structured data, recorded using the ‘Per intervention’ cluster. If both this narrative description and ‘Per intervention’ structured data is recorded, caution is required as there is a potential risk of divergence. This data element may be used to capture legacy data that is not available in a structured format.
+|at0009| 1..1| DV_CODED_TEXT | CPR decision
+a|
+* No (CMC-CPRDecision: N)
+* Yes (CMC-CPRDecision: Y)
+* Decision Not Yet Made (CMC-CPRDecision: NY)
+5+a|*Patient discussion* + 
+CLUSTER: _openEHR-EHR-CLUSTER.dnacpr_discussion_details.v0_
+|at0001| 0..1| DV_CODED_TEXT | Discussed with the patient / Lasting Power of Attorney (welfare)?
+a|
+* Yes (CMC-PatientDiscussion: Y)
+* No - not able to discuss (CMC-PatientDiscussion: NOTABLE)
+* No - not yet discussed (CMC-PatientDiscussion: NOTDISC)
+* No - not willing to discuss (CMC-PatientDiscussion: NOTWISH)
+|at0014| 0..1| DV_DATE_TIME | Date of discussion
+|
+|at0008| 0..1| DV_TEXT | Summary of discussion
+a|
+5+a|*Family discussion* + 
+CLUSTER: _openEHR-EHR-CLUSTER.dnacpr_discussion_details.v0_
+|at0001| 0..1| DV_CODED_TEXT | Discussed with relatives / carers / others?
+a|
+* Yes (CMC-FamilyDiscussion: Y)
+* No - not able to discuss (CMC-FamilyDiscussion: NOTABLE)
+* No - not willing to discuss (CMC-FamilyDiscussion: NOTWISH)
+* No - not yet discussed (CMC-FamilyDiscussion: NOTDISC)
+* Patient not wishing family / carer to be Involved in the discussion (CMC-FamilyDiscussion: PTNOTWISH)
+|at0014| 0..1| DV_DATE_TIME | Date of discussion
+|
+|at0008| 0..1| DV_TEXT | Summary of discussion
+a|
+5+a|*CPR decision details* + 
+CLUSTER: _openEHR-EHR-CLUSTER.cpr_decision_details_uk.v0_
+|at0004| 0..*| DV_TEXT | Reason why CPR inappropriate
+a|
+|at0008| 0..1| DV_TEXT | Other team involved
+a|
+5+a|*CMC CPR decision extensions* + 
+CLUSTER: _openEHR-EHR-CLUSTER.cpr_cmc.v0_
+|at0001| 0..1| DV_BOOLEAN | Child involvement
+|
+|at0002| 0..1| DV_BOOLEAN | Child parent consultation
+|
+|at0003| 0..1| DV_BOOLEAN | Court order
+|
+|at0004| 0..1| DV_BOOLEAN | DNACPR form uploaded
+|
+|at0005| 0..1| DV_BOOLEAN | CPR decision agreed by recording clinician
+|
+|at0011| 0..1| DV_CODED_TEXT | Clinician aware of patient CPR decision
+a|
+* Don't Know (CMC-ClinicianAware: DK)
+* No (CMC-ClinicianAware: N)
+* Yes (CMC-ClinicianAware: Y)
+|at0006| 0..1| DV_CODED_TEXT | Decision documented type
+a|
+* Continue to record within the CMC care plan (Preferred). (CMC-DecisionDocumentedType: 1)
+* Attach a scanned copy of an existing DNACPR form. (CMC-DecisionDocumentedType: 2)
+|at0007| 0..1| DV_DATE_TIME | CPR previous review date
+|
+|at0008| 0..1| DV_TEXT | Judge court
+a|
+|at0009| 0..1| DV_DATE_TIME | Judge court time
+|
+|at0010| 0..1| DV_TEXT | Judge court location
+a|
+|at0046| 0..1| DV_DATE_TIME | Date recorded
+|
+|at0047| 0..1| DV_DATE_TIME | Date of CPR decision
+|
+|at0049| 0..1| DV_DATE_TIME | CPR Review date
+|
+5+a|*DNACPR attachment* + 
+CLUSTER: _openEHR-EHR-CLUSTER.multimedia_source.v0_
+|at0002| 0..1| DV_TEXT | Name
+a|
+// Not supported rmType ELEMENT
+// Not supported rmType DV_IDENTIFIER
+|| 0..1| DV_TEXT | undefined
+// text_value -  /content[openEHR-EHR-EVALUATION.advance_intervention_decisions.v1,'CPR']/protocol[at0045]/items[openEHR-EHR-CLUSTER.multimedia_source.v0,'DNACPR attachment']/items[at0010,'Attachment metadata Id']/value
+a|
+// Not supported rmType DV_MULTIMEDIA
+|at0004| 0..1| DV_DATE_TIME | Created
+|
+5+a|*Provider* + 
+CLUSTER: _openEHR-EHR-CLUSTER.contact_cc.v0_
+5+a|*Name* + 
+CLUSTER: _openEHR-EHR-CLUSTER.name_cc.v0_
+|at0001| 1..1| DV_CODED_TEXT | Use
+a|
+* at0002 -> Usual 
+|at0010| 0..1| DV_TEXT | Family
+a|
+|at0011| 0..1| DV_TEXT | Given
+a|
+5+a|*Identifiers* + 
+CLUSTER: _openEHR-EHR-CLUSTER.cmc_party_identifiers.v0_
+|at0003| 0..1| DV_TEXT | CMC Id
+a|
+5+a|*Email* + 
+CLUSTER: _openEHR-EHR-CLUSTER.telecom_cc.v0_
+|at0002| 0..1| DV_TEXT | Email address
+a|
+5+a|*Organisation* + 
+CLUSTER: _openEHR-EHR-CLUSTER.organisation_cc.v0_
+5+a|*Identifiers* + 
+CLUSTER: _openEHR-EHR-CLUSTER.cmc_party_identifiers.v0_
+|at0003| 0..1| DV_TEXT | CMC Id
+a|
+|at0004| 0..1| DV_TEXT | ODS Code
+a|
+|at0012| 0..1| DV_TEXT | Name
+a|
+5+a|*Multimedia details* + 
+CLUSTER: _openEHR-EHR-CLUSTER.multimedia_details_cmc.v0_
+|at0001| 0..1| DV_CODED_TEXT | Attachment type
+a|
+* Do Not Attempt CPR Document (CMC-AttachmentType: DNACPR)
+|at0007| 0..1| DV_TEXT | Comment
+a|
+5+a|*CPR Review extension* + 
+CLUSTER: _openEHR-EHR-CLUSTER.cpr_review_extension_ol.v0_
+|at0001| 0..1| DV_CODED_TEXT | CPR decision requires review
+a|
+* Requires review (CMC-CPRReview: REQREVIEW)
+* Indefinite decision (CMC-CPRReview: INDEFINITE)
+|at0002| 0..1| DV_TEXT | Reviewer name
+a|
+5+a|*Document location* + 
+CLUSTER: _at0052_
+|at0053| 0..1| DV_TEXT | Location
+a|
+5+a|*Recorded by* + 
+CLUSTER: _openEHR-EHR-CLUSTER.contact_cc.v0_
+|at0001| 0..1| DV_CODED_TEXT | Role
+a|
+* Consultant (CMC-CPRRecorderRole: 1)
+* Registrar (CMC-CPRRecorderRole: 2)
+* Junior Doctor (CMC-CPRRecorderRole: 3)
+* GP (CMC-CPRRecorderRole: 4)
+* Nurse Consultant (CMC-CPRRecorderRole: 5)
+* Clinical Nurse Specialist (CMC-CPRRecorderRole: 6)
+* Nurse (CMC-CPRRecorderRole: 7)
+* Registered Nurse (with Advanced DNACPR Decision Training) (CMC-CPRRecorderRole: 9)
+* Other (CMC-CPRRecorderRole: 8)
+
+
+Coding with a terminology is desirable where possible.
+5+a|*Name* + 
+CLUSTER: _openEHR-EHR-CLUSTER.name_cc.v0_
+|at0001| 1..1| DV_CODED_TEXT | Use
+a|
+* at0002 -> Usual 
+|at0009| 0..1| DV_TEXT | Name
+a|
+5+a|*Identifiers* + 
+CLUSTER: _openEHR-EHR-CLUSTER.cmc_party_identifiers.v0_
+|at0003| 0..1| DV_TEXT | CMC Id
+a|
+5+a|*Email* + 
+CLUSTER: _openEHR-EHR-CLUSTER.telecom_cc.v0_
+|at0002| 0..1| DV_TEXT | Email address
+a|
+5+a|*Organisation* + 
+CLUSTER: _openEHR-EHR-CLUSTER.organisation_cc.v0_
+5+a|*Identifiers* + 
+CLUSTER: _openEHR-EHR-CLUSTER.cmc_party_identifiers.v0_
+|at0003| 0..1| DV_TEXT | CMC Id
+a|
+|at0004| 0..1| DV_TEXT | ODS Code
+a|
+|at0012| 0..1| DV_TEXT | Name
+a|
+|====
+== CMC Mental capacity
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*CMC Mental capacity* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.mental_capacity_assessment.v0_
+|at0005| 0..1| DV_CODED_TEXT | Does the person have sufficient capacity to participate in discussing the CPR recommendation?
+a|
+* Don't Know (CMC-PtAbleToDecide: DK)
+* No (CMC-PtAbleToDecide: N)
+* Yes (CMC-PtAbleToDecide: Y)
+|====
+== Capacity for involvement
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Capacity for involvement* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.mental_capacity_assessment.v0_
+|at0005| 0..1| DV_CODED_TEXT | Does the person have sufficient capacity to participate in discussing the plan?
+a|
+* Don't Know (CMC-PtAbleToDecide: DK)
+* No (CMC-PtAbleToDecide: N)
+* Yes (CMC-PtAbleToDecide: Y)
+|at0009| 0..1| DV_TEXT | Description
+a|
+|====
+== Involvement in making this plan
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Involvement in making this plan* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.mental_capacity_assessment.v0_
+|at0004| 0..1| DV_TEXT | Decision/plan
+a|
+* Ememergency treatment plan decision
+|at0005| 0..1| DV_CODED_TEXT | Personal capacity
+a|
+* A Person has mental capacity (CMC-RespectCapacity: MCA)
+* B Person does not have mental capacity (CMC-RespectCapacity: MCB)
+* C1 Person less than 18 or 16 with sufficient maturity (CMC-RespectCapacity: MCC1)
+* C2 Person less than 18 or 16 without sufficient maturity (CMC-RespectCapacity: MCC2)
+* D Other (CMC-RespectCapacity: MCD)
+|at0021| 0..1| DV_CODED_TEXT | Parental responsibility
+a|
+* C3 Person less than 18 or 16 parental decision (CMC-RespectMC: MCC3)
+|at0009| 0..1| DV_TEXT | Description
+a|
+|====
+// Not supported rmType ADMIN_ENTRY
+|at0004| 0..1| DV_CODED_TEXT | Status
+a|
+* Don't Know (CMC-WelfareAttorney: DK)
+* No (CMC-WelfareAttorney: N)
+* Yes (CMC-WelfareAttorney: Y)
+
+
+Coding of the legal directive or order status with a terminology is preferred, where possible.
+// Not supported rmType CODE_PHRASE
+// Not supported rmType CODE_PHRASE
+// Not supported rmType PARTY_PROXY
+== CPR reviewer
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*CPR reviewer* + 
+ACTION: _openEHR-EHR-ACTION.service.v0_
+|at0011| 0..1| DV_CODED_TEXT | Service name
+a|
+* Reviewer (CMC-ReviewerType: 1)
+* Endorser (DNACPR decision maker) (CMC-ReviewerType: 2)
+* Reviewer & Endorser (CMC-ReviewerType: 3)
+* Not Specified (CMC-ReviewerType: 4)
+* Decision maker (CMC-ReviewerType: 5)
+
+
+Coding of the specific service name with a terminology is preferred, where possible.
+5+a|*Reviewer* + 
+CLUSTER: _openEHR-EHR-CLUSTER.contact_cc.v0_
+5+a|*Name* + 
+CLUSTER: _openEHR-EHR-CLUSTER.name_cc.v0_
+|at0001| 1..1| DV_CODED_TEXT | Use
+a|
+* at0002 -> Usual 
+|at0009| 0..1| DV_TEXT | Reviewer name
+a|
+|====

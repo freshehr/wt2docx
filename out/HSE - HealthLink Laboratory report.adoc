@@ -1,0 +1,274 @@
+= Generic laboratory report
+:toc: left
+Template Id: **HSE - HealthLink Laboratory report [1.0.0]**
+
+
+Created: **Mon Aug 14 2023 09:18:02 GMT+0100 (British Summer Time)**
+
+
+== Composition: *Generic laboratory report*
+
+
+Document to communicate information to others about the result of a test or assessment.
+
+
+[options="header","stretch", cols="20,30,30"]
+|====
+|Data item | Description | Allowed values
+|====
+==== Composition context
+[options="header","stretch", cols="20,30,30"]
+|====
+|Data item | Description | Allowed values
+| **Report ID** +
+ `Text`  | Identification information about the report. 
+a|
+
+3+a|===== Recipient  
+| **Name** +
+ `Text`  | The unstructured name for the individual. 
+a|
+
+
+| **Identifier** +
+ `Identifier`  | Identifier associated with the individual. 
+|
+
+|====
+==  *Laboratory test result*
+
+
+The result, including findings and the laboratory's interpretation, of an investigation performed on specimens collected from an individual or related to that individual.
+
+
+[options="header","stretch", cols="20,30,30"]
+|====
+|Data item | Description | Allowed values
+| **Requested test** +
+ `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+a|
+
+
+3+a|===== Specimen  [**multiple**]
+| **Specimen type** +
+ `Text`  | The type of specimen. 
+a|
+
+
+| **Date/time received** +
+ `Date/time`  | The date and time that the sample was received at the laboratory. 
+|
+
+| **Collection method** +
+ `Text`  | The method of collection used. 
+a|
+
+
+| **Source site** +
+ `Text`  | Identification of the body site or other location from where the specimen is collected. 
+a|
+
+
+| **Collection date/time** +
+ `Choice`  | The date and time that collection has been ordered to take place or has taken place. 
+a|
+_Multiple data types allowed_
+
+|_SubTypes_ | |
+| `Date/time` +
+  |
+// date_time_value -  /content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.specimen.v1]/items[at0015]/value
+|
+| `Interval of Date/time` +
+  |
+// interval_of_date_time_value -  /content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.specimen.v1]/items[at0015]/value
+|
+| **Overall test status** +
+ `Coded text` (_multiple_) | The status of the laboratory test result as a whole. 
+a|
+
+* Registered +
+ `local:at0107`
+* Partial +
+ `local:at0037`
+* Preliminary +
+ `local:at0120`
+* Final +
+ `local:at0038`
+* Amended +
+ `local:at0040`
+* Corrected +
+ `local:at0115`
+* Appended +
+ `local:at0119`
+* Cancelled +
+ `local:at0074`
+* Entered in error +
+ `local:at0116`
+* _Other text allowed_
+
+| **Overall test status timestamp** +
+ `Date/time`  | The date and/or time that ‘Overall test status’ was issued. 
+|
+| **Diagnostic service category** +
+ `Text`  | The diagnostic service or discipline that is responsible for the laboratory test result. 
+a|
+
+
+| **Clinical information provided** +
+ `Text`  | Description of clinical information available at the time of interpretation of results. 
+a|
+
+
+3+a|===== Laboratory analyte result  [**multiple**]
+| **Analyte name** +
+ `Text`  | The name of the analyte result. 
+a|
+
+
+| **Analyte result** +
+ `Choice`  | The value of the analyte result. 
+a|
+_Multiple data types allowed_
+
+|_SubTypes_ | |
+| `Quantity` +
+  |
+// quantity_value -  /content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0001,'Analyte result']/value
+a|
+
+| `Text` +
+  |
+// text_value -  /content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0001,'Analyte result']/value
+a|
+
+| **HL7v2 Abnormal flag** +
+ `Text`  | The value of the analyte result. 
+a|
+
+* <
+* >
+* A
+* AA
+* B
+* D
+* H
+* HH
+* I
+* L
+* LL
+* MS
+* N
+* R
+* S
+* U
+* VS
+* W
+
+| **Reference range guidance** +
+ `Text`  | Additional advice on the applicability of the reference range to this result or may carry text or coded textual guidance as to whether the result is within the normal range. 
+a|
+
+
+| **Result status** +
+ `Coded text`  | The status of the analyte result value. 
+a|
+
+* Registered +
+ `local:at0015`
+* Partial +
+ `local:at0016`
+* Preliminary +
+ `local:at0017`
+* Final +
+ `local:at0018`
+* Amended +
+ `local:at0020`
+* Corrected +
+ `local:at0019`
+* Appended +
+ `local:at0021`
+* Cancelled +
+ `local:at0023`
+* Entered in error +
+ `local:at0022`
+* _Other text allowed_
+
+| **Result status time** +
+ `Date/time`  | The date and time that the analyte result was issued for the recorded ‘Result status’. 
+|
+
+| **Comment** +
+ `Text`  | Additional narrative about the analyte result, not captured in other fields. 
+a|
+
+
+| **Conclusion** +
+ `Text`  | Narrative description of the key findings. 
+a|
+
+
+3+a|===== Responsible laboratory  
+| **Name** +
+ `Text`  | The unstructured name or label for the organisation. 
+a|
+
+
+| **Identifier** +
+ `Identifier`  | Identifier associated with the organisation. 
+|
+
+3+a|===== Test request details  
+| **Placer order number** +
+ `Identifier`  | The local identifier assigned by the requesting clinical system. 
+|
+
+| **Filler order number** +
+ `Identifier`  | The local identifier assigned to the test order by the order filler, usually by the Laboratory Information System (LIS). 
+|
+
+3+a|===== Ordering provider  
+3+a|===== Name  
+| **Title** +
+ `Text`  | One or more honorific form(s) of address commencing a name. 
+a|
+
+
+| **Given name** +
+ `Text`  | One or more unique name(s) used to identify an individual within a family group. 
+a|
+
+
+| **Family name** +
+ `Text`  | One or more name(s) that an individual has in common with a family group. 
+a|
+
+
+| **Identifier** +
+ `Identifier`  | Identifier associated with the individual. 
+|
+
+3+a|===== Distribution  
+3+a|===== Individual recipient  [**multiple**]
+3+a|===== Recipient details  
+3+a|===== Name  
+| **Title** +
+ `Text`  | One or more honorific form(s) of address commencing a name. 
+a|
+
+
+| **Given name** +
+ `Text`  | One or more unique name(s) used to identify an individual within a family group. 
+a|
+
+
+| **Family name** +
+ `Text`  | One or more name(s) that an individual has in common with a family group. 
+a|
+
+
+| **Identifier** +
+ `Identifier`  | Identifier associated with the individual. 
+|
+
+|====

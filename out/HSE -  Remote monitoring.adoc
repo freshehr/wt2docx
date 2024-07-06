@@ -1,0 +1,196 @@
+:toc: left
+= Title
+
+Template Id:  **`HSE -  Remote monitoring [0.4.0]`**
+
+Created:  **Tue Jan 03 2023 16:43:50 GMT+0000 (Greenwich Mean Time)**
+
+
+== Composition: *Remote monitoring*
+
+
+==== Archetype Id: `_openEHR-EHR-COMPOSITION.encounter.v1_`
+
+
+Interaction, contact or care event between a subject of care and healthcare provider(s).
+
+
+[options="header","stretch", cols="20,30,30"]
+|====
+|Data item | Description | Allowed values
+|====
+===== Composition context
+===== `EVENT_CONTEXT: _`RM:context`_`
+[options="header","stretch", cols="20,30,30"]
+|====
+|Data item | Description | Allowed values
+|====
+==  *Blood pressure*
+
+
+==== Archetype Id: `OBSERVATION: _openEHR-EHR-OBSERVATION.blood_pressure.v2_`
+
+
+The local measurement of arterial blood pressure which is a surrogate for arterial pressure in the systemic circulation.
+
+
+[options="header","stretch", cols="20,30,30"]
+|====
+|Data item | Description | Allowed values
+| **Systolic** +
+ `Quantity` +
+  `systolic` +
+ `at0004`  | Peak systemic arterial blood pressure  - measured in systolic or contraction phase of the heart cycle.
+a|
+
+Units: +
+
+* mm[Hg]
+| **Diastolic** +
+ `Quantity` +
+  `diastolic` +
+ `at0005`  | Minimum systemic arterial blood pressure - measured in the diastolic or relaxation phase of the heart cycle.
+a|
+
+Units: +
+
+* mm[Hg]
+|====
+==  *Pulse/Heart beat*
+
+
+==== Archetype Id: `OBSERVATION: _openEHR-EHR-OBSERVATION.pulse.v2_`
+
+
+The rate and associated attributes for a pulse or heart beat.
+
+
+[options="header","stretch", cols="20,30,30"]
+|====
+|Data item | Description | Allowed values
+| **Rate** +
+ `Quantity` +
+  `rate` +
+ `at0004`  | The rate of the pulse or heart beat, measured in beats per minute.
+a|
+
+Units: +
+
+* /min
+|====
+==  *Body weight*
+
+
+==== Archetype Id: `OBSERVATION: _openEHR-EHR-OBSERVATION.body_weight.v2_`
+
+
+Measurement of the body weight of an individual.
+
+
+[options="header","stretch", cols="20,30,30"]
+|====
+|Data item | Description | Allowed values
+| **Weight** +
+ `Quantity` (_mandatory_) +
+  `weight` +
+ `at0004`  | The weight of the individual.
+a|
+
+Units: +
+
+* kg
+Units: +
+
+* [lb_av]
+Units: +
+
+* g
+|====
+==  *WHO-5 Well-Being Index*
+
+
+==== Archetype Id: `OBSERVATION: _openEHR-EHR-OBSERVATION.who_5_well_being_index.v0_`
+
+
+The World Health Organisation- Five Well-Being Index (WHO-5) is a short self-reported measure of current mental wellbeing.
+
+
+[options="header","stretch", cols="20,30,30"]
+|====
+|Data item | Description | Allowed values
+| **Cheerful and in good spirits** +
+ `Ordinal` +
+  `cheerful_and_in_good_spirits` +
+ `at0009`  | 1. I have felt cheerful and in good spirits.
+a|
+* [5]  All of the time \| `at0010` \|
+* [4]  Most of the time \| `at0011` \|
+* [3]  More than half of the time \| `at0012` \|
+* [2]  Less than half of the time \| `at0013` \|
+* [1]  Some of the time \| `at0014` \|
+* [0]  At no time \| `at0015` \|
+| **Calm and relaxed** +
+ `Ordinal` +
+  `calm_and_relaxed` +
+ `at0023`  | 2. I have felt calm and relaxed.
+a|
+* [5]  All of the time \| `at0024` \|
+* [4]  Most of the time \| `at0025` \|
+* [3]  More than half of the time \| `at0026` \|
+* [2]  Less than half of the time \| `at0027` \|
+* [1]  Some of the time \| `at0028` \|
+* [0]  At no time \| `at0029` \|
+| **Active and vigorous** +
+ `Ordinal` +
+  `active_and_vigorous` +
+ `at0016`  | 3. I have felt active and vigorous.
+a|
+* [5]  All of the time \| `at0017` \|
+* [4]  Most of the time \| `at0018` \|
+* [3]  More than half of the time \| `at0019` \|
+* [2]  Less than half of the time \| `at0020` \|
+* [1]  Some of the time \| `at0021` \|
+* [0]  At no time \| `at0022` \|
+| **Wake up feeling fresh and rested** +
+ `Ordinal` +
+  `wake_up_feeling_fresh_and_rested` +
+ `at0030`  | 3. I wake up feeling fresh and rested.
+a|
+* [5]  All of the time \| `at0031` \|
+* [4]  Most of the time \| `at0032` \|
+* [3]  More than half of the time \| `at0033` \|
+* [2]  Less than half of the time \| `at0034` \|
+* [1]  Some of the time \| `at0035` \|
+* [0]  At no time \| `at0036` \|
+| **Daily life interesting** +
+ `Ordinal` +
+  `daily_life_interesting` +
+ `at0037`  | 5. My daily life has been filled by things that interest me.
+a|
+* [5]  All of the time \| `at0038` \|
+* [4]  Most of the time \| `at0039` \|
+* [3]  More than half of the time \| `at0040` \|
+* [2]  Less than half of the time \| `at0041` \|
+* [1]  Some of the time \| `at0042` \|
+* [0]  At no time \| `at0043` \|
+| **Total score** +
+ `Count` +
+  `total_score` +
+ `at0006`  |
+a|
+
+Range: +
+
+* >= 0 and <= 25
+| **Percentage score** +
+ `Proportion` +
+  `percentage_score` +
+ `at0007`  |
+|
+| **Comment** +
+ `Text` +
+  `comment` +
+ `at0044`  |
+a|
+
+|====
