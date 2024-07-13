@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+   <id value="logicalmodel-Adversereactionevent-R4"/>
+   <url value="http://linkehr.com/fhir/logicalmodel-adversereactionevent-R4"/>
+   <identifier>
+      <system value="openEHR-CKM"/>
+      <value value="openEHR-EHR-CLUSTER.adverse_reaction_event.v1"/>
+   </identifier>
+   <version value="0"/>
+   <name value="Adversereactionevent"/>
+   <title value="Adverse reaction event"/>
+   <status value="draft"/>
+   <date value="2024-06-18"/>
+   <publisher value="openEHR"/>
+   <contact>
+      <telecom>
+         <system value="url"/>
+         <value value="http://www.veratech.es"/>
+      </telecom>
+   </contact>
+   <description value="Information about a specific adverse reaction event caused by exposure to a specific substance."/>
+   <purpose value="To record information about a specific adverse reaction event caused by exposure to a specific substance."/>
+   <fhirVersion value="4.0.0"/>
+   <mapping>
+      <identity value="openEHR"/>
+      <uri value="http://openehr.org"/>
+      <name value="openEHR Mapping"/>
+   </mapping>
+   <mapping>
+      <identity value="openEHR-natural"/>
+      <uri value="http://openehr.org"/>
+      <name value="openEHR natural path"/>
+   </mapping>
+   <kind value="logical"/>
+   <abstract value="false"/>
+   <type value="StructureDefinition"/>
+   <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Element"/>
+   <snapshot>
+      <element id="Adverse_reaction_event">
+         <path value="Adverse_reaction_event"/>
+         <short value="Adverse reaction event"/>
+         <definition value="Information about a specific adverse reaction event caused by exposure to a specific substance."/>
+         <min value="1"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event"/>
+            <min value="1"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="BackboneElement"/>
+         </type>
+         <mustSupport value="true"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Specific_substance">
+         <path value="Adverse_reaction_event.Specific_substance"/>
+         <short value="Specific substance"/>
+         <definition value="The substance considered to be responsible for the specific adverse reaction event."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Specific_substance"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Specific_substance.value">
+         <path value="Adverse_reaction_event.Specific_substance.value"/>
+         <short value="Specific substance"/>
+         <definition value="The substance considered to be responsible for the specific adverse reaction event."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Specific_substance.value"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="CodeableConcept"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Certainty">
+         <path value="Adverse_reaction_event.Certainty"/>
+         <short value="Certainty"/>
+         <definition value="The degree of clinical certainty that the 'Manifestation' in this reaction event was caused by exposure to the identified 'Specific substance'."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Certainty"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Certainty.value_DV_CODED_TEXT">
+         <path value="Adverse_reaction_event.Certainty.value_DV_CODED_TEXT"/>
+         <short value="Certainty"/>
+         <definition value="The degree of clinical certainty that the 'Manifestation' in this reaction event was caused by exposure to the identified 'Specific substance'."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Certainty.value_DV_CODED_TEXT"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="CodeableConcept"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Certainty.value_DV_TEXT">
+         <path value="Adverse_reaction_event.Certainty.value_DV_TEXT"/>
+         <short value="Certainty"/>
+         <definition value="The degree of clinical certainty that the 'Manifestation' in this reaction event was caused by exposure to the identified 'Specific substance'."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Certainty.value_DV_TEXT"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="CodeableConcept"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Manifestation">
+         <path value="Adverse_reaction_event.Manifestation"/>
+         <short value="Manifestation"/>
+         <definition value="Clinical symptoms and/or signs that are observed or associated with the adverse reaction."/>
+         <min value="0"/>
+         <max value="*"/>
+         <base>
+            <path value="Adverse_reaction_event.Manifestation"/>
+            <min value="0"/>
+            <max value="*"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Manifestation.value">
+         <path value="Adverse_reaction_event.Manifestation.value"/>
+         <short value="Manifestation"/>
+         <definition value="Clinical symptoms and/or signs that are observed or associated with the adverse reaction."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Manifestation.value"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="CodeableConcept"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Reaction_description">
+         <path value="Adverse_reaction_event.Reaction_description"/>
+         <short value="Reaction description"/>
+         <definition value="Narrative description about the adverse reaction as a whole, including details of the manifestation if required."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Reaction_description"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Reaction_description.value">
+         <path value="Adverse_reaction_event.Reaction_description.value"/>
+         <short value="Reaction description"/>
+         <definition value="Narrative description about the adverse reaction as a whole, including details of the manifestation if required."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Reaction_description.value"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="CodeableConcept"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Onset_of_reaction">
+         <path value="Adverse_reaction_event.Onset_of_reaction"/>
+         <short value="Onset of reaction"/>
+         <definition value="The date and/or time of the onset of the reaction."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Onset_of_reaction"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Onset_of_reaction.value">
+         <path value="Adverse_reaction_event.Onset_of_reaction.value"/>
+         <short value="Onset of reaction"/>
+         <definition value="The date and/or time of the onset of the reaction."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Onset_of_reaction.value"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="dateTime"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Duration_of_reaction">
+         <path value="Adverse_reaction_event.Duration_of_reaction"/>
+         <short value="Duration of reaction"/>
+         <definition value="The total amount of time that the manifestation of the adverse reaction persisted."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Duration_of_reaction"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Duration_of_reaction.value">
+         <path value="Adverse_reaction_event.Duration_of_reaction.value"/>
+         <short value="Duration of reaction"/>
+         <definition value="The total amount of time that the manifestation of the adverse reaction persisted."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Duration_of_reaction.value"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="Duration"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Severity_of_reaction">
+         <path value="Adverse_reaction_event.Severity_of_reaction"/>
+         <short value="Severity of reaction"/>
+         <definition value="Clinical assessment of the severity of the reaction event as a whole, potentially considering multiple different manifestations."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Severity_of_reaction"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Severity_of_reaction.value_DV_CODED_TEXT">
+         <path value="Adverse_reaction_event.Severity_of_reaction.value_DV_CODED_TEXT"/>
+         <short value="Severity of reaction"/>
+         <definition value="Clinical assessment of the severity of the reaction event as a whole, potentially considering multiple different manifestations."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Severity_of_reaction.value_DV_CODED_TEXT"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="CodeableConcept"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Severity_of_reaction.value_DV_TEXT">
+         <path value="Adverse_reaction_event.Severity_of_reaction.value_DV_TEXT"/>
+         <short value="Severity of reaction"/>
+         <definition value="Clinical assessment of the severity of the reaction event as a whole, potentially considering multiple different manifestations."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Severity_of_reaction.value_DV_TEXT"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="CodeableConcept"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Reaction_details">
+         <path value="Adverse_reaction_event.Reaction_details"/>
+         <short value="Reaction details"/>
+         <definition value="Additional details about the adverse reaction."/>
+         <min value="0"/>
+         <max value="*"/>
+         <base>
+            <path value="Adverse_reaction_event.Reaction_details"/>
+            <min value="0"/>
+            <max value="*"/>
+         </base>
+         <type>
+            <code value="BackboneElement"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Initial_exposure">
+         <path value="Adverse_reaction_event.Initial_exposure"/>
+         <short value="Initial exposure"/>
+         <definition value="The date and/or time of the first exposure to the Substance for this Reaction Event."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Initial_exposure"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Initial_exposure.value">
+         <path value="Adverse_reaction_event.Initial_exposure.value"/>
+         <short value="Initial exposure"/>
+         <definition value="The date and/or time of the first exposure to the Substance for this Reaction Event."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Initial_exposure.value"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="dateTime"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Duration_of_exposure">
+         <path value="Adverse_reaction_event.Duration_of_exposure"/>
+         <short value="Duration of exposure"/>
+         <definition value="The total amount of time the individual was exposed to the identified 'Specific substance'."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Duration_of_exposure"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Duration_of_exposure.value">
+         <path value="Adverse_reaction_event.Duration_of_exposure.value"/>
+         <short value="Duration of exposure"/>
+         <definition value="The total amount of time the individual was exposed to the identified 'Specific substance'."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Duration_of_exposure.value"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="Duration"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Route_of_exposure">
+         <path value="Adverse_reaction_event.Route_of_exposure"/>
+         <short value="Route of exposure"/>
+         <definition value="The route by which the subject was exposed to the identified 'Specific substance'."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Route_of_exposure"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Route_of_exposure.value">
+         <path value="Adverse_reaction_event.Route_of_exposure.value"/>
+         <short value="Route of exposure"/>
+         <definition value="The route by which the subject was exposed to the identified 'Specific substance'."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Route_of_exposure.value"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="CodeableConcept"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Exposure_description">
+         <path value="Adverse_reaction_event.Exposure_description"/>
+         <short value="Exposure description"/>
+         <definition value="Narrative description about the exposure to the identified 'Specific substance'."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Exposure_description"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Exposure_description.value">
+         <path value="Adverse_reaction_event.Exposure_description.value"/>
+         <short value="Exposure description"/>
+         <definition value="Narrative description about the exposure to the identified 'Specific substance'."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Exposure_description.value"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="CodeableConcept"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Exposure_details">
+         <path value="Adverse_reaction_event.Exposure_details"/>
+         <short value="Exposure details"/>
+         <definition value="Additional details about exposure to the 'Specific substance'."/>
+         <min value="0"/>
+         <max value="*"/>
+         <base>
+            <path value="Adverse_reaction_event.Exposure_details"/>
+            <min value="0"/>
+            <max value="*"/>
+         </base>
+         <type>
+            <code value="BackboneElement"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Clinical_management_description">
+         <path value="Adverse_reaction_event.Clinical_management_description"/>
+         <short value="Clinical management description"/>
+         <definition value="Narrative description about the clinical management provided."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Clinical_management_description"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Clinical_management_description.value">
+         <path value="Adverse_reaction_event.Clinical_management_description.value"/>
+         <short value="Clinical management description"/>
+         <definition value="Narrative description about the clinical management provided."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Clinical_management_description.value"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="CodeableConcept"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Clinical_management_details">
+         <path value="Adverse_reaction_event.Clinical_management_details"/>
+         <short value="Clinical management details"/>
+         <definition value="Additional structured details about clinical management for this reaction event."/>
+         <min value="0"/>
+         <max value="*"/>
+         <base>
+            <path value="Adverse_reaction_event.Clinical_management_details"/>
+            <min value="0"/>
+            <max value="*"/>
+         </base>
+         <type>
+            <code value="BackboneElement"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Reporting_details">
+         <path value="Adverse_reaction_event.Reporting_details"/>
+         <short value="Reporting details"/>
+         <definition value="Additional structured details required for reporting to regulatory bodies."/>
+         <min value="0"/>
+         <max value="*"/>
+         <base>
+            <path value="Adverse_reaction_event.Reporting_details"/>
+            <min value="0"/>
+            <max value="*"/>
+         </base>
+         <type>
+            <code value="BackboneElement"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Information_source">
+         <path value="Adverse_reaction_event.Information_source"/>
+         <short value="Information source"/>
+         <definition value="Details about the provenance of the information."/>
+         <min value="0"/>
+         <max value="*"/>
+         <base>
+            <path value="Adverse_reaction_event.Information_source"/>
+            <min value="0"/>
+            <max value="*"/>
+         </base>
+         <type>
+            <code value="BackboneElement"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Supporting_clinical_record_information">
+         <path value="Adverse_reaction_event.Supporting_clinical_record_information"/>
+         <short value="Supporting clinical record information"/>
+         <definition value="Link to further information about the presentation and findings that exist elsewhere in the health record, including allergy test reports."/>
+         <min value="0"/>
+         <max value="*"/>
+         <base>
+            <path value="Adverse_reaction_event.Supporting_clinical_record_information"/>
+            <min value="0"/>
+            <max value="*"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Supporting_clinical_record_information.value">
+         <path value="Adverse_reaction_event.Supporting_clinical_record_information.value"/>
+         <short value="Supporting clinical record information"/>
+         <definition value="Link to further information about the presentation and findings that exist elsewhere in the health record, including allergy test reports."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Supporting_clinical_record_information.value"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="BackboneElement"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+      <element id="Adverse_reaction_event.Comment">
+         <path value="Adverse_reaction_event.Comment"/>
+         <short value="Comment"/>
+         <definition value="Additional narrative about the adverse reaction event not captured in other fields."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Comment"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+      </element>
+      <element id="Adverse_reaction_event.Comment.value">
+         <path value="Adverse_reaction_event.Comment.value"/>
+         <short value="Comment"/>
+         <definition value="Additional narrative about the adverse reaction event not captured in other fields."/>
+         <min value="0"/>
+         <max value="1"/>
+         <base>
+            <path value="Adverse_reaction_event.Comment.value"/>
+            <min value="0"/>
+            <max value="1"/>
+         </base>
+         <type>
+            <code value="CodeableConcept"/>
+         </type>
+         <mustSupport value="false"/>
+         <isModifier value="false"/>
+         <isSummary value="true"/>
+      </element>
+   </snapshot>
+</StructureDefinition>
