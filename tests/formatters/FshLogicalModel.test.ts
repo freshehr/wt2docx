@@ -40,8 +40,9 @@ describe('fsh Logical test', () => {
       rmType: 'Composition',
       rmTypeText: 'Composition'
     }
-    const result = fshl.formatCompositionHeader(builder,element);
 
-    expect(result).toEqual(expectedOutput);
+      fshl.formatCompositionHeader(builder,element);
+
+    expect(builder.sb.toString()).toEqual(expectedOutput);
   });
 });
