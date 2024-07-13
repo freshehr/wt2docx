@@ -2,7 +2,7 @@ import { fshl } from '../../src/formatters/FshLogicalModelFormatter'
 import { DocBuilder } from '../../src/DocBuilder';
 import fs from 'fs';
 import { Config, importConfig } from '../../src/BuilderConfig';
-import { TemplateElement } from '../../src/TemplateNodes';
+import { TemplateNode } from '../../src/TemplateNodes';
 
 let builder: DocBuilder;
 
@@ -10,7 +10,7 @@ beforeAll(() => {
   // This will run once before all tests.
   const config:Config = importConfig('')
   const inDoc:string = fs.readFileSync('/test/resources/wt.json', { encoding: 'utf8', flag: 'r' });
-  builder  = new DocBuilder(JSON.parse(inDoc), config, 'adoc', '')
+  builder  = new DocBuilder(JSON.parse(inDoc), config)
 
 });
 
@@ -24,7 +24,7 @@ describe('fsh Logical test', () => {
          * ^name = MylogicalExtension
          ^status = #active`
 
-    const element:TemplateElement = {
+    const element:TemplateNode = {
       children: [], inputs: [], parentNode: undefined,
       annotations: undefined,
       aqlPath: '',

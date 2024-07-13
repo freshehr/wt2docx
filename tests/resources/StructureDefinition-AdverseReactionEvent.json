@@ -1,0 +1,1085 @@
+{
+  "resourceType" : "StructureDefinition",
+  "id" : "AdverseReactionEvent",
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border: 0px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top;\"><tr style=\"border: 1px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top\"><th style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"The logical name of the element\">Name</a></th><th style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Information about the use of the element\">Flags</a></th><th style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Minimum and Maximum # of times the the element can appear in the instance\">Card.</a></th><th style=\"width: 100px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Reference to the type of the element\">Type</a></th><th style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Additional information about the element\">Description &amp; Constraints</a><span style=\"float: right\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Legend for this format\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3goXBCwdPqAP0wAAAldJREFUOMuNk0tIlFEYhp9z/vE2jHkhxXA0zJCMitrUQlq4lnSltEqCFhFG2MJFhIvIFpkEWaTQqjaWZRkp0g26URZkTpbaaOJkDqk10szoODP//7XIMUe0elcfnPd9zsfLOYplGrpRwZaqTtw3K7PtGem7Q6FoidbGgqHVy/HRb669R+56zx7eRV1L31JGxYbBtjKK93cxeqfyQHbehkZbUkK20goELEuIzEd+dHS+qz/Y8PTSif0FnGkbiwcAjHaU1+QWOptFiyCLp/LnKptpqIuXHx6rbR26kJcBX3yLgBfnd7CxwJmflpP2wUg0HIAoUUpZBmKzELGWcN8nAr6Gpu7tLU/CkwAaoKTWRSQyt89Q8w6J+oVQkKnBoblH7V0PPvUOvDYXfopE/SJmALsxnVm6LbkotrUtNowMeIrVrBcBpaMmdS0j9df7abpSuy7HWehwJdt1lhVwi/J58U5beXGAF6c3UXLycw1wdFklArBn87xdh0ZsZtArghBdAA3+OEDVubG4UEzP6x1FOWneHh2VDAHBAt80IbdXDcesNoCvs3E5AFyNSU5nbrDPZpcUEQQTFZiEVx+51fxMhhyJEAgvlriadIJZZksRuwBYMOPBbO3hePVVqgEJhFeUuFLhIPkRP6BQLIBrmMenujm/3g4zc398awIe90Zb5A1vREALqneMcYgP/xVQWlG+Ncu5vgwwlaUNx+3799rfe96u9K0JSDXcOzOTJg4B6IgmXfsygc7/Bvg9g9E58/cDVmGIBOP/zT8Bz1zqWqpbXIsd0O9hajXfL6u4BaOS6SeWAAAAAElFTkSuQmCC\" alt=\"doco\" style=\"background-color: inherit\"/></a></span></th></tr><tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck1.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_element.gif\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Element\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent\" title=\"Information about a specific adverse reaction event caused by exposure to a specific substance.\">AdverseReactionEvent</a><a name=\"AdverseReactionEvent\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..*</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://build.fhir.org/types.html#Base\">Base</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Adverse Reaction Event<br/><span style=\"font-weight:bold\">Instances of this logical model are not marked to be the target of a Reference</span><br/></td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck01.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin_end.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_datatype.gif\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items\">Items</a><a name=\"AdverseReactionEvent.Items\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/datatypes.html#BackboneElement\">BackboneElement</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Items</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_datatype.gif\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Specificsubstance\" title=\"The substance considered to be responsible for the specific adverse reaction event.\">Specificsubstance</a><a name=\"AdverseReactionEvent.Items.Specificsubstance\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/datatypes.html#CodeableConcept\">CodeableConcept</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Specific substance</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_datatype.gif\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Certainty\" title=\"The degree of clinical certainty that the 'Manifestation' in this reaction event was caused by exposure to the identified 'Specific substance'.\">Certainty</a><a name=\"AdverseReactionEvent.Items.Certainty\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/datatypes.html#CodeableConcept\">CodeableConcept</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Certainty</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_datatype.gif\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Manifestation\" title=\"Clinical symptoms and/or signs that are observed or associated with the adverse reaction.\">Manifestation</a><a name=\"AdverseReactionEvent.Items.Manifestation\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..*</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/datatypes.html#CodeableConcept\">CodeableConcept</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Manifestation<br/></td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Reactiondescription\" title=\"Narrative description about the adverse reaction as a whole, including details of the manifestation if required.\">Reactiondescription</a><a name=\"AdverseReactionEvent.Items.Reactiondescription\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Reaction description</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Onsetofreaction\" title=\"The date and/or time of the onset of the reaction.\">Onsetofreaction</a><a name=\"AdverseReactionEvent.Items.Onsetofreaction\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/datatypes.html#dateTime\">dateTime</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Onset of reaction</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_datatype.gif\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Severityofreaction\" title=\"Clinical assessment of the severity of the reaction event as a whole, potentially considering multiple different manifestations.\">Severityofreaction</a><a name=\"AdverseReactionEvent.Items.Severityofreaction\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/datatypes.html#CodeableConcept\">CodeableConcept</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Severity of reaction</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_reference.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Reference to another Resource\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Reactiondetails\" title=\"Additional details about the adverse reaction.\">Reactiondetails</a><a name=\"AdverseReactionEvent.Items.Reactiondetails\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/references.html\">Reference</a>()</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Reaction details</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Initialexposure\" title=\"The date and/or time of the first exposure to the Substance for this Reaction Event.\">Initialexposure</a><a name=\"AdverseReactionEvent.Items.Initialexposure\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/datatypes.html#dateTime\">dateTime</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Initial exposure</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Routeofexposure\" title=\"The route by which the subject was exposed to the identified 'Specific substance'.\">Routeofexposure</a><a name=\"AdverseReactionEvent.Items.Routeofexposure\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Route of exposure</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Exposuredescription\" title=\"Narrative description about the exposure to the identified 'Specific substance'.\">Exposuredescription</a><a name=\"AdverseReactionEvent.Items.Exposuredescription\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Exposure description</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_reference.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Reference to another Resource\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Exposuredetails\" title=\"Additional details about exposure to the 'Specific substance'.\">Exposuredetails</a><a name=\"AdverseReactionEvent.Items.Exposuredetails\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/references.html\">Reference</a>()</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Exposure details</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Clinicalmanagementdescription\" title=\"Narrative description about the clinical management provided.\">Clinicalmanagementdescription</a><a name=\"AdverseReactionEvent.Items.Clinicalmanagementdescription\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Clinical management description</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_reference.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Reference to another Resource\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Clinicalmanagementdetails\" title=\"Additional structured details about clinical management for this reaction event.\">Clinicalmanagementdetails</a><a name=\"AdverseReactionEvent.Items.Clinicalmanagementdetails\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/references.html\">Reference</a>()</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Clinical management details</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_reference.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Reference to another Resource\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Reportingdetails\" title=\"Additional structured details required for reporting to regulatory bodies.\">Reportingdetails</a><a name=\"AdverseReactionEvent.Items.Reportingdetails\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/references.html\">Reference</a>()</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Reporting details</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck010.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_reference.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Reference to another Resource\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Informationsource\" title=\"Details about the provenance of the information.\">Informationsource</a><a name=\"AdverseReactionEvent.Items.Informationsource\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/references.html\">Reference</a>()</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Information source</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck000.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_blank.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin_end.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-AdverseReactionEvent-definitions.html#AdverseReactionEvent.Items.Comment\" title=\"Additional narrative about the adverse reaction event not captured in other fields.\">Comment</a><a name=\"AdverseReactionEvent.Items.Comment\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"padding-left: 3px; padding-right: 3px; color: white; background-color: red\" title=\"This element must be supported\">S</span></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">0..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Comment</td></tr>\r\n<tr><td colspan=\"5\" class=\"hierarchy\"><br/><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Legend for this format\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3goXBCwdPqAP0wAAAldJREFUOMuNk0tIlFEYhp9z/vE2jHkhxXA0zJCMitrUQlq4lnSltEqCFhFG2MJFhIvIFpkEWaTQqjaWZRkp0g26URZkTpbaaOJkDqk10szoODP//7XIMUe0elcfnPd9zsfLOYplGrpRwZaqTtw3K7PtGem7Q6FoidbGgqHVy/HRb669R+56zx7eRV1L31JGxYbBtjKK93cxeqfyQHbehkZbUkK20goELEuIzEd+dHS+qz/Y8PTSif0FnGkbiwcAjHaU1+QWOptFiyCLp/LnKptpqIuXHx6rbR26kJcBX3yLgBfnd7CxwJmflpP2wUg0HIAoUUpZBmKzELGWcN8nAr6Gpu7tLU/CkwAaoKTWRSQyt89Q8w6J+oVQkKnBoblH7V0PPvUOvDYXfopE/SJmALsxnVm6LbkotrUtNowMeIrVrBcBpaMmdS0j9df7abpSuy7HWehwJdt1lhVwi/J58U5beXGAF6c3UXLycw1wdFklArBn87xdh0ZsZtArghBdAA3+OEDVubG4UEzP6x1FOWneHh2VDAHBAt80IbdXDcesNoCvs3E5AFyNSU5nbrDPZpcUEQQTFZiEVx+51fxMhhyJEAgvlriadIJZZksRuwBYMOPBbO3hePVVqgEJhFeUuFLhIPkRP6BQLIBrmMenujm/3g4zc398awIe90Zb5A1vREALqneMcYgP/xVQWlG+Ncu5vgwwlaUNx+3799rfe96u9K0JSDXcOzOTJg4B6IgmXfsygc7/Bvg9g9E58/cDVmGIBOP/zT8Bz1zqWqpbXIsd0O9hajXfL6u4BaOS6SeWAAAAAElFTkSuQmCC\" alt=\"doco\" style=\"background-color: inherit\"/> Documentation for this format</a></td></tr></table></div>"
+  },
+  "url" : "https://aehrc.csiro.au/fhir/logical-models/AdverseReactionEvent",
+  "identifier" : [{
+    "system" : "https://aehrc.csiro.au/id/archetype_id",
+    "value" : "openEHR-EHR-CLUSTER.adverse_reaction_event.v1"
+  }],
+  "version" : "0.0.1",
+  "name" : "AdverseReactionEvent",
+  "title" : "Adverse Reaction Event",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2023-09-11T00:54:09+10:00",
+  "publisher" : "CSIRO",
+  "contact" : [{
+    "name" : "CSIRO",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://aehrc.csiro.au/"
+    }]
+  },
+  {
+    "name" : "AU logical models",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://aehrc.csiro.au/"
+    }]
+  }],
+  "description" : "The Adverse Reaction Event Logical Model Mindmap is shown below.\n\n<div><img src='data:image/png;base64,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'/></div>\n\nInformation about a specific adverse reaction event caused by exposure to a specific substance.\n\n**Purpose**\n\nTo record information about a specific adverse reaction event caused by exposure to a specific substance.\n\n**Misuse**\n\nNot to be used to record adverse events, including failures of clinical process, interventions or products. For example: abnormal use or mistakes/errors made in maladministration of an agent or substance; incorrect dosage; mislabelling; harm or injury caused by an intervention or procedure; overdose/poisoning etc. Use a specific archetype for this purpose.\n\n**Considerations**\n\nUse to record information about a specific adverse reaction event caused by exposure to a specific substance. The substance may be recorded in the 'Specific substance' element in this archetype, or in an appropriate element in the parent archetype in which this archetype is nested.\r\n\r\nThis archetype is designed to be nested within the EVALUATION.adverse_reaction_risk or the OBSERVATION.adverse_reaction_monitoring archetypes, to record details about a specific reaction event, but it could also be nested within other archetypes where clinically appropriate.\r\n\r\nThe scope of this archetype has deliberately focused on identifying a pragmatic data set that are used in most clinical systems or will be suitable for most common clinical scenarios; however, it permits extension of the model when additional detail is required, using the 'Reaction details', 'Exposure details', and 'Reporting details' slots. An extension may be required if a specialist allergist or immunologist needed to record a more detailed assessment as part of a report to regulatory bodies or within the context of a clinical trial.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "http://unstats.un.org/unsd/methods/m49/m49.htm",
+      "code" : "036",
+      "display" : "Australia (AUS)"
+    }]
+  }],
+  "fhirVersion" : "4.0.1",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "https://aehrc.csiro.au/fhir/logical-models/AdverseReactionEvent",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Base",
+  "derivation" : "specialization",
+  "snapshot" : {
+    "element" : [{
+      "id" : "AdverseReactionEvent",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0000"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "Use to record information about a specific adverse reaction event caused by exposure to a specific substance. The substance may be recorded in the 'Specific substance' element in this archetype, or in an appropriate element in the parent archetype in which this archetype is nested.\r\n\r\nThis archetype is designed to be nested within the EVALUATION.adverse_reaction_risk or the OBSERVATION.adverse_reaction_monitoring archetypes, to record details about a specific reaction event, but it could also be nested within other archetypes where clinically appropriate.\r\n\r\nThe scope of this archetype has deliberately focused on identifying a pragmatic data set that are used in most clinical systems or will be suitable for most common clinical scenarios; however, it permits extension of the model when additional detail is required, using the 'Reaction details', 'Exposure details', and 'Reporting details' slots. An extension may be required if a specialist allergist or immunologist needed to record a more detailed assessment as part of a report to regulatory bodies or within the context of a clinical trial."
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-misuse",
+        "valueString" : "Not to be used to record adverse events, including failures of clinical process, interventions or products. For example: abnormal use or mistakes/errors made in maladministration of an agent or substance; incorrect dosage; mislabelling; harm or injury caused by an intervention or procedure; overdose/poisoning etc. Use a specific archetype for this purpose."
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-purpose",
+        "valueString" : "To record information about a specific adverse reaction event caused by exposure to a specific substance."
+      }],
+      "path" : "AdverseReactionEvent",
+      "short" : "Adverse Reaction Event",
+      "definition" : "Information about a specific adverse reaction event caused by exposure to a specific substance.",
+      "comment" : "**Purpose**\n\nTo record information about a specific adverse reaction event caused by exposure to a specific substance.\n\n**Misuse**\n\nNot to be used to record adverse events, including failures of clinical process, interventions or products. For example: abnormal use or mistakes/errors made in maladministration of an agent or substance; incorrect dosage; mislabelling; harm or injury caused by an intervention or procedure; overdose/poisoning etc. Use a specific archetype for this purpose.\n\n**Considerations**\n\nUse to record information about a specific adverse reaction event caused by exposure to a specific substance. The substance may be recorded in the 'Specific substance' element in this archetype, or in an appropriate element in the parent archetype in which this archetype is nested.\r\n\r\nThis archetype is designed to be nested within the EVALUATION.adverse_reaction_risk or the OBSERVATION.adverse_reaction_monitoring archetypes, to record details about a specific reaction event, but it could also be nested within other archetypes where clinically appropriate.\r\n\r\nThe scope of this archetype has deliberately focused on identifying a pragmatic data set that are used in most clinical systems or will be suitable for most common clinical scenarios; however, it permits extension of the model when additional detail is required, using the 'Reaction details', 'Exposure details', and 'Reporting details' slots. An extension may be required if a specialist allergist or immunologist needed to record a more detailed assessment as part of a report to regulatory bodies or within the context of a clinical trial.",
+      "min" : 0,
+      "max" : "*",
+      "base" : {
+        "path" : "Base",
+        "min" : 0,
+        "max" : "*"
+      },
+      "mustSupport" : true,
+      "isModifier" : false
+    },
+    {
+      "id" : "AdverseReactionEvent.Items",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "items"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items",
+      "short" : "Items",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "BackboneElement"
+      }],
+      "constraint" : [{
+        "key" : "ele-1",
+        "severity" : "error",
+        "human" : "All FHIR elements must have a @value or children",
+        "expression" : "hasValue() or (children().count() > id.count())",
+        "xpath" : "@value|f:*|h:div",
+        "source" : "http://hl7.org/fhir/StructureDefinition/Element"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.id",
+      "path" : "AdverseReactionEvent.Items.id",
+      "representation" : ["xmlAttr"],
+      "short" : "Unique id for inter-element referencing",
+      "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "Element.id",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type",
+          "valueUrl" : "string"
+        }],
+        "code" : "http://hl7.org/fhirpath/System.String"
+      }],
+      "isModifier" : false,
+      "isSummary" : false,
+      "mapping" : [{
+        "identity" : "rim",
+        "map" : "n/a"
+      }]
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.extension",
+      "path" : "AdverseReactionEvent.Items.extension",
+      "slicing" : {
+        "discriminator" : [{
+          "type" : "value",
+          "path" : "url"
+        }],
+        "description" : "Extensions are always sliced by (at least) url",
+        "rules" : "open"
+      },
+      "short" : "Additional content defined by implementations",
+      "definition" : "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+      "comment" : "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+      "alias" : ["extensions",
+      "user content"],
+      "min" : 0,
+      "max" : "*",
+      "base" : {
+        "path" : "Element.extension",
+        "min" : 0,
+        "max" : "*"
+      },
+      "type" : [{
+        "code" : "Extension"
+      }],
+      "constraint" : [{
+        "key" : "ele-1",
+        "severity" : "error",
+        "human" : "All FHIR elements must have a @value or children",
+        "expression" : "hasValue() or (children().count() > id.count())",
+        "xpath" : "@value|f:*|h:div",
+        "source" : "http://hl7.org/fhir/StructureDefinition/Element"
+      },
+      {
+        "key" : "ext-1",
+        "severity" : "error",
+        "human" : "Must have either extensions or value[x], not both",
+        "expression" : "extension.exists() != value.exists()",
+        "xpath" : "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+        "source" : "http://hl7.org/fhir/StructureDefinition/Extension"
+      }],
+      "isModifier" : false,
+      "isSummary" : false,
+      "mapping" : [{
+        "identity" : "rim",
+        "map" : "n/a"
+      }]
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.modifierExtension",
+      "path" : "AdverseReactionEvent.Items.modifierExtension",
+      "short" : "Extensions that cannot be ignored even if unrecognized",
+      "definition" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+      "comment" : "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+      "requirements" : "Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](http://hl7.org/fhir/R4/extensibility.html#modifierExtension).",
+      "alias" : ["extensions",
+      "user content",
+      "modifiers"],
+      "min" : 0,
+      "max" : "*",
+      "base" : {
+        "path" : "BackboneElement.modifierExtension",
+        "min" : 0,
+        "max" : "*"
+      },
+      "type" : [{
+        "code" : "Extension"
+      }],
+      "constraint" : [{
+        "key" : "ele-1",
+        "severity" : "error",
+        "human" : "All FHIR elements must have a @value or children",
+        "expression" : "hasValue() or (children().count() > id.count())",
+        "xpath" : "@value|f:*|h:div",
+        "source" : "http://hl7.org/fhir/StructureDefinition/Element"
+      },
+      {
+        "key" : "ext-1",
+        "severity" : "error",
+        "human" : "Must have either extensions or value[x], not both",
+        "expression" : "extension.exists() != value.exists()",
+        "xpath" : "exists(f:extension)!=exists(f:*[starts-with(local-name(.), \"value\")])",
+        "source" : "http://hl7.org/fhir/StructureDefinition/Extension"
+      }],
+      "isModifier" : true,
+      "isModifierReason" : "Modifier extensions are expected to modify the meaning or interpretation of the element that contains them",
+      "isSummary" : true,
+      "mapping" : [{
+        "identity" : "rim",
+        "map" : "N/A"
+      }]
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Specificsubstance",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0001"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "For example: 'Amoxycillin'. Only an individual substance is a valid entry in 'Specific substance'. A substance may be a compound of simpler substances, for example a medicinal product. If the 'Substance' recorded in the archetype in which this archetype is nested is an individual substance and not a substance class, then it may be duplicated in this data element, or this element may be redundant. It is strongly recommended that 'Specific substance' be coded with a terminology, for example: RxNorm, SNOMED CT, DM+D, NDFRT, ICD-9, ICD-10, UNI, ATC or CPT."
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-display-hint",
+        "valueString" : "orientation:right"
+      }],
+      "path" : "AdverseReactionEvent.Items.Specificsubstance",
+      "short" : "Specific substance",
+      "definition" : "The substance considered to be responsible for the specific adverse reaction event.",
+      "comment" : "**Considerations**\n\nFor example: 'Amoxycillin'. Only an individual substance is a valid entry in 'Specific substance'. A substance may be a compound of simpler substances, for example a medicinal product. If the 'Substance' recorded in the archetype in which this archetype is nested is an individual substance and not a substance class, then it may be duplicated in this data element, or this element may be redundant. It is strongly recommended that 'Specific substance' be coded with a terminology, for example: RxNorm, SNOMED CT, DM+D, NDFRT, ICD-9, ICD-10, UNI, ATC or CPT.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Specificsubstance",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "CodeableConcept"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Certainty",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0002"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "The free text data type will allow for local variation by enabling other value sets to be applied to this data element in a template - in this situation it is recommended that values should be coded using a terminology."
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-display-hint",
+        "valueString" : "orientation:right"
+      }],
+      "path" : "AdverseReactionEvent.Items.Certainty",
+      "short" : "Certainty",
+      "definition" : "The degree of clinical certainty that the 'Manifestation' in this reaction event was caused by exposure to the identified 'Specific substance'.",
+      "comment" : "**Considerations**\n\nThe free text data type will allow for local variation by enabling other value sets to be applied to this data element in a template - in this situation it is recommended that values should be coded using a terminology.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Certainty",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "CodeableConcept"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Manifestation",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0006"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "Manifestation can be expressed as a single word, phrase or brief description. For example: nausea, rash. 'No reaction' may be appropriate where a previous reaction has been noted but the reaction did not re-occur after further exposure. It is preferable that 'Manifestation' should be coded with a terminology, where possible. The values entered here may be used to display on an application screen as part of a list of adverse reactions."
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-display-hint",
+        "valueString" : "orientation:right"
+      }],
+      "path" : "AdverseReactionEvent.Items.Manifestation",
+      "short" : "Manifestation",
+      "definition" : "Clinical symptoms and/or signs that are observed or associated with the adverse reaction.",
+      "comment" : "**Considerations**\n\nManifestation can be expressed as a single word, phrase or brief description. For example: nausea, rash. 'No reaction' may be appropriate where a previous reaction has been noted but the reaction did not re-occur after further exposure. It is preferable that 'Manifestation' should be coded with a terminology, where possible. The values entered here may be used to display on an application screen as part of a list of adverse reactions.",
+      "min" : 0,
+      "max" : "*",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Manifestation",
+        "min" : 0,
+        "max" : "*"
+      },
+      "type" : [{
+        "code" : "CodeableConcept"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Reactiondescription",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0007"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Reactiondescription",
+      "short" : "Reaction description",
+      "definition" : "Narrative description about the adverse reaction as a whole, including details of the manifestation if required.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Reactiondescription",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "string"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Onsetofreaction",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0008"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Onsetofreaction",
+      "short" : "Onset of reaction",
+      "definition" : "The date and/or time of the onset of the reaction.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Onsetofreaction",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "dateTime"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Severityofreaction",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0010"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "It is acknowledged that this assessment is very subjective. There may be some some specific practice domains where objective scales have been applied. Objective scales can be included in this model using the 'Reaction details' Cluster."
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-display-hint",
+        "valueString" : "orientation:right"
+      }],
+      "path" : "AdverseReactionEvent.Items.Severityofreaction",
+      "short" : "Severity of reaction",
+      "definition" : "Clinical assessment of the severity of the reaction event as a whole, potentially considering multiple different manifestations.",
+      "comment" : "**Considerations**\n\nIt is acknowledged that this assessment is very subjective. There may be some some specific practice domains where objective scales have been applied. Objective scales can be included in this model using the 'Reaction details' Cluster.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Severityofreaction",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "CodeableConcept"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Reactiondetails",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0014"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "May include structured detail about symptoms; the anatomical location of the manifestation; grading, classification or formal severity assessments such as Common Terminology Criteria for Adverse Events; or a media representation."
+      }],
+      "path" : "AdverseReactionEvent.Items.Reactiondetails",
+      "short" : "Reaction details",
+      "definition" : "Additional details about the adverse reaction.",
+      "comment" : "**Considerations**\n\nMay include structured detail about symptoms; the anatomical location of the manifestation; grading, classification or formal severity assessments such as Common Terminology Criteria for Adverse Events; or a media representation.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Reactiondetails",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "Reference"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Initialexposure",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0015"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "Exposure can be more complicated by more than one exposure events leading to a reaction. Further details about the nature of the exposure can be provided by use of additional archetypes in the 'Exposure details' SLOT or as text in the 'Exposure description'."
+      }],
+      "path" : "AdverseReactionEvent.Items.Initialexposure",
+      "short" : "Initial exposure",
+      "definition" : "The date and/or time of the first exposure to the Substance for this Reaction Event.",
+      "comment" : "**Considerations**\n\nExposure can be more complicated by more than one exposure events leading to a reaction. Further details about the nature of the exposure can be provided by use of additional archetypes in the 'Exposure details' SLOT or as text in the 'Exposure description'.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Initialexposure",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "dateTime"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Routeofexposure",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0017"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "Coding of the Route of Exposure with a terminology should be used wherever possible."
+      }],
+      "path" : "AdverseReactionEvent.Items.Routeofexposure",
+      "short" : "Route of exposure",
+      "definition" : "The route by which the subject was exposed to the identified 'Specific substance'.",
+      "comment" : "**Considerations**\n\nCoding of the Route of Exposure with a terminology should be used wherever possible.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Routeofexposure",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "string"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Exposuredescription",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0018"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Exposuredescription",
+      "short" : "Exposure description",
+      "definition" : "Narrative description about the exposure to the identified 'Specific substance'.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Exposuredescription",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "string"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Exposuredetails",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0019"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Exposuredetails",
+      "short" : "Exposure details",
+      "definition" : "Additional details about exposure to the 'Specific substance'.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Exposuredetails",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "Reference"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Clinicalmanagementdescription",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0020"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Clinicalmanagementdescription",
+      "short" : "Clinical management description",
+      "definition" : "Narrative description about the clinical management provided.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Clinicalmanagementdescription",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "string"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Clinicalmanagementdetails",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0021"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Clinicalmanagementdetails",
+      "short" : "Clinical management details",
+      "definition" : "Additional structured details about clinical management for this reaction event.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Clinicalmanagementdetails",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "Reference"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Reportingdetails",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0022"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Reportingdetails",
+      "short" : "Reporting details",
+      "definition" : "Additional structured details required for reporting to regulatory bodies.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Reportingdetails",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "Reference"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Informationsource",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0023"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "This SLOT is intended to provide details about the source of information for this particular 'Reaction event'."
+      }],
+      "path" : "AdverseReactionEvent.Items.Informationsource",
+      "short" : "Information source",
+      "definition" : "Details about the provenance of the information.",
+      "comment" : "**Considerations**\n\nThis SLOT is intended to provide details about the source of information for this particular 'Reaction event'.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Informationsource",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "Reference"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Comment",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0024"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Comment",
+      "short" : "Comment",
+      "definition" : "Additional narrative about the adverse reaction event not captured in other fields.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "AdverseReactionEvent.Items.Comment",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "string"
+      }],
+      "mustSupport" : true
+    }]
+  },
+  "differential" : {
+    "element" : [{
+      "id" : "AdverseReactionEvent",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0000"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "Use to record information about a specific adverse reaction event caused by exposure to a specific substance. The substance may be recorded in the 'Specific substance' element in this archetype, or in an appropriate element in the parent archetype in which this archetype is nested.\r\n\r\nThis archetype is designed to be nested within the EVALUATION.adverse_reaction_risk or the OBSERVATION.adverse_reaction_monitoring archetypes, to record details about a specific reaction event, but it could also be nested within other archetypes where clinically appropriate.\r\n\r\nThe scope of this archetype has deliberately focused on identifying a pragmatic data set that are used in most clinical systems or will be suitable for most common clinical scenarios; however, it permits extension of the model when additional detail is required, using the 'Reaction details', 'Exposure details', and 'Reporting details' slots. An extension may be required if a specialist allergist or immunologist needed to record a more detailed assessment as part of a report to regulatory bodies or within the context of a clinical trial."
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-misuse",
+        "valueString" : "Not to be used to record adverse events, including failures of clinical process, interventions or products. For example: abnormal use or mistakes/errors made in maladministration of an agent or substance; incorrect dosage; mislabelling; harm or injury caused by an intervention or procedure; overdose/poisoning etc. Use a specific archetype for this purpose."
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-purpose",
+        "valueString" : "To record information about a specific adverse reaction event caused by exposure to a specific substance."
+      }],
+      "path" : "AdverseReactionEvent",
+      "short" : "Adverse Reaction Event",
+      "definition" : "Information about a specific adverse reaction event caused by exposure to a specific substance.",
+      "comment" : "**Purpose**\n\nTo record information about a specific adverse reaction event caused by exposure to a specific substance.\n\n**Misuse**\n\nNot to be used to record adverse events, including failures of clinical process, interventions or products. For example: abnormal use or mistakes/errors made in maladministration of an agent or substance; incorrect dosage; mislabelling; harm or injury caused by an intervention or procedure; overdose/poisoning etc. Use a specific archetype for this purpose.\n\n**Considerations**\n\nUse to record information about a specific adverse reaction event caused by exposure to a specific substance. The substance may be recorded in the 'Specific substance' element in this archetype, or in an appropriate element in the parent archetype in which this archetype is nested.\r\n\r\nThis archetype is designed to be nested within the EVALUATION.adverse_reaction_risk or the OBSERVATION.adverse_reaction_monitoring archetypes, to record details about a specific reaction event, but it could also be nested within other archetypes where clinically appropriate.\r\n\r\nThe scope of this archetype has deliberately focused on identifying a pragmatic data set that are used in most clinical systems or will be suitable for most common clinical scenarios; however, it permits extension of the model when additional detail is required, using the 'Reaction details', 'Exposure details', and 'Reporting details' slots. An extension may be required if a specialist allergist or immunologist needed to record a more detailed assessment as part of a report to regulatory bodies or within the context of a clinical trial.",
+      "min" : 0,
+      "max" : "*",
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "items"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items",
+      "short" : "Items",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "BackboneElement"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Specificsubstance",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0001"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "For example: 'Amoxycillin'. Only an individual substance is a valid entry in 'Specific substance'. A substance may be a compound of simpler substances, for example a medicinal product. If the 'Substance' recorded in the archetype in which this archetype is nested is an individual substance and not a substance class, then it may be duplicated in this data element, or this element may be redundant. It is strongly recommended that 'Specific substance' be coded with a terminology, for example: RxNorm, SNOMED CT, DM+D, NDFRT, ICD-9, ICD-10, UNI, ATC or CPT."
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-display-hint",
+        "valueString" : "orientation:right"
+      }],
+      "path" : "AdverseReactionEvent.Items.Specificsubstance",
+      "short" : "Specific substance",
+      "definition" : "The substance considered to be responsible for the specific adverse reaction event.",
+      "comment" : "**Considerations**\n\nFor example: 'Amoxycillin'. Only an individual substance is a valid entry in 'Specific substance'. A substance may be a compound of simpler substances, for example a medicinal product. If the 'Substance' recorded in the archetype in which this archetype is nested is an individual substance and not a substance class, then it may be duplicated in this data element, or this element may be redundant. It is strongly recommended that 'Specific substance' be coded with a terminology, for example: RxNorm, SNOMED CT, DM+D, NDFRT, ICD-9, ICD-10, UNI, ATC or CPT.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "CodeableConcept"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Certainty",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0002"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "The free text data type will allow for local variation by enabling other value sets to be applied to this data element in a template - in this situation it is recommended that values should be coded using a terminology."
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-display-hint",
+        "valueString" : "orientation:right"
+      }],
+      "path" : "AdverseReactionEvent.Items.Certainty",
+      "short" : "Certainty",
+      "definition" : "The degree of clinical certainty that the 'Manifestation' in this reaction event was caused by exposure to the identified 'Specific substance'.",
+      "comment" : "**Considerations**\n\nThe free text data type will allow for local variation by enabling other value sets to be applied to this data element in a template - in this situation it is recommended that values should be coded using a terminology.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "CodeableConcept"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Manifestation",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0006"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "Manifestation can be expressed as a single word, phrase or brief description. For example: nausea, rash. 'No reaction' may be appropriate where a previous reaction has been noted but the reaction did not re-occur after further exposure. It is preferable that 'Manifestation' should be coded with a terminology, where possible. The values entered here may be used to display on an application screen as part of a list of adverse reactions."
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-display-hint",
+        "valueString" : "orientation:right"
+      }],
+      "path" : "AdverseReactionEvent.Items.Manifestation",
+      "short" : "Manifestation",
+      "definition" : "Clinical symptoms and/or signs that are observed or associated with the adverse reaction.",
+      "comment" : "**Considerations**\n\nManifestation can be expressed as a single word, phrase or brief description. For example: nausea, rash. 'No reaction' may be appropriate where a previous reaction has been noted but the reaction did not re-occur after further exposure. It is preferable that 'Manifestation' should be coded with a terminology, where possible. The values entered here may be used to display on an application screen as part of a list of adverse reactions.",
+      "min" : 0,
+      "max" : "*",
+      "type" : [{
+        "code" : "CodeableConcept"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Reactiondescription",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0007"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Reactiondescription",
+      "short" : "Reaction description",
+      "definition" : "Narrative description about the adverse reaction as a whole, including details of the manifestation if required.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "string"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Onsetofreaction",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0008"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Onsetofreaction",
+      "short" : "Onset of reaction",
+      "definition" : "The date and/or time of the onset of the reaction.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "dateTime"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Severityofreaction",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0010"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "It is acknowledged that this assessment is very subjective. There may be some some specific practice domains where objective scales have been applied. Objective scales can be included in this model using the 'Reaction details' Cluster."
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-display-hint",
+        "valueString" : "orientation:right"
+      }],
+      "path" : "AdverseReactionEvent.Items.Severityofreaction",
+      "short" : "Severity of reaction",
+      "definition" : "Clinical assessment of the severity of the reaction event as a whole, potentially considering multiple different manifestations.",
+      "comment" : "**Considerations**\n\nIt is acknowledged that this assessment is very subjective. There may be some some specific practice domains where objective scales have been applied. Objective scales can be included in this model using the 'Reaction details' Cluster.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "CodeableConcept"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Reactiondetails",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0014"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "May include structured detail about symptoms; the anatomical location of the manifestation; grading, classification or formal severity assessments such as Common Terminology Criteria for Adverse Events; or a media representation."
+      }],
+      "path" : "AdverseReactionEvent.Items.Reactiondetails",
+      "short" : "Reaction details",
+      "definition" : "Additional details about the adverse reaction.",
+      "comment" : "**Considerations**\n\nMay include structured detail about symptoms; the anatomical location of the manifestation; grading, classification or formal severity assessments such as Common Terminology Criteria for Adverse Events; or a media representation.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "Reference"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Initialexposure",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0015"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "Exposure can be more complicated by more than one exposure events leading to a reaction. Further details about the nature of the exposure can be provided by use of additional archetypes in the 'Exposure details' SLOT or as text in the 'Exposure description'."
+      }],
+      "path" : "AdverseReactionEvent.Items.Initialexposure",
+      "short" : "Initial exposure",
+      "definition" : "The date and/or time of the first exposure to the Substance for this Reaction Event.",
+      "comment" : "**Considerations**\n\nExposure can be more complicated by more than one exposure events leading to a reaction. Further details about the nature of the exposure can be provided by use of additional archetypes in the 'Exposure details' SLOT or as text in the 'Exposure description'.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "dateTime"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Routeofexposure",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0017"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "Coding of the Route of Exposure with a terminology should be used wherever possible."
+      }],
+      "path" : "AdverseReactionEvent.Items.Routeofexposure",
+      "short" : "Route of exposure",
+      "definition" : "The route by which the subject was exposed to the identified 'Specific substance'.",
+      "comment" : "**Considerations**\n\nCoding of the Route of Exposure with a terminology should be used wherever possible.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "string"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Exposuredescription",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0018"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Exposuredescription",
+      "short" : "Exposure description",
+      "definition" : "Narrative description about the exposure to the identified 'Specific substance'.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "string"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Exposuredetails",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0019"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Exposuredetails",
+      "short" : "Exposure details",
+      "definition" : "Additional details about exposure to the 'Specific substance'.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "Reference"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Clinicalmanagementdescription",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0020"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Clinicalmanagementdescription",
+      "short" : "Clinical management description",
+      "definition" : "Narrative description about the clinical management provided.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "string"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Clinicalmanagementdetails",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0021"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Clinicalmanagementdetails",
+      "short" : "Clinical management details",
+      "definition" : "Additional structured details about clinical management for this reaction event.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "Reference"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Reportingdetails",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0022"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Reportingdetails",
+      "short" : "Reporting details",
+      "definition" : "Additional structured details required for reporting to regulatory bodies.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "Reference"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Informationsource",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0023"
+        }
+      },
+      {
+        "url" : "https://aehrc.csiro.au/fhir/StructureDefinition/note-considerations",
+        "valueString" : "This SLOT is intended to provide details about the source of information for this particular 'Reaction event'."
+      }],
+      "path" : "AdverseReactionEvent.Items.Informationsource",
+      "short" : "Information source",
+      "definition" : "Details about the provenance of the information.",
+      "comment" : "**Considerations**\n\nThis SLOT is intended to provide details about the source of information for this particular 'Reaction event'.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "Reference"
+      }],
+      "mustSupport" : true
+    },
+    {
+      "id" : "AdverseReactionEvent.Items.Comment",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-identifier",
+        "valueIdentifier" : {
+          "system" : "https://aehrc.csiro.au/id/archetype_id/openEHR-EHR-CLUSTER.adverse_reaction_event.v1",
+          "value" : "at0024"
+        }
+      }],
+      "path" : "AdverseReactionEvent.Items.Comment",
+      "short" : "Comment",
+      "definition" : "Additional narrative about the adverse reaction event not captured in other fields.",
+      "min" : 0,
+      "max" : "1",
+      "type" : [{
+        "code" : "string"
+      }],
+      "mustSupport" : true
+    }]
+  }
+}
