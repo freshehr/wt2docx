@@ -1,15 +1,14 @@
-import { findParentNodeId, TemplateElement } from './TemplateElement';
+import { findParentNodeId, TemplateNode } from './TemplateNodes';
 import { WebTemplate } from "./WebTemplate";
 import {
   isActivity,
-  isAnyChoice,
+  isAnyChoice, isArchetype, isCluster, isComposition,
   isDataValue,
   isEntry,
   isEvent,
-  isSection
-} from "./TemplateTypes";
+  isSection,
+} from './TemplateTypes';
 import { StringBuilder } from "./StringBuilder";
-import { Config } from "./Config";
 import rmDescriptions from "../resources/rm_descriptions.json";
 import {
   ExportFormat,
@@ -23,7 +22,7 @@ import {
   formatObservationEvent,
   formatTemplateHeader,
   formatUnsupported
-} from "./DocFormatter";
+} from "./formatters/DocFormatter";
 import {
   formatDvCodedText,
   formatDvCount,
@@ -120,8 +119,8 @@ export class DocBuilder {
     }
   }
 
-  private walkNonRMChildren(f: TemplateElement) {
-    this.walkChildren(f, true)
+  private async walkNonRMChildren(f: TemplateNode) {
+    await this.walkChildren(f, true)
   }
 
   private async walk(f: TemplateNode) {
@@ -130,22 +129,20 @@ export class DocBuilder {
       // Only Update the lists if the augment operation has been successful
       await this.augmentArchetypeMetadata(f);
     }
-
     if (isComposition(f.rmType))
-
       await this.walkComposition(f)
     else if (isCluster(f.rmType))
-     await this.walkCluster(f)
+      await this.walkCluster(f)
     else if (isEntry(f.rmType))
       await this.walkEntry(f)
     else if (isDataValue(f.rmType))
-      this.walkElement(f)
+      await this.walkElement(f)
     else if (isSection(f.rmType))
       await this.walkSection(f)
     else if (isEvent(f.rmType))
-      this.walkObservationEvent(f)
+      await this.walkObservationEvent(f)
     else if (isActivity(f.rmType))
-       this.walkInstructionActivity(f)
+      await this.walkInstructionActivity(f)
     else {
       switch (f.rmType) {
         case 'EVENT_CONTEXT':
@@ -167,7 +164,6 @@ export class DocBuilder {
     }
   }
 
-
   private async augmentArchetypeMetadata(f: TemplateNode) {
     await augmentWebTemplate(this, f)
       .then(() => updateArchetypeLists(this.remoteArchetypeList, this.candidateArchetypeList, this.localArchetypeList, getProvenance(f)))
@@ -186,62 +182,62 @@ export class DocBuilder {
       });
   }
 
-  private walkUnsupported(f: TemplateElement)
+  private async walkUnsupported(f: TemplateNode)
   {
     formatUnsupported(this,f);
   }
 
   private async walkCluster(f: TemplateNode) {
     formatCluster(this, f)
-    this.walkChildren(f);
+    await this.walkChildren(f);
   }
 
-  private walkObservationEvent(f: TemplateElement) {
+  private async walkObservationEvent(f: TemplateNode) {
     formatObservationEvent(this, f)
-    this.walkChildren(f);
+    await this.walkChildren(f);
   }
 
-  private walkComposition(f: TemplateElement) {
+  private async walkComposition(f: TemplateNode) {
     f.depth = 0;
     this.archetypeList.push({archetypeId: f.nodeId})
     formatCompositionHeader(this, f)
     formatNodeHeader(this);
-    this.walkRmChildren(f);
+    await this.walkRmChildren(f);
     formatNodeFooter(this,f);
-    this.walkNonRMChildren(f)
+    await this.walkNonRMChildren(f)
   }
 
-  private walkElement(f: TemplateElement) {
+  private walkElement(f: TemplateNode) {
     formatNodeContent(this, f, false)
     this.walkDataType(f)
  //   formatAnnotations(this,f);
   }
 
-  private walkChoice(f: TemplateElement) {
+  private async walkChoice(f: TemplateNode) {
     formatNodeContent(this, f, true)
-    this.walkDataType(f)
+    await this.walkDataType(f)
  //   formatAnnotations(this,f);
   }
 
-  private walkSection(f: TemplateElement) {
+  private async walkSection(f: TemplateNode) {
     if (!this.config?.skippedAQLPaths?.includes(f.aqlPath)) {
-      this.archetypeList.push(f.nodeId)
+ //     this.archetypeList.push(f.nodeId)
       formatLeafHeader(this, f)
     }
-    this.walkChildren(f)
+    await this.walkChildren(f)
   }
 
 
-  private walkEntry(f: TemplateElement) {
-    this.archetypeList.push(f.nodeId)
+  private async walkEntry(f: TemplateNode) {
+//    this.archetypeList.push(f.nodeId)
     formatLeafHeader(this, f)
     formatNodeHeader(this)
-    this.walkRmChildren(f);
-    this.walkNonRMChildren(f)
+    await this.walkRmChildren(f);
+    await this.walkNonRMChildren(f)
     formatNodeFooter(this,f)
   }
 
-  private walkCompositionContext(f: TemplateElement) {
+  private async walkCompositionContext(f: TemplateNode) {
     formatCompositionContextHeader(this, f);
     if (f.children?.length > 0) {
       formatNodeHeader(this)
@@ -251,9 +247,9 @@ export class DocBuilder {
     }
   }
 
-  private walkRmChildren(f: TemplateElement) {
+  private async walkRmChildren(f: TemplateNode) {
 
-    const rmAttributes = new Array<TemplateElement>();
+    const rmAttributes = new Array<TemplateNode>();
 
     if (f.children) {
       f.children.forEach((child) => {
@@ -282,7 +278,7 @@ export class DocBuilder {
 
   }
 
-  private stripExcludedRmTypes(childNode: TemplateElement, list: TemplateElement[]) {
+  private stripExcludedRmTypes(childNode: TemplateNode, list: TemplateNode[]) {
 
     if (!this.config.excludedRMTags.includes(childNode.id)) {
       list.push(childNode);
@@ -327,7 +323,7 @@ export class DocBuilder {
       return rmType
   }
 
-  private walkDataType(f: TemplateElement) {
+  private walkDataType(f: TemplateNode) {
 
     const adjustedRmType = this.adjustRmTypeForInterval(f.rmType);
 
@@ -366,7 +362,7 @@ export class DocBuilder {
     }
   }
 
-  public getDescription = (f: TemplateElement) => {
+  public getDescription = (f: TemplateNode) => {
     const language: string = 'en'
     if (!f.inContext)
       return this.getValueOfRecord(f.localizedDescriptions)
@@ -374,7 +370,7 @@ export class DocBuilder {
       let rmTag = f.id;
       if (f.id === 'time') {
 
-        const parent: TemplateElement = findParentNodeId(f);
+        const parent: TemplateNode = findParentNodeId(f);
         switch (parent.rmType){
           case 'ACTION':
             rmTag = 'action_time'
@@ -391,7 +387,7 @@ export class DocBuilder {
     }
   };
 
-  private walkChoiceHeader(f: TemplateElement) {
+  private async walkChoiceHeader(f: TemplateNode) {
 
     formatChoiceHeader(this,f)
     if (isAnyChoice(f.children.map(child => child.rmType)))
@@ -404,8 +400,8 @@ export class DocBuilder {
   }
 
 
-  private walkInstructionActivity(f: TemplateElement) {
+  private async walkInstructionActivity(f: TemplateNode) {
     formatInstructionActivity(this, f)
-    this.walkChildren(f);
+    await this.walkChildren(f);
   }
 }
