@@ -7,7 +7,7 @@ Template Id: **Generic Nurse Encounter**
 Version: **3.0.0**
 
 
-Created: **Sat Jul 06 2024**
+Created: **Sun Jul 14 2024**
 
 
 === Composition: *Generic Nurse Encounter*
@@ -19,8 +19,8 @@ Interaction, contact or care event between a subject of care and healthcare prov
 [options="header","stretch", cols="20,50,30"]
 |====
 |Data item | Description | Allowed values
-| **category** + 
- Type: `Coded text` (_mandatory_) | Temporal category of this Composition, persistent / episodic or event. 
+| **category** +
+ Type: `Coded text` (_mandatory_) | Temporal category of this Composition, persistent / episodic or event.
 a|
 
 * event +
@@ -44,20 +44,20 @@ A measurement of the body temperature, which is a surrogate for the core body te
 |Data item | Description | Allowed values
 3+a|===== Body temperature reading  **[multiple]**
 `EVENT: _at0003_`
-| **Temperature** + 
- Type: `Quantity` (_mandatory_) | The measured body temperature (as a surrogate for the core of the body). 
+| **Temperature** +
+ Type: `Quantity` (_mandatory_) | The measured body temperature (as a surrogate for the core of the body).
 a|
 
 Valid units: +
 
 * [degF]
 * Cel
-| **Confounding factors** + 
- Type: `Text` (_multiple_) | Additional issues or factors that may impact on the measurement of body temperature, not captured in other fields. 
+| **Confounding factors** +
+ Type: `Text` (_multiple_) | Additional issues or factors that may impact on the measurement of body temperature, not captured in other fields.
 a|
 
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
 |====
 ===  *Respirations*
@@ -71,15 +71,15 @@ The observed characteristics of spontaneous breathing as would commonly be recor
 |Data item | Description | Allowed values
 3+a|===== Respiration rate  **[multiple]**
 `EVENT: _at0002_`
-| **Respiratory rate** + 
- Type: `Quantity`  | Rate of respiration. 
+| **Respiratory rate** +
+ Type: `Quantity`  | Rate of respiration.
 a|
 
 Valid units: +
 
 * /min
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
 |====
 ===  *Heart Rate*
@@ -93,15 +93,15 @@ The rate and associated attributes for a pulse or heart beat.
 |Data item | Description | Allowed values
 3+a|===== Heart rate reading  **[multiple]**
 `EVENT: _at0003_`
-| **Heart rate** + 
- Type: `Quantity`  | The rate of the pulse or heart beat, measured in beats per minute. 
+| **Heart rate** +
+ Type: `Quantity`  | The rate of the pulse or heart beat, measured in beats per minute.
 a|
 
 Valid units: +
 
 * /min
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
 |====
 ===  *Blood pressure*
@@ -115,25 +115,25 @@ The local measurement of arterial blood pressure which is a surrogate for arteri
 |Data item | Description | Allowed values
 3+a|===== Blood pressure reading  **[multiple]**
 `EVENT: _at0006_`
-| **Systolic** + 
- Type: `Quantity`  | Peak systemic arterial blood pressure  - measured in systolic or contraction phase of the heart cycle. 
+| **Systolic** +
+ Type: `Quantity`  | Peak systemic arterial blood pressure  - measured in systolic or contraction phase of the heart cycle.
 a|
 
 Valid units: +
 
 * mm[Hg]
-| **Diastolic** + 
- Type: `Quantity`  | Minimum systemic arterial blood pressure - measured in the diastolic or relaxation phase of the heart cycle. 
+| **Diastolic** +
+ Type: `Quantity`  | Minimum systemic arterial blood pressure - measured in the diastolic or relaxation phase of the heart cycle.
 a|
 
 Valid units: +
 
 * mm[Hg]
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
-| **Location of measurement** + 
- Type: `Coded text`  | Simple body site where blood pressure was measured. 
+| **Location of measurement** +
+ Type: `Coded text`  | Simple body site where blood pressure was measured.
 a|
 
 * Right arm
@@ -161,16 +161,16 @@ Blood oxygen and related measurements, measured by pulse oximetry or pulse CO-ox
 |Data item | Description | Allowed values
 3+a|===== SPO2 reading  **[multiple]**
 `EVENT: _at0002_`
-| **SpO₂** + 
- Type: `Proportion`  | The saturation of oxygen in the peripheral blood, measured via pulse oximetry. 
+| **SpO₂** +
+ Type: `Proportion`  | The saturation of oxygen in the peripheral blood, measured via pulse oximetry.
 
 
 
 
 *comment*: SpO₂ is defined as the percentage of oxyhaemoglobin (HbO₂) to the total concentration of haemoglobin (HbO₂ + deoxyhaemoglobin) in peripheral blood.
 |
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
 |====
 ===  *Point of care tests*
@@ -190,8 +190,8 @@ The result, including findings and the laboratory's interpretation, of an invest
 |Data item | Description | Allowed values
 3+a|===== RBG test  **[multiple]**
 `EVENT: _at0002_`
-| **Test name** + 
- Type: `Coded text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+| **Test name** +
+ Type: `Coded text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s).
 
 
 
@@ -202,8 +202,8 @@ a|
 * Glucose [Moles/volume] in Capillary blood by Glucometer +
  `LOINC:14743-9`
 3+a|===== Glucose result  **[multiple]**
-| **Analyte name** + 
- Type: `Coded text`  | The name of the analyte result. 
+| **Analyte name** +
+ Type: `Coded text`  | The name of the analyte result.
 
 
 
@@ -213,8 +213,8 @@ a|
 
 * Glucose [Moles/volume] in Capillary blood by Glucometer +
  `LOINC:14743-9`
-| **Result** + 
- Type: `Quantity` (_multiple_) | The value of the analyte result. 
+| **Result** +
+ Type: `Quantity` (_multiple_) | The value of the analyte result.
 
 
 
@@ -226,8 +226,8 @@ Valid units: +
 
 * mg/dl
 * mmol/L
-| **Test method** + 
- Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+| **Test method** +
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only.
 
 
 
@@ -235,8 +235,8 @@ Valid units: +
 *comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
 a|
 _All data types allowed_
-| **Conclusion** + 
- Type: `Text`  | Narrative description of the key findings. 
+| **Conclusion** +
+ Type: `Text`  | Narrative description of the key findings.
 
 
 
@@ -244,11 +244,11 @@ _All data types allowed_
 *comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
 a|
 
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
-| **Point-of-care test** + 
- Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+| **Point-of-care test** +
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
 
 
 
@@ -267,8 +267,8 @@ The result, including findings and the laboratory's interpretation, of an invest
 |Data item | Description | Allowed values
 3+a|===== HIV test  **[multiple]**
 `EVENT: _at0002_`
-| **Test name** + 
- Type: `Coded text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+| **Test name** +
+ Type: `Coded text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s).
 
 
 
@@ -279,8 +279,8 @@ a|
 * HIV rapid test +
  `LOINC:LOINC3`
 3+a|===== HIV result  **[multiple]**
-| **Result** + 
- Type: `Text` (_multiple_) | The value of the analyte result. 
+| **Result** +
+ Type: `Text` (_multiple_) | The value of the analyte result.
 
 
 
@@ -291,8 +291,8 @@ a|
 * Positive
 * Negative
 * Indeterminate
-| **Test method** + 
- Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+| **Test method** +
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only.
 
 
 
@@ -300,8 +300,8 @@ a|
 *comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
 a|
 _All data types allowed_
-| **Conclusion** + 
- Type: `Text`  | Narrative description of the key findings. 
+| **Conclusion** +
+ Type: `Text`  | Narrative description of the key findings.
 
 
 
@@ -309,11 +309,11 @@ _All data types allowed_
 *comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
 a|
 
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
-| **Point-of-care test** + 
- Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+| **Point-of-care test** +
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
 
 
 
@@ -332,8 +332,8 @@ Qualitative and semi-quantitative test array using reagent test strips to indica
 |Data item | Description | Allowed values
 3+a|===== Point in Time  **[multiple]**
 `POINT_EVENT: _at0002_`
-| **Glucose** + 
- Type: `Ordinal`  | Detection of glucose in urine sample. 
+| **Glucose** +
+ Type: `Ordinal`  | Detection of glucose in urine sample.
 a|
 * [1] Negative +
  `local:at0115`
@@ -347,8 +347,8 @@ a|
  `local:at0119`
 * [6] 4+ +
  `local:at0120`
-| **Bilirubin** + 
- Type: `Ordinal`  | Detection of bilirubin in urine sample. 
+| **Bilirubin** +
+ Type: `Ordinal`  | Detection of bilirubin in urine sample.
 a|
 * [1] Negative +
  `local:at0121`
@@ -358,8 +358,8 @@ a|
  `local:at0123`
 * [4] 3+ +
  `local:at0124`
-| **Ketones** + 
- Type: `Ordinal`  | Detection of ketones in urine sample. 
+| **Ketones** +
+ Type: `Ordinal`  | Detection of ketones in urine sample.
 a|
 * [1] Negative +
  `local:at0109`
@@ -373,8 +373,8 @@ a|
  `local:at0113`
 * [6] Large+ +
  `local:at0114`
-| **Specific gravity** + 
- Type: `Ordinal`  | Measurement of the concentration of substances dissolved (solutes) in the urine sample relative to distilled water. 
+| **Specific gravity** +
+ Type: `Ordinal`  | Measurement of the concentration of substances dissolved (solutes) in the urine sample relative to distilled water.
 a|
 * [1] 1.000 +
  `local:at0152`
@@ -390,8 +390,8 @@ a|
  `local:at0157`
 * [7] 1.030 +
  `local:at0158`
-| **Blood** + 
- Type: `Ordinal`  | Detection of blood in urine sample. 
+| **Blood** +
+ Type: `Ordinal`  | Detection of blood in urine sample.
 a|
 * [1] Negative +
  `local:at0102`
@@ -407,8 +407,8 @@ a|
  `local:at0107`
 * [7] 3+ +
  `local:at0108`
-| **pH** + 
- Type: `Ordinal`  | Measurement of pH in urine sample. 
+| **pH** +
+ Type: `Ordinal`  | Measurement of pH in urine sample.
 a|
 * [1] 5.0 +
  `local:at0127`
@@ -432,8 +432,8 @@ a|
  `local:at0177`
 * [11] 10.0 +
  `local:at0179`
-| **Protein** + 
- Type: `Ordinal`  | Detection of protein in urine sample. 
+| **Protein** +
+ Type: `Ordinal`  | Detection of protein in urine sample.
 a|
 * [1] Negative +
  `local:at0096`
@@ -447,8 +447,8 @@ a|
  `local:at0100`
 * [6] 4+ +
  `local:at0101`
-| **Urobilinogen** + 
- Type: `Ordinal`  | Detection of urobilinogen in urine sample. 
+| **Urobilinogen** +
+ Type: `Ordinal`  | Detection of urobilinogen in urine sample.
 a|
 * [1] Normal (lower) +
  `local:at0161`
@@ -460,15 +460,15 @@ a|
  `local:at0164`
 * [5] 8 mg/dL +
  `local:at0165`
-| **Nitrite** + 
- Type: `Ordinal`  | Detection of nitrites in urine sample. 
+| **Nitrite** +
+ Type: `Ordinal`  | Detection of nitrites in urine sample.
 a|
 * [1] Negative +
  `local:at0159`
 * [2] Positive +
  `local:at0160`
-| **Leukocytes** + 
- Type: `Ordinal`  | Detection of white blood cells in urine sample. 
+| **Leukocytes** +
+ Type: `Ordinal`  | Detection of white blood cells in urine sample.
 a|
 * [1] Negative +
  `local:at0135`
@@ -480,8 +480,8 @@ a|
  `local:at0138`
 * [5] 3+ +
  `local:at0139`
-| **Clinical interpretation** + 
- Type: `Text` (_multiple_) | Single word, phrase or brief description represents the clinical meaning and significance of the urinalysis findings. 
+| **Clinical interpretation** +
+ Type: `Text` (_multiple_) | Single word, phrase or brief description represents the clinical meaning and significance of the urinalysis findings.
 
 
 
@@ -489,8 +489,8 @@ a|
 *comment*: Comment: Coding with a terminology is preferred, where possible. For example: normal urinalysis; mild proteinuria; or trace of blood. Multiple statements are allowed.
 a|
 
-| **Comment** + 
- Type: `Text`  | Narrative about the urinalysis not captured in other fields. 
+| **Comment** +
+ Type: `Text`  | Narrative about the urinalysis not captured in other fields.
 
 
 
@@ -498,11 +498,11 @@ a|
 *comment*: For example: the freshness or small volume of the urine sample, method of collection or any problems with testing.
 a|
 
-| **Time** + 
- Type: `Date/time` (_mandatory_) |  
+| **Time** +
+ Type: `Date/time` (_mandatory_) |
 |
-| **Method** + 
- Type: `Coded text`  | Method by which the reagent strips were read. 
+| **Method** +
+ Type: `Coded text`  | Method by which the reagent strips were read.
 a|
 
 * Manual
@@ -519,8 +519,8 @@ The result, including findings and the laboratory's interpretation, of an invest
 |Data item | Description | Allowed values
 3+a|===== Syphilis test  **[multiple]**
 `EVENT: _at0002_`
-| **Test name** + 
- Type: `Coded text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+| **Test name** +
+ Type: `Coded text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s).
 
 
 
@@ -533,8 +533,8 @@ a|
 * SD Bioline +
  `LOINC:LOINC5`
 3+a|===== Syphilis test result  **[multiple]**
-| **Result** + 
- Type: `Text` (_multiple_) | The value of the analyte result. 
+| **Result** +
+ Type: `Text` (_multiple_) | The value of the analyte result.
 
 
 
@@ -545,8 +545,8 @@ a|
 * Positive
 * Negative
 * Invalid
-| **Test method** + 
- Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+| **Test method** +
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only.
 
 
 
@@ -554,8 +554,8 @@ a|
 *comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
 a|
 _All data types allowed_
-| **Conclusion** + 
- Type: `Text`  | Narrative description of the key findings. 
+| **Conclusion** +
+ Type: `Text`  | Narrative description of the key findings.
 
 
 
@@ -563,8 +563,8 @@ _All data types allowed_
 *comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
 a|
 
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
 |====
 ===  *HbA1c*
@@ -578,8 +578,8 @@ The result, including findings and the laboratory's interpretation, of an invest
 |Data item | Description | Allowed values
 3+a|===== HBa1c test  **[multiple]**
 `EVENT: _at0002_`
-| **Test name** + 
- Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+| **Test name** +
+ Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s).
 
 
 
@@ -589,8 +589,8 @@ a|
 
 * HbA1c
 3+a|===== HbA1c result  **[multiple]**
-| **Result** + 
- Type: `Quantity` (_multiple_) | The value of the analyte result. 
+| **Result** +
+ Type: `Quantity` (_multiple_) | The value of the analyte result.
 
 
 
@@ -602,8 +602,8 @@ Valid units: +
 
 * mmol/mol
 * %
-| **Test method** + 
- Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+| **Test method** +
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only.
 
 
 
@@ -611,8 +611,8 @@ Valid units: +
 *comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
 a|
 _All data types allowed_
-| **Conclusion** + 
- Type: `Text`  | Narrative description of the key findings. 
+| **Conclusion** +
+ Type: `Text`  | Narrative description of the key findings.
 
 
 
@@ -620,11 +620,11 @@ _All data types allowed_
 *comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
 a|
 
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
-| **Point-of-care test** + 
- Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+| **Point-of-care test** +
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
 
 
 
@@ -643,8 +643,8 @@ The result, including findings and the laboratory's interpretation, of an invest
 |Data item | Description | Allowed values
 3+a|===== Cholesterol test  **[multiple]**
 `EVENT: _at0002_`
-| **Test name** + 
- Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+| **Test name** +
+ Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s).
 
 
 
@@ -654,8 +654,8 @@ a|
 
 * Cholesterol
 3+a|===== Cholesterol result  **[multiple]**
-| **Result** + 
- Type: `Quantity` (_multiple_) | The value of the analyte result. 
+| **Result** +
+ Type: `Quantity` (_multiple_) | The value of the analyte result.
 
 
 
@@ -667,8 +667,8 @@ Valid units: +
 
 * mg/dl
 * mmol/L
-| **Test method** + 
- Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+| **Test method** +
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only.
 
 
 
@@ -676,8 +676,8 @@ Valid units: +
 *comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
 a|
 _All data types allowed_
-| **Conclusion** + 
- Type: `Text`  | Narrative description of the key findings. 
+| **Conclusion** +
+ Type: `Text`  | Narrative description of the key findings.
 
 
 
@@ -685,11 +685,11 @@ _All data types allowed_
 *comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
 a|
 
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
-| **Point-of-care test** + 
- Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+| **Point-of-care test** +
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
 
 
 
@@ -708,8 +708,8 @@ The result, including findings and the laboratory's interpretation, of an invest
 |Data item | Description | Allowed values
 3+a|===== CD4 test  **[multiple]**
 `EVENT: _at0002_`
-| **Test name** + 
- Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+| **Test name** +
+ Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s).
 
 
 
@@ -719,8 +719,8 @@ a|
 
 * CD4 Count
 3+a|===== CD4 count  **[multiple]**
-| **Result** + 
- Type: `Choice` (_multiple_) | The value of the analyte result. 
+| **Result** +
+ Type: `Choice` (_multiple_) | The value of the analyte result.
 
 
 
@@ -738,8 +738,8 @@ Valid units: +
 * 1/mm3
 | Type: `Proportion` |
 |
-| **Test method** + 
- Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+| **Test method** +
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only.
 
 
 
@@ -747,8 +747,8 @@ Valid units: +
 *comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
 a|
 _All data types allowed_
-| **Conclusion** + 
- Type: `Text`  | Narrative description of the key findings. 
+| **Conclusion** +
+ Type: `Text`  | Narrative description of the key findings.
 
 
 
@@ -756,11 +756,11 @@ _All data types allowed_
 *comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
 a|
 
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
-| **Point-of-care test** + 
- Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+| **Point-of-care test** +
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
 
 
 
@@ -779,8 +779,8 @@ The result, including findings and the laboratory's interpretation, of an invest
 |Data item | Description | Allowed values
 3+a|===== Covid antigen test  **[multiple]**
 `EVENT: _at0002_`
-| **Test name** + 
- Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+| **Test name** +
+ Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s).
 
 
 
@@ -790,8 +790,8 @@ a|
 
 * Covid antigen test
 3+a|===== Covid antigen test  **[multiple]**
-| **Result** + 
- Type: `Text` (_multiple_) | The value of the analyte result. 
+| **Result** +
+ Type: `Text` (_multiple_) | The value of the analyte result.
 
 
 
@@ -802,8 +802,8 @@ a|
 * Positive
 * Negative
 * Indeterminate
-| **Test method** + 
- Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+| **Test method** +
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only.
 
 
 
@@ -811,8 +811,8 @@ a|
 *comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
 a|
 _All data types allowed_
-| **Conclusion** + 
- Type: `Text`  | Narrative description of the key findings. 
+| **Conclusion** +
+ Type: `Text`  | Narrative description of the key findings.
 
 
 
@@ -820,11 +820,11 @@ _All data types allowed_
 *comment*: For example: 'Pattern suggests significant renal impairment'. The content of the conclusion will vary, depending on the investigation performed. This conclusion should be aligned with the coded 'Test diagnosis'.
 a|
 
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
-| **Point-of-care test** + 
- Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+| **Point-of-care test** +
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
 
 
 
@@ -843,8 +843,8 @@ Result of a simple test to detect early pregnancy, usually a commercial product 
 |Data item | Description | Allowed values
 3+a|===== Point in time  **[multiple]**
 `POINT_EVENT: _at0002_`
-| **Result** + 
- Type: `Coded text` (_mandatory_) | The result of the test. 
+| **Result** +
+ Type: `Coded text` (_mandatory_) | The result of the test.
 a|
 
 * Negative
@@ -852,11 +852,11 @@ a|
 * Weakly positive
 * Strongly positive
 * Indeterminate
-| **Time** + 
- Type: `Date/time` (_mandatory_) |  
+| **Time** +
+ Type: `Date/time` (_mandatory_) |
 |
-| **Method** + 
- Type: `Text`  | Description of the method used to perform the test. 
+| **Method** +
+ Type: `Text`  | Description of the method used to perform the test.
 a|
 
 |====
@@ -871,8 +871,8 @@ The result, including findings and the laboratory's interpretation, of an invest
 |Data item | Description | Allowed values
 3+a|===== Cardiac enzyme test  **[multiple]**
 `EVENT: _at0002_`
-| **Test name** + 
- Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s). 
+| **Test name** +
+ Type: `Text` (_mandatory_) | Name of the laboratory investigation performed on the specimen(s).
 
 
 
@@ -881,9 +881,9 @@ The result, including findings and the laboratory's interpretation, of an invest
 a|
 
 * Troponin
-3+a|===== Cardiac enzyme result  
-| **Analyte result** + 
- Type: `Text` (_multiple_) | The value of the analyte result. 
+3+a|===== Cardiac enzyme result
+| **Analyte result** +
+ Type: `Text` (_multiple_) | The value of the analyte result.
 
 
 
@@ -895,8 +895,8 @@ a|
 * Abnormal
 * Equivocal
 * Incomplete
-| **Test method** + 
- Type: `Choice`  | Description about the method used to perform the test on this analyte only. 
+| **Test method** +
+ Type: `Choice`  | Description about the method used to perform the test on this analyte only.
 
 
 
@@ -904,11 +904,11 @@ a|
 *comment*: If the test method applies to an entire panel, the test method can be captured using the 'Test method' data element within the OBSERVATION.laboratory_test_result
 a|
 _All data types allowed_
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
-| **Point-of-care test** + 
- Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation. 
+| **Point-of-care test** +
+ Type: `Boolean`  | This indicates whether the test was performed directly at Point-of-Care (POCT) as opposed to a formal result from a laboratory or other service delivery organisation.
 
 
 
@@ -932,8 +932,8 @@ Summary information about the significant health-related problems found in famil
 |====
 |Data item | Description | Allowed values
 3+a|===== Per problem  **[multiple]**
-| **Problem/diagnosis name** + 
- Type: `Text`  | Identification of the significant problem or diagnosis in the family overall. 
+| **Problem/diagnosis name** +
+ Type: `Text`  | Identification of the significant problem or diagnosis in the family overall.
 
 
 
@@ -951,13 +951,13 @@ a|
 * Prostate Cancer
 * Breast Cancer
 * Colon Cancer
-| **Description** + 
- Type: `Text`  | Narrative description about occurrence of the problem or diagnosis in family members. 
+| **Description** +
+ Type: `Text`  | Narrative description about occurrence of the problem or diagnosis in family members.
 a|
 
 3+a|===== Per family member  **[multiple]**
-| **Relationship** + 
- Type: `Text`  | The relationship of the family member to the subject of care. 
+| **Relationship** +
+ Type: `Text`  | The relationship of the family member to the subject of care.
 
 
 
@@ -971,8 +971,8 @@ a|
 * Brother
 * Son
 * Daughter
-| **Relationship degree** + 
- Type: `Coded text`  | The degree of relationship between the subject of care and the family member. 
+| **Relationship degree** +
+ Type: `Coded text`  | The degree of relationship between the subject of care and the family member.
 
 
 
@@ -983,8 +983,8 @@ a|
 * First degree relative
 * Second degree relative
 * Third degree relative
-| **Family line** + 
- Type: `Coded text`  | Identification of the maternal or paternal family line in the relationship. 
+| **Family line** +
+ Type: `Coded text`  | Identification of the maternal or paternal family line in the relationship.
 
 
 
@@ -994,8 +994,8 @@ a|
 
 * Maternal line
 * Paternal line
-| **Deceased?** + 
- Type: `Boolean`  | Is the family member deceased? 
+| **Deceased?** +
+ Type: `Boolean`  | Is the family member deceased?
 
 
 
@@ -1003,28 +1003,28 @@ a|
 *comment*: Record as 'True' if family member is deceased.
 |
 3+a|===== Clinical history  **[multiple]**
-| **Age at onset** + 
- Type: `Duration`  | Estimated or actual age of the family member when the problem/diagnosis was clinically recognised. 
+| **Age at onset** +
+ Type: `Duration`  | Estimated or actual age of the family member when the problem/diagnosis was clinically recognised.
 
 
 
 
 *comment*: For health problems with multiple occurrences, this describes the first nown occurrence.
 |
-| **Cause of death?** + 
- Type: `Coded text`  | Relationship of the problem/diagnosis to the death of this family member. 
+| **Cause of death?** +
+ Type: `Coded text`  | Relationship of the problem/diagnosis to the death of this family member.
 a|
 
 * Direct cause or closely related
 * Unrelated
 * Indeterminate
 * _Other text/ coded text allowed_
-| **Comment** + 
- Type: `Text`  | Additional narrative about the family member not captured in other fields. 
+| **Comment** +
+ Type: `Text`  | Additional narrative about the family member not captured in other fields.
 a|
 
-| **Last Updated** + 
- Type: `Date/time`  | The date this family history summary was last updated. 
+| **Last Updated** +
+ Type: `Date/time`  | The date this family history summary was last updated.
 |
 |====
 ===  *Sexual Health*
@@ -1036,8 +1036,8 @@ Summary or persistent information about an individual's sexual health and histor
 [options="header","stretch", cols="20,50,30"]
 |====
 |Data item | Description | Allowed values
-| **Have you ever had any of the following diseases?** + 
- Type: `Text`  | Narrative description about the sexual health history of an individual. 
+| **Have you ever had any of the following diseases?** +
+ Type: `Text`  | Narrative description about the sexual health history of an individual.
 a|
 
 * Gonorrhea
@@ -1047,15 +1047,15 @@ a|
 * Herpes Simplex
 * Hepatitis B
 * Syphilis
-| **Are you sexually active?** + 
- Type: `Coded text`  | Is the individual sexually active? 
+| **Are you sexually active?** +
+ Type: `Coded text`  | Is the individual sexually active?
 a|
 
 * Sexually active, regular partner
 * Sexually active, no regular partner
 * Never sexually active
-| **Comment** + 
- Type: `Text`  | Additional narrative about the sexual health history not captured in other fields. 
+| **Comment** +
+ Type: `Text`  | Additional narrative about the sexual health history not captured in other fields.
 a|
 
 |====
@@ -1070,11 +1070,11 @@ Narrative description of health-related events at a specific point-in-time about
 |Data item | Description | Allowed values
 3+a|===== Any event  **[multiple]**
 `EVENT: _at0002_`
-| **Progress Note** + 
- Type: `Text`  | Narrative description of health-related events, health status, findings, opinions at a specific point-in-time. 
+| **Progress Note** +
+ Type: `Text`  | Narrative description of health-related events, health status, findings, opinions at a specific point-in-time.
 a|
 
-| **Time** + 
- Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event. 
+| **Time** +
+ Type: `Date/time` (_mandatory_) | `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.
 |
 |====
