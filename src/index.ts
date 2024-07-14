@@ -3,63 +3,33 @@ import yargs from 'yargs';
 import ora from 'ora';
 import  * as fs from 'fs';
 import { DocBuilder } from './DocBuilder';
-import  path  from 'path';
-import { importConfig } from './BuilderConfig';
-import { Config } from "./Config";
-import { saveFile } from "./DocFormatter";
-import {
-  updateArchetypeList,
-} from "./openEProvenance";
-
-function handleOutPath(infile :string, outputFile: string , ext: string, outDir: string) {
-  {
-    if (outputFile)
-      return outputFile;
-
-    const pathSeg = path.parse(infile);
-    return  `${outDir}/${pathSeg.name}.${ext}`;
-  }
-}
+import { Config, importConfig } from './BuilderConfig';
+import { ExportFormat } from './formatters/DocFormatter';
 
 const args = yargs.options({
   'web-template': { type: 'string', describe: 'web template name',demandOption: true, alias: 'wt' },
   'out-file': { type: 'string', describe: 'Output file',demandOption: false, alias: 'o' },
   'out-dir': { type: 'string', demandOption: false, describe: 'Output folder', alias: 'od', default: './out'},
-  'config-file': { type: 'string', demandOption: false, describe: 'Config file',alias: 'cf', default: "config/wtconfig.json"},
+  'in-dir': { type: 'string', demandOption: false, describe: 'Input folder', alias: 'id', default: './templates'},
+  'config-file': { type: 'string', demandOption: false, describe: 'Config file',alias: 'cf', default: "./config/wtconfig.json"},
   'export-format': { type: 'string', demandOption: false, describe: 'Export format: adoc|docx|xmind|pdf (default: adoc)',alias: 'ex', default: "adoc"},
 }).argv;
 
-
-const inFilePath = args['web-template']
-const spinner = ora(`Processing ${inFilePath}`).start();
-
-
 const config:Config = importConfig(args['config-file'])
-const outFileDir: string = args['out-dir']
-const outFileName: string = args['out-file']
-const exportFormat = args['export-format'];
-const outFilePath = handleOutPath(inFilePath, outFileName, exportFormat,outFileDir);
-const inputFileExist = fs.existsSync(inFilePath);
 
-// Create default out folder
-if (!fs.existsSync('out')) {
-  fs.mkdirSync('out', { recursive: true })
-}
+config.inFilePath = args['web-template']
+config.inFileDir = args['in-dir']
+config.exportFormat  = ExportFormat[args['export-format']];
+config.outFileDir = args['out-dir']
+config.outFilePath = args['out-file']
 
-if (inputFileExist) {
-  const inDoc: string = fs.readFileSync(inFilePath, { encoding: 'utf8', flag: 'r' });
-  const docBuilder: DocBuilder = new DocBuilder(JSON.parse(inDoc), config, exportFormat, outFileDir);
+const spinner = ora(`Processing ${config.inFilePath}`).start();
 
-  saveFile(docBuilder, outFilePath);
-
-  updateArchetypeList('openEHR','CKM-mirror', 'org.openehr', docBuilder.archetypeList,false) .then( result => {
-   docBuilder.archetypeList = result; // Outputs: 'Hello, World!'
-  })
-    .catch(error => console.log("Caught Error: ", error));
-
+if (fs.existsSync(config.inFilePath)) {
+  const inDoc:string = fs.readFileSync(config.inFilePath, { encoding: 'utf8', flag: 'r' });
+  const docBuilder : DocBuilder = new DocBuilder(JSON.parse(inDoc), config);
 }
 else
-  console.log('The input file does not exist:' + inFilePath);
-
+  console.log('The input file does not exist:' + config.inFilePath);
 
 spinner.stop();

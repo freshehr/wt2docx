@@ -21,7 +21,8 @@ import {
   formatNodeHeader,
   formatObservationEvent,
   formatTemplateHeader,
-  formatUnsupported
+  formatUnsupported,
+  saveFile
 } from "./formatters/DocFormatter";
 import {
   formatDvCodedText,
