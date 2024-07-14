@@ -11,7 +11,6 @@ import {
 import { StringBuilder } from "./StringBuilder";
 import rmDescriptions from "../resources/rm_descriptions.json";
 import {
-  ExportFormat,
   formatChoiceHeader,
   formatCluster, formatCompositionContextHeader,
   formatCompositionHeader, formatInstructionActivity,
@@ -19,11 +18,10 @@ import {
   formatNodeContent,
   formatNodeFooter,
   formatNodeHeader,
-  formatObservationEvent,
+  formatObservationEvent, formatProvenanceTable,
   formatTemplateHeader,
-  formatUnsupported,
-  saveFile
-} from "./formatters/DocFormatter";
+  formatUnsupported, saveFile,
+} from './formatters/DocFormatter';
 import {
   formatDvCodedText,
   formatDvCount,
@@ -46,19 +44,15 @@ import axios from 'axios';
 export class DocBuilder {
 
   sb: StringBuilder = new StringBuilder();
-  defaultLang: string = 'en';
   config: Config;
   localArchetypeList : ArchetypeList = [];
   candidateArchetypeList: ArchetypeList = []
   remoteArchetypeList: ArchetypeList = [];
   resolvedTemplateFiles: ResolvedTemplateFiles;
-  exportFormat: ExportFormat
-  outFileDir: string;
-  archetypeList : ArchetypeList = [];
 
   readonly _wt: WebTemplate;
 
-  constructor(wt: WebTemplate, config: Config) {
+  constructor (wt: WebTemplate, config: Config) {
     this._wt = wt;
     this.config = config;
     this.config.defaultLang = wt.defaultLanguage;
@@ -66,18 +60,24 @@ export class DocBuilder {
     this.generate().then( () => {
 
       const outFilePath = this.handleOutPath(this.config.inFilePath, this.config.outFilePath, this.config.exportFormat,this.config.outFileDir);
-      saveFile(this, outFilePath);
+      saveFile(this, outFilePath).catch();
 
       if (this.regenWtx() && this.isWtxAugmented() )
-        saveWtxFile(this)
+        saveWtxFile(this).catch()
     });
 
   }
+
+  private regenWtx(): boolean {
+    return (this.resolvedTemplateFiles.wtxOutPath !== null)
+  }
+
+
 // If the archetypeLists are empty, then the wtx Augmentation process has failed
   private isWtxAugmented(): boolean {
     const archetypesAdded = this.localArchetypeList.length + this .candidateArchetypeList.length + this.remoteArchetypeList.length
-   return (archetypesAdded > 0)
- }
+    return (archetypesAdded > 0)
+  }
 
   private handleOutPath(infile :string, outputFile: string , ext: string, outDir: string) {
     {
@@ -102,7 +102,8 @@ export class DocBuilder {
     this.resolvedTemplateFiles = resolveTemplateFiles(this.config)
     console.log('resolvedTemplateFiles', this.resolvedTemplateFiles)
     formatTemplateHeader(this)
-    this.walkComposition(this._wt.tree);
+    await this.walk(this._wt.tree);
+    formatProvenanceTable(this)
   }
 
   private async walkChildren(f: TemplateNode, nonContextOnly: boolean = false) {
@@ -137,7 +138,7 @@ export class DocBuilder {
     else if (isEntry(f.rmType))
       await this.walkEntry(f)
     else if (isDataValue(f.rmType))
-      await this.walkElement(f)
+      this.walkElement(f)
     else if (isSection(f.rmType))
       await this.walkSection(f)
     else if (isEvent(f.rmType))
@@ -159,7 +160,7 @@ export class DocBuilder {
           this.walkElement(f);
           break;
         default:
-          this.walkUnsupported(f)
+          await this.walkUnsupported(f)
           break;
       }
     }
@@ -200,7 +201,6 @@ export class DocBuilder {
 
   private async walkComposition(f: TemplateNode) {
     f.depth = 0;
-    this.archetypeList.push({archetypeId: f.nodeId})
     formatCompositionHeader(this, f)
     formatNodeHeader(this);
     await this.walkRmChildren(f);
@@ -214,9 +214,9 @@ export class DocBuilder {
  //   formatAnnotations(this,f);
   }
 
-  private async walkChoice(f: TemplateNode) {
+  private walkChoice(f: TemplateNode) {
     formatNodeContent(this, f, true)
-    await this.walkDataType(f)
+    this.walkDataType(f)
  //   formatAnnotations(this,f);
   }
 
@@ -357,7 +357,7 @@ export class DocBuilder {
 
   private getValueOfRecord(record?: Record<string, string>): string {
     if (record) {
-      return record[this.defaultLang];
+      return record[this.config.defaultLang];
     } else {
       return '';
     }
@@ -372,7 +372,7 @@ export class DocBuilder {
       if (f.id === 'time') {
 
         const parent: TemplateNode = findParentNodeId(f);
-        switch (parent.rmType){
+        switch (parent.rmType) {
           case 'ACTION':
             rmTag = 'action_time'
             break;
@@ -386,9 +386,10 @@ export class DocBuilder {
       return rmDescriptions[rmTag] ? rmDescriptions[rmTag][language] : ''
 
     }
-  };
 
-  private async walkChoiceHeader(f: TemplateNode) {
+  }
+
+  private walkChoiceHeader(f: TemplateNode) {
 
     formatChoiceHeader(this,f)
     if (isAnyChoice(f.children.map(child => child.rmType)))
