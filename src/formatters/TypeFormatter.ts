@@ -1,19 +1,19 @@
 import { DocBuilder } from "../DocBuilder";
-import { TemplateElement } from "../TemplateElement";
-import { ExportFormat, FormatElementFn } from "../DocFormatter";
+import { TemplateNode } from "../TemplateNodes";
+import { ExportFormat, FormatElementFn } from "./DocFormatter";
 // import { xmind } from "./XmindFormatter";
 import { adoc } from "./AdocFormatter";
 import { xmind } from "./XmindFormatter";
 
-export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.dvTypes.formatDvCodedText
       break
-    case ExportFormat.fsh:
+    case ExportFormat.fshl:
       break;
     default:
       fn = adoc.dvTypes.formatDvCodedText
@@ -24,11 +24,11 @@ export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): v
     fn(docBuilder, f);
 }
 
-// export const formatDvChoice = (docBuilder: DocBuilder, f: TemplateElement): void => {
+// export const formatDvChoice = (docBuilder: DocBuilder, f: TemplateNode): void => {
 //
 //   let fn: FormatElementFn;
 //
-//   switch (docBuilder.exportFormat) {
+//   switch (docBuilder.config.exportFormat) {
 //     case ExportFormat.xmind:
 //       break;
 //     case ExportFormat.fsh:
@@ -42,15 +42,15 @@ export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateElement): v
 //     fn(docBuilder, f);
 // }
 
-export const formatDvText = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatDvText = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.dvTypes.formatDvText
       break;
-    case ExportFormat.fsh:
+    case ExportFormat.fshl:
       break;
     default:
       fn = adoc.dvTypes.formatDvText
@@ -60,13 +60,13 @@ export const formatDvText = (docBuilder: DocBuilder, f: TemplateElement): void =
     fn(docBuilder, f);
 }
 
-export const formatDvCount = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatDvCount = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
-    case ExportFormat.fsh:
+    case ExportFormat.fshl:
       break;
     default:
       fn = adoc.dvTypes.formatDvCount
@@ -76,13 +76,13 @@ export const formatDvCount = (docBuilder: DocBuilder, f: TemplateElement): void 
     fn(docBuilder, f);
 }
 
-export const formatDvQuantity = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatDvQuantity = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
-    case ExportFormat.fsh:
+    case ExportFormat.fshl:
       break;
     default:
       fn = adoc.dvTypes.formatDvQuantity
@@ -92,15 +92,15 @@ export const formatDvQuantity = (docBuilder: DocBuilder, f: TemplateElement): vo
     fn(docBuilder, f);
 }
 
-export const formatDvOrdinal = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatDvOrdinal = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.dvTypes.formatDvOrdinal
       break;
-    case ExportFormat.fsh:
+    case ExportFormat.fshl:
       break;
     default:
       fn = adoc.dvTypes.formatDvOrdinal
@@ -109,13 +109,13 @@ export const formatDvOrdinal = (docBuilder: DocBuilder, f: TemplateElement): voi
   if (fn)
     fn(docBuilder, f);
 }
-export const formatDvDefault = (docBuilder: DocBuilder, f: TemplateElement): void => {
+export const formatDvDefault = (docBuilder: DocBuilder, f: TemplateNode): void => {
 
   let fn: FormatElementFn;
 
-  switch (docBuilder.exportFormat) {
+  switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
-    case ExportFormat.fsh:
+    case ExportFormat.fshl:
       break;
     default:
       fn = adoc.dvTypes.formatDvDefault

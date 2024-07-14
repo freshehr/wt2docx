@@ -19,5 +19,9 @@
   },
   "careflow_step": {
     "en": "`ISM_TRANSITION.care_flow_step` - The step in the careflow process which occurred as part of generating this action, e.g. dispense , start_administration. This attribute represents the clinical label for the activity, as opposed to current_state which represents the state machine (ISM) computable form. Defined in archetype."
+  },
+  "context": {
+    "en": "`COMPOSITION.context` - Documents the context information of a healthcare event involving the subject of care and the health system. The context information recorded here are independent of the attributes recorded in the version audit, which document the system interaction context, i.e. the context of a user interacting with the health record system. Healthcare events include patient contacts, and any other business activity, such as pathology investigations which take place on behalf of the patient."
   }
+
 }

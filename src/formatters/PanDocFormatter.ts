@@ -12,7 +12,7 @@ const CreateDocbook = (src: string): void => {
 
   // Write DocBook content to a temporary file
   const fs = require('fs');
-  fs.writeFileSync(`./tmpDocbook.xml`, docbookContent.toString());
+  fs.writeFileSync(`./tmp/tmpDocbook.xml`, docbookContent.toString());
 
 }
 
@@ -22,7 +22,7 @@ const runPandoc = async (src: string, format: string, outFile: string ): Promise
 
   CreateDocbook(src)
 
-  const command = `pandoc ${args} ./tmpDocbook.xml`
+  const command = `pandoc ${args} ./tmp/tmpDocbook.xml`
 
   exec(command, (error: { message: any; }, stdout: any, stderr: any) => {
     if (error) {
@@ -51,7 +51,7 @@ export const docx = {
 export const pdf = {
 
   saveFile:  async (dBuilder: DocBuilder, outFile: string) => {
-    await adoc.saveFile(dBuilder,'./tmp.adoc')
+    await adoc.saveFile(dBuilder,'./tmp/tmp.adoc')
 //    await runAsciidocPDF(dBuilder.sb.toString(), outFile)
     await runPandoc(dBuilder.sb.toString(),'pdf', outFile)
   },

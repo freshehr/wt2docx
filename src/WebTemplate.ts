@@ -1,4 +1,4 @@
-import { TemplateElement } from './TemplateElement';
+import { TemplateNode } from './TemplateNodes';
 
 export interface WebTemplate {
   templateId: string;
@@ -6,5 +6,5 @@ export interface WebTemplate {
   version: string;
   defaultLanguage: string;
   languages: string[];
-  tree: TemplateElement;
+  tree: TemplateNode;
 }

@@ -32,7 +32,15 @@ import {
   formatDvQuantity,
   formatDvText
 } from "./formatters/TypeFormatter";
-import { ArchetypeList } from "./openEProvenance";
+import {
+  ArchetypeList,
+  getProvenance,
+  updateArchetypeLists,
+} from './provenance/openEProvenance';
+import { Config } from './BuilderConfig';
+import path from 'path';
+import { augmentWebTemplate, ResolvedTemplateFiles, resolveTemplateFiles, saveWtxFile } from './provenance/wtxBuilder';
+import axios from 'axios';
 
 
 export class DocBuilder {
@@ -40,22 +48,47 @@ export class DocBuilder {
   sb: StringBuilder = new StringBuilder();
   defaultLang: string = 'en';
   config: Config;
+  localArchetypeList : ArchetypeList = [];
+  candidateArchetypeList: ArchetypeList = []
+  remoteArchetypeList: ArchetypeList = [];
+  resolvedTemplateFiles: ResolvedTemplateFiles;
   exportFormat: ExportFormat
   outFileDir: string;
   archetypeList : ArchetypeList = [];
 
   readonly _wt: WebTemplate;
 
-  constructor(wt: WebTemplate, config: Config, exportFormatString: string, outFileDir: string) {
+  constructor(wt: WebTemplate, config: Config) {
     this._wt = wt;
-    this.defaultLang = wt.defaultLanguage;
     this.config = config;
-    this.exportFormat = ExportFormat[exportFormatString];
-    this.outFileDir = outFileDir
+    this.config.defaultLang = wt.defaultLanguage;
 
-    this.generate();
+    this.generate().then( () => {
+
+      const outFilePath = this.handleOutPath(this.config.inFilePath, this.config.outFilePath, this.config.exportFormat,this.config.outFileDir);
+      saveFile(this, outFilePath);
+
+      if (this.regenWtx() && this.isWtxAugmented() )
+        saveWtxFile(this)
+    });
+
   }
+// If the archetypeLists are empty, then the wtx Augmentation process has failed
+  private isWtxAugmented(): boolean {
+    const archetypesAdded = this.localArchetypeList.length + this .candidateArchetypeList.length + this.remoteArchetypeList.length
+   return (archetypesAdded > 0)
+ }
 
+  private handleOutPath(infile :string, outputFile: string , ext: string, outDir: string) {
+    {
+      if (outputFile) return outputFile;
+
+      const fExt:string = ext === 'wtx'?'wtx.json': ext;
+      const pathSeg = path.parse(infile);
+
+      return  `${outDir}/${pathSeg.name}.${fExt}`;
+    }
+  }
   public toString(): string {
     return this.sb.toString();
   }
@@ -64,19 +97,26 @@ export class DocBuilder {
     return this._wt;
   }
 
-  private generate() {
+  private async generate() {
+
+    this.resolvedTemplateFiles = resolveTemplateFiles(this.config)
+    console.log('resolvedTemplateFiles', this.resolvedTemplateFiles)
     formatTemplateHeader(this)
     this.walkComposition(this._wt.tree);
   }
 
-  private walkChildren(f: TemplateElement, nonContextOnly: boolean = false) {
+  private async walkChildren(f: TemplateNode, nonContextOnly: boolean = false) {
     if (f.children) {
-      f.children.forEach((child) => {
+
+      const newDepth: number = f.depth+1;
+
+      for( const child of f.children) {
         child.parentNode = f;
+        child.depth = newDepth;
         if (!nonContextOnly || (nonContextOnly && !child.inContext)) {
-          this.walk(child)
+          await this.walk(child)
         }
-      });
+      }
     }
   }
 
@@ -84,28 +124,33 @@ export class DocBuilder {
     this.walkChildren(f, true)
   }
 
-  private walk(f: TemplateElement) {
-     if (isEntry(f.rmType))
-      this.walkEntry(f)
-     else if (isDataValue(f.rmType))
-      this.walkElement(f)
-     else if (isSection(f.rmType))
-      this.walkSection(f)
-     else if (isEvent(f.rmType))
-      this.walkObservationEvent(f)
-     else if (isActivity(f.rmType))
-       this.walkInstructionActivity(f)
-     else if (f.rmType === 'CLUSTER')
-      this.walkCluster(f);
-     else {
-      switch (f.rmType) {
+  private async walk(f: TemplateNode) {
 
-      //       case 'ISM_TRANSITION':
-       //         this.walkChildren(f)
-        //        break;
+    if (isArchetype(f.rmType,f.nodeId) && this.regenWtx() ) {
+      // Only Update the lists if the augment operation has been successful
+      await this.augmentArchetypeMetadata(f);
+    }
+
+    if (isComposition(f.rmType))
+
+      await this.walkComposition(f)
+    else if (isCluster(f.rmType))
+     await this.walkCluster(f)
+    else if (isEntry(f.rmType))
+      await this.walkEntry(f)
+    else if (isDataValue(f.rmType))
+      this.walkElement(f)
+    else if (isSection(f.rmType))
+      await this.walkSection(f)
+    else if (isEvent(f.rmType))
+      this.walkObservationEvent(f)
+    else if (isActivity(f.rmType))
+       this.walkInstructionActivity(f)
+    else {
+      switch (f.rmType) {
         case 'EVENT_CONTEXT':
           f.name = 'Composition context';
-          this.walkCompositionContext(f);
+          await this.walkCompositionContext(f);
           break;
         case 'CODE_PHRASE':
           f.name = f.id;
@@ -122,16 +167,31 @@ export class DocBuilder {
     }
   }
 
+
+  private async augmentArchetypeMetadata(f: TemplateNode) {
+    await augmentWebTemplate(this, f)
+      .then(() => updateArchetypeLists(this.remoteArchetypeList, this.candidateArchetypeList, this.localArchetypeList, getProvenance(f)))
+      .catch(error => {
+        if (axios.isAxiosError(error)) {
+          switch (error.response.status) {
+            case 403:
+              console.log(`error: ${error.message}
+                      Could not read archetype details: Check your Archetype Designer credentials and Repository Id`);
+              break;
+            default:
+              console.log('error message: ', error.message);
+          }
+        } else
+          console.log('unexpected error: ', error.message);
+      });
+  }
+
   private walkUnsupported(f: TemplateElement)
   {
     formatUnsupported(this,f);
   }
 
-  private walkCluster(f: TemplateElement) {
-    if (f.nodeId.includes('CLUSTER')){
-      this.archetypeList.push({archetypeId: f.nodeId})
-    }
-
+  private async walkCluster(f: TemplateNode) {
     formatCluster(this, f)
     this.walkChildren(f);
   }
@@ -142,6 +202,7 @@ export class DocBuilder {
   }
 
   private walkComposition(f: TemplateElement) {
+    f.depth = 0;
     this.archetypeList.push({archetypeId: f.nodeId})
     formatCompositionHeader(this, f)
     formatNodeHeader(this);
@@ -164,7 +225,7 @@ export class DocBuilder {
 
   private walkSection(f: TemplateElement) {
     if (!this.config?.skippedAQLPaths?.includes(f.aqlPath)) {
-      this.archetypeList.push({archetypeId: f.nodeId})
+      this.archetypeList.push(f.nodeId)
       formatLeafHeader(this, f)
     }
     this.walkChildren(f)
@@ -172,7 +233,7 @@ export class DocBuilder {
 
 
   private walkEntry(f: TemplateElement) {
-    this.archetypeList.push({archetypeId: f.nodeId})
+    this.archetypeList.push(f.nodeId)
     formatLeafHeader(this, f)
     formatNodeHeader(this)
     this.walkRmChildren(f);
@@ -184,8 +245,8 @@ export class DocBuilder {
     formatCompositionContextHeader(this, f);
     if (f.children?.length > 0) {
       formatNodeHeader(this)
-      this.walkRmChildren(f);
-      this.walkNonRMChildren(f)
+      await this.walkRmChildren(f);
+      await this.walkNonRMChildren(f)
       formatNodeFooter(this,f)
     }
   }
@@ -347,6 +408,4 @@ export class DocBuilder {
     formatInstructionActivity(this, f)
     this.walkChildren(f);
   }
-
 }
-

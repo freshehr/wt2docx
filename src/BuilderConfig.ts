@@ -1,5 +1,36 @@
-import fs from "fs";
-import { Config } from "./Config";
+import fs from 'fs';
+import { ExportFormat } from './formatters/DocFormatter';
+
+export enum WtxRegenerate  {
+  always = 'always',
+  never = 'never',
+  whenStale = 'whenStale'
+}
+
+export type Config = {
+  displayTechnicalOccurrences: boolean;
+  hideNodeIds: boolean;
+  skippedAQLPaths: string[];
+  includedAnnotations: string[];
+  excludedRMTags: string[];
+  title: string;
+  hideParticipations: boolean;
+  displayAQLPaths: boolean;
+  displayToC: boolean;
+  hideXmindValues: boolean
+  generateWtx: boolean
+  ADRepositoryId: string
+  ADUsername: string
+  ADPassword:string
+  inFilePath: string
+  outFilePath: string
+  outFileDir: string
+  inFileDir: string
+  exportFormat: ExportFormat
+  defaultLang: string
+  regenerateWtx: WtxRegenerate
+}
+
 
 const defaultConfig: Config = {
   displayTechnicalOccurrences: false,
@@ -11,7 +42,19 @@ const defaultConfig: Config = {
   hideParticipations: true,
   displayAQLPaths: false,
   displayToC: false,
-  hideXmindValues: true
+  hideXmindValues: true,
+  generateWtx: false,
+  ADRepositoryId: '',
+  ADUsername: '',
+  ADPassword: '',
+  inFilePath: '',
+  outFilePath: '',
+  outFileDir: './out',
+  inFileDir: './templates',
+  exportFormat: ExportFormat.adoc,
+  defaultLang: 'en',
+  regenerateWtx: WtxRegenerate.whenStale
+
 };
 
  export function importConfig(path: string): Config {

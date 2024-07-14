@@ -2,10 +2,10 @@ import fs from "fs";
 import { parseXMindMarkToXMindFile} from "xmindmark";
 
 import { DocBuilder } from "../DocBuilder";
-import {  TemplateElement } from "../TemplateElement";
+import {  TemplateNode, TemplateInput } from "../TemplateNodes";
 import { formatOccurrences, isAnyChoice, mapRmTypeText } from '../TemplateTypes';
-import { formatRawOccurrencesText } from "../DocFormatter";
-import { TemplateInput } from "../TemplateInput";
+import { formatRawOccurrencesText } from "./DocFormatter";
+
 
 const headerIndent: string = '  -';
 const eventIndent:  string = '    -';
@@ -32,7 +32,7 @@ export const xmind = {
     sb.append(sb.newLineCoded(`Template: ${wt.templateId} \n ${wt.semVer} \n ${new Date().toDateString()}`));
   },
 
-  formatCompositionHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatCompositionHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const {  sb } = dBuilder;
     sb.append(sb.newLineCoded(`- Composition: ${f.name}`))
 
@@ -40,47 +40,45 @@ export const xmind = {
       sb.append(`${headerIndent} attributes`)
   },
 
-  formatCompositionContextHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatCompositionContextHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb} = dBuilder;
     sb.append(`${headerIndent} context`);
   },
 
   saveFile: async (dBuilder: DocBuilder, outFile: any): Promise <void>  => {
     const xmindArrayBuffer = await parseXMindMarkToXMindFile(dBuilder.toString())
-    fs.writeFileSync('./out/tmp.md', dBuilder.toString(), {encoding: "utf8"});
+    fs.writeFileSync('./tmp/tmp.md', dBuilder.toString(), {encoding: "utf8"});
     fs.writeFileSync(outFile, Buffer.from(xmindArrayBuffer), {encoding: "utf8"});
     console.log(`\n Exported : ${outFile}`)
   },
 
-  formatNodeContent: (dBuilder: DocBuilder, f: TemplateElement, isChoice: boolean) => {
+  formatNodeContent: (dBuilder: DocBuilder, f: TemplateNode, isChoice: boolean) => {
     const { sb, config } = dBuilder;
     const localName = f.localizedName ? f.localizedName : f.name
     const nodeName = localName ? localName : f.id
     const rmTypeText = mapRmTypeText(f.rmType);
     const occurrencesText = formatOccurrences(f, config.displayTechnicalOccurrences)
     sb.append(`${nodeIndent} ${nodeName} [${rmTypeText} ${occurrencesText}]`)
-
   },
 
-  formatLeafHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatLeafHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb} = dBuilder;
     sb.append(`${headerIndent} ${f.name} ${f.rmType}`)
   },
 
-  formatObservationEvent: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatObservationEvent: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb} = dBuilder;
     sb.append(`${eventIndent} ${f.name}  ${formatRawOccurrencesText(dBuilder, f)}`)
   },
 
-  formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateElement) => {
+  formatChoiceHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { sb} = dBuilder;
-
     if (isAnyChoice(f.children.map(child =>  child.rmType)))
       sb.append(`${dvIndent} All data types allowed`);
   },
 
   dvTypes: {
-    formatDvCodedText: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvCodedText: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb, config} = dBuilder;
 
       f?.inputs.forEach((item :TemplateInput) => {
@@ -102,7 +100,7 @@ export const xmind = {
       });
     },
 
-    formatDvText: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvText: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb , config} = dBuilder;
 
       if (f.inputs.length > 0) {
@@ -128,7 +126,7 @@ export const xmind = {
       }
     },
 
-    formatDvOrdinal: (dBuilder: DocBuilder, f: TemplateElement) => {
+    formatDvOrdinal: (dBuilder: DocBuilder, f: TemplateNode) => {
       const { sb , config} = dBuilder;
 
       f.inputs.forEach((input) => {

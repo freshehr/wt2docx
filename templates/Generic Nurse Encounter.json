@@ -966,11 +966,8 @@
       "localizedDescriptions" : {
         "en" : "A generic section header which should be renamed in a template to suit a specific clinical context."
       },
-      "aqlPath" : "/content[openEHR-EHR-SECTION.adhoc.v1,'Point of care tests']",
+      "aqlPath" : "/content[openEHR-EHR-SECTION.adhoc.v1,'Point \n        \"id\" : \"random_blood_glucose\",\n        \"name\" : \"Random blood glucose\",\n        \"localizedName\" : \"Random blood glucose\",of care tests']",
       "children" : [ {
-        "id" : "random_blood_glucose",
-        "name" : "Random blood glucose",
-        "localizedName" : "Random blood glucose",
         "rmType" : "OBSERVATION",
         "nodeId" : "openEHR-EHR-OBSERVATION.laboratory_test_result.v1",
         "min" : 0,
