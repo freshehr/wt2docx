@@ -1,6 +1,5 @@
 import axios from 'axios';
 import path from 'path';
-import { DocBuilder } from "./DocBuilder";
 import fs from "fs";
 
 type ArchetypeProvenance = {

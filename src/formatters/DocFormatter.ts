@@ -167,9 +167,9 @@ export const formatLeafHeader = (docBuilder: DocBuilder, f: TemplateNode): void 
         fn = fshl.formatLeafHeader;
         break;
     default:
-      fn = adoc.formatLeafHeader
-      break;
-  }
+        fn = adoc.formatLeafHeader
+        break;
+    }
 
   if (fn)
     fn(docBuilder, f);

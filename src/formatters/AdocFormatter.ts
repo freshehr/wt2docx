@@ -338,7 +338,10 @@ export const adoc = {
     }
 
     const calcPercent = (numerator: number) : string => {
-      return (numerator/overallTotal * 100).toFixed(1)
+      if (!numerator)
+         return ''
+      else
+        return (numerator/overallTotal * 100).toFixed(1)
     }
 
     const formatTotal = (total: number) : string => {
@@ -355,7 +358,7 @@ export const adoc = {
     sb.append(`== Archetype provenance`)
 
     sb.append('[options="header","stretch", cols="33,33,33"]');
-    sb.append('|====');
+    sb.append('|===');
     sb.append('|Internal | Candidate | External');
 
     sb.append(`| Internal archetypes which are not intended to be shared | Internal archetypes which are candidates for external publication| Archetypes published or managed externally`)
@@ -364,7 +367,7 @@ export const adoc = {
     formatList(candidateArchetypeList)
     formatList(remoteArchetypeList)
 
-    sb.append('====|');
+    sb.append('===|');
 
   },
 

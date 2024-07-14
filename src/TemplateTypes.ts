@@ -51,7 +51,7 @@ export function isAnyChoice(rmType: string[]) {
 }
 
 export const isArchetype= (rmType: string, nodeId: string) => {
-  return ['COMPOSITION','OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY', 'CLUSTER', 'ELEMENT'].includes(rmType)
+  return ['COMPOSITION','OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'SECTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY', 'CLUSTER', 'ELEMENT'].includes(rmType)
          &&  nodeId.substring(0,2) !== 'at'
 }
 

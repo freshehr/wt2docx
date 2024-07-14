@@ -5,7 +5,7 @@ import {
   isAnyChoice, isArchetype, isCluster, isComposition,
   isDataValue,
   isEntry,
-  isEvent,
+  isEvent, isEventContext,
   isSection,
 } from './TemplateTypes';
 import { StringBuilder } from "./StringBuilder";
@@ -72,7 +72,6 @@ export class DocBuilder {
     return (this.resolvedTemplateFiles.wtxOutPath !== null)
   }
 
-
 // If the archetypeLists are empty, then the wtx Augmentation process has failed
   private isWtxAugmented(): boolean {
     const archetypesAdded = this.localArchetypeList.length + this .candidateArchetypeList.length + this.remoteArchetypeList.length
@@ -98,18 +97,22 @@ export class DocBuilder {
   }
 
   private async generate() {
-
     this.resolvedTemplateFiles = resolveTemplateFiles(this.config)
-    console.log('resolvedTemplateFiles', this.resolvedTemplateFiles)
+    // console.log('resolvedTemplateFiles', this.resolvedTemplateFiles)
     formatTemplateHeader(this)
     await this.walk(this._wt.tree);
     formatProvenanceTable(this)
   }
 
-  private async walkChildren(f: TemplateNode, nonContextOnly: boolean = false) {
+  private async walkChildren(f: TemplateNode, nonContextOnly: boolean = false, isContentRoot:boolean = false) {
     if (f.children) {
 
-      const newDepth: number = f.depth+1;
+      let newDepth: number
+
+      if (isContentRoot)
+           newDepth = f.depth
+        else
+           newDepth = f.depth+1
 
       for( const child of f.children) {
         child.parentNode = f;
@@ -123,6 +126,10 @@ export class DocBuilder {
 
   private async walkNonRMChildren(f: TemplateNode) {
     await this.walkChildren(f, true)
+  }
+
+  private async walkCompositionContent(f: TemplateNode) {
+    await this.walkChildren(f, true,true)
   }
 
   private async walk(f: TemplateNode) {
@@ -145,12 +152,10 @@ export class DocBuilder {
       await this.walkObservationEvent(f)
     else if (isActivity(f.rmType))
       await this.walkInstructionActivity(f)
+    else if (isEventContext(f.rmType))
+      await this.walkCompositionContext(f)
     else {
       switch (f.rmType) {
-        case 'EVENT_CONTEXT':
-          f.name = 'Composition context';
-          await this.walkCompositionContext(f);
-          break;
         case 'CODE_PHRASE':
           f.name = f.id;
           this.walkElement(f);
@@ -184,8 +189,7 @@ export class DocBuilder {
       });
   }
 
-  private async walkUnsupported(f: TemplateNode)
-  {
+  private async walkUnsupported(f: TemplateNode) {
     formatUnsupported(this,f);
   }
 
@@ -205,7 +209,8 @@ export class DocBuilder {
     formatNodeHeader(this);
     await this.walkRmChildren(f);
     formatNodeFooter(this,f);
-    await this.walkNonRMChildren(f)
+    f.depth = 0;
+    await this.walkCompositionContent(f)
   }
 
   private walkElement(f: TemplateNode) {
@@ -239,6 +244,8 @@ export class DocBuilder {
   }
 
   private async walkCompositionContext(f: TemplateNode) {
+    f.name = 'Context';
+    f.depth = 0;
     formatCompositionContextHeader(this, f);
     if (f.children?.length > 0) {
       formatNodeHeader(this)
@@ -246,6 +253,7 @@ export class DocBuilder {
       await this.walkNonRMChildren(f)
       formatNodeFooter(this,f)
     }
+    f.depth = 0;
   }
 
   private async walkRmChildren(f: TemplateNode) {

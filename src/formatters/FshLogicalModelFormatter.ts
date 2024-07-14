@@ -8,7 +8,6 @@ export const fshl = {
 
   formatTemplateHeader: (dBuilder: DocBuilder) => {
     const { wt, sb, config } = dBuilder;
-
     const techName = wt.templateId.toLowerCase().replace(/ /g, "_");
     sb.append(`Logical: ${techName}`)
     sb.append(`Title: "${wt.templateId}"`)
@@ -29,7 +28,7 @@ export const fshl = {
     const occurrencesText = formatOccurrences(f, true)
     const localizedDescription = dBuilder.getDescription(f)
     const spaces: string = " ".repeat(f.depth);
-    sb.append(`${spaces} * ${nodeName} ${occurrencesText} ${rmTypeText} "${localName}" "${f.nodeId}: ${localizedDescription}"`)
+    sb.append(`${spaces}* ${nodeName} ${occurrencesText} ${rmTypeText} "${localName}" "${f.nodeId}: ${localizedDescription}"`)
 
   },
 
@@ -40,7 +39,9 @@ export const fshl = {
 
   formatNodeContent: (dBuilder: DocBuilder, f: TemplateNode, isChoice: boolean) => {
 
-    if (isChoice) return
+   // Stop Choice being called twice as alreadty handled by Choice Header
+
+    if (f.rmType === 'ELEMENT' || isChoice) return
 
     const { sb, config } = dBuilder;
     const localName = f.localizedName ? f.localizedName : f.name
@@ -111,6 +112,6 @@ export const fshl = {
       }
     });
 
-    sb.append(`${spaces}* ${nodeName} ${occurrencesText} ${rmTypeText} "${localName}" "${f.nodeId}: ${localizedDescription}"`)
+    sb.append(`${spaces}* ${nodeName}[x] ${occurrencesText} ${rmTypeText} "${localName}" "${f.nodeId}: ${localizedDescription}"`)
   },
 }
