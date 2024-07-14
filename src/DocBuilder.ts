@@ -187,9 +187,9 @@ export class DocBuilder {
       });
   }
 
-  private walkUnsupported(f: TemplateNode)
+  private async walkUnsupported(f: TemplateNode)
   {
-    formatUnsupported(this,f);
+    await formatUnsupported(this,f);
   }
 
   private async walkCluster(f: TemplateNode) {
@@ -197,9 +197,9 @@ export class DocBuilder {
     await this.walkChildren(f);
   }
 
-  private walkObservationEvent(f: TemplateNode) {
+  private async walkObservationEvent(f: TemplateNode) {
     formatObservationEvent(this, f)
-    this.walkChildren(f);
+    await this.walkChildren(f);
   }
 
   private async walkComposition(f: TemplateNode) {
@@ -211,14 +211,14 @@ export class DocBuilder {
     await this.walkNonRMChildren(f)
   }
 
-  private walkElement(f: TemplateNode) {
+  private async walkElement(f: TemplateNode) {
     formatNodeContent(this, f, false)
-    this.walkDataType(f)
+    await this.walkDataType(f)
   }
 
-  private walkChoice(f: TemplateNode) {
+  private async walkChoice(f: TemplateNode) {
     formatNodeContent(this, f, true)
-    this.walkDataType(f)
+    await this.walkDataType(f)
  //   formatAnnotations(this,f);
   }
 
@@ -249,13 +249,13 @@ export class DocBuilder {
     formatCompositionContextHeader(this, f);
     if (f.children?.length > 0) {
       formatNodeHeader(this)
-      this.walkRmChildren(f);
+      await this.walkRmChildren(f);
       await this.walkNonRMChildren(f)
       formatNodeFooter(this,f)
     }
   }
 
-  private walkRmChildren(f: TemplateNode) {
+  private async walkRmChildren(f: TemplateNode) {
 
     const rmAttributes = new Array<TemplateNode>();
 
@@ -395,7 +395,7 @@ export class DocBuilder {
     }
   };
 
-  private walkChoiceHeader(f: TemplateNode) {
+  private async walkChoiceHeader(f: TemplateNode) {
 
     formatChoiceHeader(this,f)
     if (isAnyChoice(f.children.map(child => child.rmType)))
@@ -408,8 +408,8 @@ export class DocBuilder {
   }
 
 
-  private walkInstructionActivity(f: TemplateNode) {
+  private async walkInstructionActivity(f: TemplateNode) {
     formatInstructionActivity(this, f)
-    this.walkChildren(f);
+    await this.walkChildren(f);
   }
 }
