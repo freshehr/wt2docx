@@ -14,7 +14,8 @@ export interface WebTemplateNode {
   aqlPath: string;
   inputs?: TemplateInput[];
   inContext?: boolean;
-  children: TemplateNode[];
+  children?: TemplateNode[];
+  depth?: number;
 }
 
 export interface TemplateNode extends WebTemplateNode{

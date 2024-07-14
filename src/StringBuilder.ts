@@ -4,6 +4,10 @@ export class StringBuilder {
     this.arr = [];
   }
 
+  clear = () =>{
+    this.arr =[]
+  }
+
   backTick = (inString: string): string => `\`${inString}\``
 
   append = (s: string): StringBuilder => {

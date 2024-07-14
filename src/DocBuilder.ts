@@ -108,8 +108,12 @@ export class DocBuilder {
 
   private async walkChildren(f: TemplateNode, nonContextOnly: boolean = false) {
     if (f.children) {
+
+      const newDepth: number = f.depth+1;
+
       for( const child of f.children) {
         child.parentNode = f;
+        child.depth = newDepth;
         if (!nonContextOnly || (nonContextOnly && !child.inContext)) {
           await this.walk(child)
         }
@@ -199,6 +203,7 @@ export class DocBuilder {
   }
 
   private async walkComposition(f: TemplateNode) {
+    f.depth = 0;
     formatCompositionHeader(this, f)
     formatNodeHeader(this);
     this.walkRmChildren(f);
