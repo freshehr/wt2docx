@@ -9,7 +9,7 @@
     "en": "The setting in which the clinical session took place. Coded using the openEHR Terminology, setting group."
   },
   "start_time": {
-    "en": "Start time of the clinical session or other kind of event during which a provider performs a service of any kind for the patient."
+    "en": "COMPOSITION.context.start_time - Start time of the clinical session or other kind of event during which a provider performs a service of any kind for the patient."
   },
   "event_time": {
     "en": "`OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event."

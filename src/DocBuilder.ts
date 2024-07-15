@@ -104,15 +104,10 @@ export class DocBuilder {
     formatProvenanceTable(this)
   }
 
-  private async walkChildren(f: TemplateNode, nonContextOnly: boolean = false, isContentRoot:boolean = false) {
+  private async walkChildren(f: TemplateNode, useSameDepth :boolean, nonContextOnly: boolean = false, ) {
     if (f.children) {
 
-      let newDepth: number
-
-      if (isContentRoot)
-           newDepth = f.depth
-        else
-           newDepth = f.depth+1
+      const newDepth = useSameDepth?f.depth:f.depth+1
 
       for( const child of f.children) {
         child.parentNode = f;
@@ -124,10 +119,9 @@ export class DocBuilder {
     }
   }
 
-  private async walkNonRMChildren(f: TemplateNode) {
-    await this.walkChildren(f, true)
+  private async walkNonRMChildren(f: TemplateNode, useSameDepth: boolean) {
+    await this.walkChildren(f, useSameDepth, true)
   }
-
   private async walkCompositionContent(f: TemplateNode) {
     await this.walkChildren(f, true,true)
   }
@@ -195,19 +189,19 @@ export class DocBuilder {
 
   private async walkCluster(f: TemplateNode) {
     formatCluster(this, f)
-    await this.walkChildren(f);
+    await this.walkChildren(f,false,false);
   }
 
   private async walkObservationEvent(f: TemplateNode) {
     formatObservationEvent(this, f)
-    await this.walkChildren(f);
+    await this.walkChildren(f,false,false);
   }
 
   private async walkComposition(f: TemplateNode) {
     f.depth = 0;
     formatCompositionHeader(this, f)
     formatNodeHeader(this);
-    await this.walkRmChildren(f);
+    await this.walkRmChildren(f,true);
     formatNodeFooter(this,f);
     f.depth = 0;
     await this.walkCompositionContent(f)
@@ -230,7 +224,7 @@ export class DocBuilder {
  //     this.archetypeList.push(f.nodeId)
       formatLeafHeader(this, f)
     }
-    await this.walkChildren(f)
+    await this.walkChildren(f,false,false)
   }
 
 
@@ -238,27 +232,28 @@ export class DocBuilder {
 //    this.archetypeList.push(f.nodeId)
     formatLeafHeader(this, f)
     formatNodeHeader(this)
-    await this.walkRmChildren(f);
-    await this.walkNonRMChildren(f)
+    await this.walkRmChildren(f,false);
+    await this.walkNonRMChildren(f,false)
     formatNodeFooter(this,f)
   }
 
   private async walkCompositionContext(f: TemplateNode) {
-    f.name = 'Context';
+    f.name = 'context';
     f.depth = 0;
     formatCompositionContextHeader(this, f);
     if (f.children?.length > 0) {
       formatNodeHeader(this)
-      await this.walkRmChildren(f);
-      await this.walkNonRMChildren(f)
+      await this.walkRmChildren(f,false);
+      await this.walkNonRMChildren(f, false)
       formatNodeFooter(this,f)
     }
     f.depth = 0;
   }
 
-  private async walkRmChildren(f: TemplateNode) {
+  private async walkRmChildren(f: TemplateNode, useSameDepth: boolean) {
 
     const rmAttributes = new Array<TemplateNode>();
+    const newDepth = useSameDepth?f.depth:f.depth+1
 
     if (f.children) {
       f.children.forEach((child) => {
@@ -281,7 +276,8 @@ export class DocBuilder {
     if (rmAttributes.length === 0) return
 
     rmAttributes.forEach(child => {
-      child.localizedName = child.id;
+      child.localizedName = child.id
+      child.depth = newDepth
       this.walk(child);
     });
 
@@ -373,7 +369,7 @@ export class DocBuilder {
 
   public getDescription = (f: TemplateNode) => {
     const language: string = 'en'
-    if (!f.inContext)
+    if ((!f.inContext ) && (f.id !== 'context'))
       return this.getValueOfRecord(f.localizedDescriptions)
     else {
       let rmTag = f.id;
@@ -385,6 +381,7 @@ export class DocBuilder {
             rmTag = 'action_time'
             break;
           case 'EVENT':
+          case 'OBSERVATION':
             rmTag = 'event_time'
             break
           default:
@@ -412,6 +409,6 @@ export class DocBuilder {
 
   private async walkInstructionActivity(f: TemplateNode) {
     formatInstructionActivity(this, f)
-    await this.walkChildren(f);
+    await this.walkChildren(f,false,false);
   }
 }

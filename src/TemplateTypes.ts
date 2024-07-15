@@ -1,10 +1,9 @@
 import { TemplateNode } from './TemplateNodes';
-import { ArchetypeProvenance } from './provenance/openEProvenance';
 
 export function isEntry(rmType: string) {
   return ['OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY'].includes(rmType);
 }
-
+``
 export function isEvent(rmType: string) {
   return ['EVENT', 'POINT_EVENT', 'INTERVAL_EVENT'].includes(rmType);
 }
@@ -50,6 +49,19 @@ export function isAnyChoice(rmType: string[]) {
 
 }
 
+export const snakeToCamel = (s: string) => {
+  if (!s) return '*undefined*'
+
+  return s.replace(/[-_\s,.[\]<>]+(.)?/g, (_, c) => {
+    return c ? c.toUpperCase() : '';
+  })
+    .replace(/^./, (c) => {
+      return c.toUpperCase();
+    });
+
+}
+
+
 export const isArchetype= (rmType: string, nodeId: string) => {
   return ['COMPOSITION','OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'SECTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY', 'CLUSTER', 'ELEMENT'].includes(rmType)
          &&  nodeId.substring(0,2) !== 'at'
@@ -80,6 +92,8 @@ export const mapRmType2FHIR = (rmTypeString: string) => {
   if (rmTypeString.startsWith('DV_INTERVAL')) {
     intervalPrefix = "Interval of "
     rmType = rmTypeString.replace(/(^.*<|>.*$)/g, '');
+
+    return dataValueIntervalFHIRMapper(rmType)
   }
 
   return `${intervalPrefix}${dataValueFHIRMapper(rmType)}`
@@ -159,8 +173,8 @@ export const openEHR2FHIRDatatypeTable = {
   DV_ORDINAL: 'CodeableConcept',
   DV_SCALE: 'CodeableConcept',
   DV_QUANTITY: 'Quantity',
-  DV_DURATION: 'Period',
-  DV_COUNT: 'SimpleQuantity',
+  DV_DURATION: 'Duration',
+  DV_COUNT: 'Count',
   DV_DATE_TIME: 'dateTime',
   DV_IDENTIFIER: 'Identifier',
   DV_MULTIMEDIA: 'Attachment',
@@ -173,9 +187,19 @@ export const openEHR2FHIRDatatypeTable = {
   DV_DATE: "date",
   DV_TIME: "time",
   CODE_PHRASE: "Coding",
-  PARTY_PROXY: "Party",
+  PARTY_PROXY: "BackboneElement",
   STRING: "String",
 }
+export const openEHRInterval2FHIRTable = {
+  DV_QUANTITY: 'Range',
+  DV_DURATION: 'Duration',
+  DV_COUNT: 'Range',
+  DV_DATE_TIME: 'Period',
+  DV_PROPORTION: "Proportion",
+  DV_DATE: "Period",
+  DV_TIME: "Period",
+}
+
 
 export const dataValueLabelMapper = (dataValue:string) => displayableNodeTextTable[dataValue] || `RM type not supported ${dataValue}`
 
@@ -185,6 +209,9 @@ export const dataValueFHIRMapper = (dataValue:string) => {
    else
      return openEHR2FHIRDatatypeTable[dataValue] || `(FHIR mapping not supported) ${dataValue}`
 }
+
+export const dataValueIntervalFHIRMapper = (dataValue:string) => openEHRInterval2FHIRTable[dataValue] || `RM Interval type not supported ${dataValue}`
+
 
 export const formatOccurrences = (f: TemplateNode, techDisplay :boolean = true) => {
 
