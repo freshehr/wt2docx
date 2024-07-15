@@ -15,7 +15,7 @@ Options:
     --web-template, -wt     Source web template                   [string] [required]
     --out-file,     -o                                            [string]
     --export-format, -ex    Export format (default:adoc)          [string] adoc|xmind|docx|pdf
-    -- config-file,  -cf    default: "config/wtconfig.json"       [string]
+    -- config-file,  -cfg    default: "config/wtconfig.json"       [string]
   
  ```  
 ## Export format dependencies 
