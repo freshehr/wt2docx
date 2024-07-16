@@ -29,6 +29,7 @@ export type Config = {
   exportFormat: ExportFormat
   defaultLang: string
   regenerateWtx: WtxRegenerate
+  fhirBaseUrl: string
 }
 
 
@@ -53,8 +54,8 @@ const defaultConfig: Config = {
   inFileDir: './templates',
   exportFormat: ExportFormat.adoc,
   defaultLang: 'en',
-  regenerateWtx: WtxRegenerate.whenStale
-
+  regenerateWtx: WtxRegenerate.whenStale,
+  fhirBaseUrl: 'http://openehr.org',
 };
 
  export function importConfig(path: string): Config {

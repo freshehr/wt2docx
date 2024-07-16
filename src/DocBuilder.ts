@@ -56,7 +56,6 @@ export class DocBuilder {
     this._wt = wt;
     this.config = config;
     this.config.defaultLang = wt.defaultLanguage;
-
     this.generate().then( () => {
 
       const outFilePath = this.handleOutPath(this.config.inFilePath, this.config.outFilePath, this.config.exportFormat,this.config.outFileDir);

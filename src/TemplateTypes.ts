@@ -3,7 +3,7 @@ import { TemplateNode } from './TemplateNodes';
 export function isEntry(rmType: string) {
   return ['OBSERVATION', 'EVALUATION', 'INSTRUCTION', 'ACTION', 'ADMIN_ENTRY', 'GENERIC_ENTRY'].includes(rmType);
 }
-``
+
 export function isEvent(rmType: string) {
   return ['EVENT', 'POINT_EVENT', 'INTERVAL_EVENT'].includes(rmType);
 }
@@ -49,16 +49,18 @@ export function isAnyChoice(rmType: string[]) {
 
 }
 
-export const snakeToCamel = (s: string) => {
+export const snakeToCamel = (s: string, forceInitialCap : boolean) => {
   if (!s) return '*undefined*'
 
-  return s.replace(/[-_\s,.[\]<>]+(.)?/g, (_, c) => {
-    return c ? c.toUpperCase() : '';
-  })
-    .replace(/^./, (c) => {
-      return c.toUpperCase();
-    });
+    const indexInit = forceInitialCap?-1:0
 
+  return s
+     .replace(/(?:^\w|[A-Z]_|\b\w)/g, (letter, index) =>
+      index === indexInit
+        ? letter.toLowerCase()
+        : letter.toUpperCase()
+    )
+    .replace(/\s+/g, '')
 }
 
 

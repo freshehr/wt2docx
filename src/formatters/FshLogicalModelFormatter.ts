@@ -2,7 +2,7 @@ import fs from "fs";
 
 import { DocBuilder } from "../DocBuilder";
 import {  TemplateNode} from "../TemplateNodes";
-import { formatOccurrences, mapRmType2FHIR, snakeToCamel } from '../TemplateTypes';
+import { formatOccurrences, isEntry, mapRmType2FHIR, snakeToCamel } from '../TemplateTypes';
 
 const formatLocalName = (f:TemplateNode) => f.localizedName ? f.localizedName : f.name;
 const formatSpaces = (f:TemplateNode) =>  " ".repeat(f.depth*2);
@@ -12,14 +12,14 @@ const appendFSHLM = (dBuilder: DocBuilder, f: TemplateNode, isChoice: boolean = 
 
   const choiceSuffix: string = isChoice?'x':'';
   const nodeId: string = f.nodeId?f.nodeId:`RM`
-  sb.append(`${formatSpaces(f)}* ${snakeToCamel(f.id)}${choiceSuffix} ${formatOccurrences(f,true)} ${mapRmType2FHIR(f.rmType)} "${formatLocalName(f)}" "${nodeId}: ${dBuilder.getDescription(f)}"`)
+  sb.append(`${formatSpaces(f)}* ${snakeToCamel(f.localizedName?f.localizedName:f.id,isEntry(f.rmType))}${choiceSuffix} ${formatOccurrences(f,true)} ${mapRmType2FHIR(f.rmType)} "${formatLocalName(f)}" "[${nodeId}] ${dBuilder.getDescription(f)}"`)
 
 }
 export const fshl = {
 
   formatTemplateHeader: (dBuilder: DocBuilder) => {
     const { wt, sb, config } = dBuilder;
-    const techName = snakeToCamel(wt.templateId);
+    const techName = snakeToCamel(wt.templateId,true);
     sb.append(`Logical: ${techName}`)
     sb.append(`Title: "${wt.templateId}"`)
     sb.append(`Parent: Element`)
@@ -28,9 +28,11 @@ export const fshl = {
   formatCompositionHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
     const { wt, sb, config } = dBuilder;
     sb.append(`Description:  "${f.localizedDescriptions.en}"`)
-    sb.append(`* ^name = "${snakeToCamel(f.id)}"`)
+    sb.append(`* ^name = "${snakeToCamel(wt.templateId,true)}"`)
     sb.append(`* ^status = #active`)
-    sb.append(`* ^version = "${dBuilder.wt.semVer}"`)
+    sb.append(`* ^version = "${wt.semVer}"`)
+    sb.append(`* ^url = "${config.fhirBaseUrl}/StructureDefinition/${snakeToCamel(f.id,true)}"`)
+
   },
 
   formatCompositionContextHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
@@ -57,43 +59,18 @@ export const fshl = {
   ,
 
   formatLeafHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
-    const { sb, config } = dBuilder;
-    const localName = f.localizedName ? f.localizedName : f.name
-    const nodeName = f.id
-    const rmTypeText = mapRmType2FHIR(f.rmType);
-    const occurrencesText = formatOccurrences(f, true)
-    const localizedDescription = dBuilder.getDescription(f)
-    const spaces: string = " ".repeat(f.depth * 2);
-
 //    sb.append(`${spaces}* ${nodeName} ${occurrencesText} ${rmTypeText} "${localName}" "${f.nodeId}: ${localizedDescription}"`)
     appendFSHLM(dBuilder,f)
 
   },
 
   formatCluster: (dBuilder: DocBuilder, f: TemplateNode) => {
-    const { sb, config } = dBuilder;
-    const localName = f.localizedName ? f.localizedName : f.name
-    const nodeName = f.id
-    const rmTypeText = mapRmType2FHIR(f.rmType);
-    const occurrencesText = formatOccurrences(f, true)
-    const localizedDescription = dBuilder.getDescription(f)
-    const spaces: string = " ".repeat(f.depth * 2);
-
   //  sb.append(`${spaces}* ${nodeName} ${occurrencesText} ${rmTypeText} "${localName}" "${f.nodeId}: ${localizedDescription}"`)
     appendFSHLM(dBuilder,f)
 
   },
 
   formatObservationEvent: (dBuilder: DocBuilder, f: TemplateNode) => {
-    const { sb } = dBuilder;
-    const localName = f.localizedName ? f.localizedName : f.name
-    const nodeName = f.id
-    const rmTypeText = mapRmType2FHIR(f.rmType);
-    const occurrencesText = formatOccurrences(f, true)
-    const localizedDescription = dBuilder.getDescription(f)
-    const spaces: string = " ".repeat(f.depth * 2);
-
-    // sb.append(`${spaces}* ${nodeName} ${occurrencesText} ${rmTypeText} "${localName}" "${f.rmType}: ${localizedDescription}"`)
 
     appendFSHLM(dBuilder,f)
 
@@ -115,7 +92,7 @@ export const fshl = {
       }
     });
 
-    sb.append(`${formatSpaces(f)}* ${snakeToCamel(f.id)}[x] ${formatOccurrences(f,true)} ${rmTypeText} "${formatLocalName(f)}" "${f.nodeId}: ${dBuilder.getDescription(f)}"`)
+    sb.append(`${formatSpaces(f)}* ${snakeToCamel(f.id,false)}[x] ${formatOccurrences(f,true)} ${rmTypeText} "${formatLocalName(f)}" "${f.nodeId}: ${dBuilder.getDescription(f)}"`)
 //    sb.append(`${spaces}* ${nodeName}[x] ${occurrencesText} ${rmTypeText} "${localName}" "${f.nodeId}: ${localizedDescription}"`)
   },
 }
