@@ -18,7 +18,7 @@ const appendFSHLM = (dBuilder: DocBuilder, f: TemplateNode, isChoice: boolean = 
 export const fshl = {
 
   formatTemplateHeader: (dBuilder: DocBuilder) => {
-    const { wt, sb, config } = dBuilder;
+    const { wt, sb} = dBuilder;
     const techName = snakeToCamel(wt.templateId,true);
     sb.append(`Logical: ${techName}`)
     sb.append(`Title: "${wt.templateId}"`)
