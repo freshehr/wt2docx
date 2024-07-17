@@ -58,16 +58,16 @@
       "name" : "Pseudonymised patient",
       "localizedName" : "Pseudonymised patient",
       "rmType" : "ADMIN_ENTRY",
-      "nodeId" : "openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1",
+      "nodeId" : "openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1",
       "min" : 0,
       "max" : 1,
       "localizedNames" : {
         "en" : "Pseudonymised patient"
       },
       "localizedDescriptions" : {
-        "en" : "Pseudo-anonymised details of a patient to support population querying."
+        "en" : "Pseudo-anonymised details of a patient to support AQL population querying, and to define the content of an AQL proxy subject object."
       },
-      "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]",
+      "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]",
       "children" : [ {
         "id" : "identifier",
         "name" : "identifier",
@@ -82,7 +82,7 @@
         "localizedDescriptions" : {
           "en" : "An pseudo-anonymised identifier for this patient."
         },
-        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]/data[at0001]/items[at0009]/value",
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/data[at0001]/items[at0009]/value",
         "inputs" : [ {
           "suffix" : "id",
           "type" : "TEXT"
@@ -110,7 +110,7 @@
         "localizedDescriptions" : {
           "en" : "The date of birth for the individual."
         },
-        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]/data[at0001]/items[at0003]/value",
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/data[at0001]/items[at0003]/value",
         "inputs" : [ {
           "type" : "DATETIME"
         } ]
@@ -128,7 +128,7 @@
         "localizedDescriptions" : {
           "en" : "Is the patient deceased?"
         },
-        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]/data[at0001]/items[at0007]/value",
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/data[at0001]/items[at0007]/value",
         "inputs" : [ {
           "type" : "BOOLEAN"
         } ]
@@ -146,7 +146,7 @@
         "localizedDescriptions" : {
           "en" : "The date and time of death of the patient, if deceased."
         },
-        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]/data[at0001]/items[at0010]/value",
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/data[at0001]/items[at0010]/value",
         "inputs" : [ {
           "type" : "DATETIME"
         } ]
@@ -164,7 +164,7 @@
         "localizedDescriptions" : {
           "en" : "The administrative gender of the patient."
         },
-        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]/data[at0001]/items[at0002]/value",
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/data[at0001]/items[at0002]/value",
         "inputs" : [ {
           "type" : "TEXT",
           "listOpen" : true
@@ -186,7 +186,7 @@
         "localizedDescriptions" : {
           "en" : "The birth sex of the patient."
         },
-        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]/data[at0001]/items[at0004]/value",
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/data[at0001]/items[at0004]/value",
         "inputs" : [ {
           "type" : "TEXT",
           "listOpen" : true
@@ -208,7 +208,7 @@
         "localizedDescriptions" : {
           "en" : "The patient's usual address."
         },
-        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]/data[at0001]/items[at0011]",
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/data[at0001]/items[at0011]",
         "children" : [ {
           "id" : "postalcode",
           "name" : "postalCode",
@@ -223,7 +223,7 @@
           "localizedDescriptions" : {
             "en" : "The postal code of the patient's normal address."
           },
-          "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]/data[at0001]/items[at0011]/items[at0005]/value",
+          "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/data[at0001]/items[at0011]/items[at0005]/value",
           "inputs" : [ {
             "type" : "TEXT"
           } ]
@@ -241,7 +241,7 @@
           "localizedDescriptions" : {
             "en" : "The country of the patient's usual address."
           },
-          "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]/data[at0001]/items[at0011]/items[at0006]/value",
+          "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/data[at0001]/items[at0011]/items[at0006]/value",
           "inputs" : [ {
             "type" : "TEXT"
           } ]
@@ -252,7 +252,7 @@
         "rmType" : "CODE_PHRASE",
         "min" : 1,
         "max" : 1,
-        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]/language",
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/language",
         "inContext" : true
       }, {
         "id" : "encoding",
@@ -260,7 +260,7 @@
         "rmType" : "CODE_PHRASE",
         "min" : 1,
         "max" : 1,
-        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]/encoding",
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/encoding",
         "inContext" : true
       }, {
         "id" : "subject",
@@ -268,7 +268,7 @@
         "rmType" : "PARTY_PROXY",
         "min" : 1,
         "max" : 1,
-        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymisedpatient.v1]/subject",
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/subject",
         "inputs" : [ {
           "suffix" : "id",
           "type" : "TEXT"

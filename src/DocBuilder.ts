@@ -64,7 +64,6 @@ export class DocBuilder {
       if (this.regenWtx() && this.isWtxAugmented() )
         saveWtxFile(this).catch()
     });
-
   }
 
   private regenWtx(): boolean {
@@ -83,7 +82,6 @@ export class DocBuilder {
 
       const fExt:string = ext === 'wtx'?'wtx.json': ext;
       const pathSeg = path.parse(infile);
-
       return  `${outDir}/${pathSeg.name}.${fExt}`;
     }
   }
@@ -133,20 +131,20 @@ export class DocBuilder {
     }
     if (isComposition(f.rmType))
       await this.walkComposition(f)
-    else if (isCluster(f.rmType))
-      await this.walkCluster(f)
-    else if (isEntry(f.rmType))
-      await this.walkEntry(f)
-    else if (isDataValue(f.rmType))
-      this.walkElement(f)
+    else if (isEventContext(f.rmType))
+      await this.walkCompositionContext(f)
     else if (isSection(f.rmType))
       await this.walkSection(f)
+    else if (isEntry(f.rmType))
+      await this.walkEntry(f)
     else if (isEvent(f.rmType))
       await this.walkObservationEvent(f)
     else if (isActivity(f.rmType))
       await this.walkInstructionActivity(f)
-    else if (isEventContext(f.rmType))
-      await this.walkCompositionContext(f)
+    else if (isCluster(f.rmType))
+      await this.walkCluster(f)
+    else if (isDataValue(f.rmType))
+      this.walkElement(f)
     else {
       switch (f.rmType) {
         case 'CODE_PHRASE':
@@ -199,9 +197,12 @@ export class DocBuilder {
   private async walkComposition(f: TemplateNode) {
     f.depth = 0;
     formatCompositionHeader(this, f)
-    formatNodeHeader(this);
-    await this.walkRmChildren(f,true);
-    formatNodeFooter(this,f);
+
+    if (!this.config.entriesOnly) {
+      formatNodeHeader(this);
+      await this.walkRmChildren(f,true);
+      formatNodeFooter(this,f);
+   }
     f.depth = 0;
     await this.walkCompositionContent(f)
   }
@@ -219,25 +220,27 @@ export class DocBuilder {
   }
 
   private async walkSection(f: TemplateNode) {
-    if (!this.config?.skippedAQLPaths?.includes(f.aqlPath)) {
+    if (!this.config?.skippedAQLPaths?.includes(f.aqlPath) && (!this.config.entriesOnly)){
  //     this.archetypeList.push(f.nodeId)
       formatLeafHeader(this, f)
     }
     await this.walkChildren(f,false,false)
   }
 
-
   private async walkEntry(f: TemplateNode) {
 //    this.archetypeList.push(f.nodeId)
     formatLeafHeader(this, f)
     formatNodeHeader(this)
-    await this.walkRmChildren(f,false);
-    await this.walkNonRMChildren(f,false)
+    await this.walkRmChildren(f,true);
+    await this.walkNonRMChildren(f,true)
     formatNodeFooter(this,f)
   }
 
   private async walkCompositionContext(f: TemplateNode) {
-    f.name = 'context';
+
+    if (this.config.entriesOnly) return
+
+      f.name = 'context';
     f.depth = 0;
     formatCompositionContextHeader(this, f);
     if (f.children?.length > 0) {

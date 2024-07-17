@@ -1,7 +1,7 @@
 import { DocBuilder } from "../DocBuilder";
 import { TemplateNode } from "../TemplateNodes";
 import { ExportFormat, FormatElementFn } from "./DocFormatter";
-// import { xmind } from "./XmindFormatter";
+import { fshl } from "./FshLogicalModelFormatter";
 import { adoc } from "./AdocFormatter";
 import { xmind } from "./XmindFormatter";
 
@@ -12,8 +12,9 @@ export const formatDvCodedText = (docBuilder: DocBuilder, f: TemplateNode): void
   switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
       fn = xmind.dvTypes.formatDvCodedText
-      break
+      break;
     case ExportFormat.fshl:
+      fn = fshl.dvTypes.formatDvCodedText
       break;
     default:
       fn = adoc.dvTypes.formatDvCodedText

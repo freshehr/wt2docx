@@ -5,26 +5,13 @@ import { DocBuilder } from "../DocBuilder";
 import {  TemplateNode, TemplateInput } from "../TemplateNodes";
 import { formatOccurrences, isAnyChoice, mapRmTypeText } from '../TemplateTypes';
 import { formatRawOccurrencesText } from "./DocFormatter";
-
+import { extractTextInBrackets} from './FormatterUtils';
 
 const headerIndent: string = '  -';
 const eventIndent:  string = '    -';
 const nodeIndent:   string = '      -';
 const dvIndent:     string = '        -';
 
-function extractTextInBrackets(input: string): string[] {
-  // The regular expression matches text within square brackets.
-  const regex = /\[(.*?)]/g;
-  let match;
-  const matches: string[] = [];
-
-  // tslint:disable-next-line:no-conditional-assignment
-  while ((match = regex.exec(input)) !== null) {
-    matches.push(match[1]);
-  }
-
-  return matches;
-}
 export const xmind = {
 
   formatHeader: (dBuilder : DocBuilder): void => {

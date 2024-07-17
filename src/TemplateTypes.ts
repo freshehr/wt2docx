@@ -55,12 +55,13 @@ export const snakeToCamel = (s: string, forceInitialCap : boolean) => {
     const indexInit = forceInitialCap?-1:0
 
   return s
-     .replace(/(?:^\w|[A-Z]_|\b\w)/g, (letter, index) =>
+    .replace(/[_-]/g,' ')
+    .replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) =>
       index === indexInit
         ? letter.toLowerCase()
         : letter.toUpperCase()
     )
-    .replace(/\s+/g, '')
+    .replace(/\s+|[_-]/g, '')
 }
 
 

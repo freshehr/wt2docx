@@ -37,6 +37,8 @@
     "@types/ora": "^3.2.0",
     "asciidoctor": "^3.0.0",
     "axios": "^1.7.2",
+    "fsh-sushi": "^3.11.0",
+    "hl7.fhir.r4.core": "^0.0.1-security",
     "node-fetch": "^3.3.2",
     "node-pandoc": "^0.3.0",
     "ora": "^5.1.0",
