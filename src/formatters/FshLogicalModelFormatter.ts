@@ -12,17 +12,17 @@ const formatLocalName = (f:TemplateNode) => f.localizedName ? f.localizedName : 
 const formatSpaces = (f:TemplateNode) =>  " ".repeat(f.depth*2);
 
 const formatNodeId = (f: TemplateNode):string => f.nodeId?f.nodeId:`RM`
-const formatDescription = (dBuilder:DocBuilder,f:TemplateNode) =>
-  wrapTripleQuote(`\`[${formatNodeId(f)}]\`
+const formatDescription = (dBuilder:DocBuilder,f:TemplateNode,typeConstraint: string = '') =>
+  wrapTripleQuote(`\`[${formatNodeId(f)} ${typeConstraint}]\`
                              ${dBuilder.getDescription(f)})`)
 
 const wrapTripleQuote = (inString: string) => `"""${inString}"""`
 
-const appendFSHLM = (dBuilder: DocBuilder, f: TemplateNode, isChoice: boolean = false) => {
+const appendFSHLM = (dBuilder: DocBuilder, f: TemplateNode, typeConstraint: string = '') => {
   const { sb } = dBuilder;
-  const choiceSuffix: string = isChoice?'x':'';
+ // const choiceSuffix: string = isChoice?'x':'';
 
-  sb.append(`${formatSpaces(f)}* ${snakeToCamel(f.localizedName?f.localizedName:f.id,isEntry(f.rmType))}${choiceSuffix} ${formatOccurrences(f,true)} ${mapRmType2FHIR(f.rmType)} "${formatLocalName(f)}" ${formatDescription(dBuilder,f)}`)
+  sb.append(`${formatSpaces(f)}* ${snakeToCamel(f.localizedName?f.localizedName:f.id,isEntry(f.rmType))} ${formatOccurrences(f,true)} ${mapRmType2FHIR(f.rmType)} "${formatLocalName(f)}" ${formatDescription(dBuilder,f,typeConstraint)}`)
 
 }
 const appendBinding = (dBuilder: DocBuilder, f: TemplateNode) => {
@@ -61,7 +61,7 @@ export const fshl = {
   },
 
   formatCompositionContextHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
-    appendFSHLM(dBuilder, f)
+    appendFSHLM(dBuilder,f)
   },
 
 
@@ -193,7 +193,21 @@ formatDvText: (dBuilder: DocBuilder, f: TemplateNode) => {
   })
 },
     formatDvQuantity: (dBuilder: DocBuilder, f: TemplateNode) => {
-      appendFSHLM(dBuilder,f)
+
+      let unitStr = ' | '
+
+      if (f.inputs?.length > 0) {
+        f.inputs.forEach((item) => {
+          if (item.list && item.suffix === 'unit') {
+            item.list.forEach((val) => {
+              unitStr = unitStr.concat(`${val.label}`);
+            });
+          }
+        });
+      }
+
+      appendFSHLM(dBuilder, f, unitStr)
+
     },
 
     formatDvDefault: (dBuilder: DocBuilder, f: TemplateNode) => {

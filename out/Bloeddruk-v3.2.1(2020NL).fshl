@@ -1,29 +1,29 @@
 Logical: Bloeddruk
 Title: "Bloeddruk-v3.2.1(2020NL)"
 Parent: Element
-Description: """`[openEHR-EHR-OBSERVATION.blood_pressure.v2]`
+Description: """`[openEHR-EHR-OBSERVATION.blood_pressure.v2 ]`
                              De lokale meting van de arteriële bloeddruk, welke surrogaat is voor de arteriële druk in de systemische circulatie.)"""
 * ^name = "Bloeddruk"
 * ^status = #active
 * ^version = "undefined"
 * ^url = "http://openehr.org/StructureDefinition/Bloeddruk"
-* time 1..1 dateTime "time" """`[RM]`
+* time 1..1 dateTime "time" """`[RM ]`
                              `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.)"""
-* systolisch 1..1 Quantity "Systolisch" """`[at0004]`
+* systolisch 1..1 Quantity "Systolisch" """`[at0004  | mm[Hg]]`
                              De hoogste (piek) systemische arteriële bloeddruk - gemeten in de systolische of samentrekkingsfase van de hartslag.)"""
-* diastolisch 1..1 Quantity "Diastolisch" """`[at0005]`
+* diastolisch 1..1 Quantity "Diastolisch" """`[at0005  | mm[Hg]]`
                              De laagste systemische arteriële bloeddruk - gemeten in de diastolische of ontspanningsfase van de hartslag.)"""
-* gemiddeldeArteriëLeDruk 0..1 Quantity "Gemiddelde arteriële druk" """`[at1006]`
+* gemiddeldeArteriëLeDruk 0..1 Quantity "Gemiddelde arteriële druk" """`[at1006  | mm[Hg]]`
                              De gemiddelde bloeddruk gedurende één cyclus van samentrekken en ontspannen van het hart.)"""
-* opmerking 0..1 CodeableConcept "Opmerking" """`[at0033]`
+* opmerking 0..1 CodeableConcept "Opmerking" """`[at0033 ]`
                              Aanvullend opmerkingen over de meting, niet vastgelegd in andere velden.)"""
-* houding 0..1 CodeableConcept "Houding" """`[at0008]`
+* houding 0..1 CodeableConcept "Houding" """`[at0008 ]`
                              De houding van het individu op het moment van de meting.)"""
-* manchetGrootte 0..1 CodeableConcept "Manchet grootte" """`[at0013]`
+* manchetGrootte 0..1 CodeableConcept "Manchet grootte" """`[at0013 ]`
                              De grootte van de manchet gebruikt bij de meting.)"""
-* lichaamslocatieVanDeMeting 0..1 CodeableConcept "Lichaamslocatie van de meting" """`[at0014]`
+* lichaamslocatieVanDeMeting 0..1 CodeableConcept "Lichaamslocatie van de meting" """`[at0014 ]`
                              Lichaamslocatie waar de bloeddruk is gemeten.)"""
-* methodiek 0..1 CodeableConcept "Methodiek" """`[at1035]`
+* methodiek 0..1 CodeableConcept "Methodiek" """`[at1035 ]`
                              De methode van de meting van de bloeddruk.)"""
-* diastolischEindpunt 0..1 CodeableConcept "Diastolisch eindpunt" """`[at1010]`
+* diastolischEindpunt 0..1 CodeableConcept "Diastolisch eindpunt" """`[at1010 ]`
                              Om te registreren welk Korotkoff geluid gebruikt is om de diastolische druk te meten door de auscultatieve methode.)"""

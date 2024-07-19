@@ -1,0 +1,21 @@
+Logical: HartfrequentieV342020NL
+Title: "Hartfrequentie-v3.4(2020NL)"
+Parent: Element
+Description: """`[openEHR-EHR-OBSERVATION.pulse.v2 ]`
+                             De frequentie en bijbehorende eigenschappen van de pols- of hartfrequentie.)"""
+* ^name = "HartfrequentieV342020NL"
+* ^status = #active
+* ^version = "undefined"
+* ^url = "http://openehr.org.nl/zibs/StructureDefinition/HartfrequentieV342020NL"
+* time 0..1 dateTime "time" """`[RM ]`
+                             `OBSERVATION.EVENT.time` - Time of this Observation event. If the width is non-zero, it is the time point of the trailing edge of the event.)"""
+* hartfrequentie 1..1 Quantity "Hartfrequentie" """`[at0004  | /min]`
+                             De frequentie van pols- of hartslag, gemeten in slagen per minuut.)"""
+* regulariteit 0..1 CodeableConcept "Regulariteit." """`[at0005 ]`
+                             Regulariteit van de pols- of hartslag.)"""
+* klinischeBeschrijving 0..1 CodeableConcept "Klinische beschrijving" """`[at1022 ]`
+                             Verhalende beschrijving van de pols- of hartslag.)"""
+* klinischeInterpretatie 0..1 CodeableConcept "Klinische interpretatie" """`[at1023 ]`
+                             Algemeen label om uitspraken over de pols- of hartslag toe te staan.)"""
+* methode 0..1 CodeableConcept "Methode" """`[at1019 ]`
+                             De gebruikte methode voor het observeren van de pols- of hartslag.)"""
