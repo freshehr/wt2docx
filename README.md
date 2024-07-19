@@ -26,7 +26,7 @@ Options:
 - **Docx** requires a local install of [Pandoc](https://pandoc.org/installing.html)
 
 
-- **PDF** requires local installs of [Pandoc](https://pandoc.org/installing.html) and [BasicTex](https://www.neelsomani.com/blog/get-mactex-faster-easily-using-basictex.php) - for Macos
+- **PDF** requires local installs of [Pandoc](https://pandoc.org/installing.html) and [BasicTex](https://www.neelsomani.com/blog/get-mactex-faster-easily-using-basictex.php) - for macOS.
 
 
 ## Configuration
