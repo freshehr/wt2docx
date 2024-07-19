@@ -52,6 +52,7 @@ export const formatDvText = (docBuilder: DocBuilder, f: TemplateNode): void => {
       fn = xmind.dvTypes.formatDvText
       break;
     case ExportFormat.fshl:
+      fn = fshl.dvTypes.formatDvText
       break;
     default:
       fn = adoc.dvTypes.formatDvText
@@ -83,7 +84,9 @@ export const formatDvQuantity = (docBuilder: DocBuilder, f: TemplateNode): void 
 
   switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
+     break;
     case ExportFormat.fshl:
+      fn = fshl.dvTypes.formatDvQuantity
       break;
     default:
       fn = adoc.dvTypes.formatDvQuantity
@@ -116,7 +119,9 @@ export const formatDvDefault = (docBuilder: DocBuilder, f: TemplateNode): void =
 
   switch (docBuilder.config.exportFormat) {
     case ExportFormat.xmind:
+      break;
     case ExportFormat.fshl:
+      fn = fshl.dvTypes.formatDvDefault
       break;
     default:
       fn = adoc.dvTypes.formatDvDefault

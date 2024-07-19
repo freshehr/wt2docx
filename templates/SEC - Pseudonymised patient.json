@@ -1,6 +1,6 @@
 {
   "templateId" : "SEC - Pseudonymised patient",
-  "semVer" : "1.0.0-alpha.1",
+  "semVer" : "1.0.0-alpha.2",
   "version" : "2.3",
   "defaultLanguage" : "en",
   "languages" : [ "en" ],
@@ -164,6 +164,9 @@
         "localizedDescriptions" : {
           "en" : "The administrative gender of the patient."
         },
+        "annotations" : {
+          "vset_description" : "title='AdministrativeGender'&description='The gender of a person used for administrative purposes.'&system= http://hl7.org/fhir/administrative-gender&url=http://hl7.org/fhir/ValueSet/administrative-gender"
+        },
         "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/data[at0001]/items[at0002]/value",
         "inputs" : [ {
           "type" : "TEXT",
@@ -185,6 +188,9 @@
         },
         "localizedDescriptions" : {
           "en" : "The birth sex of the patient."
+        },
+        "annotations" : {
+          "vset_description" : "title='Biological sex'&description='The biological sex of a person determined at birth.'&system=http://snomed.info/sct&url=https://healthterminologies.gov.au/fhir/ValueSet/biological-sex-1"
         },
         "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]/data[at0001]/items[at0004]/value",
         "inputs" : [ {

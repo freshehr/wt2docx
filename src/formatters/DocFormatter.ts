@@ -156,6 +156,25 @@ export const formatCompositionContextHeader = (docBuilder: DocBuilder, f: Templa
     fn(docBuilder, f);
 }
 
+export const formatEntryHeader = (docBuilder: DocBuilder, f: TemplateNode): void => {
+  let fn: FormatElementFn;
+
+  switch (docBuilder.config.exportFormat) {
+    case ExportFormat.xmind:
+      fn = xmind.formatLeafHeader
+      break;
+    case ExportFormat.fshl:
+      fn = fshl.formatEntryHeader;
+      break;
+    default:
+      fn = adoc.formatLeafHeader
+      break;
+  }
+
+  if (fn)
+    fn(docBuilder, f);
+}
+
 export const formatLeafHeader = (docBuilder: DocBuilder, f: TemplateNode): void => {
   let fn: FormatElementFn;
 

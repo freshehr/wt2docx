@@ -13,7 +13,7 @@ import rmDescriptions from "../resources/rm_descriptions.json";
 import {
   formatChoiceHeader,
   formatCluster, formatCompositionContextHeader,
-  formatCompositionHeader, formatInstructionActivity,
+  formatCompositionHeader, formatEntryHeader, formatInstructionActivity,
   formatLeafHeader,
   formatNodeContent,
   formatNodeFooter,
@@ -229,7 +229,7 @@ export class DocBuilder {
 
   private async walkEntry(f: TemplateNode) {
 //    this.archetypeList.push(f.nodeId)
-    formatLeafHeader(this, f)
+    formatEntryHeader(this, f)
     formatNodeHeader(this)
     await this.walkRmChildren(f,true);
     await this.walkNonRMChildren(f,true)

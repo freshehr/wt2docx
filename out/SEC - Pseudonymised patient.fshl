@@ -1,18 +1,29 @@
 Logical: PseudonymisedPatient
 Title: "SEC - Pseudonymised patient"
 Parent: Element
-Description:  "Pseudonymised patient [openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]
-       Pseudo-anonymised details of a patient to support AQL population querying, and to define the content of an AQL proxy subject object."
+Description: """`[openEHR-EHR-ADMIN_ENTRY.pseudonymised_patient.v1]`
+                             Pseudo-anonymised details of a patient to support AQL population querying, and to define the content of an AQL proxy subject object.)"""
 * ^name = "PseudonymisedPatient"
 * ^status = #active
-* ^version = "1.0.0-alpha.1"
+* ^version = "1.0.0-alpha.2"
 * ^url = "http://openehr.org/StructureDefinition/PseudonymisedPatient"
-* identifier 0..* Identifier "identifier" "[at0009] An pseudo-anonymised identifier for this patient."
-* birthDate 0..1 dateTime "birthDate" "[at0003] The date of birth for the individual."
-* deceasedBoolean 0..1 boolean "deceasedBoolean" "[at0007] Is the patient deceased?"
-* deceasedDateTime 0..1 dateTime "deceasedDateTime" "[at0010] The date and time of death of the patient, if deceased."
-* gender 0..1 CodeableConcept "gender" "[at0002] The administrative gender of the patient."
-* birthSex 0..1 CodeableConcept "birthSex" "[at0004] The birth sex of the patient."
-* address 0..1 BackboneElement "address" "[at0011] The patient's usual address."
-  * postalCode 0..1 CodeableConcept "postalCode" "[at0005] The postal code of the patient's normal address."
-  * country 0..1 CodeableConcept "country" "[at0006] The country of the patient's usual address."
+* identifier 0..* Identifier "identifier" """`[at0009]`
+                             An pseudo-anonymised identifier for this patient.)"""
+* birthDate 0..1 dateTime "birthDate" """`[at0003]`
+                             The date of birth for the individual.)"""
+* deceasedBoolean 0..1 boolean "deceasedBoolean" """`[at0007]`
+                             Is the patient deceased?)"""
+* deceasedDateTime 0..1 dateTime "deceasedDateTime" """`[at0010]`
+                             The date and time of death of the patient, if deceased.)"""
+* gender 0..1 CodeableConcept "gender" """`[at0002]`
+                             The administrative gender of the patient.)"""
+* gender from http://hl7.org/fhir/ValueSet/administrative-gender (preferred)
+* birthSex 0..1 CodeableConcept "birthSex" """`[at0004]`
+                             The birth sex of the patient.)"""
+* birthSex from https://healthterminologies.gov.au/fhir/ValueSet/biological-sex-1 (preferred)
+* address 0..1 BackboneElement "address" """`[at0011]`
+                             The patient's usual address.)"""
+  * postalCode 0..1 CodeableConcept "postalCode" """`[at0005]`
+                             The postal code of the patient's normal address.)"""
+  * country 0..1 CodeableConcept "country" """`[at0006]`
+                             The country of the patient's usual address.)"""
