@@ -63,13 +63,13 @@ export const resolveTemplateFiles = (config: Config): ResolvedTemplateFiles => {
     //  console.log('F Augmented ', f.original_namespace)
 
     })
-
 }
 
 export const saveWtxFile = async (dBuilder: DocBuilder) => {
 
   const outFile = dBuilder.resolvedTemplateFiles.wtxOutPath
-  const wtString: string = JSON.stringify(dBuilder.wt, (key, value) => key==='parentNode' ? undefined : value)
+ const wtString: string = JSON.stringify(dBuilder.wt, (key, value) => key ==='parentNode' || key === 'builder' ? undefined : value)
+ // const wtString: string = JSON.stringify(dBuilder.wt)
 
   fs.writeFileSync(outFile, wtString);
   console.log(`\n Exported : ${outFile}`)
