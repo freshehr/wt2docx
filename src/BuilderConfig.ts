@@ -57,7 +57,7 @@ const defaultConfig: Config = {
   defaultLang: 'en',
   regenerateWtx: WtxRegenerate.whenStale,
   fhirBaseUrl: 'http://openehr.org',
-  entriesOnly: true,
+  entriesOnly: false,
 };
 
  export function importConfig(path: string): Config {
