@@ -1,6 +1,3 @@
-import fs from "fs";
-import { sushiClient } from 'fsh-sushi';
-
 import { DocBuilder } from "../DocBuilder";
 import { TemplateInput, TemplateNode } from '../TemplateNodes';
 import { formatOccurrences, isEntry, mapRmType2FHIR, snakeToCamel } from '../TemplateTypes';

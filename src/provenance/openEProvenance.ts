@@ -169,14 +169,17 @@ export const updateArchetypeList = async (repoAccount: string,repoName: string, 
 
 export const updateArchetypeLists = (remoteArchetypeList: ArchetypeList, candidateArchetypeList: ArchetypeList, localArchetypeList: ArchetypeList, provenance: ArchetypeProvenance) => {
 
-  if (formalPublicationNamespaces.includes(provenance.custodianNamespace))
-    remoteArchetypeList.push(provenance)
+  let targetList: ArchetypeList = [];
+  if (formalPublicationNamespaces.includes(provenance.originalNamespace))
+   targetList = remoteArchetypeList
   else
-  if (provenance.custodianNamespace.substring(0.5) === 'local')
-    localArchetypeList.push(provenance)
- else
-    candidateArchetypeList.push(provenance)
+  if (provenance.originalNamespace.substring(0.5) === 'local')
+    targetList = localArchetypeList
+  else
+    targetList = candidateArchetypeList
 
+  if (!targetList.some(item => item.archetypeId === provenance.archetypeId))
+    targetList.push(provenance)
 }
 
 export const getProvenance = (templateNode: TemplateNode): ArchetypeProvenance  => {

@@ -367,7 +367,7 @@ export const adoc = {
     formatList(candidateArchetypeList)
     formatList(remoteArchetypeList)
 
-    sb.append('===|');
+    sb.append('|===');
 
   },
 
