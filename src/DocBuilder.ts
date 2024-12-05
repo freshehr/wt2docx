@@ -11,6 +11,7 @@ import {
 import { StringBuilder } from "./StringBuilder";
 import rmDescriptions from "../resources/rm_descriptions.json";
 import {
+  ExportFormat,
   formatChoiceHeader,
   formatCluster, formatCompositionContextHeader,
   formatCompositionHeader, formatEntryHeader, formatInstructionActivity,
@@ -43,7 +44,20 @@ import axios from 'axios';
 
 export class DocBuilder {
 
+  // stringified Tree
   sb: StringBuilder = new StringBuilder();
+
+  // vstringified Valuesets
+  vb: StringBuilder = new StringBuilder()
+
+  // Stringified Codesystema
+  cb: StringBuilder = new StringBuilder()
+
+  // Stringified Codesystem Aliases
+  ab: StringBuilder = new StringBuilder()
+
+
+
   config: Config;
   localArchetypeList : ArchetypeList = [];
   candidateArchetypeList: ArchetypeList = []
@@ -86,7 +100,11 @@ export class DocBuilder {
     }
   }
   public toString(): string {
-    return this.sb.toString();
+
+    const sb:string = this.sb?`${this.sb.toString()}`:''
+    const vb:string = this.ab?`${this.ab.toString()}`:''
+    const cb:string = this.cb?`${this.cb.toString()}`:''
+    return sb+vb
   }
 
   get wt(): WebTemplate {
@@ -97,7 +115,7 @@ export class DocBuilder {
     this.resolvedTemplateFiles = resolveTemplateFiles(this.config)
     // console.log('resolvedTemplateFiles', this.resolvedTemplateFiles)
     formatTemplateHeader(this)
-    await this.walk(this._wt.tree);
+    await this.walk(this.wt.tree, this);
     formatProvenanceTable(this)
   }
 
@@ -110,7 +128,7 @@ export class DocBuilder {
         child.parentNode = f;
         child.depth = newDepth;
         if (!nonContextOnly || (nonContextOnly && !child.inContext)) {
-          await this.walk(child)
+          await this.walk(child,this)
         }
       }
     }
@@ -123,12 +141,19 @@ export class DocBuilder {
     await this.walkChildren(f, true,true)
   }
 
-  private async walk(f: TemplateNode) {
+  private async walk(f: TemplateNode, builder: DocBuilder) {
+    if (f?.builder == null)
+      f.builder = builder;
 
-    if (isArchetype(f.rmType,f.nodeId) && this.regenWtx() ) {
+    if (isArchetype(f.rmType,f.nodeId)) {
+      f.archetype_id = f.nodeId
       // Only Update the lists if the augment operation has been successful
-      await this.augmentArchetypeMetadata(f);
-    }
+      if(this.regenWtx())
+       await this.augmentArchetypeMetadata(f)
+     }
+     else
+       f.archetype_id = f.parentNode.archetype_id;
+
     if (isComposition(f.rmType))
       await this.walkComposition(f)
     else if (isEventContext(f.rmType))
@@ -215,8 +240,8 @@ export class DocBuilder {
 
   private walkChoice(f: TemplateNode) {
     formatNodeContent(this, f, true)
-    this.walkDataType(f)
- //   formatAnnotations(this,f);
+    if (this.config.exportFormat !== ExportFormat.fshl)
+     this.walkDataType(f)
   }
 
   private async walkSection(f: TemplateNode) {
@@ -280,7 +305,7 @@ export class DocBuilder {
     rmAttributes.forEach(child => {
       child.localizedName = child.id
       child.depth = newDepth
-      this.walk(child);
+      this.walk(child, this);
     });
 
   }

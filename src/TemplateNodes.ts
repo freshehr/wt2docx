@@ -1,3 +1,6 @@
+import { DocBuilder } from './DocBuilder';
+
+// Original schema from Better Web templates
 
 export interface WebTemplateNode {
   id: string;
@@ -19,10 +22,13 @@ export interface WebTemplateNode {
 }
 
 export interface TemplateNode extends WebTemplateNode{
+  builder: DocBuilder; // parent Docbulider obect
   parentNode: TemplateNode;
+
   // Extensions to formal webTemplate
   original_namespace?: string;
   original_publisher?: string;
+  archetype_id?:string
   custodian_namespace?: string;
   custodian_organisation?: string;
   revision?: string;

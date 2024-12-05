@@ -4,14 +4,13 @@ import { sushiClient } from 'fsh-sushi';
 import { DocBuilder } from "../DocBuilder";
 import { TemplateInput, TemplateNode } from '../TemplateNodes';
 import { formatOccurrences, isEntry, mapRmType2FHIR, snakeToCamel } from '../TemplateTypes';
-import { extractTextInBrackets} from './FormatterUtils';
 import { formatLeafHeader } from './DocFormatter';
-import { wrap } from 'yargs';
+import { formatValueSetDefinition, formatCodeSystemDefinition } from './FshTerminologyFormatter';
 
 const formatLocalName = (f:TemplateNode) => f.localizedName ? f.localizedName : f.name;
 const formatSpaces = (f:TemplateNode) =>  " ".repeat(f.depth*2);
-
 const formatNodeId = (f: TemplateNode):string => f.nodeId?f.nodeId:`RM`
+
 const formatDescription = (dBuilder:DocBuilder,f:TemplateNode,typeConstraint: string = '') =>
   wrapTripleQuote(`\`[${formatNodeId(f)} ${typeConstraint}]\`
                              ${dBuilder.getDescription(f)})`)
@@ -20,19 +19,26 @@ const wrapTripleQuote = (inString: string) => `"""${inString}"""`
 
 const appendFSHLM = (dBuilder: DocBuilder, f: TemplateNode, typeConstraint: string = '') => {
   const { sb } = dBuilder;
- // const choiceSuffix: string = isChoice?'x':'';
-
   sb.append(`${formatSpaces(f)}* ${snakeToCamel(f.localizedName?f.localizedName:f.id,isEntry(f.rmType))} ${formatOccurrences(f,true)} ${mapRmType2FHIR(f.rmType)} "${formatLocalName(f)}" ${formatDescription(dBuilder,f,typeConstraint)}`)
-
 }
-const appendBinding = (dBuilder: DocBuilder, f: TemplateNode) => {
-  const { sb } = dBuilder;
-  const bindingFSH: string = `http://hl7.org/fhir/ValueSet/administrative-gender (preferred)`
-  sb.append(`${formatSpaces(f)}* ${snakeToCamel(f.localizedName?f.localizedName:f.id,isEntry(f.rmType))} from ${bindingFSH}`)
+const appendExternalBinding = (f: TemplateNode, input: TemplateInput) => {
+  const { sb } = f.builder;
+  // Pick up an external valueset description annotation
+  const params = new URLSearchParams(f.annotations?.vset_description)
+  const bindingFSH: string = `from ${params.get('url')} (${input?.listOpen?'preferred':'required'})`
+  sb.append(`${formatSpaces(f)}* ${snakeToCamel(f.localizedName ? f.localizedName : f.id, isEntry(f.rmType))} ${bindingFSH}`)
+};
+
+const appendLocalBinding = (f: TemplateNode, input: TemplateInput) => {
+  const { sb } = f.builder;
+  const nodeName = snakeToCamel(f.localizedName ? f.localizedName : f.id, false)
+  const vsName = snakeToCamel(f.localizedName ? f.localizedName : f.id, true)
+  // Pick up an external valueset description annotation
+  const bindingFSH: string = `from ${vsName} (${input?.listOpen?'preferred':'required'})`
+  sb.append(`${formatSpaces(f)}* ${nodeName} ${bindingFSH}`)
 };
 
 const formatFSHDefinition = (dBuilder: DocBuilder, f: TemplateNode) => {
-
   const { sb,wt,config } = dBuilder;
   const techName = snakeToCamel(f.localizedName, true);
   sb.append(`Logical: ${techName}`);
@@ -44,6 +50,7 @@ const formatFSHDefinition = (dBuilder: DocBuilder, f: TemplateNode) => {
   sb.append(`* ^version = "${wt.semVer}"`);
   sb.append(`* ^url = "${config.fhirBaseUrl}/StructureDefinition/${snakeToCamel(techName, true)}"`);
 }
+
 
 export const fshl = {
 
@@ -65,38 +72,13 @@ export const fshl = {
   },
 
 
-  saveFile: async (dBuilder: DocBuilder, outFile: any): Promise<void> => {
-
-
-    fs.writeFileSync(outFile, dBuilder.toString(), { encoding: "utf8" });
-    console.log(`\n Exported : ${outFile}`)
-
-    await fshl.convertFSH(dBuilder, outFile)
-  },
-
-  convertFSH: async (dBuilder: DocBuilder, outFile: any):Promise<void> => {
-
-    const str = dBuilder.toString()
-    sushiClient
-      .fshToFhir(str, {
-      //  dependencies: [{ packageId: "hl7.fhir.us.core", version: "4.0.1" }],
-        logLevel: "error",
-      })
-      .then((results) => {
-        fs.writeFileSync(outFile+'.json', JSON.stringify(results.fhir[0]), { encoding: "utf8" });
-        console.log(`\n Exported : ${outFile}.json`)     // handle results
-      })
-      .catch((err) => {
-        console.log(`Sushi error: ${err}`)// handle thrown errors
-      });
-  },
 
   formatNodeContent: (dBuilder: DocBuilder, f: TemplateNode, isChoice: boolean) => {
     const { wt, sb, config } = dBuilder;
     // Stop Choice being called twice as alreadty handled by Choice Header
     if (f.rmType === 'ELEMENT' || isChoice ) return
 
-    // appendFSHLM(dBuilder,f)
+//     appendFSHLM(dBuilder,f)
   },
 
   formatEntryHeader: (dBuilder: DocBuilder, f: TemplateNode) => {
@@ -145,40 +127,49 @@ export const fshl = {
 
   dvTypes: {
     formatDvCodedText: (dBuilder: DocBuilder, f: TemplateNode) => {
-      const { sb, config} = dBuilder;
+      const { ab } = dBuilder;
 
-      appendFSHLM(dBuilder,f)
+      appendFSHLM(dBuilder, f)
 
-      f?.inputs.forEach((item :TemplateInput) => {
-      if (item.list ) {
-         item.list.forEach( (list) => {
-      // Pick up an external valueset description annotation
-            if (item.suffix === 'code' && f?.annotations?.vset_description) {
-              const params = new URLSearchParams(f.annotations?.vset_description)
-              const bindingFSH: string = `from ${params.get('url')} (${item?.listOpen?'preferred':'required'})`
-              sb.append(`${formatSpaces(f)}* ${snakeToCamel(f.localizedName ? f.localizedName : f.id, isEntry(f.rmType))} ${bindingFSH}`)
+
+      formatValueSetDefinition(f)
+
+      f?.inputs.forEach((input: TemplateInput) => {
+        if (input?.list) {
+          if (input.suffix === 'code') {
+            if (f?.annotations?.vset_description)
+              appendExternalBinding(f, input)
+            else
+            if (input?.list.length >0) {
+              input?.list?.forEach((item) => {
+                ab.append(`* $local#${item.value} "${item.label}"`);
+              })
+              appendLocalBinding(f, input)
             }
-         })
-      }
-  });
-},
+          }
+        }
+      })
+    },
 
 formatDvText: (dBuilder: DocBuilder, f: TemplateNode) => {
-  const { sb , config} = dBuilder;
+  const { ab , config} = dBuilder;
 
-  appendFSHLM(dBuilder,f)
+   appendFSHLM(dBuilder,f)
 
-  if (f.inputs.length > 0) {
-    f.inputs.forEach((item) => {
-      if (item?.suffix !== 'other' && f?.annotations?.vset_description) {
-        // Pick up an external valueset description annotation
-        const params = new URLSearchParams(f.annotations?.vset_description)
-        const bindingFSH: string = `from ${params.get('url')} (${item?.listOpen?'preferred':'required'})`
-        sb.append(`${formatSpaces(f)}* ${snakeToCamel(f.localizedName ? f.localizedName : f.id, isEntry(f.rmType))} ${bindingFSH}`)
-      }
+    if (f?.inputs?.length > 0)
+      f.inputs.forEach((input: TemplateInput) => {
+       if (!['other'].includes(input?.suffix))
+          if (f?.annotations?.vset_description)
+            appendExternalBinding(f, input)
+          else
+            if (input?.list?.length >0) {
+                input?.list?.forEach((item) => {
+                  ab.append(`* $local$#{item.value} "${item.label}"`);
+            })
+              appendLocalBinding(f, input)
+            }
 
-    });
-  }
+    })
 },
 
   formatDvOrdinal: (dBuilder: DocBuilder, f: TemplateNode) => {
@@ -195,7 +186,6 @@ formatDvText: (dBuilder: DocBuilder, f: TemplateNode) => {
     formatDvQuantity: (dBuilder: DocBuilder, f: TemplateNode) => {
 
       let unitStr = ' | '
-
       if (f.inputs?.length > 0) {
         f.inputs.forEach((item) => {
           if (item.list && item.suffix === 'unit') {
@@ -205,9 +195,7 @@ formatDvText: (dBuilder: DocBuilder, f: TemplateNode) => {
           }
         });
       }
-
       appendFSHLM(dBuilder, f, unitStr)
-
     },
 
     formatDvDefault: (dBuilder: DocBuilder, f: TemplateNode) => {

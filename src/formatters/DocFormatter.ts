@@ -5,14 +5,17 @@ import { TemplateNode } from "../TemplateNodes";
 import { formatOccurrences } from "../TemplateTypes";
 import { docx, pdf } from "./PanDocFormatter";
 import { fshl } from './FshLogicalModelFormatter';
+import { fsh } from './FshCommon';
 
 export enum ExportFormat {
   adoc = 'adoc',
   xmind = 'xmind',
   docx = 'docx',
   pdf = 'pdf',
-  fshl  = 'fshl'
+  fshl  = 'fshl',
+  fsht = 'fsht',
 }
+
 
 type FormatHeaderFn = (db: DocBuilder) => void;
 type SaveFileFn = (db: DocBuilder, outFile: string) =>  Promise<void>;
@@ -255,8 +258,9 @@ export const saveFile  = async (docBuilder: DocBuilder, outFile: string): Promis
     case ExportFormat.xmind:
       fn = xmind.saveFile
       break
+    case ExportFormat.fsht:
     case ExportFormat.fshl:
-      fn = fshl.saveFile
+      fn = fsh.saveFile
       break;
 
     case ExportFormat.docx:
