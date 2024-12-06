@@ -172,10 +172,10 @@ export const updateArchetypeLists = (remoteArchetypeList: ArchetypeList, candida
   if (formalPublicationNamespaces.includes(provenance.originalNamespace))
    targetList = remoteArchetypeList
   else
-  if (provenance.originalNamespace.endsWith('.local'))
+ // if (provenance.originalNamespace.endsWith('.local'))
     targetList = localArchetypeList
-  else
-    targetList = candidateArchetypeList
+ // else
+ //  targetList = candidateArchetypeList
 
   if (!targetList.some(item => item.archetypeId === provenance.archetypeId))
     targetList.push(provenance)

@@ -331,9 +331,10 @@ export const adoc = {
     const formatList = (aList: ArchetypeList) => {
       sb.append('a|');
       aList.forEach((item) => {
-        const trimmedId = item.archetypeId.replace(new RegExp('^' + 'openEHR-EHR-'), "");
-        sb.append(`* ${trimmedId} 
-        **           ${item.originalNamespace} : ${item.semver}`);
+ //       const trimmedId = item.archetypeId.replace(new RegExp('^' + 'openEHR-EHR-'),  `${item.originalNamespace}::`);
+        const trimmedId = item.archetypeId.replace(new RegExp('^' + 'openEHR-EHR-'), ``);
+      //  const semver = item.semver.substring(2,3);
+        sb.append(`${trimmedId}`);
       });
     }
 
@@ -341,30 +342,26 @@ export const adoc = {
       if (!numerator)
          return ''
       else
-        return (numerator/overallTotal * 100).toFixed(1)
+        return (numerator/overallTotal * 100).toFixed(0)
     }
 
     const formatTotal = (total: number) : string => {
-      return `Total: ${total}     Percent: (${calcPercent(total)}%)`
+      return `Total: ${total}  (${calcPercent(total)}%)`
     }
 
     const localTotal: number = localArchetypeList.length;
-    const candidateTotal: number = candidateArchetypeList.length;
     const remoteTotal: number = remoteArchetypeList.length;
-    const overallTotal = localTotal + candidateTotal + remoteTotal;
+    const overallTotal = localTotal  + remoteTotal;
 
     sb.newline()
 
     sb.append(`== Archetype provenance`)
 
-    sb.append('[options="header","stretch", cols="33,33,33"]');
+    sb.append('[options="header","stretch", cols="50,50"]');
     sb.append('|===');
-    sb.append('|Internal | Candidate | External');
-
-    sb.append(`| Internal archetypes which are not intended to be shared | Internal archetypes which are candidates for external publication| Archetypes published or managed externally`)
-    sb.append(`| **${formatTotal(localTotal)}** | **${formatTotal(candidateTotal)}** | **${formatTotal(remoteTotal)}**`)
+    sb.append(`| Local archetypes | Archetypes published or managed externally`)
+    sb.append(`| **${formatTotal(localTotal)}**  | **${formatTotal(remoteTotal)}**`)
     formatList(localArchetypeList)
-    formatList(candidateArchetypeList)
     formatList(remoteArchetypeList)
 
     sb.append('|===');
