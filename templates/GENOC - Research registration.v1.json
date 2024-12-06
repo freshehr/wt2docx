@@ -1,0 +1,736 @@
+{
+  "templateId" : "GENOC - Research registration.v1",
+  "semVer" : "1.0.0-alpha.1",
+  "version" : "2.3",
+  "defaultLanguage" : "en",
+  "languages" : [ "en" ],
+  "tree" : {
+    "id" : "research_registration",
+    "name" : "Research registration",
+    "localizedName" : "Research registration",
+    "rmType" : "COMPOSITION",
+    "nodeId" : "openEHR-EHR-COMPOSITION.research_registration.v1",
+    "min" : 1,
+    "max" : 1,
+    "localizedNames" : {
+      "en" : "Research registration"
+    },
+    "localizedDescriptions" : {
+      "en" : "Research Registration"
+    },
+    "aqlPath" : "",
+    "children" : [ {
+      "id" : "context",
+      "rmType" : "EVENT_CONTEXT",
+      "nodeId" : "",
+      "min" : 1,
+      "max" : 1,
+      "aqlPath" : "/context",
+      "children" : [ {
+        "id" : "start_time",
+        "name" : "Start_time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/context/start_time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "setting",
+        "name" : "Setting",
+        "rmType" : "DV_CODED_TEXT",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/context/setting",
+        "inputs" : [ {
+          "suffix" : "code",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "value",
+          "type" : "TEXT"
+        } ],
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "research_study_registration",
+      "name" : "Research study registration",
+      "localizedName" : "Research study registration",
+      "rmType" : "ADMIN_ENTRY",
+      "nodeId" : "openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Research study registration"
+      },
+      "localizedDescriptions" : {
+        "en" : "Administrative details of a research study or clinical registry to which the patient is or has been registered."
+      },
+      "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]",
+      "children" : [ {
+        "id" : "study_name",
+        "name" : "Study name",
+        "localizedName" : "Study name",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0002",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Study name"
+        },
+        "localizedDescriptions" : {
+          "en" : "The name of the research study or clinical registry."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/data[at0001]/items[at0002]/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "study_identifier",
+        "name" : "Study identifier",
+        "localizedName" : "Study identifier",
+        "rmType" : "DV_IDENTIFIER",
+        "nodeId" : "at0015",
+        "min" : 0,
+        "max" : -1,
+        "localizedNames" : {
+          "en" : "Study identifier"
+        },
+        "localizedDescriptions" : {
+          "en" : "An identifier for the study itself, allocated by the research or clinical registry organisation"
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/data[at0001]/items[at0015]/value",
+        "inputs" : [ {
+          "suffix" : "id",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "type",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "issuer",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "assigner",
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "study_organisation",
+        "name" : "Study organisation",
+        "localizedName" : "Study organisation",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0009",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Study organisation"
+        },
+        "localizedDescriptions" : {
+          "en" : "The research organisation responsible for the study."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/data[at0001]/items[at0009]/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "status",
+        "name" : "Status",
+        "localizedName" : "Status",
+        "rmType" : "DV_CODED_TEXT",
+        "nodeId" : "at0005",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Status"
+        },
+        "localizedDescriptions" : {
+          "en" : ""
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/data[at0001]/items[at0005]/value",
+        "inputs" : [ {
+          "suffix" : "code",
+          "type" : "CODED_TEXT",
+          "list" : [ {
+            "value" : "at0006",
+            "label" : "Registered",
+            "localizedLabels" : {
+              "en" : "Registered"
+            },
+            "localizedDescriptions" : {
+              "en" : "The person has been registered for this study."
+            }
+          }, {
+            "value" : "at0007",
+            "label" : "Withdrawn",
+            "localizedLabels" : {
+              "en" : "Withdrawn"
+            },
+            "localizedDescriptions" : {
+              "en" : "The person has been with drawn from this study."
+            }
+          } ]
+        } ]
+      }, {
+        "id" : "patient_identifier",
+        "name" : "Patient identifier",
+        "localizedName" : "Patient identifier",
+        "rmType" : "DV_IDENTIFIER",
+        "nodeId" : "at0008",
+        "min" : 0,
+        "max" : -1,
+        "localizedNames" : {
+          "en" : "Patient identifier"
+        },
+        "localizedDescriptions" : {
+          "en" : "An identifier which is used to identifiy the patient in this study."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/data[at0001]/items[at0008]/value",
+        "inputs" : [ {
+          "suffix" : "id",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "type",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "issuer",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "assigner",
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "date_registered",
+        "name" : "Date registered",
+        "localizedName" : "Date registered",
+        "rmType" : "DV_DATE_TIME",
+        "nodeId" : "at0003",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Date registered"
+        },
+        "localizedDescriptions" : {
+          "en" : "The date at which the patient was registered for the study."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/data[at0001]/items[at0003]/value",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ]
+      }, {
+        "id" : "date_withdrawn",
+        "name" : "Date withdrawn",
+        "localizedName" : "Date withdrawn",
+        "rmType" : "DV_DATE_TIME",
+        "nodeId" : "at0004",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Date withdrawn"
+        },
+        "localizedDescriptions" : {
+          "en" : "The date at which the patient was with drawn from the study."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/data[at0001]/items[at0004]/value",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ]
+      }, {
+        "id" : "reason_for_withdrawal",
+        "name" : "Reason for withdrawal",
+        "localizedName" : "Reason for withdrawal",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0011",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Reason for withdrawal"
+        },
+        "localizedDescriptions" : {
+          "en" : "The reason why the patient was withdrawn from the study."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/data[at0001]/items[at0011]/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "study_information",
+        "name" : "Study information",
+        "localizedName" : "Study information",
+        "rmType" : "DV_URI",
+        "nodeId" : "at0013",
+        "min" : 0,
+        "max" : -1,
+        "localizedNames" : {
+          "en" : "Study information"
+        },
+        "localizedDescriptions" : {
+          "en" : "Links to background information about the study."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/data[at0001]/items[at0013]/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "patient_support",
+        "name" : "Patient support",
+        "localizedName" : "Patient support",
+        "rmType" : "DV_URI",
+        "nodeId" : "at0014",
+        "min" : 0,
+        "max" : -1,
+        "localizedNames" : {
+          "en" : "Patient support"
+        },
+        "localizedDescriptions" : {
+          "en" : "Link to patient support resources"
+        },
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/data[at0001]/items[at0014]/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ADMIN_ENTRY.research_study_registration.v1]/subject",
+        "inputs" : [ {
+          "suffix" : "id",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_scheme",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_namespace",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "name",
+          "type" : "TEXT"
+        } ],
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "informed_consent",
+      "name" : "Informed consent",
+      "localizedName" : "Informed consent",
+      "rmType" : "ACTION",
+      "nodeId" : "openEHR-EHR-ACTION.informed_consent.v0",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Informed consent"
+      },
+      "localizedDescriptions" : {
+        "en" : "Record of status and details of informed consent from an individual (or the individual's agent/proxy) for a proposed procedure, trial or other healthcare-related activity (including treatments and investigations), based upon a clear appreciation and understanding of the facts, implications, and possible future consequences by the consenting party."
+      },
+      "aqlPath" : "/content[openEHR-EHR-ACTION.informed_consent.v0]",
+      "children" : [ {
+        "id" : "ism_transition",
+        "name" : "Ism_transition",
+        "rmType" : "ISM_TRANSITION",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ACTION.informed_consent.v0]/ism_transition",
+        "children" : [ {
+          "id" : "current_state",
+          "name" : "Current_state",
+          "rmType" : "DV_CODED_TEXT",
+          "min" : 1,
+          "max" : 1,
+          "aqlPath" : "/content[openEHR-EHR-ACTION.informed_consent.v0]/ism_transition/current_state",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "245",
+              "label" : "active"
+            }, {
+              "value" : "531",
+              "label" : "aborted"
+            }, {
+              "value" : "526",
+              "label" : "planned"
+            } ]
+          } ],
+          "inContext" : true
+        }, {
+          "id" : "transition",
+          "name" : "Transition",
+          "rmType" : "DV_CODED_TEXT",
+          "min" : 0,
+          "max" : 1,
+          "aqlPath" : "/content[openEHR-EHR-ACTION.informed_consent.v0]/ism_transition/transition",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "TEXT"
+          }, {
+            "suffix" : "value",
+            "type" : "TEXT"
+          } ],
+          "inContext" : true
+        }, {
+          "id" : "careflow_step",
+          "name" : "Careflow_step",
+          "rmType" : "DV_CODED_TEXT",
+          "min" : 0,
+          "max" : 1,
+          "aqlPath" : "/content[openEHR-EHR-ACTION.informed_consent.v0]/ism_transition/careflow_step",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0014",
+              "label" : "Informed consent requested",
+              "localizedLabels" : {
+                "en" : "Informed consent requested"
+              },
+              "currentStates" : [ "245", "526" ]
+            }, {
+              "value" : "at0015",
+              "label" : "Informed consent provided",
+              "localizedLabels" : {
+                "en" : "Informed consent provided"
+              },
+              "currentStates" : [ "245" ]
+            }, {
+              "value" : "at0021",
+              "label" : "Informed consent not obtained",
+              "localizedLabels" : {
+                "en" : "Informed consent not obtained"
+              },
+              "currentStates" : [ "245" ]
+            }, {
+              "value" : "at0016",
+              "label" : "Informed consent refused",
+              "localizedLabels" : {
+                "en" : "Informed consent refused"
+              },
+              "currentStates" : [ "531" ]
+            }, {
+              "value" : "at0017",
+              "label" : "Informed consent withdrawn",
+              "localizedLabels" : {
+                "en" : "Informed consent withdrawn"
+              },
+              "currentStates" : [ "531" ]
+            } ]
+          } ],
+          "inContext" : true
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "procedure_trial_activity",
+        "name" : "Procedure/Trial/Activity",
+        "localizedName" : "Procedure/Trial/Activity",
+        "rmType" : "DV_TEXT",
+        "nodeId" : "at0002",
+        "min" : 1,
+        "max" : -1,
+        "localizedNames" : {
+          "en" : "Procedure/Trial/Activity"
+        },
+        "localizedDescriptions" : {
+          "en" : "Identification of the procedure, clinical trial or healthcare-related activity (including correct side/correct site, where appropriate) against which the consent status and details are recorded."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ACTION.informed_consent.v0]/description[at0001]/items[at0002]/value",
+        "inputs" : [ {
+          "type" : "TEXT"
+        } ]
+      }, {
+        "id" : "time",
+        "name" : "Time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ACTION.informed_consent.v0]/time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ACTION.informed_consent.v0]/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ACTION.informed_consent.v0]/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ACTION.informed_consent.v0]/subject",
+        "inputs" : [ {
+          "suffix" : "id",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_scheme",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_namespace",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "name",
+          "type" : "TEXT"
+        } ],
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "review",
+      "name" : "Review",
+      "localizedName" : "Review",
+      "rmType" : "ACTION",
+      "nodeId" : "openEHR-EHR-ACTION.review.v0",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Review"
+      },
+      "localizedDescriptions" : {
+        "en" : "Clinical activity regarding the performance of a formal clinical review of a subject's clinical situation, a specific aspect of their clinical care or a specified part of the health record."
+      },
+      "aqlPath" : "/content[openEHR-EHR-ACTION.review.v0]",
+      "children" : [ {
+        "id" : "ism_transition",
+        "name" : "Ism_transition",
+        "rmType" : "ISM_TRANSITION",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ACTION.review.v0]/ism_transition",
+        "children" : [ {
+          "id" : "current_state",
+          "name" : "Current_state",
+          "rmType" : "DV_CODED_TEXT",
+          "min" : 1,
+          "max" : 1,
+          "aqlPath" : "/content[openEHR-EHR-ACTION.review.v0]/ism_transition/current_state",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "532",
+              "label" : "completed"
+            }, {
+              "value" : "526",
+              "label" : "planned"
+            }, {
+              "value" : "529",
+              "label" : "scheduled"
+            } ]
+          } ],
+          "inContext" : true
+        }, {
+          "id" : "transition",
+          "name" : "Transition",
+          "rmType" : "DV_CODED_TEXT",
+          "min" : 0,
+          "max" : 1,
+          "aqlPath" : "/content[openEHR-EHR-ACTION.review.v0]/ism_transition/transition",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "TEXT"
+          }, {
+            "suffix" : "value",
+            "type" : "TEXT"
+          } ],
+          "inContext" : true
+        }, {
+          "id" : "careflow_step",
+          "name" : "Careflow_step",
+          "rmType" : "DV_CODED_TEXT",
+          "min" : 0,
+          "max" : 1,
+          "aqlPath" : "/content[openEHR-EHR-ACTION.review.v0]/ism_transition/careflow_step",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0003",
+              "label" : "Review planned",
+              "localizedLabels" : {
+                "en" : "Review planned"
+              },
+              "currentStates" : [ "526" ]
+            }, {
+              "value" : "at0004",
+              "label" : "Review scheduled",
+              "localizedLabels" : {
+                "en" : "Review scheduled"
+              },
+              "currentStates" : [ "529" ]
+            }, {
+              "value" : "at0019",
+              "label" : "Review rescheduled",
+              "localizedLabels" : {
+                "en" : "Review rescheduled"
+              },
+              "currentStates" : [ "529" ]
+            }, {
+              "value" : "at0016",
+              "label" : "Review completed",
+              "localizedLabels" : {
+                "en" : "Review completed"
+              },
+              "currentStates" : [ "532" ]
+            } ]
+          } ],
+          "inContext" : true
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "start_date_time",
+        "name" : "Start date/time",
+        "localizedName" : "Start date/time",
+        "rmType" : "DV_DATE_TIME",
+        "nodeId" : "at0018",
+        "min" : 0,
+        "max" : 1,
+        "localizedNames" : {
+          "en" : "Start date/time"
+        },
+        "localizedDescriptions" : {
+          "en" : "The start date and/or time for the Review activity."
+        },
+        "annotations" : {
+          "comment" : "This will indicate the scheduled date/time when recorded against the Scheduled care pathway step or the actual Start date/time in the Procedure performed step."
+        },
+        "aqlPath" : "/content[openEHR-EHR-ACTION.review.v0]/protocol[at0017]/items[at0018]/value",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ]
+      }, {
+        "id" : "time",
+        "name" : "Time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ACTION.review.v0]/time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ACTION.review.v0]/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ACTION.review.v0]/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-ACTION.review.v0]/subject",
+        "inputs" : [ {
+          "suffix" : "id",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_scheme",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_namespace",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "name",
+          "type" : "TEXT"
+        } ],
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "category",
+      "rmType" : "DV_CODED_TEXT",
+      "nodeId" : "",
+      "min" : 1,
+      "max" : 1,
+      "aqlPath" : "/category",
+      "inputs" : [ {
+        "suffix" : "code",
+        "type" : "CODED_TEXT",
+        "list" : [ {
+          "value" : "433",
+          "label" : "event",
+          "localizedLabels" : {
+            "en" : "event"
+          }
+        } ],
+        "terminology" : "openehr"
+      } ],
+      "inContext" : true
+    }, {
+      "id" : "language",
+      "name" : "Language",
+      "rmType" : "CODE_PHRASE",
+      "min" : 1,
+      "max" : 1,
+      "aqlPath" : "/language",
+      "inContext" : true
+    }, {
+      "id" : "territory",
+      "name" : "Territory",
+      "rmType" : "CODE_PHRASE",
+      "min" : 1,
+      "max" : 1,
+      "aqlPath" : "/territory",
+      "inContext" : true
+    }, {
+      "id" : "composer",
+      "name" : "Composer",
+      "rmType" : "PARTY_PROXY",
+      "min" : 1,
+      "max" : 1,
+      "aqlPath" : "/composer",
+      "inputs" : [ {
+        "suffix" : "id",
+        "type" : "TEXT"
+      }, {
+        "suffix" : "id_scheme",
+        "type" : "TEXT"
+      }, {
+        "suffix" : "id_namespace",
+        "type" : "TEXT"
+      }, {
+        "suffix" : "name",
+        "type" : "TEXT"
+      } ],
+      "inContext" : true
+    } ]
+  }
+}
