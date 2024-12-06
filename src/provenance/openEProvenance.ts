@@ -25,8 +25,7 @@ const formalPublicationNamespaces: string[] = ['org.openehr', 'org.apperta']
 
 const ADRootUrl = `https://tools.openehr.org/designer/api`
 
-const formatADUrl = (repositoryId: string, listType: string) =>
-`${ADRootUrl}/repository/entry/list?repositoryId=${repositoryId}&cache=false&type=${listType}&depth=-1`;
+// const formatADUrl = (repositoryId: string, listType: string) =>` ${ADRootUrl}/repository/entry/list?repositoryId=${repositoryId}&cache=false&type=${listType}&depth=-1`;
 
 const formatGHSearchUrl = (repositoryId: string) => {
   return `https://api.github.com/repos/${repositoryId}/git/trees/master?recursive=1`;
